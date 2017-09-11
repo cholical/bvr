@@ -5,6 +5,7 @@ using SharpBCI;
 
 public class EEGColorChanger : MonoBehaviour {
 
+	public int side = 0;
 	public Color startColor;
 	public Color endColor;
 
@@ -34,17 +35,26 @@ public class EEGColorChanger : MonoBehaviour {
 
 	void OnEEGData(EEGEvent evt) {
 		currentPower = 0;
-		int i = 0;
 
-		foreach (float v in evt.data) {
+		int max = evt.data.Length;
+		int min = 0;
+		if (side == -1) {
+			max = evt.data.Length / 2;
+		} else if (side == 1) {
+			min = evt.data.Length / 2;
+		}
+
+		int n = 0;
+		for (int i = 0; i < max; i++) {
+			float v = evt.data[i];
 			if (float.IsNaN(v))
 				continue;
 			currentPower += v;
-			i++;
+			n++;
 		}
 
-		if (i > 0)
-			currentPower /= i;
+		if (n > 0)
+			currentPower /= n;
 		
 		if (currentPower < sessionMinPower) {
 			sessionMinPower = currentPower;

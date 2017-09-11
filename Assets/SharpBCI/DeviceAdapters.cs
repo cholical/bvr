@@ -100,29 +100,30 @@ namespace SharpBCI {
 	}
 
 	public class RemoteOSCAdapter : EEGDeviceAdapter {
-
-		Thread oscThread;
+		
 		int port;
-		bool requestStop = false;
+		//bool requestStop = false;
+
+		UDPListener listener;
+		Dictionary<string, EEGDataType> typeMap;
+		Converter<object, double> converter = new Converter<object, double>(delegate(object inAdd) {
+			return (double) inAdd;
+		});
 
 		public RemoteOSCAdapter(int port) {
 			this.port = port;
 		}
 
 		public override void Start() {
-			//Console.WriteLine("RemoteOSCAdapter starting");
-			oscThread = new Thread(new ThreadStart(Run));
-			oscThread.Name = "RemoteOSCAdapterThread";
-			oscThread.Start();
+			typeMap = InitTypeMap();
+			listener = new UDPListener(port, OnOSCMessageReceived);
 		}
 
 		public override void Stop() {
-			//Console.WriteLine("RemoteOSCAdapter stopping");
-			requestStop = true;
-			oscThread.Join();
+			listener.Dispose();
 		}
 
-		private Dictionary<string, EEGDataType> InitTypeMap() {
+		Dictionary<string, EEGDataType> InitTypeMap() {
 			Dictionary<string, EEGDataType> typeMap = new Dictionary<string, EEGDataType>();
 
 			// raw EEG data
@@ -162,25 +163,14 @@ namespace SharpBCI {
 			return typeMap;
 		}
 
-		public void Run() {
-			var listener = new UDPListener(port);
-			var converter = new Converter<object, double>(delegate(object inAdd) {
-				return (double) inAdd;
-			});
-			var typeMap = InitTypeMap();
-			while (!requestStop) {
-				try {
-					OscMessage msg = (OscMessage) listener.Receive();
-					if (msg != null && typeMap.ContainsKey(msg.Address)) {
-						List<double> data = msg.Arguments.ConvertAll<double>(converter);
-						EEGDataType type = typeMap[msg.Address];
-						EmitData(type, data);
-					}
-				} catch (Exception e) {
-					// TODO thread-safe exception handling?
-				}
-			}
-			listener.Dispose();
+		void OnOSCMessageReceived(OscPacket packet) {
+			var msg = (OscMessage) packet;
+			if (!typeMap.ContainsKey(msg.Address))
+				return;
+			
+			List<double> data = msg.Arguments.ConvertAll<double>(converter);
+			EEGDataType type = typeMap[msg.Address];
+			EmitData(type, data);
 		}
 	}
 
