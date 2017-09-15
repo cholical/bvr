@@ -45,7 +45,7 @@ public class EEGColorChanger : MonoBehaviour {
 		}
 
 		int n = 0;
-		for (int i = 0; i < max; i++) {
+		for (int i = min; i < max; i++) {
 			float v = evt.data[i];
 			if (float.IsNaN(v))
 				continue;
