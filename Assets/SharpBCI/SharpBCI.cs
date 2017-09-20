@@ -16,7 +16,7 @@ namespace SharpBCI {
 		readonly EEGDeviceAdapter adapter;
 		readonly int channels;
 
-		List<Pipeable<object, object>> stages;
+		readonly List<Pipeable> stages;
 
 		public SharpBCI(SharpBCIConfig config) {
 			// begin check args
@@ -34,7 +34,7 @@ namespace SharpBCI {
 
 			// begin internal pipeline construction
 			var producer = new EEGDeviceProducer(adapter);
-			stages.Add((Pipeable<object, object>) producer);
+			stages.Add(producer);
 
 			// TODO other stages
 
@@ -57,7 +57,7 @@ namespace SharpBCI {
 		}
 	}
 
-	public class EEGDeviceProducer : Pipeable<object, EEGEvent> {
+	public class EEGDeviceProducer : Pipeable {
 		readonly EEGDeviceAdapter adapter;
 		public EEGDeviceProducer(EEGDeviceAdapter adapter) {
 			this.adapter = adapter;

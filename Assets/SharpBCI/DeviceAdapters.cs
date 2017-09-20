@@ -3,6 +3,7 @@ using System.Threading;
 using System.Collections;
 using System.Collections.Generic;
 using SharpOSC;
+using UnityEngine;
 
 namespace SharpBCI {
 
@@ -46,20 +47,15 @@ namespace SharpBCI {
 
 		public delegate void DataHandler(EEGEvent evt);
 
-		private Dictionary<EEGDataType, List<DataHandler>> handlers 
-		  = new Dictionary<EEGDataType, List<DataHandler>>();
+		readonly Dictionary<EEGDataType, List<DataHandler>> handlers = new Dictionary<EEGDataType, List<DataHandler>>();
 
-		private Queue<EEGEvent> eventQueue 
-		= new Queue<EEGEvent>();
-
-		private Converter<double, float> converter = new Converter<double, float>(delegate (double x) {
-			return (float) x;
-		});
+		readonly Queue<EEGEvent> eventQueue = new Queue<EEGEvent>();
 
 		public abstract void Start();
 		public abstract void Stop();
 
 		public void AddHandler(EEGDataType type, DataHandler handler) {
+			// Debug.Log("AddHandler type="+type);
 			if (!handlers.ContainsKey(type)) {
 				handlers.Add(type, new List<DataHandler>());
 			}
@@ -67,6 +63,7 @@ namespace SharpBCI {
 		}
 
 		public void RemoveHandler(EEGDataType type, DataHandler handler) {
+			// Debug.Log("RemoveHandler type="+type);
 			if (!handlers.ContainsKey(type))
 				throw new Exception("Handler was not registered");
 
@@ -76,6 +73,7 @@ namespace SharpBCI {
 
 		public void FlushEvents() {
 			lock (eventQueue) {
+				// Debug.Log("FlushEvents()");
 				while (eventQueue.Count > 0) {
 					EEGEvent evt = eventQueue.Dequeue();
 					FlushEvent(evt);
@@ -83,14 +81,17 @@ namespace SharpBCI {
 			}
 		}
 
-		protected void EmitData(EEGDataType type, List<double> data) {
+		protected void EmitData(EEGDataType type, float[] data) {
+			//Debug.Log("EmitData type=" + type);
 			lock (eventQueue) {
-				eventQueue.Enqueue(new EEGEvent(DateTime.UtcNow, type, data.ConvertAll(converter).ToArray()));
+				//Debug.Log("EmitData lock obtained");
+				eventQueue.Enqueue(new EEGEvent(DateTime.UtcNow, type, data));
 			}
 		}
 
 		private void FlushEvent(EEGEvent evt) {
 			if (handlers.ContainsKey(evt.type)) {
+				//Debug.Log("FlushEvent type=" + evt.type);
 				List<DataHandler> h = handlers[evt.type];
 				foreach (DataHandler dh in h) {
 					dh(evt);
@@ -102,24 +103,32 @@ namespace SharpBCI {
 	public class RemoteOSCAdapter : EEGDeviceAdapter {
 		
 		int port;
-		//bool requestStop = false;
 
 		UDPListener listener;
 		Dictionary<string, EEGDataType> typeMap;
-		Converter<object, double> converter = new Converter<object, double>(delegate(object inAdd) {
-			return (double) inAdd;
+		Converter<object, float> converter = new Converter<object, float>(delegate(object inAdd) {
+			return (float) inAdd;
 		});
+
+		Thread listenerThread;
+		bool stopRequested;
 
 		public RemoteOSCAdapter(int port) {
 			this.port = port;
 		}
 
 		public override void Start() {
+			Debug.Log("Starting RemoteOSCAdapter");
 			typeMap = InitTypeMap();
 			listener = new UDPListener(port, OnOSCMessageReceived);
+			listenerThread = new Thread(new ThreadStart(Run));
+			listenerThread.Start();
 		}
 
 		public override void Stop() {
+			Debug.Log("Stopping RemoteOSCAdapter");
+			stopRequested = true;
+			listenerThread.Join();
 			listener.Dispose();
 		}
 
@@ -163,13 +172,34 @@ namespace SharpBCI {
 			return typeMap;
 		}
 
+		void Run() {
+			while (!stopRequested) {
+				var packet = listener.Receive();
+				if (packet != null)
+					OnOSCMessageReceived(packet);
+			}
+		}
+
 		void OnOSCMessageReceived(OscPacket packet) {
 			var msg = (OscMessage) packet;
 			if (!typeMap.ContainsKey(msg.Address))
 				return;
-			
-			List<double> data = msg.Arguments.ConvertAll<double>(converter);
-			EEGDataType type = typeMap[msg.Address];
+
+			//Debug.Log("Got packet from: " + msg.Address);
+			//Debug.Log("Arguments: ");
+			//foreach (var a in msg.Arguments) {
+			//	Debug.Log(a.ToString());
+			//}
+
+			var data = msg.Arguments.ConvertAll<float>(converter).ToArray();
+			var type = typeMap[msg.Address];
+
+			//Debug.Log("EEGType: " + type);
+			//Debug.Log("Converted Args: ");
+			//foreach (float d in data) {
+			//	Debug.Log(d.ToString());
+			//}
+
 			EmitData(type, data);
 		}
 	}
