@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['devicecontroller',['DeviceController',['../class_device_controller.html',1,'']]]
+  ['centralizationpreprocessor',['CentralizationPreprocessor',['../class_sharp_b_c_i_1_1_centralization_preprocessor.html',1,'SharpBCI']]]
 ];

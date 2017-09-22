@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['linecolors',['lineColors',['../class_scrolling_graph.html#a0d94cb9af5c61bca3c4949aa73d186cd',1,'ScrollingGraph']]],
-  ['linethickness',['lineThickness',['../class_scrolling_graph.html#a553ec91ab143029adde6b9a8c17a8005',1,'ScrollingGraph']]]
+  ['eegtype',['EEGType',['../class_e_e_g_color_changer.html#abe9894fdf18ab340fa8df044a8138e38',1,'EEGColorChanger']]],
+  ['endcolor',['endColor',['../class_e_e_g_color_changer.html#a36d0c0d8edcac23b45249c4db4f2d7e2',1,'EEGColorChanger']]]
 ];

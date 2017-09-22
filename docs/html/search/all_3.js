@@ -8,5 +8,8 @@ var searchData=
   ['device',['Device',['../class_device_controller.html#a2b92db3cd78469f28db4a608bc1b9e05',1,'DeviceController']]],
   ['deviceadapters_2ecs',['DeviceAdapters.cs',['../_device_adapters_8cs.html',1,'']]],
   ['devicecontroller',['DeviceController',['../class_device_controller.html',1,'']]],
-  ['devicecontroller_2ecs',['DeviceController.cs',['../_device_controller_8cs.html',1,'']]]
+  ['devicecontroller_2ecs',['DeviceController.cs',['../_device_controller_8cs.html',1,'']]],
+  ['distancemeasure',['DistanceMeasure',['../namespace_sharp_b_c_i.html#ac3ee47b1ee7f40a2fc3c86d88f117e80',1,'SharpBCI']]],
+  ['dynamictimewarping',['DynamicTimeWarping',['../class_sharp_b_c_i_1_1_dynamic_time_warping.html',1,'SharpBCI.DynamicTimeWarping'],['../class_sharp_b_c_i_1_1_dynamic_time_warping.html#a07fd9215333049ad236cee9f750f670c',1,'SharpBCI.DynamicTimeWarping.DynamicTimeWarping(double[] x, double[] y, DistanceMeasure distanceMeasure=DistanceMeasure.Euclidean, bool boundaryConstraintStart=true, bool boundaryConstraintEnd=true, int? slopeStepSizeDiagonal=null, int? slopeStepSizeAside=null, int? sakoeChibaMaxShift=null)'],['../class_sharp_b_c_i_1_1_dynamic_time_warping.html#ad636ff8c25a49c766b7e6ec0a2c20b1b',1,'SharpBCI.DynamicTimeWarping.DynamicTimeWarping(SeriesVariable[] seriesVariables, DistanceMeasure distanceMeasure=DistanceMeasure.Euclidean, bool boundaryConstraintStart=true, bool boundaryConstraintEnd=true, int? slopeStepSizeDiagonal=null, int? slopeStepSizeAside=null, int? sakoeChibaMaxShift=null)']]],
+  ['dynamictimewarping_2ecs',['DynamicTimeWarping.cs',['../_dynamic_time_warping_8cs.html',1,'']]]
 ];

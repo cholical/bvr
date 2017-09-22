@@ -1,5 +1,6 @@
 var interface_sharp_b_c_i_1_1_i_pipeable =
 [
+    [ "Connect", "interface_sharp_b_c_i_1_1_i_pipeable.html#a8761061994efc0be275dafe8fc07d61e", null ],
     [ "Connect", "interface_sharp_b_c_i_1_1_i_pipeable.html#a2838b61a43a65fbf77f62db14a12fba6", null ],
     [ "SetInput", "interface_sharp_b_c_i_1_1_i_pipeable.html#a1775fb57fee4ffe5716ff0fe99a17a2a", null ],
     [ "Start", "interface_sharp_b_c_i_1_1_i_pipeable.html#a9348aeb6dd14dd6ce8c332ba5d1b7552", null ],
