@@ -27,7 +27,8 @@ public class FFTOutput : MonoBehaviour {
 		sampleWindow.Enqueue(0);
 
 		if (sampleWindow.Count/2 == windowSize) {
-			double[] data = sampleWindow.ToArray();			fft.FFT(data, true);
+			double[] data = sampleWindow.ToArray();
+			fft.FFT(data, true);
 		}
 	}
 }
