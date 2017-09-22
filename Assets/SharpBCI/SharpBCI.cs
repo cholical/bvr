@@ -205,7 +205,7 @@ namespace SharpBCI {
 		}
 
 		void UpdateConnectionStatus(EEGEvent evt) {
-			_connectionStatus = evt.data;a
+			_connectionStatus = evt.data;
 		}
 	}
 
