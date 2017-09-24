@@ -14,19 +14,19 @@ public class ScrollingGraphController : MonoBehaviour {
 	void Start() {
 		startCalled = true;
 		graph = GetComponent<ScrollingGraph>();
-		DeviceController.Device.AddHandler(type, OnEEGData);
+		//SharpBCIController.BCI.AddRawHandler(type, OnEEGData);
 	}
 
 	// Use this for initialization
 	void OnEnable() {
 		if (!startCalled)
 			return;
-		
-		DeviceController.Device.AddHandler(type, OnEEGData);
+
+		SharpBCIController.BCI.AddRawHandler(type, OnEEGData);
 	}
 
 	void OnDisable() {
-		DeviceController.Device.RemoveHandler(type, OnEEGData);
+		SharpBCIController.BCI.RemoveRawHandler(type, OnEEGData);
 	}
 
 	void OnEEGData(EEGEvent evt) {

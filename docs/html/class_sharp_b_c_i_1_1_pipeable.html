@@ -93,17 +93,21 @@ Inheritance diagram for SharpBCI.Pipeable:</div>
  <div class="center">
   <img src="class_sharp_b_c_i_1_1_pipeable.png" usemap="#SharpBCI.Pipeable_map" alt=""/>
   <map id="SharpBCI.Pipeable_map" name="SharpBCI.Pipeable_map">
-<area href="interface_sharp_b_c_i_1_1_i_pipeable.html" alt="SharpBCI.IPipeable" shape="rect" coords="0,0,188,24"/>
+<area href="interface_sharp_b_c_i_1_1_i_pipeable.html" alt="SharpBCI.IPipeable" shape="rect" coords="198,0,386,24"/>
 <area href="class_sharp_b_c_i_1_1_e_e_g_device_producer.html" alt="SharpBCI.EEGDeviceProducer" shape="rect" coords="0,112,188,136"/>
+<area href="class_sharp_b_c_i_1_1_f_f_t_band_pipeable.html" alt="SharpBCI.FFTBandPipeable" shape="rect" coords="198,112,386,136"/>
+<area href="class_sharp_b_c_i_1_1_f_f_t_pipeable.html" alt="SharpBCI.FFTPipeable" shape="rect" coords="396,112,584,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad2b52299cee109e5312897927a803a4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_pipeable.html#ad2b52299cee109e5312897927a803a4f">SetInput</a> (BlockingCollection&lt; object &gt; input)</td></tr>
-<tr class="separator:ad2b52299cee109e5312897927a803a4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dd47de67c12f9bdb7a521c0ad5f9bb2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_pipeable.html#a3dd47de67c12f9bdb7a521c0ad5f9bb2">SetInput</a> (BlockingCollection&lt; object &gt; newInput)</td></tr>
+<tr class="separator:a3dd47de67c12f9bdb7a521c0ad5f9bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ca41f69b9c57f4ef50208f42ceba9ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_pipeable.html#a9ca41f69b9c57f4ef50208f42ceba9ec">Connect</a> (<a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html">IPipeable</a> other)</td></tr>
 <tr class="separator:a9ca41f69b9c57f4ef50208f42ceba9ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a484ed00cf334e582bbca3f02b2de32b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_pipeable.html#a484ed00cf334e582bbca3f02b2de32b4">Connect</a> (<a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html">IPipeable</a> other, bool mirror)</td></tr>
+<tr class="separator:a484ed00cf334e582bbca3f02b2de32b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d35c3692567886710f23263d0a40234"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_pipeable.html#a1d35c3692567886710f23263d0a40234">Start</a> (TaskFactory taskFactory, CancellationTokenSource cts)</td></tr>
 <tr class="separator:a1d35c3692567886710f23263d0a40234"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a714316963ff8f7ac8fdd7e4479f3f9c6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_pipeable.html#a714316963ff8f7ac8fdd7e4479f3f9c6">Stop</a> ()</td></tr>
@@ -144,7 +148,7 @@ Protected Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="a9ca41f69b9c57f4ef50208f42ceba9ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ca41f69b9c57f4ef50208f42ceba9ec">&#9670;&nbsp;</a></span>Connect()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ca41f69b9c57f4ef50208f42ceba9ec">&#9670;&nbsp;</a></span>Connect() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -158,9 +162,40 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Connect the input of other to our output </p>
+<p>Connect the input of other to our output Note: mirror == false using this override </p>
 
 <p>Implements <a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html#a2838b61a43a65fbf77f62db14a12fba6">SharpBCI.IPipeable</a>.</p>
+
+</div>
+</div>
+<a id="a484ed00cf334e582bbca3f02b2de32b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a484ed00cf334e582bbca3f02b2de32b4">&#9670;&nbsp;</a></span>Connect() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SharpBCI.Pipeable.Connect </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html">IPipeable</a>&#160;</td>
+          <td class="paramname"><em>other</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>mirror</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Connect the input of other to our output and allow for control of mirror data </p>
+
+<p>Implements <a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html#a8761061994efc0be275dafe8fc07d61e">SharpBCI.IPipeable</a>.</p>
 
 </div>
 </div>
@@ -188,12 +223,12 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_producer.html#a0e5956cc35176fea04ad5788b128f70b">SharpBCI.EEGDeviceProducer</a>.</p>
+<p>Implemented in <a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_producer.html#a0e5956cc35176fea04ad5788b128f70b">SharpBCI.EEGDeviceProducer</a>, <a class="el" href="class_sharp_b_c_i_1_1_f_f_t_band_pipeable.html#aec5c057045b73b86022eb5c60d884860">SharpBCI.FFTBandPipeable</a>, and <a class="el" href="class_sharp_b_c_i_1_1_f_f_t_pipeable.html#a9c1a74d528d4069ea781561baf4c59c2">SharpBCI.FFTPipeable</a>.</p>
 
 </div>
 </div>
-<a id="ad2b52299cee109e5312897927a803a4f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2b52299cee109e5312897927a803a4f">&#9670;&nbsp;</a></span>SetInput()</h2>
+<a id="a3dd47de67c12f9bdb7a521c0ad5f9bb2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3dd47de67c12f9bdb7a521c0ad5f9bb2">&#9670;&nbsp;</a></span>SetInput()</h2>
 
 <div class="memitem">
 <div class="memproto">

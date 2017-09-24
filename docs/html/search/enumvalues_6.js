@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['theta_5fabsolute',['THETA_ABSOLUTE',['../namespace_sharp_b_c_i.html#a093a660576d1484ca08f82f943ba6651a5248e60cd470fac8c07f54606002411a',1,'SharpBCI']]],
-  ['theta_5frelative',['THETA_RELATIVE',['../namespace_sharp_b_c_i.html#a093a660576d1484ca08f82f943ba6651affd0d8cf427b56bd17acb0aa40d92c89',1,'SharpBCI']]]
+  ['manhattan',['Manhattan',['../namespace_sharp_b_c_i.html#ac3ee47b1ee7f40a2fc3c86d88f117e80a1834cdf9bf35ea1d737c15eef72e18c7',1,'SharpBCI']]],
+  ['maximum',['Maximum',['../namespace_sharp_b_c_i.html#ac3ee47b1ee7f40a2fc3c86d88f117e80a8321e79c278ec510f63675c040594892',1,'SharpBCI']]]
 ];

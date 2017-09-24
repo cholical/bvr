@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['eegdeviceproducer',['EEGDeviceProducer',['../class_sharp_b_c_i_1_1_e_e_g_device_producer.html#a3e93e658a00bc822a092dc45746364f1',1,'SharpBCI::EEGDeviceProducer']]],
-  ['eegevent',['EEGEvent',['../class_sharp_b_c_i_1_1_e_e_g_event.html#a7a540bbaf720e10b9bb28057f1fb2349',1,'SharpBCI::EEGEvent']]],
-  ['emitdata',['EmitData',['../class_sharp_b_c_i_1_1_e_e_g_device_adapter.html#a452dc960ef006d32f2ddae8fcddef345',1,'SharpBCI::EEGDeviceAdapter']]]
+  ['datahandler',['DataHandler',['../class_sharp_b_c_i_1_1_e_e_g_device_adapter.html#a6bc5578dae837bf0b6d9c55c26d036bb',1,'SharpBCI::EEGDeviceAdapter']]],
+  ['dynamictimewarping',['DynamicTimeWarping',['../class_sharp_b_c_i_1_1_dynamic_time_warping.html#a07fd9215333049ad236cee9f750f670c',1,'SharpBCI.DynamicTimeWarping.DynamicTimeWarping(double[] x, double[] y, DistanceMeasure distanceMeasure=DistanceMeasure.Euclidean, bool boundaryConstraintStart=true, bool boundaryConstraintEnd=true, int? slopeStepSizeDiagonal=null, int? slopeStepSizeAside=null, int? sakoeChibaMaxShift=null)'],['../class_sharp_b_c_i_1_1_dynamic_time_warping.html#ad636ff8c25a49c766b7e6ec0a2c20b1b',1,'SharpBCI.DynamicTimeWarping.DynamicTimeWarping(SeriesVariable[] seriesVariables, DistanceMeasure distanceMeasure=DistanceMeasure.Euclidean, bool boundaryConstraintStart=true, bool boundaryConstraintEnd=true, int? slopeStepSizeDiagonal=null, int? slopeStepSizeAside=null, int? sakoeChibaMaxShift=null)']]]
 ];

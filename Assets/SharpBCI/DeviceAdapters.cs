@@ -34,9 +34,9 @@ namespace SharpBCI {
 	public class EEGEvent {
 		public DateTime timestamp;
 		public EEGDataType type;
-		public float[] data;
+		public double[] data;
 
-		public EEGEvent(DateTime timestamp, EEGDataType type, float[] data) {
+		public EEGEvent(DateTime timestamp, EEGDataType type, double[] data) {
 			this.timestamp = timestamp;
 			this.type = type;
 			this.data = data;
@@ -81,7 +81,7 @@ namespace SharpBCI {
 			}
 		}
 
-		protected void EmitData(EEGDataType type, float[] data) {
+		protected void EmitData(EEGDataType type, double[] data) {
 			//Debug.Log("EmitData type=" + type);
 			lock (eventQueue) {
 				//Debug.Log("EmitData lock obtained");
@@ -106,8 +106,8 @@ namespace SharpBCI {
 
 		UDPListener listener;
 		Dictionary<string, EEGDataType> typeMap;
-		Converter<object, float> converter = new Converter<object, float>(delegate(object inAdd) {
-			return (float) inAdd;
+		readonly Converter<object, double> converter = new Converter<object, double>(delegate(object inAdd) {
+			return (double) inAdd;
 		});
 
 		Thread listenerThread;
@@ -191,7 +191,7 @@ namespace SharpBCI {
 			//	Debug.Log(a.ToString());
 			//}
 
-			var data = msg.Arguments.ConvertAll<float>(converter).ToArray();
+			var data = msg.Arguments.ConvertAll<double>(converter).ToArray();
 			var type = typeMap[msg.Address];
 
 			//Debug.Log("EEGType: " + type);

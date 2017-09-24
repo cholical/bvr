@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['remoteoscadapter',['RemoteOSCAdapter',['../class_sharp_b_c_i_1_1_remote_o_s_c_adapter.html',1,'SharpBCI']]]
+  ['ipipeable',['IPipeable',['../interface_sharp_b_c_i_1_1_i_pipeable.html',1,'SharpBCI']]],
+  ['ipreprocessor',['IPreprocessor',['../interface_sharp_b_c_i_1_1_i_preprocessor.html',1,'SharpBCI']]]
 ];

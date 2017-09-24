@@ -14,11 +14,11 @@ public class EEGDataOutput : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		text = GetComponent<Text>();
-		DeviceController.Device.AddHandler(dataType, OnEEGData);
+		SharpBCIController.BCI.AddRawHandler(dataType, OnEEGData);
 	}
 
 	void OnDestroy() {
-		DeviceController.Device.RemoveHandler(dataType, OnEEGData);
+		SharpBCIController.BCI.RemoveRawHandler(dataType, OnEEGData);
 	}
 
 	double[] buffer = new double[4];
