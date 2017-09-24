@@ -15,6 +15,11 @@ namespace SharpBCI {
 	public class SharpBCIConfig {
 		public EEGDeviceAdapter adapter;
 		public int channels;
+
+		public SharpBCIConfig(EEGDeviceAdapter adapter, int channels) {
+			this.adapter = adapter;
+			this.channels = channels;
+		}
 	}
 
 	/**
@@ -36,11 +41,8 @@ namespace SharpBCI {
 			return this;
 		}
 
-		public SharpBCIConfig Build() {
-			SharpBCIConfig cfg = new SharpBCIConfig();
-			cfg.adapter = adapter;
-			cfg.channels = channels;
-			return cfg;
+		public SharpBCI Build() {
+			return new SharpBCI(new SharpBCIConfig(adapter, channels));
 		}
 	}
 
@@ -76,18 +78,24 @@ namespace SharpBCI {
 		readonly EEGDeviceAdapter adapter;
 		readonly int channels;
 
-		readonly List<Pipeable> stages;
+		readonly List<Pipeable> stages = new List<Pipeable>();
 
-		float[] _connectionStatus;
+		double[] _connectionStatus;
 
 		int nextId = 0;
+
+		readonly Dictionary<EEGDataType, List<SharpBCIRawHandler>> rawHandlers = new Dictionary<EEGDataType, List<SharpBCIRawHandler>>();
+		readonly Dictionary<int, List<SharpBCITrainedHandler>> trainedHandlers = new Dictionary<int, List<SharpBCITrainedHandler>>();
+
+		readonly TaskFactory taskFactory;
+		readonly CancellationTokenSource cts;
 
 		/**
 		 * Is the device connected to a human
 		 * Based on the Muse EEG status updates: 
 		 * @returns 4 = no connection, 2 = ok connection, 1 = good connection, 3 = unused, complain to Muse about that
 		 */
-		public float[] connectionStatus { get { return _connectionStatus; } }
+		public double[] connectionStatus { get { return _connectionStatus; } }
 
 		/**
          * @param config a valid config object, generally built with SharpBCIBuilder
@@ -99,14 +107,14 @@ namespace SharpBCI {
 			if (config.adapter == null)
 				throw new ArgumentException("config.adapter must not be null");
 
-			if (channels <= 0)
+			if (config.channels <= 0)
 				throw new ArgumentException("config.channels must be > 0");
 			// end check args
 
 			// begin state config
 			adapter = config.adapter;
 			channels = config.channels;
-			_connectionStatus = new float[channels];
+			_connectionStatus = new double[channels];
 			for (int i = 0; i < channels; i++) {
 				_connectionStatus[i] = 4;
 			}
@@ -123,38 +131,21 @@ namespace SharpBCI {
 			fft.Connect(producer);
 			stages.Add(fft);
 
-			// frequency src: en.wikipedia.org/wiki/Electroencephalography
-			// in order of increasing frequency
-			var deltaAbs = new FFTBandPipeable(0, 4, EEGDataType.DELTA_ABSOLUTE);
-			deltaAbs.Connect(fft);
-			stages.Add(deltaAbs);
+			var rawEvtEmmiter = new RawEventEmitter(this);
+			producer.Connect(rawEvtEmmiter);
+			fft.Connect(rawEvtEmmiter);
 
-			var thetaAbs = new FFTBandPipeable(4, 8, EEGDataType.THETA_ABSOLUTE);
-			thetaAbs.Connect(fft);
-			stages.Add(thetaAbs);
-
-			var alphaAbs = new FFTBandPipeable(8, 16, EEGDataType.ALPHA_ABSOLUTE);
-			alphaAbs.Connect(fft);
-			stages.Add(alphaAbs);
-
-			var betaAbs = new FFTBandPipeable(16, 32, EEGDataType.BETA_ABSOLUTE);
-			betaAbs.Connect(fft);
-			stages.Add(betaAbs);
-
-			var gammaAbs = new FFTBandPipeable(32, 500, EEGDataType.GAMMA_ABSOLUTE);
-			gammaAbs.Connect(fft);
-			stages.Add(gammaAbs);
-
+			var trainedEvtEmitter = new TrainedEventEmitter(this);
 			// TODO other stages
 
 			// end internal pipeline construction
 
 			// begin start associated threads & EEGDeviceAdapter
-			TaskFactory f = new TaskFactory(TaskCreationOptions.LongRunning, TaskContinuationOptions.None);
-			CancellationTokenSource cts = CancellationTokenSource.CreateLinkedTokenSource();
+			taskFactory = new TaskFactory(TaskCreationOptions.LongRunning, TaskContinuationOptions.None);
+			cts = new CancellationTokenSource();
 
 			foreach (var stage in stages) {
-				stage.Start(f, cts);
+				stage.Start(taskFactory, cts);
 			}
 			// end start associated threads & EEGDeviceAdapter
 		}
@@ -166,31 +157,51 @@ namespace SharpBCI {
 		 */
 		public int StartTraining() {
 			return nextId++;
+			// TODO start training
 		}
 
 		/**
 		 * Stop training SharpBCI on the current trainingID
 		 */
 		public void StopTraining(int id) {
-			if (id < 0) throw new ArgumentException("Training id cannot be < 0");
+			if (id < 0 || id >= nextId) throw new ArgumentException("Training id invalid");
+			// TODO stop training
 		}
 
 		public void AddTrainedHandler(int id, SharpBCITrainedHandler handler) { 
-			if (id < 0) throw new ArgumentException("Training id cannot be < 0");
-
+			if (id < 0 || id >= nextId) throw new ArgumentException("Training id invalid");
+			lock (trainedHandlers) {
+				if (!trainedHandlers.ContainsKey(id))
+					trainedHandlers.Add(id, new List<SharpBCITrainedHandler>());
+				trainedHandlers[id].Add(handler);
+			}
 		}
 
 		public void RemoveTrainedHandler(int id, SharpBCITrainedHandler handler) { 
-			if (id< 0) throw new ArgumentException("Training id cannot be < 0");
-		
+			if (id < 0 || id >= nextId) throw new ArgumentException("Training id invalid");
+			lock (trainedHandlers) {
+				if (!trainedHandlers.ContainsKey(id))
+					throw new ArgumentException("No handlers registered for id: " + id);
+				if (!trainedHandlers[id].Remove(handler))
+					throw new ArgumentException("Handler '" + handler + "' not registered for id: " + id);
+			}
 		}
 
-		public void AddRawHandler(EEGDataType type, SharpBCIRawHandler handler) { 
-		
+		public void AddRawHandler(EEGDataType type, SharpBCIRawHandler handler) {
+			lock (rawHandlers) {
+				if (!rawHandlers.ContainsKey(type))
+					rawHandlers.Add(type, new List<SharpBCIRawHandler>());
+				rawHandlers[type].Add(handler);
+			}
 		}
 
-		public void RemoveRawHandler(EEGDataType type, SharpBCIRawHandler handler) { 
-		
+		public void RemoveRawHandler(EEGDataType type, SharpBCIRawHandler handler) {
+			lock (rawHandlers) {
+				if (!rawHandlers.ContainsKey(type))
+					throw new ArgumentException("No handlers registered for type: " + type);
+				if (!rawHandlers[type].Remove(handler))
+					throw new ArgumentException("Handler '" + handler + "' not registered for EEGDataType: " + type);
+			}
 		}
 
 		/**
@@ -199,6 +210,7 @@ namespace SharpBCI {
 		 * You should unregister events before calling this: adjust your code accordingly.
 		 */
 		public void Close() {
+			cts.Cancel();
 			foreach (var stage in stages) {
 				stage.Stop();
 			}
@@ -206,6 +218,48 @@ namespace SharpBCI {
 
 		void UpdateConnectionStatus(EEGEvent evt) {
 			_connectionStatus = evt.data;
+		}
+
+		protected class TrainedEventEmitter : Pipeable { 
+			readonly SharpBCI self;
+
+			public TrainedEventEmitter(SharpBCI self) {
+				this.self = self;
+			}
+
+			protected override bool Process(object item) {
+				TrainedEvent evt = (TrainedEvent) item;
+				lock (self.trainedHandlers) { 
+					if (!self.trainedHandlers.ContainsKey(evt.id))
+						return true;
+
+					foreach (var handler in self.trainedHandlers[evt.id]) {
+						handler(evt);
+					}
+				}
+				return true;
+			}
+		}
+
+		protected class RawEventEmitter : Pipeable {
+			readonly SharpBCI self;
+
+			public RawEventEmitter(SharpBCI self) {
+				this.self = self;
+			}
+
+			protected override bool Process(object item) {
+				EEGEvent evt = (EEGEvent) item;
+				lock (self.rawHandlers) {
+					if (!self.rawHandlers.ContainsKey(evt.type))
+						return true;
+
+					foreach (var handler in self.rawHandlers[evt.type]) {
+						handler(evt);
+					}
+				}
+				return true;
+			}
 		}
 	}
 

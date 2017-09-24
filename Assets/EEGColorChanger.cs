@@ -13,22 +13,22 @@ public class EEGColorChanger : MonoBehaviour {
 
 	public Renderer targetRenderer;
 
-	private float sessionMinPower = 0f;
-	private float sessionMaxPower = 0f;
-	private float currentPower = 0f;
+	double sessionMinPower = 0f;
+	double sessionMaxPower = 0f;
+	double currentPower = 0f;
 
 	// Use this for initialization
 	void Start () {
-		DeviceController.Device.AddHandler(EEGType, OnEEGData);
+		SharpBCIController.BCI.AddRawHandler(EEGType, OnEEGData);
 	}
 	
 	// Update is called once per frame
 	void OnDestroy() {
-		DeviceController.Device.RemoveHandler(EEGType, OnEEGData);
+		SharpBCIController.BCI.RemoveRawHandler(EEGType, OnEEGData);
 	}
 
 	void Update() {
-		float t = Mathf.InverseLerp(sessionMinPower, sessionMaxPower, currentPower);
+		float t = Mathf.InverseLerp((float) sessionMinPower, (float) sessionMaxPower, (float) currentPower);
 		Color c = Color.Lerp(startColor, endColor, t);
 		targetRenderer.material.color = c;
 	}
@@ -46,8 +46,8 @@ public class EEGColorChanger : MonoBehaviour {
 
 		int n = 0;
 		for (int i = min; i < max; i++) {
-			float v = evt.data[i];
-			if (float.IsNaN(v))
+			double v = evt.data[i];
+			if (double.IsNaN(v))
 				continue;
 			currentPower += v;
 			n++;
