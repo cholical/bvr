@@ -41,10 +41,9 @@ namespace SharpBCI
 					if(training != 0) {
 						AddTrainingData(training, buffer.ToArray());
 					}else {
-						Add (knn.Predict (buffer.ToArray ()));
+						Add (new TrainedEvent(knn.Predict (buffer.ToArray ())));
 					}
-			}
-			}
+				}
 			}
 			return true;
 		}
