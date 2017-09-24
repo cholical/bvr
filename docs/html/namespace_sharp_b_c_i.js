@@ -5,7 +5,6 @@ var namespace_sharp_b_c_i =
     [ "EEGDeviceAdapter", "class_sharp_b_c_i_1_1_e_e_g_device_adapter.html", "class_sharp_b_c_i_1_1_e_e_g_device_adapter" ],
     [ "EEGDeviceProducer", "class_sharp_b_c_i_1_1_e_e_g_device_producer.html", "class_sharp_b_c_i_1_1_e_e_g_device_producer" ],
     [ "EEGEvent", "class_sharp_b_c_i_1_1_e_e_g_event.html", "class_sharp_b_c_i_1_1_e_e_g_event" ],
-    [ "FFTBandPipeable", "class_sharp_b_c_i_1_1_f_f_t_band_pipeable.html", "class_sharp_b_c_i_1_1_f_f_t_band_pipeable" ],
     [ "FFTEvent", "class_sharp_b_c_i_1_1_f_f_t_event.html", "class_sharp_b_c_i_1_1_f_f_t_event" ],
     [ "FFTPipeable", "class_sharp_b_c_i_1_1_f_f_t_pipeable.html", "class_sharp_b_c_i_1_1_f_f_t_pipeable" ],
     [ "IPipeable", "interface_sharp_b_c_i_1_1_i_pipeable.html", "interface_sharp_b_c_i_1_1_i_pipeable" ],

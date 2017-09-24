@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['scrollinggraph_2ecs',['ScrollingGraph.cs',['../_scrolling_graph_8cs.html',1,'']]],
-  ['scrollinggraphcontroller_2ecs',['ScrollingGraphController.cs',['../_scrolling_graph_controller_8cs.html',1,'']]],
-  ['seriesvariable_2ecs',['SeriesVariable.cs',['../_series_variable_8cs.html',1,'']]],
-  ['sharpbci_2ecs',['SharpBCI.cs',['../_sharp_b_c_i_8cs.html',1,'']]],
-  ['smoothers_2ecs',['Smoothers.cs',['../_smoothers_8cs.html',1,'']]]
+  ['togglepanel_2ecs',['TogglePanel.cs',['../_toggle_panel_8cs.html',1,'']]]
 ];

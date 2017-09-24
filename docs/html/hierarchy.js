@@ -12,8 +12,9 @@ var hierarchy =
     [ "SharpBCI.IPipeable", "interface_sharp_b_c_i_1_1_i_pipeable.html", [
       [ "SharpBCI.Pipeable", "class_sharp_b_c_i_1_1_pipeable.html", [
         [ "SharpBCI.EEGDeviceProducer", "class_sharp_b_c_i_1_1_e_e_g_device_producer.html", null ],
-        [ "SharpBCI.FFTBandPipeable", "class_sharp_b_c_i_1_1_f_f_t_band_pipeable.html", null ],
-        [ "SharpBCI.FFTPipeable", "class_sharp_b_c_i_1_1_f_f_t_pipeable.html", null ]
+        [ "SharpBCI.FFTPipeable", "class_sharp_b_c_i_1_1_f_f_t_pipeable.html", null ],
+        [ "SharpBCI.SharpBCI.RawEventEmitter", "class_sharp_b_c_i_1_1_sharp_b_c_i_1_1_raw_event_emitter.html", null ],
+        [ "SharpBCI.SharpBCI.TrainedEventEmitter", "class_sharp_b_c_i_1_1_sharp_b_c_i_1_1_trained_event_emitter.html", null ]
       ] ]
     ] ],
     [ "SharpBCI.IPreprocessor", "interface_sharp_b_c_i_1_1_i_preprocessor.html", [
@@ -28,9 +29,8 @@ var hierarchy =
       [ "DeviceController", "class_device_controller.html", null ],
       [ "EEGColorChanger", "class_e_e_g_color_changer.html", null ],
       [ "EEGDataOutput", "class_e_e_g_data_output.html", null ],
-      [ "FFTOutput", "class_f_f_t_output.html", null ],
-      [ "MuseIOStarter", "class_muse_i_o_starter.html", null ],
       [ "ScrollingGraphController", "class_scrolling_graph_controller.html", null ],
+      [ "SharpBCIController", "class_sharp_b_c_i_controller.html", null ],
       [ "TogglePanel", "class_toggle_panel.html", null ]
     ] ],
     [ "SharpBCI.Preprocessors", "class_sharp_b_c_i_1_1_preprocessors.html", null ],
