@@ -38,6 +38,7 @@ namespace SharpBCI
 				
 			return costs.OrderBy (x => x.Value) //.Take (k_neighbors)  <-- k>1
 				.First ().Key; // <-- k==1. which we care about
+
 		}
 	}
 }
