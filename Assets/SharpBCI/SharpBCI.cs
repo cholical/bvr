@@ -102,7 +102,7 @@ namespace SharpBCI {
 		public double[] connectionStatus { get { return _connectionStatus; } }
 
 		//Pipeable to train on.
-		private readonly Pipeable predictor;
+		private readonly KNearestNeighborPipeable predictor;
 
 		/**
          * @param config a valid config object, generally built with SharpBCIBuilder

@@ -12,19 +12,22 @@ namespace SharpBCI
 		private int training;
 
 
-		public KNearestNeighborPipeable(int bufferSize) {
+		public KNearestNeighborPipeable (int bufferSize)
+		{
 			this.knn = new KNearestNeighbor (1);
 			this.bufferSize = bufferSize;
-			buffer = new List<double>();
+			buffer = new List<double> ();
 			training = 0;
 
 		}
 
-		public void StartTraining(int id) {
+		public void StartTraining (int id)
+		{
 			training = id;
 		}
 
-		public void StopTraining(int id) {
+		public void StopTraining (int id)
+		{
 			training = 0;
 		}
 
@@ -34,21 +37,21 @@ namespace SharpBCI
 				return false;
 			}
 
-			buffer.Add ((double) item);
+			buffer.Add ((double)item);
 
 			if (buffer.Count == bufferSize) {
-				lock(training) {
-					if(training != 0) {
-						AddTrainingData(training, buffer.ToArray());
-					}else {
-						Add (new TrainedEvent(knn.Predict (buffer.ToArray ())));
-					}
+				if (training != 0) {
+					AddTrainingData (training, buffer.ToArray ());
+				} else {
+					Add (new TrainedEvent (knn.Predict (buffer.ToArray ())));
 				}
+
 			}
 			return true;
 		}
 
-		private void AddTrainingData(int label, double[] data) {
+		private void AddTrainingData (int label, double[] data)
+		{
 			knn.AddTrainingData (label, data);
 		}
 			

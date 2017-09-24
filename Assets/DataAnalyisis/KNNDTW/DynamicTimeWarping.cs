@@ -24,7 +24,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SharpBCI
+namespace diff
 {
     public class DynamicTimeWarping
     {
