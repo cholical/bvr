@@ -6,73 +6,70 @@ using SharpBCI;
 
 namespace SharpBCI
 {
-	public class Smoothers
+	public abstract class TimeSeriesSmoother
+	{
+		protected double current;
+
+		public abstract double next (double x);
+
+		public double getAverage ()
+		{
+			return current;
+		}
+	}
+
+	public class SimpleMovingAverageSmoother : TimeSeriesSmoother
 	{
 
-		public abstract class TimeSeriesSmoother
+		private int windowSize;
+
+		private Queue<double> window;
+
+		public SimpleMovingAverageSmoother (int win)
 		{
-			protected double current;
 
-			public abstract double next (double x);
-
-			public double getAverage ()
-			{
-				return current;
+			if (win < 1) {
+				win = 1;
 			}
+
+			windowSize = win;
+			window = new Queue<double> ();
 		}
 
-		public class SimpleMovingAverageSmoother : TimeSeriesSmoother
+		public override double next (double x)
 		{
+			window.Enqueue (x);
 
-			private int windowSize;
-
-			private Queue<double> window;
-
-			public SimpleMovingAverageSmoother (int win)
-			{
-
-				if (win < 1) {
-					win = 1;
-				}
-
-				windowSize = win;
-				window = new Queue<double> ();
+			if (window.Count > windowSize) {
+				window.Dequeue ();
 			}
 
-			public override double next (double x)
-			{
-				window.Enqueue (x);
+			current = window.Average ();
 
-				if (window.Count > windowSize) {
-					window.Dequeue ();
-				}
+			return current;
 
-				current = window.Average ();
+		}
+	}
 
-				return current;
+	public class SingleExponentialSmoother : TimeSeriesSmoother
+	{
+		public double alpha;
 
-			}
+		public SingleExponentialSmoother (double a)
+		{
+			alpha = a;
 		}
 
-		public class SingleExponentialSmoother : TimeSeriesSmoother
+		public override double next (double x)
 		{
-			public double alpha;
-
-			public SingleExponentialSmoother (double a)
-			{
-				alpha = a;
+			if (current.Equals (null)) {
+				current = x;
+			} else {
+				current = (alpha * x) + ((1 - alpha) * current);
 			}
-
-			public override double next (double x)
-			{
-				if (current.Equals (null)) {
-					current = x;
-				} else {
-					current = (alpha * x) + ((1 - alpha) * current);
-				}
-				return current;
-			}
+			return current;
 		}
 	}
 }
+
 

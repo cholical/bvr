@@ -51,6 +51,10 @@ namespace SharpBCI {
 	 */
 	public class TrainedEvent {
 		public int id;
+
+		public TrainedEvent(int i) {
+			id = i;
+		}
 	}
 
 	/**
@@ -97,6 +101,9 @@ namespace SharpBCI {
 		 */
 		public double[] connectionStatus { get { return _connectionStatus; } }
 
+		//Pipeable to train on.
+		private readonly Pipeable predictor;
+
 		/**
          * @param config a valid config object, generally built with SharpBCIBuilder
          * @see SharpBCIConfig
@@ -135,6 +142,12 @@ namespace SharpBCI {
 			producer.Connect(rawEvtEmmiter);
 			fft.Connect(rawEvtEmmiter);
 
+			int bufferSize = 50;
+			var predict = new KNearestNeighborPipeable(bufferSize);
+			predictor = predict;
+			rawEvtEmmiter.Connect(predict);
+
+
 			var trainedEvtEmitter = new TrainedEventEmitter(this);
 			// TODO other stages
 
@@ -155,9 +168,8 @@ namespace SharpBCI {
 		 * Should be paired w/ a StopTraining(id) call
 		 * @returns The id which identifies the current training session
 		 */
-		public int StartTraining() {
-			return nextId++;
-			// TODO start training
+		public void StartTraining(int id) {
+			predictor.StartTraining(id);
 		}
 
 		/**
@@ -165,7 +177,8 @@ namespace SharpBCI {
 		 */
 		public void StopTraining(int id) {
 			if (id < 0 || id >= nextId) throw new ArgumentException("Training id invalid");
-			// TODO stop training
+			
+			predictor.StopTraining(id);
 		}
 
 		public void AddTrainedHandler(int id, SharpBCITrainedHandler handler) { 
