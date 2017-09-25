@@ -14,7 +14,7 @@ public class ScrollingGraphController : MonoBehaviour {
 	void Start() {
 		startCalled = true;
 		graph = GetComponent<ScrollingGraph>();
-		//SharpBCIController.BCI.AddRawHandler(type, OnEEGData);
+		SharpBCIController.BCI.AddRawHandler(type, OnEEGData);
 	}
 
 	// Use this for initialization

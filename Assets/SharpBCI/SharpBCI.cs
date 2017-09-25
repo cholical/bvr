@@ -135,18 +135,19 @@ namespace SharpBCI {
 			stages.Add(producer);
 
 			var fft = new FFTPipeable(WINDOW_SIZE, channels);
-			fft.Connect(producer);
+			producer.Connect(fft);
 			stages.Add(fft);
 
 			var rawEvtEmmiter = new RawEventEmitter(this);
 			producer.Connect(rawEvtEmmiter);
 			fft.Connect(rawEvtEmmiter);
+			stages.Add(rawEvtEmmiter);
 
 			int bufferSize = 50;
 			var predict = new KNearestNeighborPipeable(bufferSize);
 			predictor = predict;
 			rawEvtEmmiter.Connect(predict);
-
+			stages.Add(predictor);
 
 			var trainedEvtEmitter = new TrainedEventEmitter(this);
 			// TODO other stages
@@ -154,8 +155,12 @@ namespace SharpBCI {
 			// end internal pipeline construction
 
 			// begin start associated threads & EEGDeviceAdapter
-			taskFactory = new TaskFactory(TaskCreationOptions.LongRunning, TaskContinuationOptions.None);
 			cts = new CancellationTokenSource();
+			taskFactory = new TaskFactory(cts.Token, 
+			                              TaskCreationOptions.LongRunning, 
+			                              TaskContinuationOptions.None, 
+			                              TaskScheduler.Default
+			                             );
 
 			foreach (var stage in stages) {
 				stage.Start(taskFactory, cts);
