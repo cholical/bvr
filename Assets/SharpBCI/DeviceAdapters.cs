@@ -120,7 +120,7 @@ namespace SharpBCI {
 		public override void Start() {
 			Debug.Log("Starting RemoteOSCAdapter");
 			typeMap = InitTypeMap();
-			listener = new UDPListener(port, OnOSCMessageReceived);
+			listener = new UDPListener(port);
 			listenerThread = new Thread(new ThreadStart(Run));
 			listenerThread.Start();
 		}

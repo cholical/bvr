@@ -14,17 +14,24 @@ public class EEGDataOutput : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		text = GetComponent<Text>();
-		SharpBCIController.BCI.AddRawHandler(dataType, OnEEGData);
+		if (dataType != EEGDataType.CONTACT_QUALITY) {
+			SharpBCIController.BCI.AddRawHandler(dataType, OnEEGData);
+		}
 	}
 
 	void OnDestroy() {
-		SharpBCIController.BCI.RemoveRawHandler(dataType, OnEEGData);
+		if (dataType != EEGDataType.CONTACT_QUALITY) {
+			SharpBCIController.BCI.RemoveRawHandler(dataType, OnEEGData);
+		}
 	}
 
 	double[] buffer = new double[4];
 
 	int nUpdates = 0;	
 	void Update() {
+		if (dataType == EEGDataType.CONTACT_QUALITY) {
+			buffer = SharpBCIController.BCI.connectionStatus;
+		}
 		if (nUpdates % updateSkips == 0) {
 			text.text = string.Format("TP9 {0:F2}, FL: {1:F2}, RL: {2:F2}, TP10: {3:F2}", buffer[0], buffer[1], buffer[2], buffer[3]);
 		}
