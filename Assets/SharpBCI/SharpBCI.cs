@@ -142,16 +142,16 @@ namespace SharpBCI {
 
 			int bufferSize = 50;
 			predictor = new KNearestNeighborPipeable(bufferSize);
-			stages.Add(predictor);
+			//stages.Add(predictor);
 
 			var trainedEvtEmitter = new TrainedEventEmitter(this);
-			stages.Add(trainedEvtEmitter);
+			//stages.Add(trainedEvtEmitter);
 
 			producer.Connect(fft, true);
 			producer.Connect(rawEvtEmmiter, true);
-			producer.Connect(predictor, true);
+			//producer.Connect(predictor, true);
 			fft.Connect(rawEvtEmmiter);
-			predictor.Connect(trainedEvtEmitter);
+			//predictor.Connect(trainedEvtEmitter);
 
 			// TODO other stages
 

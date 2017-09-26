@@ -106,10 +106,11 @@ namespace SharpBCI {
 					}
 				}
 			} catch (Exception e) {
-				Logger.Error("Unexpected exception occurred in Pipeable " + this + ", cancelling pipeline.  Exception: " + e);
 				cts.Cancel();
-				if (!(e is OperationCanceledException))
+				if (!(e is OperationCanceledException)) {
+					Logger.Error("Unexpected exception occurred in Pipeable " + this + ", cancelling pipeline.  Exception: " + e);
 					throw;
+				}
 			} finally {
 				foreach (var output in allOutputs) { 
 					output.CompleteAdding();
