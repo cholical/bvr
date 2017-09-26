@@ -18,8 +18,8 @@ public class SharpBCIController : MonoBehaviour {
 			museIOProcess.StartInfo.FileName = System.IO.Path.Combine(Application.streamingAssetsPath, "muse-io.exe");
 			// default is osc.tcp://localhost:5000, but we expect udp
 			museIOProcess.StartInfo.Arguments = "--osc osc.udp://localhost:5000";
-			//museIOProcess.StartInfo.CreateNoWindow = true;
-			//museIOProcess.StartInfo.UseShellExecute = false;
+			museIOProcess.StartInfo.CreateNoWindow = true;
+			museIOProcess.StartInfo.UseShellExecute = false;
 			museIOProcess.Start();
 		} catch (System.Exception e) {
 			UnityEngine.Debug.LogError("Could not open muse-io:");
