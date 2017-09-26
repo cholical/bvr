@@ -18,6 +18,7 @@ namespace SharpBCI
 			this.bufferSize = bufferSize;
 			buffer = new List<double> ();
 			training = 0;
+			AddTrainingData(-1, new double[bufferSize]);
 
 		}
 
@@ -45,7 +46,7 @@ namespace SharpBCI
 				} else {
 					Add (new TrainedEvent (knn.Predict (buffer.ToArray ())));
 				}
-
+				buffer.Clear();
 			}
 			return true;
 		}
