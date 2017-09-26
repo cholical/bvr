@@ -11,13 +11,13 @@ namespace SharpBCI
 		private List<double> buffer;
 		private int training;
 
-
 		public KNearestNeighborPipeable (int bufferSize)
 		{
 			this.knn = new KNearestNeighbor (1);
 			this.bufferSize = bufferSize;
 			buffer = new List<double> ();
 			training = 0;
+			AddTrainingData(-1, new double[bufferSize]);
 
 		}
 
@@ -36,8 +36,8 @@ namespace SharpBCI
 			if (!(item is double)) {
 				return false;
 			}
-
-			buffer.Add ((double)item);
+				
+			buffer.Add ((double) item);
 
 			if (buffer.Count == bufferSize) {
 				if (training != 0) {
@@ -45,11 +45,11 @@ namespace SharpBCI
 				} else {
 					Add (new TrainedEvent (knn.Predict (buffer.ToArray ())));
 				}
-
+				buffer.Clear();
 			}
 			return true;
 		}
-
+			
 		private void AddTrainingData (int label, double[] data)
 		{
 			knn.AddTrainingData (label, data);

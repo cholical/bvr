@@ -18,7 +18,16 @@ namespace SharpBCI
 		public KNearestNeighbor (int k)
 		{
 			train_data = new List<KeyValuePair<int, double[]>>();
-			k_neighbors = k;
+			if (k != 1) {
+				Debug.LogWarning ("KNearestNeighbor currently only supports k=1");
+			}
+			k_neighbors = 1;
+		}
+
+		public KNearestNeighbor()
+		{
+			train_data = new List<KeyValuePair<int, double[]>> ();
+			k_neighbors = 1;
 		}
 
 		public void AddTrainingData(int label, double[] data) {
