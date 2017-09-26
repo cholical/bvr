@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['remoteoscadapter',['RemoteOSCAdapter',['../class_sharp_b_c_i_1_1_remote_o_s_c_adapter.html',1,'SharpBCI.RemoteOSCAdapter'],['../class_sharp_b_c_i_1_1_remote_o_s_c_adapter.html#a8c40105f89cc017c2903ef06f1bfb226',1,'SharpBCI.RemoteOSCAdapter.RemoteOSCAdapter()']]],
-  ['removehandler',['RemoveHandler',['../class_sharp_b_c_i_1_1_e_e_g_device_adapter.html#a69d74be6c873c0f35a5cbfa7c5dfedef',1,'SharpBCI::EEGDeviceAdapter']]]
+  ['next',['next',['../class_sharp_b_c_i_1_1_smoothers_1_1_time_series_smoother.html#a4913a466cd1f923a7f0797e956ba92ab',1,'SharpBCI.Smoothers.TimeSeriesSmoother.next()'],['../class_sharp_b_c_i_1_1_smoothers_1_1_simple_moving_average_smoother.html#ad77bd23ff7a524bcee2d0881202caa5a',1,'SharpBCI.Smoothers.SimpleMovingAverageSmoother.next()'],['../class_sharp_b_c_i_1_1_smoothers_1_1_single_exponential_smoother.html#a10a6e4170448d5c61e3f6d8c3c1893bd',1,'SharpBCI.Smoothers.SingleExponentialSmoother.next()']]],
+  ['nonepreprocessor',['NonePreprocessor',['../class_sharp_b_c_i_1_1_preprocessors_1_1_none_preprocessor.html',1,'SharpBCI::Preprocessors']]],
+  ['normalizationpreprocessor',['NormalizationPreprocessor',['../class_sharp_b_c_i_1_1_preprocessors_1_1_normalization_preprocessor.html',1,'SharpBCI.Preprocessors.NormalizationPreprocessor'],['../class_sharp_b_c_i_1_1_preprocessors_1_1_normalization_preprocessor.html#a778249265e2b060c1b9f5ae414ec26fc',1,'SharpBCI.Preprocessors.NormalizationPreprocessor.NormalizationPreprocessor()'],['../class_sharp_b_c_i_1_1_preprocessors_1_1_normalization_preprocessor.html#aff556c23114ba253897fe0ab59b0cde9',1,'SharpBCI.Preprocessors.NormalizationPreprocessor.NormalizationPreprocessor(double minBoundary, double maxBoundary)']]]
 ];

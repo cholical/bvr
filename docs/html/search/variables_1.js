@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['channels',['channels',['../class_sharp_b_c_i_1_1_sharp_b_c_i_config.html#abf1526c0c04daf4ef4e2c62deb2d0fc6',1,'SharpBCI::SharpBCIConfig']]]
+  ['bci',['BCI',['../class_sharp_b_c_i_controller.html#a24ea8792b523b2bf2f784f5e5ef3270c',1,'SharpBCIController']]],
+  ['bins',['bins',['../class_sharp_b_c_i_1_1_f_f_t_event.html#acf2391e3c3c124d02106cc57b7bcf681',1,'SharpBCI::FFTEvent']]]
 ];

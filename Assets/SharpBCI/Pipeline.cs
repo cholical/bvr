@@ -41,15 +41,20 @@ namespace SharpBCI {
 		CancellationTokenSource cts;
 		CancellationToken token;
 
-		BlockingCollection<object> input;
+		BlockingCollection<object>[] input;
 
 		List<BlockingCollection<object>> allOutputs = new List<BlockingCollection<object>>();
 
 		// TODO do we need to limit the size of this buffer due to memory concerns?
 		// BlockingCollection<object> output = new BlockingCollection<object>();
 
-		public void SetInput(BlockingCollection<object> input) {
-			this.input = input;
+		public void SetInput(BlockingCollection<object> newInput) {
+			if (input == null) {
+				input = new BlockingCollection<object>[0];
+			}
+			var inputsAsList = new List<BlockingCollection<object>>(input);
+			inputsAsList.Add(newInput);
+			input = inputsAsList.ToArray();
 		}
 
 		public void Connect(IPipeable other) {
@@ -91,9 +96,10 @@ namespace SharpBCI {
 				}
 				// case: consumer (possibly a filter)
 				else {
-					foreach (var item in input.GetConsumingEnumerable(token)) {
-						if (token.IsCancellationRequested || !Process(item))
-							break;
+					while (!token.IsCancellationRequested) {
+						object item;
+						BlockingCollection<object>.TakeFromAny(input, out item, token);
+						if (!Process(item)) break;
 					}
 				}
 			} catch (Exception e) {

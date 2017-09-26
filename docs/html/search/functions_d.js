@@ -1,0 +1,15 @@
+var searchData=
+[
+  ['seriesvariable',['SeriesVariable',['../class_sharp_b_c_i_1_1_series_variable.html#a6adcbf6271408bf943318f96943b009d',1,'SharpBCI::SeriesVariable']]],
+  ['setinput',['SetInput',['../interface_sharp_b_c_i_1_1_i_pipeable.html#a1775fb57fee4ffe5716ff0fe99a17a2a',1,'SharpBCI.IPipeable.SetInput()'],['../class_sharp_b_c_i_1_1_pipeable.html#a3dd47de67c12f9bdb7a521c0ad5f9bb2',1,'SharpBCI.Pipeable.SetInput()']]],
+  ['sharpbci',['SharpBCI',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#a3a1fef163f303e6b7d0aacd72aacc7a5',1,'SharpBCI::SharpBCI']]],
+  ['sharpbciconfig',['SharpBCIConfig',['../class_sharp_b_c_i_1_1_sharp_b_c_i_config.html#a826cbd163068038b4d4ed999640e334c',1,'SharpBCI::SharpBCIConfig']]],
+  ['sharpbcirawhandler',['SharpBCIRawHandler',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#a70268de29756f5f85d063f28f4be0a5a',1,'SharpBCI::SharpBCI']]],
+  ['sharpbcitrainedhandler',['SharpBCITrainedHandler',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#a660d3b06dc723a05b32c50aed9a18785',1,'SharpBCI::SharpBCI']]],
+  ['simplemovingaveragesmoother',['SimpleMovingAverageSmoother',['../class_sharp_b_c_i_1_1_smoothers_1_1_simple_moving_average_smoother.html#a04b7872ce0a4ecf2c10236b2d6171d8f',1,'SharpBCI::Smoothers::SimpleMovingAverageSmoother']]],
+  ['singleexponentialsmoother',['SingleExponentialSmoother',['../class_sharp_b_c_i_1_1_smoothers_1_1_single_exponential_smoother.html#a326b6a51b1d18a7a6e252b7875f3fbaf',1,'SharpBCI::Smoothers::SingleExponentialSmoother']]],
+  ['start',['Start',['../class_sharp_b_c_i_1_1_e_e_g_device_adapter.html#a41278c1e7ace24403c1b631cff5e96ed',1,'SharpBCI.EEGDeviceAdapter.Start()'],['../class_sharp_b_c_i_1_1_remote_o_s_c_adapter.html#ab292d2dc26166c9a2ee873982dded677',1,'SharpBCI.RemoteOSCAdapter.Start()'],['../interface_sharp_b_c_i_1_1_i_pipeable.html#a9348aeb6dd14dd6ce8c332ba5d1b7552',1,'SharpBCI.IPipeable.Start()'],['../class_sharp_b_c_i_1_1_pipeable.html#a1d35c3692567886710f23263d0a40234',1,'SharpBCI.Pipeable.Start()'],['../class_sharp_b_c_i_1_1_e_e_g_device_producer.html#aa25c7c2e32027694cdd9788761cb6d7c',1,'SharpBCI.EEGDeviceProducer.Start()']]],
+  ['starttraining',['StartTraining',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#aafcddc93445255172f7cfaef3bbaa04b',1,'SharpBCI::SharpBCI']]],
+  ['stop',['Stop',['../class_sharp_b_c_i_1_1_e_e_g_device_adapter.html#ab7f342bb842da7708b5da5d6ff8676b1',1,'SharpBCI.EEGDeviceAdapter.Stop()'],['../class_sharp_b_c_i_1_1_remote_o_s_c_adapter.html#aea4057959fc8197e3c8a13fe8c8ab63e',1,'SharpBCI.RemoteOSCAdapter.Stop()'],['../interface_sharp_b_c_i_1_1_i_pipeable.html#ae41775c72425fda3539ae086ef7666f9',1,'SharpBCI.IPipeable.Stop()'],['../class_sharp_b_c_i_1_1_pipeable.html#a714316963ff8f7ac8fdd7e4479f3f9c6',1,'SharpBCI.Pipeable.Stop()'],['../class_sharp_b_c_i_1_1_e_e_g_device_producer.html#abe7c2e83fd1ef40dd6f997d99987349d',1,'SharpBCI.EEGDeviceProducer.Stop()']]],
+  ['stoptraining',['StopTraining',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#a95920f7e515a4d773ca3d1766b096046',1,'SharpBCI::SharpBCI']]]
+];

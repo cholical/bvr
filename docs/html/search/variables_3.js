@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['eegtype',['EEGType',['../class_e_e_g_color_changer.html#abe9894fdf18ab340fa8df044a8138e38',1,'EEGColorChanger']]],
-  ['endcolor',['endColor',['../class_e_e_g_color_changer.html#a36d0c0d8edcac23b45249c4db4f2d7e2',1,'EEGColorChanger']]]
+  ['data',['data',['../class_sharp_b_c_i_1_1_e_e_g_event.html#afcebdb58730f5a3bbd3b0db23e2fc94c',1,'SharpBCI::EEGEvent']]],
+  ['datatype',['dataType',['../class_e_e_g_data_output.html#ac4495c1c22c261cdc5920a18614c8dc2',1,'EEGDataOutput']]],
+  ['device',['Device',['../class_device_controller.html#a2b92db3cd78469f28db4a608bc1b9e05',1,'DeviceController']]]
 ];

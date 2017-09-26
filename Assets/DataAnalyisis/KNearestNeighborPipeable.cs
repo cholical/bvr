@@ -12,6 +12,7 @@ namespace SharpBCI
 		private int training;
 
 
+<<<<<<< HEAD
 		public KNearestNeighborPipeable(int bufferSize) {
 			this.knn = new KNearestNeighbor (1);
 			this.bufferSize = bufferSize;
@@ -25,6 +26,25 @@ namespace SharpBCI
 		}
 
 		public void StopTraining(int id) {
+=======
+		public KNearestNeighborPipeable (int bufferSize)
+		{
+			this.knn = new KNearestNeighbor (1);
+			this.bufferSize = bufferSize;
+			buffer = new List<double> ();
+			training = 0;
+			AddTrainingData(-1, new double[bufferSize]);
+
+		}
+
+		public void StartTraining (int id)
+		{
+			training = id;
+		}
+
+		public void StopTraining (int id)
+		{
+>>>>>>> master
 			training = 0;
 		}
 
@@ -34,6 +54,7 @@ namespace SharpBCI
 				return false;
 			}
 
+<<<<<<< HEAD
 			buffer.Add ((double) item);
 
 			if (buffer.Count == bufferSize) {
@@ -45,11 +66,27 @@ namespace SharpBCI
 					}
 			}
 			}
+=======
+			buffer.Add ((double)item);
+
+			if (buffer.Count == bufferSize) {
+				if (training != 0) {
+					AddTrainingData (training, buffer.ToArray ());
+				} else {
+					Add (new TrainedEvent (knn.Predict (buffer.ToArray ())));
+				}
+				buffer.Clear();
+>>>>>>> master
 			}
 			return true;
 		}
 
+<<<<<<< HEAD
 		private void AddTrainingData(int label, double[] data) {
+=======
+		private void AddTrainingData (int label, double[] data)
+		{
+>>>>>>> master
 			knn.AddTrainingData (label, data);
 		}
 			

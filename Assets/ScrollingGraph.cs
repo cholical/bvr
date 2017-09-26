@@ -23,8 +23,8 @@ public class ScrollingGraph : Graphic {
 	private DateTime minX;
 	private DateTime maxX;
 
-	private float minY;
-	private float maxY;
+	private double minY;
+	private double maxY;
 
 	private bool valuesDirty = false;
 
@@ -49,25 +49,25 @@ public class ScrollingGraph : Graphic {
 
 		float deltaTime = (float) maxX.Subtract(minX).TotalSeconds;
 
-		float sizeX = rectTransform.rect.width;
-		float sizeY = rectTransform.rect.height;
-		Vector2 offset = new Vector2(rectTransform.pivot.x * sizeX, rectTransform.pivot.y * sizeY);
+		double sizeX = rectTransform.rect.width;
+		double sizeY = rectTransform.rect.height;
+		Vector2 offset = new Vector2((float)(rectTransform.pivot.x * sizeX), (float)(rectTransform.pivot.y * sizeY));
 
 		Vector2[] prevValues = null;
 		int i = 0;
 		foreach (EEGEvent evt in values) {
-			float[] arr = evt.data;
+			double[] arr = evt.data;
 			if (prevValues == null)
 				prevValues = new Vector2[arr.Length];
 
-			float time = (float) evt.timestamp.Subtract(minX).TotalSeconds;
-			float scaledTime = Rescale(time, 0, deltaTime, 0f, sizeX);
+			var time = (float) evt.timestamp.Subtract(minX).TotalSeconds;
+			var scaledTime = Rescale(time, 0, deltaTime, 0f, sizeX);
 			for (int j = 0; j < arr.Length; j++) {
 				var v = arr[j];
-				if (float.IsNaN(v))
+				if (double.IsNaN(v))
 					continue;
 
-				Vector2 curr = new Vector2(scaledTime, Rescale(v, minY, maxY, 0f, sizeY));
+				Vector2 curr = new Vector2((float) scaledTime, (float) Rescale(v, minY, maxY, 0f, sizeY));
 				curr -= offset;
 				if (i > 0) {
 					Vector2 prev = prevValues[j];
@@ -84,7 +84,7 @@ public class ScrollingGraph : Graphic {
 		}
 	}
 
-	private float Rescale(float x, float oldMin, float oldMax, float newMin, float newMax) {
+	private double Rescale(double x, double oldMin, double oldMax, double newMin, double newMax) {
 		return ((newMax - newMin) * (x - oldMin)) / (oldMax - oldMin) + newMin;
 	}
 
@@ -111,7 +111,7 @@ public class ScrollingGraph : Graphic {
 			}
 
 			foreach (var value in pt.data) {
-				if (float.IsNaN(value))
+				if (double.IsNaN(value))
 					continue;
 
 				if (value < minY) {

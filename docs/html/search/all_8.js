@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['linecolors',['lineColors',['../class_scrolling_graph.html#a0d94cb9af5c61bca3c4949aa73d186cd',1,'ScrollingGraph']]],
-  ['linethickness',['lineThickness',['../class_scrolling_graph.html#a553ec91ab143029adde6b9a8c17a8005',1,'ScrollingGraph']]]
+  ['knearestneighbor',['KNearestNeighbor',['../class_sharp_b_c_i_1_1_k_nearest_neighbor.html',1,'SharpBCI.KNearestNeighbor'],['../class_sharp_b_c_i_1_1_k_nearest_neighbor.html#ab96a33ec4ca2fb3371d9d04fae42e3af',1,'SharpBCI.KNearestNeighbor.KNearestNeighbor()']]],
+  ['knearestneighbor_2ecs',['KNearestNeighbor.cs',['../_k_nearest_neighbor_8cs.html',1,'']]]
 ];

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['pipeable',['Pipeable',['../class_sharp_b_c_i_1_1_pipeable.html',1,'SharpBCI']]],
-  ['pipeline_2ecs',['Pipeline.cs',['../_pipeline_8cs.html',1,'']]],
-  ['process',['Process',['../class_sharp_b_c_i_1_1_pipeable.html#a2c0cf40eff6ea6ab5de4c4f779a4d652',1,'SharpBCI.Pipeable.Process()'],['../class_sharp_b_c_i_1_1_e_e_g_device_producer.html#a0e5956cc35176fea04ad5788b128f70b',1,'SharpBCI.EEGDeviceProducer.Process()']]]
+  ['manhattan',['Manhattan',['../namespace_sharp_b_c_i.html#ac3ee47b1ee7f40a2fc3c86d88f117e80a1834cdf9bf35ea1d737c15eef72e18c7',1,'SharpBCI']]],
+  ['maximum',['Maximum',['../namespace_sharp_b_c_i.html#ac3ee47b1ee7f40a2fc3c86d88f117e80a8321e79c278ec510f63675c040594892',1,'SharpBCI']]]
 ];
