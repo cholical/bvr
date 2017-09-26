@@ -204,5 +204,45 @@ namespace SharpBCI {
 		}
 	}
 
+	public class DummyAdapter : EEGDeviceAdapter {
+		readonly double[] freqs;
+		readonly double[] amplitudes;
+		readonly int period;
+
+		bool isCancelled;
+		Thread thread;
+
+		public DummyAdapter(double[] freqs, double[] amplitudes, double sampleRate) {
+			this.freqs = freqs;
+			this.amplitudes = amplitudes;
+			period = (int) (1000 * (1/sampleRate));
+		}
+
+		void Run() {
+			double t = 0;
+			while (!isCancelled) {
+				double v = 0;
+				for (int i = 0; i < freqs.Length; i++) {
+					var f = freqs[i];
+					var a = amplitudes[i];
+					v += a * Math.Sin(2 * Math.PI * f * t);
+				}
+				t += period / 1000;
+				EmitData(EEGDataType.EEG, new double[] { v });
+				Thread.Sleep(period);
+			}
+		}
+
+		public override void Start() {
+			thread = new Thread(Run);
+			thread.Start();
+		}
+
+		public override void Stop() {
+			isCancelled = true;
+			thread.Join();
+		}
+	}
+
 }
 

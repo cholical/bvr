@@ -135,21 +135,24 @@ namespace SharpBCI {
 			stages.Add(producer);
 
 			var fft = new FFTPipeable(WINDOW_SIZE, channels);
-			producer.Connect(fft);
 			stages.Add(fft);
 
 			var rawEvtEmmiter = new RawEventEmitter(this);
-			producer.Connect(rawEvtEmmiter);
-			fft.Connect(rawEvtEmmiter);
 			stages.Add(rawEvtEmmiter);
 
 			int bufferSize = 50;
-			var predict = new KNearestNeighborPipeable(bufferSize);
-			predictor = predict;
-			rawEvtEmmiter.Connect(predict);
+			predictor = new KNearestNeighborPipeable(bufferSize);
 			stages.Add(predictor);
 
 			var trainedEvtEmitter = new TrainedEventEmitter(this);
+			stages.Add(trainedEvtEmitter);
+
+			producer.Connect(fft, true);
+			producer.Connect(rawEvtEmmiter, true);
+			producer.Connect(predictor, true);
+			fft.Connect(rawEvtEmmiter);
+			predictor.Connect(trainedEvtEmitter);
+
 			// TODO other stages
 
 			// end internal pipeline construction
