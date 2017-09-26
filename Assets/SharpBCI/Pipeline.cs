@@ -77,7 +77,7 @@ namespace SharpBCI {
 
 		public virtual void Start(TaskFactory taskFactory, CancellationTokenSource cts) {
 			this.cts = cts;
-			this.token = cts.Token;
+			token = cts.Token;
 			runningTask = taskFactory.StartNew(Run);
 		}
 
@@ -87,15 +87,18 @@ namespace SharpBCI {
 		}
 
 		void Run() {
+			//Logger.Log("Pipeable " + this + " running");
 			try {
 				// case: producer
 				if (input == null) {
+					Logger.Log("Pipeable " + this + " running as producer");
 					do {
 						if (token.IsCancellationRequested) break;
 					} while (Process(null));
 				}
 				// case: consumer (possibly a filter)
 				else {
+					Logger.Log("Pipeable " + this + " running as consumer/filter");
 					while (!token.IsCancellationRequested) {
 						object item;
 						BlockingCollection<object>.TakeFromAny(input, out item, token);
@@ -103,6 +106,7 @@ namespace SharpBCI {
 					}
 				}
 			} catch (Exception e) {
+				Logger.Error("Unexpected exception occurred in Pipeable " + this + ", cancelling pipeline.  Exception: " + e);
 				cts.Cancel();
 				if (!(e is OperationCanceledException))
 					throw;

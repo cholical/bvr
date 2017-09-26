@@ -4,22 +4,6 @@ using System.Collections.Generic;
 namespace SharpBCI {
 
 	/**
-	 * A simple event class which represents the output of an FFT over an arbitrary amount of channels
-	 * Probably shouldn't mod the fields unless you know what you're doing
-	 */
-	public class FFTEvent {
-		public DateTime timestamp;
-		public double[][] bins;
-		public double sampleRate;
-
-		public FFTEvent(DateTime timestamp, double sampleRate, double[][] bins) {
-			this.timestamp = timestamp;
-			this.sampleRate = sampleRate;
-			this.bins = bins;
-		}
-	}
-
-	/**
 	 * A Pipeable which performs an FFT on each channel
 	 * It outputs an FFTEvent every windowSize samples
 	 * @see FFTEvent
@@ -159,12 +143,13 @@ namespace SharpBCI {
 		}
 
 		double AbsBandPower(double[] bins, double minFreq, double maxFreq, double sampleRate) {
-			int N = bins.Length;
+			int N = bins.Length / 2;
+			// freq = (i/2) * sampleRate / N => i = 2 * freq / (sampleRate / N)
 			int minBin = Math.Max(1, 2 * (int)Math.Floor(minFreq / (sampleRate / N)));
-			int maxBin = Math.Min(N/2, 2 * (int)Math.Ceiling(maxFreq / (sampleRate / N)));
+			int maxBin = Math.Min(N / 2, 2 * (int)Math.Ceiling(maxFreq / (sampleRate / N)));
 			double powerSum = 0;
 			for (int i = minBin; i < maxBin; i += 2) {
-				powerSum += bins[i];;
+				powerSum += Math.Abs(bins[i]);
 			}
 			return powerSum;
 		}
