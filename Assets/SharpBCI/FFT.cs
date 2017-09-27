@@ -3,6 +3,42 @@ using System.Collections.Generic;
 
 namespace SharpBCI {
 
+	public class ChanneledQueue {
+		readonly int channels;
+		readonly int maxSize;
+		readonly Queue<double>[] samples;
+		readonly Queue<DateTime> timestamps;
+
+		DateTime windowStart;
+		DateTime windowEnd;
+
+		public ChanneledQueue(int channels, int maxSize) {
+			if (channels < 1)
+				throw new ArgumentException("channels must be >= 1");
+			this.channels = channels;
+			this.maxSize = maxSize;
+
+			samples = new Queue<double>[channels];
+			for (int i = 0; i < channels; i++) {
+				samples[i] = new Queue<double>();
+			}
+
+			timestamps = new Queue<DateTime>();
+		}
+
+		public int Count { get { return timestamps.Count; } }
+
+		public void Add(EEGEvent evt) {
+			for (int i = 0; i < channels; i++) {
+				samples[i].Enqueue(evt.data[i]);
+			}
+			timestamps.Enqueue(evt.timestamp);
+
+
+		}
+
+	}
+
 	/**
 	 * A Pipeable which performs an FFT on each channel
 	 * It outputs an FFTEvent every windowSize samples
@@ -12,18 +48,20 @@ namespace SharpBCI {
 
 		readonly int windowSize;
 		readonly int channels;
+
 		// use a jagged array to make full-row access faster
-		readonly double[][] samples;
+		//readonly double[][] samples;
+
+		readonly Queue<double>[] samples;
 
 		readonly Lomont.LomontFFT FFT = new Lomont.LomontFFT();
 
-		//readonly Converter<float, double> doubleConverter = new Converter<float, double>(delegate(float input) {
-		//	return (double)input;
-		//});
-
-		int nSamples = 0;
 		DateTime windowStart;
 		DateTime windowEnd;
+
+		int nSamples = 0;
+		int lastFFT = 0;
+		int totalSamples = 0;
 
 		/**
 		 * Create a new FFTPipeable which performs an FFT over windowSize.  Expects an input pipeable of EEGEvent's
@@ -36,9 +74,9 @@ namespace SharpBCI {
 			this.windowSize = 2 * windowSize;
 			this.channels = channels;
 
-			samples = new double[channels][];
+			samples = new Queue<double>[channels];
 			for (int i = 0; i < channels; i++) {
-				samples[i] = new double[windowSize];
+				samples[i] = new Queue<double>();
 			}
 		}
 
@@ -47,30 +85,43 @@ namespace SharpBCI {
 			if (evt.type != EEGDataType.EEG)
 				throw new Exception("FFTFilter recieved invalid EEGEvent: " + evt);
 
-			// for calculating sampleRate
-			if (nSamples == 0) {
-				windowStart = evt.timestamp;
+			if (evt.data.Length != channels)
+				throw new Exception("Malformed EEGEvent: " + evt);
+
+			//Logger.Log ("Recording samples, nSamples=" + nSamples + ", evt=" + evt);
+			totalSamples += 2;
+			if (totalSamples % windowSize == 0) {
+				windowStart = windowEnd;
+				windowEnd = evt.timestamp;
 			}
 
 			// normal case: just append data to sample buffer
 			for (int i = 0; i < channels; i++) {
-				samples[i][nSamples++] = evt.data[i];
+				samples[i].Enqueue(evt.data[i]);
 				// this is the imaginary part of the signal, but we're FFT-ing a real number so 0 for us
 				// TODO is this ALWAYS true?
-				samples[i][nSamples++] = 0;
+				samples[i].Enqueue(0);
+			}
+			nSamples += 2;
+
+			if (nSamples >= windowSize + 2) {
+				foreach (var channelSamples in samples) {
+					channelSamples.Dequeue();
+					channelSamples.Dequeue();
+				}
+				nSamples -= 2;
 			}
 
+			lastFFT++;
 			// sample buffer is full, do FFT then reset for next round
-			if (nSamples == windowSize) {
-				windowEnd = evt.timestamp;
-
+			if (nSamples >= windowSize && lastFFT % (windowSize / 8) == 0) {
 				// Do an FFT on each channel
 				List<double[]> fftOutput = new List<double[]>();
 				foreach (var channelSamples in samples) {
-					// TODO is a clone necessary?
-					// var samplesCopy = (double[]) channelSamples.Clone();
-					FFT.FFT(channelSamples, true);
-					fftOutput.Add(channelSamples);
+					// Logger.Log("FFT sample size:" + channelSamples.Count);
+					var samplesCopy = channelSamples.ToArray();
+					FFT.FFT(samplesCopy, true);
+					fftOutput.Add(samplesCopy);
 				}
 
 				// find sampleRate given windowStart and windowEnd there are only windowSize / 2 actual samples
@@ -102,15 +153,10 @@ namespace SharpBCI {
 
 				// now calc and emit relative powers
 				Add(new EEGEvent(evt.timestamp, EEGDataType.ALPHA_RELATIVE, RelBandPower(absolutePowers, EEGDataType.ALPHA_ABSOLUTE)));
-				Add(new EEGEvent(evt.timestamp, EEGDataType.BETA_RELATIVE, RelBandPower(absolutePowers, EEGDataType.BETA_RELATIVE)));
-				Add(new EEGEvent(evt.timestamp, EEGDataType.GAMMA_RELATIVE, RelBandPower(absolutePowers, EEGDataType.GAMMA_RELATIVE)));
-				Add(new EEGEvent(evt.timestamp, EEGDataType.DELTA_RELATIVE, RelBandPower(absolutePowers, EEGDataType.DELTA_RELATIVE)));
-				Add(new EEGEvent(evt.timestamp, EEGDataType.THETA_RELATIVE, RelBandPower(absolutePowers, EEGDataType.THETA_RELATIVE)));
-
-				// now write over all the data by resetting nSamples, this way we don't have to waste time clearing
-				// NOTE: after FFT stage samples now contains freq-domain data not time-domain data,
-				// but it will be completely overwritten before next FFT
-				nSamples = 0;
+				Add(new EEGEvent(evt.timestamp, EEGDataType.BETA_RELATIVE, RelBandPower(absolutePowers, EEGDataType.BETA_ABSOLUTE)));
+				Add(new EEGEvent(evt.timestamp, EEGDataType.GAMMA_RELATIVE, RelBandPower(absolutePowers, EEGDataType.GAMMA_ABSOLUTE)));
+				Add(new EEGEvent(evt.timestamp, EEGDataType.DELTA_RELATIVE, RelBandPower(absolutePowers, EEGDataType.DELTA_ABSOLUTE)));
+				Add(new EEGEvent(evt.timestamp, EEGDataType.THETA_RELATIVE, RelBandPower(absolutePowers, EEGDataType.THETA_ABSOLUTE)));
 			}
 
 			return true;

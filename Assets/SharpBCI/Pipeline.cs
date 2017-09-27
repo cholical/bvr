@@ -83,6 +83,9 @@ namespace SharpBCI {
 
 		public virtual void Stop() {
 			// TODO do cooperative stopping here, or above us?
+			foreach (var o in allOutputs) {
+				o.Dispose();
+			}
 			runningTask.Wait();
 		}
 
@@ -98,7 +101,7 @@ namespace SharpBCI {
 				}
 				// case: consumer (possibly a filter)
 				else {
-					Logger.Log("Pipeable " + this + " running as consumer/filter");
+					Logger.Log("Pipeable " + this + " running as consumer/filter: nInputs = " + input.Length);
 					while (!token.IsCancellationRequested) {
 						object item;
 						BlockingCollection<object>.TakeFromAny(input, out item, token);
@@ -106,10 +109,11 @@ namespace SharpBCI {
 					}
 				}
 			} catch (Exception e) {
-				Logger.Error("Unexpected exception occurred in Pipeable " + this + ", cancelling pipeline.  Exception: " + e);
 				cts.Cancel();
-				if (!(e is OperationCanceledException))
+				if (!(e is OperationCanceledException)) {
+					Logger.Error("Unexpected exception occurred in Pipeable " + this + ", cancelling pipeline.  Exception: " + e);
 					throw;
+				}
 			} finally {
 				foreach (var output in allOutputs) { 
 					output.CompleteAdding();

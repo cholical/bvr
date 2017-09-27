@@ -41,6 +41,15 @@ namespace SharpBCI {
 			this.type = type;
 			this.data = data;
 		}
+
+//		public override string ToString () {
+//			var dataStr = "[ ";
+//			foreach (var d in data) {
+//				dataStr += d + ", ";
+//			}
+//			dataStr += " ]";
+//			return string.Format ("EEGEvent({0}, {1}, {2})", type, timestamp, dataStr);
+//		}
 	}
 
 	public abstract class EEGDeviceAdapter {
@@ -107,7 +116,8 @@ namespace SharpBCI {
 		UDPListener listener;
 		Dictionary<string, EEGDataType> typeMap;
 		readonly Converter<object, double> converter = new Converter<object, double>(delegate(object inAdd) {
-			return (double) inAdd;
+			// TODO fix this horrendous kludge
+			return Double.Parse(inAdd.ToString());
 		});
 
 		Thread listenerThread;
@@ -185,22 +195,66 @@ namespace SharpBCI {
 			if (!typeMap.ContainsKey(msg.Address))
 				return;
 
-			//Debug.Log("Got packet from: " + msg.Address);
-			//Debug.Log("Arguments: ");
-			//foreach (var a in msg.Arguments) {
-			//	Debug.Log(a.ToString());
-			//}
+//			Debug.Log("Got packet from: " + msg.Address);
+//			Debug.Log("Arguments: ");
+//			foreach (var a in msg.Arguments) {
+//				Debug.Log(a.ToString());
+//			}
 
-			var data = msg.Arguments.ConvertAll<double>(converter).ToArray();
-			var type = typeMap[msg.Address];
+			try {
+				var data = msg.Arguments.ConvertAll<double>(converter).ToArray();
+				var type = typeMap[msg.Address];
 
-			//Debug.Log("EEGType: " + type);
-			//Debug.Log("Converted Args: ");
-			//foreach (float d in data) {
-			//	Debug.Log(d.ToString());
-			//}
+//				Debug.Log("EEGType: " + type);
+//				Debug.Log("Converted Args: ");
+//				foreach (var d in data) {
+//					Debug.Log(d.ToString());
+//				}
 
-			EmitData(type, data);
+				EmitData(type, data);
+			} catch (Exception e) {
+				Logger.Error("Could not convert/emit data from EEGDeviceAdapter: " + e);
+			}
+		}
+	}
+
+	public class DummyAdapter : EEGDeviceAdapter {
+		readonly double[] freqs;
+		readonly double[] amplitudes;
+		readonly int period;
+
+		bool isCancelled;
+		Thread thread;
+
+		public DummyAdapter(double[] freqs, double[] amplitudes, double sampleRate) {
+			this.freqs = freqs;
+			this.amplitudes = amplitudes;
+			period = (int) (1000 * (1/sampleRate));
+		}
+
+		void Run() {
+			double t = 0;
+			while (!isCancelled) {
+				double v = 0;
+				for (int i = 0; i < freqs.Length; i++) {
+					var f = freqs[i];
+					var a = amplitudes[i];
+					v += a * Math.Sin(2 * Math.PI * f * t);
+				}
+				t += period / 1000;
+				EmitData(EEGDataType.EEG, new double[] { v, v, v, v });
+				Thread.Sleep(period);
+			}
+		}
+
+		public override void Start() {
+			thread = new Thread(Run);
+			thread.Start();
+		}
+
+		public override void Stop() {
+			isCancelled = true;
+			thread.Join();
 		}
 	}
 
