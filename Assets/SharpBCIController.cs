@@ -21,14 +21,17 @@ public class SharpBCIController : MonoBehaviour {
 			museIOProcess.StartInfo.CreateNoWindow = true;
 			museIOProcess.StartInfo.UseShellExecute = false;
 			museIOProcess.Start();
+			museIOProcess.PriorityClass = ProcessPriorityClass.RealTime;
 		} catch (System.Exception e) {
 			UnityEngine.Debug.LogError("Could not open muse-io:");
 			UnityEngine.Debug.LogException(e);
 		}
 
+		//EEGDeviceAdapter adapter = new DummyAdapter(new double[] { 12, 24, 40, 2, 6, }, new double[] { 1, 1, 1, 1, 1 }, 220);
+		EEGDeviceAdapter adapter = new RemoteOSCAdapter(OSC_DATA_PORT);
 		SharpBCI.Logger.UseUnity = true;
 		BCI = new SharpBCIBuilder()
-			.EEGDeviceAdapter(new RemoteOSCAdapter(OSC_DATA_PORT))
+			.EEGDeviceAdapter(adapter)
 			.Channels(4).Build();
 	}
 

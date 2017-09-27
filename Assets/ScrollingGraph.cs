@@ -8,7 +8,7 @@ using SharpBCI;
 //[ExecuteInEditMode]
 public class ScrollingGraph : Graphic {
 
-	public float windowSize = 30;
+	public float windowSize = 1000;
 	public float lineThickness = 1;
 	public Color[] lineColors = new Color[] {
 		Color.blue,
@@ -39,19 +39,19 @@ public class ScrollingGraph : Graphic {
 		if (values.Count < 2)
 			return;
 
-		vh.Clear();
+		vh.Clear ();
 
 		if (valuesDirty) {
-			TrimValues();
-			CalcExtents();
+			TrimValues ();
+			CalcExtents ();
 			valuesDirty = false;
 		}
 
-		float deltaTime = (float) maxX.Subtract(minX).TotalSeconds;
+		float deltaTime = (float)maxX.Subtract (minX).TotalSeconds;
 
 		double sizeX = rectTransform.rect.width;
 		double sizeY = rectTransform.rect.height;
-		Vector2 offset = new Vector2((float)(rectTransform.pivot.x * sizeX), (float)(rectTransform.pivot.y * sizeY));
+		Vector2 offset = new Vector2 ((float)(rectTransform.pivot.x * sizeX), (float)(rectTransform.pivot.y * sizeY));
 
 		Vector2[] prevValues = null;
 		int i = 0;
@@ -60,25 +60,25 @@ public class ScrollingGraph : Graphic {
 			if (prevValues == null)
 				prevValues = new Vector2[arr.Length];
 
-			var time = (float) evt.timestamp.Subtract(minX).TotalSeconds;
-			var scaledTime = Rescale(time, 0, deltaTime, 0f, sizeX);
+			var time = (float)evt.timestamp.Subtract (minX).TotalSeconds;
+			var scaledTime = Rescale (time, 0, deltaTime, 0f, sizeX);
 			for (int j = 0; j < arr.Length; j++) {
-				var v = arr[j];
-				if (double.IsNaN(v))
+				var v = arr [j];
+				if (double.IsNaN (v))
 					continue;
 
-				Vector2 curr = new Vector2((float) scaledTime, (float) Rescale(v, minY, maxY, 0f, sizeY));
+				Vector2 curr = new Vector2 ((float)scaledTime, (float)Rescale (v, minY, maxY, 0f, sizeY));
 				curr -= offset;
 				if (i > 0) {
-					Vector2 prev = prevValues[j];
-					var v1 = prev + new Vector2(0, -lineThickness / 2);
-					var v2 = prev + new Vector2(0, +lineThickness / 2);
-					var v3 = curr + new Vector2(0, +lineThickness / 2);
-					var v4 = curr + new Vector2(0, -lineThickness / 2);
+					Vector2 prev = prevValues [j];
+					var v1 = prev + new Vector2 (0, -lineThickness / 2);
+					var v2 = prev + new Vector2 (0, +lineThickness / 2);
+					var v3 = curr + new Vector2 (0, +lineThickness / 2);
+					var v4 = curr + new Vector2 (0, -lineThickness / 2);
 
-					MakeQuad(vh, new Vector2[] { v1, v2, v3, v4 }, lineColors[j]);
+					MakeQuad (vh, new Vector2[] { v1, v2, v3, v4 }, lineColors [j]);
 				}
-				prevValues[j] = curr;
+				prevValues [j] = curr;
 			}
 			i++;
 		}
@@ -89,10 +89,8 @@ public class ScrollingGraph : Graphic {
 	}
 
 	private void TrimValues() {
-		DateTime windowEnd = DateTime.UtcNow.AddSeconds(-windowSize);
-		while (values.Count > 0 && values.Peek().timestamp < windowEnd) {
+		while (values.Count > windowSize)
 			values.Dequeue();
-		}
 	}
 
 	private void CalcExtents() {

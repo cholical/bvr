@@ -61,7 +61,7 @@ namespace SharpBCI {
 	 *  This is the "main" class which you should create.
 	 */
 	public class SharpBCI {
-		public const int WINDOW_SIZE = 1024;
+		public const int WINDOW_SIZE = 256;
 
 		// out-facing delegates
 		/**
@@ -134,23 +134,22 @@ namespace SharpBCI {
 			var producer = new EEGDeviceProducer(adapter);
 			stages.Add(producer);
 
-			var fft = new FFTPipeable(WINDOW_SIZE, channels);
-			stages.Add(fft);
+			//var fft = new FFTPipeable(WINDOW_SIZE, channels);
+			//stages.Add(fft);
 
 			var rawEvtEmmiter = new RawEventEmitter(this);
 			stages.Add(rawEvtEmmiter);
 
-			int bufferSize = 50;
-			predictor = new KNearestNeighborPipeable(bufferSize);
+			predictor = new KNearestNeighborPipeable(WINDOW_SIZE);
 			//stages.Add(predictor);
 
 			var trainedEvtEmitter = new TrainedEventEmitter(this);
 			//stages.Add(trainedEvtEmitter);
 
-			producer.Connect(fft, true);
+			//producer.Connect(fft, true);
 			producer.Connect(rawEvtEmmiter, true);
 			//producer.Connect(predictor, true);
-			fft.Connect(rawEvtEmmiter);
+			//fft.Connect(rawEvtEmmiter);
 			//predictor.Connect(trainedEvtEmitter);
 
 			// TODO other stages
@@ -271,12 +270,15 @@ namespace SharpBCI {
 
 			protected override bool Process(object item) {
 				EEGEvent evt = (EEGEvent) item;
-				lock (self.rawHandlers) {
-					if (!self.rawHandlers.ContainsKey(evt.type))
-						return true;
+				if (!self.rawHandlers.ContainsKey(evt.type))
+					return true;
 
-					foreach (var handler in self.rawHandlers[evt.type]) {
+				// Logger.Log("Emitting evt: " + evt.type);
+				foreach (var handler in self.rawHandlers[evt.type]) {
+					try {
 						handler(evt);
+					} catch (Exception e) {
+						Logger.Error("Handler " + handler + " encountered exception: " + e);
 					}
 				}
 				return true;
@@ -285,13 +287,25 @@ namespace SharpBCI {
 	}
 
 	public class EEGDeviceProducer : Pipeable {
+
+		readonly static EEGDataType[] supportedTypes = new EEGDataType[] {
+			EEGDataType.EEG,
+			EEGDataType.ALPHA_RELATIVE,
+			EEGDataType.BETA_RELATIVE,
+			EEGDataType.GAMMA_RELATIVE,
+			EEGDataType.DELTA_RELATIVE,
+			EEGDataType.THETA_RELATIVE,
+		};
+
 		readonly EEGDeviceAdapter adapter;
 		public EEGDeviceProducer(EEGDeviceAdapter adapter) {
 			this.adapter = adapter;
 		}
 
 		public override void Start(TaskFactory taskFactory, CancellationTokenSource cts) {
-			adapter.AddHandler(EEGDataType.EEG, Add);
+			foreach (EEGDataType type in supportedTypes) {
+				adapter.AddHandler(type, Add);
+			}
 			adapter.Start();
 			base.Start(taskFactory, cts);
 		}
