@@ -2,9 +2,14 @@ var dir_792cb359bd7f1349fe0e3b05fe820b6d =
 [
     [ "DeviceAdapters.cs", "_device_adapters_8cs.html", "_device_adapters_8cs" ],
     [ "FFT.cs", "_f_f_t_8cs.html", [
-      [ "FFTEvent", "class_sharp_b_c_i_1_1_f_f_t_event.html", "class_sharp_b_c_i_1_1_f_f_t_event" ],
       [ "FFTPipeable", "class_sharp_b_c_i_1_1_f_f_t_pipeable.html", "class_sharp_b_c_i_1_1_f_f_t_pipeable" ]
     ] ],
+    [ "Filters.cs", "_filters_8cs.html", [
+      [ "IFilter", "interface_sharp_b_c_i_1_1_i_filter.html", "interface_sharp_b_c_i_1_1_i_filter" ],
+      [ "PassThroughFilter", "class_sharp_b_c_i_1_1_pass_through_filter.html", "class_sharp_b_c_i_1_1_pass_through_filter" ],
+      [ "ExponentialFilter", "class_sharp_b_c_i_1_1_exponential_filter.html", "class_sharp_b_c_i_1_1_exponential_filter" ]
+    ] ],
+    [ "Logger.cs", "_logger_8cs.html", "_logger_8cs" ],
     [ "Pipeline.cs", "_pipeline_8cs.html", [
       [ "IPipeable", "interface_sharp_b_c_i_1_1_i_pipeable.html", "interface_sharp_b_c_i_1_1_i_pipeable" ],
       [ "Pipeable", "class_sharp_b_c_i_1_1_pipeable.html", "class_sharp_b_c_i_1_1_pipeable" ]

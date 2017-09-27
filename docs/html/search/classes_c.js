@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['timeseriessmoother',['TimeSeriesSmoother',['../class_sharp_b_c_i_1_1_smoothers_1_1_time_series_smoother.html',1,'SharpBCI::Smoothers']]],
-  ['togglepanel',['TogglePanel',['../class_toggle_panel.html',1,'']]],
-  ['trainedevent',['TrainedEvent',['../class_sharp_b_c_i_1_1_trained_event.html',1,'SharpBCI']]]
+  ['openvr',['OpenVR',['../class_valve_1_1_v_r_1_1_open_v_r.html',1,'Valve::VR']]],
+  ['openvrinterop',['OpenVRInterop',['../class_valve_1_1_v_r_1_1_open_v_r_interop.html',1,'Valve::VR']]]
 ];

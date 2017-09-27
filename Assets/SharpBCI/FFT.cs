@@ -3,48 +3,15 @@ using System.Collections.Generic;
 
 namespace SharpBCI {
 
-	public class ChanneledQueue {
-		readonly int channels;
-		readonly int maxSize;
-		readonly Queue<double>[] samples;
-		readonly Queue<DateTime> timestamps;
-
-		DateTime windowStart;
-		DateTime windowEnd;
-
-		public ChanneledQueue(int channels, int maxSize) {
-			if (channels < 1)
-				throw new ArgumentException("channels must be >= 1");
-			this.channels = channels;
-			this.maxSize = maxSize;
-
-			samples = new Queue<double>[channels];
-			for (int i = 0; i < channels; i++) {
-				samples[i] = new Queue<double>();
-			}
-
-			timestamps = new Queue<DateTime>();
-		}
-
-		public int Count { get { return timestamps.Count; } }
-
-		public void Add(EEGEvent evt) {
-			for (int i = 0; i < channels; i++) {
-				samples[i].Enqueue(evt.data[i]);
-			}
-			timestamps.Enqueue(evt.timestamp);
-
-
-		}
-
-	}
-
 	/**
 	 * A Pipeable which performs an FFT on each channel
 	 * It outputs an FFTEvent every windowSize samples
 	 * @see FFTEvent
 	 */
 	public class FFTPipeable : Pipeable {
+
+		// ~10 Hz @ 220Hz sampling
+		public const int FFT_RATE = 22;
 
 		readonly int windowSize;
 		readonly int channels;
@@ -63,20 +30,28 @@ namespace SharpBCI {
 		int lastFFT = 0;
 		int totalSamples = 0;
 
+		double sampleRate;
+
+		IFilter<double>[] filters;
+
+
 		/**
 		 * Create a new FFTPipeable which performs an FFT over windowSize.  Expects an input pipeable of EEGEvent's
 		 * @param windowSize The size of the FFT window, determines granularity (google FFT)
 		 * @param channels How many channels to operate on
 		 * @see EEGEvent
 		 */
-		public FFTPipeable(int windowSize, int channels) {
+		public FFTPipeable(int windowSize, int channels, double sampleRate) {
 			// 2 * windowSize to account for the imaginary parts of the FFT
 			this.windowSize = 2 * windowSize;
 			this.channels = channels;
-
+			this.sampleRate = sampleRate;
+				
 			samples = new Queue<double>[channels];
+			filters = new IFilter<double>[channels];
 			for (int i = 0; i < channels; i++) {
 				samples[i] = new Queue<double>();
+				filters[i] = new PassThroughFilter();
 			}
 		}
 
@@ -97,7 +72,7 @@ namespace SharpBCI {
 
 			// normal case: just append data to sample buffer
 			for (int i = 0; i < channels; i++) {
-				samples[i].Enqueue(evt.data[i]);
+				samples[i].Enqueue(filters[i].Filter(evt.data[i]));
 				// this is the imaginary part of the signal, but we're FFT-ing a real number so 0 for us
 				// TODO is this ALWAYS true?
 				samples[i].Enqueue(0);
@@ -114,7 +89,7 @@ namespace SharpBCI {
 
 			lastFFT++;
 			// sample buffer is full, do FFT then reset for next round
-			if (nSamples >= windowSize && lastFFT % (windowSize / 8) == 0) {
+			if (nSamples >= windowSize && lastFFT % FFT_RATE == 0) {
 				// Do an FFT on each channel
 				List<double[]> fftOutput = new List<double[]>();
 				foreach (var channelSamples in samples) {
@@ -125,16 +100,17 @@ namespace SharpBCI {
 				}
 
 				// find sampleRate given windowStart and windowEnd there are only windowSize / 2 actual samples
-				double sampleRate = (windowSize / 2) / windowEnd.Subtract(windowStart).TotalSeconds;
+				//double sampleRate = (windowSize / 2) / windowEnd.Subtract(windowStart).TotalSeconds;
+				//Logger.Log(string.Format("Current sampleRate: {0:#} Hz", sampleRate));
 
 				// find abs powers for each band
 				Dictionary<EEGDataType, List<double>> absolutePowers = new Dictionary<EEGDataType, List<double>>();
 				foreach (var bins in fftOutput) {
-					double deltaAbs = AbsBandPower(bins, 0, 4, sampleRate);
+					double deltaAbs = AbsBandPower(bins, 1, 4, sampleRate);
 					double thetaAbs = AbsBandPower(bins, 4, 8, sampleRate);
-					double alphaAbs = AbsBandPower(bins, 8, 16, sampleRate);
-					double betaAbs = AbsBandPower(bins, 16, 32, sampleRate);
-					double gammaAbs = AbsBandPower(bins, 32, 0, sampleRate);
+					double alphaAbs = AbsBandPower(bins, 7.5, 13, sampleRate);
+					double betaAbs = AbsBandPower(bins, 13, 30, sampleRate);
+					double gammaAbs = AbsBandPower(bins, 30, 44, sampleRate);
 
 					GetBandList(absolutePowers, EEGDataType.ALPHA_ABSOLUTE).Add(alphaAbs);
 					GetBandList(absolutePowers, EEGDataType.BETA_ABSOLUTE).Add(betaAbs);

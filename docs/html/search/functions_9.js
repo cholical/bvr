@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['next',['next',['../class_sharp_b_c_i_1_1_smoothers_1_1_time_series_smoother.html#a4913a466cd1f923a7f0797e956ba92ab',1,'SharpBCI.Smoothers.TimeSeriesSmoother.next()'],['../class_sharp_b_c_i_1_1_smoothers_1_1_simple_moving_average_smoother.html#ad77bd23ff7a524bcee2d0881202caa5a',1,'SharpBCI.Smoothers.SimpleMovingAverageSmoother.next()'],['../class_sharp_b_c_i_1_1_smoothers_1_1_single_exponential_smoother.html#a10a6e4170448d5c61e3f6d8c3c1893bd',1,'SharpBCI.Smoothers.SingleExponentialSmoother.next()']]],
-  ['normalizationpreprocessor',['NormalizationPreprocessor',['../class_sharp_b_c_i_1_1_preprocessors_1_1_normalization_preprocessor.html#a778249265e2b060c1b9f5ae414ec26fc',1,'SharpBCI.Preprocessors.NormalizationPreprocessor.NormalizationPreprocessor()'],['../class_sharp_b_c_i_1_1_preprocessors_1_1_normalization_preprocessor.html#aff556c23114ba253897fe0ab59b0cde9',1,'SharpBCI.Preprocessors.NormalizationPreprocessor.NormalizationPreprocessor(double minBoundary, double maxBoundary)']]]
+  ['knearestneighbor',['KNearestNeighbor',['../class_sharp_b_c_i_1_1_k_nearest_neighbor.html#ab96a33ec4ca2fb3371d9d04fae42e3af',1,'SharpBCI.KNearestNeighbor.KNearestNeighbor(int k)'],['../class_sharp_b_c_i_1_1_k_nearest_neighbor.html#a090709139b0fb0529b3398d32b51d964',1,'SharpBCI.KNearestNeighbor.KNearestNeighbor()']]],
+  ['knearestneighborpipeable',['KNearestNeighborPipeable',['../class_sharp_b_c_i_1_1_k_nearest_neighbor_pipeable.html#af0d6eec554988e54d7a32c3f04e4a040',1,'SharpBCI::KNearestNeighborPipeable']]]
 ];

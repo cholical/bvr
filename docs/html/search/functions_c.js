@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['raweventemitter',['RawEventEmitter',['../class_sharp_b_c_i_1_1_sharp_b_c_i_1_1_raw_event_emitter.html#a3e4d8480de29bd6e2f6b101c92fc504b',1,'SharpBCI::SharpBCI::RawEventEmitter']]],
-  ['realfft',['RealFFT',['../class_lomont_1_1_lomont_f_f_t.html#a8d770db72fb42d890c096b894cbf57b2',1,'Lomont::LomontFFT']]],
-  ['remoteoscadapter',['RemoteOSCAdapter',['../class_sharp_b_c_i_1_1_remote_o_s_c_adapter.html#a8c40105f89cc017c2903ef06f1bfb226',1,'SharpBCI::RemoteOSCAdapter']]],
-  ['removehandler',['RemoveHandler',['../class_sharp_b_c_i_1_1_e_e_g_device_adapter.html#a69d74be6c873c0f35a5cbfa7c5dfedef',1,'SharpBCI::EEGDeviceAdapter']]],
-  ['removerawhandler',['RemoveRawHandler',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#ae7465d4262ea17036d3cc33cbc6bdaf4',1,'SharpBCI::SharpBCI']]],
-  ['removetrainedhandler',['RemoveTrainedHandler',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#afd15e4a9d121e29024d73cf1b46af5c0',1,'SharpBCI::SharpBCI']]]
+  ['next',['next',['../class_sharp_b_c_i_1_1_time_series_smoother.html#a7a42d70ea28a34bfa062be0c2c3c86b7',1,'SharpBCI.TimeSeriesSmoother.next()'],['../class_sharp_b_c_i_1_1_simple_moving_average_smoother.html#a895e94056c28283554e507cba49711ee',1,'SharpBCI.SimpleMovingAverageSmoother.next()'],['../class_sharp_b_c_i_1_1_single_exponential_smoother.html#af14210d5f345d0892a307a705080c597',1,'SharpBCI.SingleExponentialSmoother.next()']]],
+  ['normalizationpreprocessor',['NormalizationPreprocessor',['../class_sharp_b_c_i_1_1_preprocessors_1_1_normalization_preprocessor.html#a778249265e2b060c1b9f5ae414ec26fc',1,'SharpBCI.Preprocessors.NormalizationPreprocessor.NormalizationPreprocessor()'],['../class_sharp_b_c_i_1_1_preprocessors_1_1_normalization_preprocessor.html#aff556c23114ba253897fe0ab59b0cde9',1,'SharpBCI.Preprocessors.NormalizationPreprocessor.NormalizationPreprocessor(double minBoundary, double maxBoundary)']]]
 ];

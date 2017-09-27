@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using SharpBCI;
 
-//[ExecuteInEditMode]
+[ExecuteInEditMode]
 public class ScrollingGraph : Graphic {
 
 	public float windowSize = 1000;
@@ -18,15 +18,17 @@ public class ScrollingGraph : Graphic {
 		Color.black,
 	};
 
-	private Queue<EEGEvent> values = new Queue<EEGEvent>();
+	public int maxPoints = 100;
 
-	private DateTime minX;
-	private DateTime maxX;
+	Queue<EEGEvent> values = new Queue<EEGEvent>();
 
-	private double minY;
-	private double maxY;
+	DateTime minX;
+	DateTime maxX;
 
-	private bool valuesDirty = false;
+	double minY;
+	double maxY;
+
+	bool valuesDirty = false;
 
 	public void AppendValue(EEGEvent evt) {
 		values.Enqueue(evt);
@@ -36,14 +38,14 @@ public class ScrollingGraph : Graphic {
 	}
 
 	protected override void OnPopulateMesh(VertexHelper vh) {
+		vh.Clear();
+
 		if (values.Count < 2)
 			return;
-
-		vh.Clear ();
-
+		
 		if (valuesDirty) {
-			TrimValues ();
-			CalcExtents ();
+			TrimValues();
+			CalcExtents();
 			valuesDirty = false;
 		}
 
@@ -54,34 +56,54 @@ public class ScrollingGraph : Graphic {
 		Vector2 offset = new Vector2 ((float)(rectTransform.pivot.x * sizeX), (float)(rectTransform.pivot.y * sizeY));
 
 		Vector2[] prevValues = null;
-		int i = 0;
-		foreach (EEGEvent evt in values) {
+		//int i = 0;
+
+		var valueCopy = values.ToArray();
+		var N = valueCopy.Length;
+		// N = len(A) / skipFactor => skipFactor = len(A) / N
+		var skipFactor = Math.Max(1, valueCopy.Length / maxPoints);
+		for (int i = 0; i < N; i += skipFactor) {
+			EEGEvent evt = AverageEvent(valueCopy, i, Mathf.Min(N, i + skipFactor));
 			double[] arr = evt.data;
 			if (prevValues == null)
 				prevValues = new Vector2[arr.Length];
 
-			var time = (float)evt.timestamp.Subtract (minX).TotalSeconds;
-			var scaledTime = Rescale (time, 0, deltaTime, 0f, sizeX);
-			for (int j = 0; j < arr.Length; j++) {
-				var v = arr [j];
-				if (double.IsNaN (v))
+			var time = (float)evt.timestamp.Subtract(minX).TotalSeconds;
+			var scaledTime = Rescale(time, 0, deltaTime, 0f, sizeX);
+			for (int j = 0; j<arr.Length; j++) {
+				var v = arr[j];
+				if (double.IsNaN(v))
 					continue;
 
-				Vector2 curr = new Vector2 ((float)scaledTime, (float)Rescale (v, minY, maxY, 0f, sizeY));
+				Vector2 curr = new Vector2((float)scaledTime, (float)Rescale(v, minY, maxY, 0f, sizeY));
 				curr -= offset;
 				if (i > 0) {
-					Vector2 prev = prevValues [j];
-					var v1 = prev + new Vector2 (0, -lineThickness / 2);
-					var v2 = prev + new Vector2 (0, +lineThickness / 2);
-					var v3 = curr + new Vector2 (0, +lineThickness / 2);
-					var v4 = curr + new Vector2 (0, -lineThickness / 2);
+					Vector2 prev = prevValues[j];
+					var v1 = prev + new Vector2(0, -lineThickness / 2);
+					var v2 = prev + new Vector2(0, +lineThickness / 2);
+					var v3 = curr + new Vector2(0, +lineThickness / 2);
+					var v4 = curr + new Vector2(0, -lineThickness / 2);
 
-					MakeQuad (vh, new Vector2[] { v1, v2, v3, v4 }, lineColors [j]);
+					MakeQuad(vh, new Vector2[] { v1, v2, v3, v4 }, lineColors[j]);
 				}
-				prevValues [j] = curr;
+				prevValues[j] = curr;
 			}
-			i++;
 		}
+	}
+
+	EEGEvent AverageEvent(EEGEvent[] events, int min, int max) {
+		EEGEvent startEvt = events[min];
+		int channels = startEvt.data.Length;
+		double[] sums = new double[channels];
+		for (int i = min; i < max; i++) {
+			for (int j = 0; j < channels; j++) {
+				sums[j] += events[i].data[j];
+			}
+		}
+		for (int j = 0; j<channels; j++) {
+			sums[j] /= (max - min);
+		}
+		return new EEGEvent(startEvt.timestamp, startEvt.type, sums);
 	}
 
 	private double Rescale(double x, double oldMin, double oldMax, double newMin, double newMax) {

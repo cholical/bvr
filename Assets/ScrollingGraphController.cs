@@ -29,7 +29,7 @@ public class ScrollingGraphController : MonoBehaviour {
 		SharpBCIController.BCI.RemoveRawHandler(type, OnEEGData);
 	}
 
-	Queue<EEGEvent> evts = new Queue<EEGEvent>();
+	readonly Queue<EEGEvent> evts = new Queue<EEGEvent>();
 
 	void Update() {
 		while (evts.Count > 0) {

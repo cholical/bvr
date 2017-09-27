@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['timeseriessmoother',['TimeSeriesSmoother',['../class_sharp_b_c_i_1_1_smoothers_1_1_time_series_smoother.html',1,'SharpBCI::Smoothers']]],
-  ['togglepanel',['TogglePanel',['../class_toggle_panel.html',1,'']]],
-  ['trainedevent',['TrainedEvent',['../class_sharp_b_c_i_1_1_trained_event.html',1,'SharpBCI']]],
-  ['trainedeventemitter',['TrainedEventEmitter',['../class_sharp_b_c_i_1_1_sharp_b_c_i_1_1_trained_event_emitter.html',1,'SharpBCI::SharpBCI']]]
+  ['nonepreprocessor',['NonePreprocessor',['../class_sharp_b_c_i_1_1_preprocessors_1_1_none_preprocessor.html',1,'SharpBCI::Preprocessors']]],
+  ['normalizationpreprocessor',['NormalizationPreprocessor',['../class_sharp_b_c_i_1_1_preprocessors_1_1_normalization_preprocessor.html',1,'SharpBCI::Preprocessors']]],
+  ['notificationbitmap_5ft',['NotificationBitmap_t',['../struct_valve_1_1_v_r_1_1_notification_bitmap__t.html',1,'Valve::VR']]]
 ];

@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Threading;
-using System.Collections;
 using System.Collections.Generic;
 using SharpOSC;
-using UnityEngine;
 
 namespace SharpBCI {
 
@@ -60,6 +58,14 @@ namespace SharpBCI {
 
 		readonly Queue<EEGEvent> eventQueue = new Queue<EEGEvent>();
 
+		public readonly int channels;
+		public readonly double sampleRate;
+
+		public EEGDeviceAdapter(int channels, double sampleRate) {
+			this.channels = channels;
+			this.sampleRate = sampleRate;
+		}
+
 		public abstract void Start();
 		public abstract void Stop();
 
@@ -90,11 +96,11 @@ namespace SharpBCI {
 			}
 		}
 
-		protected void EmitData(EEGDataType type, double[] data) {
+		protected void EmitData(EEGEvent evt) {
 			//Debug.Log("EmitData type=" + type);
 			lock (eventQueue) {
 				//Debug.Log("EmitData lock obtained");
-				eventQueue.Enqueue(new EEGEvent(DateTime.UtcNow, type, data));
+				eventQueue.Enqueue(evt);
 			}
 		}
 
@@ -123,12 +129,12 @@ namespace SharpBCI {
 		Thread listenerThread;
 		bool stopRequested;
 
-		public RemoteOSCAdapter(int port) {
+		public RemoteOSCAdapter(int port) : base(4, 220) {
 			this.port = port;
 		}
 
 		public override void Start() {
-			Debug.Log("Starting RemoteOSCAdapter");
+			Logger.Log("Starting RemoteOSCAdapter");
 			typeMap = InitTypeMap();
 			listener = new UDPListener(port);
 			listenerThread = new Thread(new ThreadStart(Run));
@@ -136,7 +142,7 @@ namespace SharpBCI {
 		}
 
 		public override void Stop() {
-			Debug.Log("Stopping RemoteOSCAdapter");
+			Logger.Log("Stopping RemoteOSCAdapter");
 			stopRequested = true;
 			listenerThread.Join();
 			listener.Dispose();
@@ -211,7 +217,7 @@ namespace SharpBCI {
 //					Debug.Log(d.ToString());
 //				}
 
-				EmitData(type, data);
+				EmitData(new EEGEvent(DateTime.UtcNow, type, data));
 			} catch (Exception e) {
 				Logger.Error("Could not convert/emit data from EEGDeviceAdapter: " + e);
 			}
@@ -226,10 +232,12 @@ namespace SharpBCI {
 		bool isCancelled;
 		Thread thread;
 
-		public DummyAdapter(double[] freqs, double[] amplitudes, double sampleRate) {
+		DateTime lastSampled = DateTime.UtcNow;
+
+		public DummyAdapter(double[] freqs, double[] amplitudes, double sampleRate) : base(4, 220) {
 			this.freqs = freqs;
 			this.amplitudes = amplitudes;
-			period = (int) (1000 * (1/sampleRate));
+			period = (int) (1000/sampleRate);
 		}
 
 		void Run() {
@@ -239,20 +247,27 @@ namespace SharpBCI {
 				for (int i = 0; i < freqs.Length; i++) {
 					var f = freqs[i];
 					var a = amplitudes[i];
-					v += a * Math.Sin(2 * Math.PI * f * t);
+					v += (a * Math.Sin(2 * Math.PI * f * t) ) + a;
 				}
-				t += period / 1000;
-				EmitData(EEGDataType.EEG, new double[] { v, v, v, v });
+				// Logger.Log("Emitting v " + v + " at time " + t);
+				t += ((double)(period)) / 1000;
+				EmitData(new EEGEvent(DateTime.UtcNow, EEGDataType.EEG, new double[] { v, v, v, v }));
+
+				var now = DateTime.UtcNow;
+				var delayTime = period - (int)(now.Subtract(lastSampled).TotalMilliseconds);
+				lastSampled = now;
 				Thread.Sleep(period);
 			}
 		}
 
 		public override void Start() {
+			Logger.Log("Starting DummyAdapter");
 			thread = new Thread(Run);
 			thread.Start();
 		}
 
 		public override void Stop() {
+			Logger.Log("Stopping DummyAdapter");
 			isCancelled = true;
 			thread.Join();
 		}
