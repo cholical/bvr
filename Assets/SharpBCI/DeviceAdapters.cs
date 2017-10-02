@@ -4,52 +4,7 @@ using System.Collections.Generic;
 using SharpOSC;
 
 namespace SharpBCI {
-
-	public enum EEGDataType {
-		// raw Accelerometer data
-		ACCEL,
-
-		// raw EEG data
-		EEG,
-
-		// absolute freq bands
-		ALPHA_ABSOLUTE,
-		BETA_ABSOLUTE,
-		GAMMA_ABSOLUTE,
-		DELTA_ABSOLUTE,
-		THETA_ABSOLUTE,
-
-		// relative freq bands
-		ALPHA_RELATIVE,
-		BETA_RELATIVE,
-		GAMMA_RELATIVE,
-		DELTA_RELATIVE,
-		THETA_RELATIVE,
-
-		CONTACT_QUALITY,
-	}
-
-	public class EEGEvent {
-		public DateTime timestamp;
-		public EEGDataType type;
-		public double[] data;
-
-		public EEGEvent(DateTime timestamp, EEGDataType type, double[] data) {
-			this.timestamp = timestamp;
-			this.type = type;
-			this.data = data;
-		}
-
-//		public override string ToString () {
-//			var dataStr = "[ ";
-//			foreach (var d in data) {
-//				dataStr += d + ", ";
-//			}
-//			dataStr += " ]";
-//			return string.Format ("EEGEvent({0}, {1}, {2})", type, timestamp, dataStr);
-//		}
-	}
-
+	
 	public abstract class EEGDeviceAdapter {
 
 		public delegate void DataHandler(EEGEvent evt);
@@ -155,9 +110,6 @@ namespace SharpBCI {
 			typeMap.Add("/muse/eeg", EEGDataType.EEG);
 			//typeMap.Add("/muse/eeg/quantization", EEGDataType.QUANTIZATION);
 
-			// accel data
-			typeMap.Add("/muse/acc", EEGDataType.ACCEL);
-
 			// absolute power bands
 			typeMap.Add("/muse/elements/alpha_absolute", EEGDataType.ALPHA_ABSOLUTE);
 			typeMap.Add("/muse/elements/beta_absolute", EEGDataType.BETA_ABSOLUTE);
@@ -235,8 +187,12 @@ namespace SharpBCI {
 		DateTime lastSampled = DateTime.UtcNow;
 
 		public DummyAdapter(double[] freqs, double[] amplitudes, double sampleRate) : base(4, 220) {
+			if (freqs.Length != amplitudes.Length)
+				throw new ArgumentException("Freqs must be same length as amplitudes");
+			
 			this.freqs = freqs;
 			this.amplitudes = amplitudes;
+
 			period = (int) (1000/sampleRate);
 		}
 
@@ -253,9 +209,10 @@ namespace SharpBCI {
 				t += ((double)(period)) / 1000;
 				EmitData(new EEGEvent(DateTime.UtcNow, EEGDataType.EEG, new double[] { v, v, v, v }));
 
-				var now = DateTime.UtcNow;
-				var delayTime = period - (int)(now.Subtract(lastSampled).TotalMilliseconds);
-				lastSampled = now;
+				//var now = DateTime.UtcNow;
+				//var delayTime = Math.Max(0, period - (int)(now.Subtract(lastSampled).TotalMilliseconds));
+				//Logger.Log("Delay Time: " + delayTime);
+				//lastSampled = now;
 				Thread.Sleep(period);
 			}
 		}

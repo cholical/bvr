@@ -69,7 +69,24 @@ public class SharpBCIController : MonoBehaviour {
 			EEGDeviceAdapter adapter = new RemoteOSCAdapter(OSC_DATA_PORT);
 			BCI = new SharpBCIBuilder().EEGDeviceAdapter(adapter).Build();
 		} else if (bciType == SharpBCIControllerType.TONE_GENERATOR) { 
-			EEGDeviceAdapter adapter = new DummyAdapter(new double[] { 10, 24, 40, 2, 6, }, new double[] { 512, 512, 512, 512, 512 }, 220);
+			EEGDeviceAdapter adapter = new DummyAdapter(new double[] { 
+				// alpha
+				10, 
+				//// beta
+				24, 
+				//// gamma
+				40, 
+				//// delta
+				2, 
+				//// theta
+				6, 
+			}, new double[] { 
+				512, 
+				512, 
+				512, 
+				512, 
+				512 
+			}, 220);
 			BCI = new SharpBCIBuilder().EEGDeviceAdapter(adapter).Build();
 		}
 	}

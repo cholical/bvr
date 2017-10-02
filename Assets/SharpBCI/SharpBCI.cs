@@ -236,6 +236,22 @@ namespace SharpBCI {
 			}
 		}
 
+		protected void EmitRawEvent(EEGEvent evt) { 
+			lock (rawHandlers) {
+				if (!rawHandlers.ContainsKey(evt.type))
+					return;
+
+				// Logger.Log("Emitting evt: " + evt.type);
+				foreach (var handler in rawHandlers[evt.type]) {
+					try {
+						handler(evt);
+					} catch (Exception e) {
+						Logger.Error("Handler " + handler + " encountered exception: " + e);
+					}
+				}
+			}
+		}
+
 		/**
 		 * Called when all the SharpBCI threads should shutdown.  
 		 * You may or may not continue to receive events after calling this.
@@ -283,21 +299,8 @@ namespace SharpBCI {
 
 			protected override bool Process(object item) {
 				EEGEvent evt = (EEGEvent) item;
-
-				lock (self.rawHandlers) {
-					if (!self.rawHandlers.ContainsKey(evt.type))
-						return true;
-
-					// Logger.Log("Emitting evt: " + evt.type);
-					foreach (var handler in self.rawHandlers[evt.type]) {
-						try {
-							handler(evt);
-						} catch (Exception e) {
-							Logger.Error("Handler " + handler + " encountered exception: " + e);
-						}
-					}
-					return true;
-				}
+				self.EmitRawEvent(evt);
+				return true;
 			}
 		}
 	}
