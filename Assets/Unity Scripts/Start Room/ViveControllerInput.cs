@@ -21,7 +21,7 @@ public class ViveControllerInput : MonoBehaviour {
 		}
 	}
 
-	bool menuShown;
+	bool menuShown = false;
 
 	void Awake() {
 		trackedObj = GetComponent<SteamVR_TrackedObject>();
@@ -33,12 +33,12 @@ public class ViveControllerInput : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Controller.GetHairTriggerDown()) {
+		if (Controller.GetHairTrigger()) {
 			RaycastHit hit;
-			if (Physics.Raycast(trackedObj.transform.position, transform.forward, out hit, 100)) {
+			if (Physics.Raycast (trackedObj.transform.position, transform.forward, out hit, 100)) {
 				hitPoint = hit.point;
-				hitObj = hit.collider.GetComponent<SceneChanger>();
-				ShowLaser(hit);
+				hitObj = hit.collider.GetComponent<SceneChanger> ();
+				ShowLaser(hit.distance);
 			}
 		} else {
 			laser.SetActive(false);
@@ -55,18 +55,20 @@ public class ViveControllerInput : MonoBehaviour {
 	void ToggleMenu() {
 		if (menuShown) {
 			// hide
+			menuShown = false;
 			menuPrefab.SetActive(false);
 		} else {
 			// show
+			menuShown = true;
 			menuPrefab.SetActive(true);
 			// TODO do we need to teleport menu?
 		}
 	}
 
-	void ShowLaser(RaycastHit hit) {
+	void ShowLaser(float distance) {
 		laser.SetActive(true);
 		laserTransform.position = Vector3.Lerp(trackedObj.transform.position, hitPoint, .5f);
 		laserTransform.LookAt(hitPoint);
-		laserTransform.localScale = new Vector3(laserTransform.localScale.x, laserTransform.localScale.y, hit.distance);
+		laserTransform.localScale = new Vector3(laserTransform.localScale.x, laserTransform.localScale.y, distance);
 	}
 }
