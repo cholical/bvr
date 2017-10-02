@@ -148,17 +148,21 @@ namespace SharpBCI {
 			var rawEvtEmmiter = new RawEventEmitter(this);
 			stages.Add(rawEvtEmmiter);
 
-			//predictor = new KNearestNeighborPipeable(WINDOW_SIZE);
-			//stages.Add(predictor);
+			predictor = new KNearestNeighborPipeable(WINDOW_SIZE);
+			stages.Add(predictor);
 
-			//var trainedEvtEmitter = new TrainedEventEmitter(this);
-			//stages.Add(trainedEvtEmitter);
+			var trainedEvtEmitter = new TrainedEventEmitter(this);
+			stages.Add(trainedEvtEmitter);
 
-			producer.Connect(fft, true);
-			producer.Connect(rawEvtEmmiter, true);
+			//producer.Connect(fft, true);
+			//producer.Connect(rawEvtEmmiter, true);
 			//producer.Connect(predictor, true);
-			fft.Connect(rawEvtEmmiter);
+			//fft.Connect(rawEvtEmmiter);
 			//predictor.Connect(trainedEvtEmitter);
+
+			producer.Connect (fft);
+			fft.Connect (predictor);
+			predictor.Connect (trainedEvtEmitter);
 
 			// TODO other stages
 

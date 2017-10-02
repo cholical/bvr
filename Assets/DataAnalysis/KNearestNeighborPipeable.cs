@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -33,9 +34,17 @@ namespace SharpBCI
 
 		protected override bool Process (object item)
 		{
-			if (!(item is double)) {
-				return false;
+			EEGEvent evt = (EEGEvent) item;
+
+			if (evt.type != EEGDataType.FFT_RAW)
+				throw new Exception("KNearestNeighbor recieved invalid EEGEvent: " + evt);
+
+			foreach (var i in evt.data) {
+				Debug.Log (i);
 			}
+			
+
+				
 				
 			buffer.Add ((double) item);
 
