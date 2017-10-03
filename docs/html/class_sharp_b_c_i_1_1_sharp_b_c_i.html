@@ -105,8 +105,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a660d3b06dc723a05b32c50aed9a18785"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a1fef163f303e6b7d0aacd72aacc7a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a3a1fef163f303e6b7d0aacd72aacc7a5">SharpBCI</a> (<a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_config.html">SharpBCIConfig</a> config)</td></tr>
 <tr class="separator:a3a1fef163f303e6b7d0aacd72aacc7a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafcddc93445255172f7cfaef3bbaa04b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#aafcddc93445255172f7cfaef3bbaa04b">StartTraining</a> ()</td></tr>
-<tr class="separator:aafcddc93445255172f7cfaef3bbaa04b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5161e89a76022be2ed540e2c74ebd9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#ab5161e89a76022be2ed540e2c74ebd9a">StartTraining</a> (int id)</td></tr>
+<tr class="separator:ab5161e89a76022be2ed540e2c74ebd9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95920f7e515a4d773ca3d1766b096046"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a95920f7e515a4d773ca3d1766b096046">StopTraining</a> (int id)</td></tr>
 <tr class="separator:a95920f7e515a4d773ca3d1766b096046"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fa9c8dad54c67668cbbfdd2734ca0ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a8fa9c8dad54c67668cbbfdd2734ca0ed">AddTrainedHandler</a> (int id, <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a660d3b06dc723a05b32c50aed9a18785">SharpBCITrainedHandler</a> handler)</td></tr>
@@ -122,8 +122,12 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ab3f303aa0a26f550479d3d0eeee4d13b"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#ab3f303aa0a26f550479d3d0eeee4d13b">WINDOW_SIZE</a> = 1024</td></tr>
+<tr class="memitem:ab3f303aa0a26f550479d3d0eeee4d13b"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#ab3f303aa0a26f550479d3d0eeee4d13b">WINDOW_SIZE</a> = 256</td></tr>
 <tr class="separator:ab3f303aa0a26f550479d3d0eeee4d13b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3de9635ac1944af5ff2ac8ac20fc3ded"><td class="memItemLeft" align="right" valign="top">readonly int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a3de9635ac1944af5ff2ac8ac20fc3ded">channels</a></td></tr>
+<tr class="separator:a3de9635ac1944af5ff2ac8ac20fc3ded"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48ad5b9c3721618290494dc949239fa3"><td class="memItemLeft" align="right" valign="top">readonly double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a48ad5b9c3721618290494dc949239fa3">sampleRate</a></td></tr>
+<tr class="separator:a48ad5b9c3721618290494dc949239fa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
@@ -331,16 +335,17 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a id="aafcddc93445255172f7cfaef3bbaa04b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aafcddc93445255172f7cfaef3bbaa04b">&#9670;&nbsp;</a></span>StartTraining()</h2>
+<a id="ab5161e89a76022be2ed540e2c74ebd9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5161e89a76022be2ed540e2c74ebd9a">&#9670;&nbsp;</a></span>StartTraining()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int SharpBCI.SharpBCI.StartTraining </td>
+          <td class="memname">void SharpBCI.SharpBCI.StartTraining </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -369,6 +374,36 @@ Properties</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a3de9635ac1944af5ff2ac8ac20fc3ded"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3de9635ac1944af5ff2ac8ac20fc3ded">&#9670;&nbsp;</a></span>channels</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly int SharpBCI.SharpBCI.channels</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>How many channels the <a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html">EEGDeviceAdapter</a> has </p>
+
+</div>
+</div>
+<a id="a48ad5b9c3721618290494dc949239fa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48ad5b9c3721618290494dc949239fa3">&#9670;&nbsp;</a></span>sampleRate</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly double SharpBCI.SharpBCI.sampleRate</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Nominal sample rate of <a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html">EEGDeviceAdapter</a>, used for FFT and to understand EEGEvents </p>
+
+</div>
+</div>
 <a id="ab3f303aa0a26f550479d3d0eeee4d13b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab3f303aa0a26f550479d3d0eeee4d13b">&#9670;&nbsp;</a></span>WINDOW_SIZE</h2>
 
@@ -376,7 +411,7 @@ Properties</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const int SharpBCI.SharpBCI.WINDOW_SIZE = 1024</td>
+          <td class="memname">const int SharpBCI.SharpBCI.WINDOW_SIZE = 256</td>
         </tr>
       </table>
 </div><div class="memdoc">

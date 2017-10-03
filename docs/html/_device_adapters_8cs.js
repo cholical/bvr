@@ -3,6 +3,7 @@ var _device_adapters_8cs =
     [ "EEGEvent", "class_sharp_b_c_i_1_1_e_e_g_event.html", "class_sharp_b_c_i_1_1_e_e_g_event" ],
     [ "EEGDeviceAdapter", "class_sharp_b_c_i_1_1_e_e_g_device_adapter.html", "class_sharp_b_c_i_1_1_e_e_g_device_adapter" ],
     [ "RemoteOSCAdapter", "class_sharp_b_c_i_1_1_remote_o_s_c_adapter.html", "class_sharp_b_c_i_1_1_remote_o_s_c_adapter" ],
+    [ "DummyAdapter", "class_sharp_b_c_i_1_1_dummy_adapter.html", "class_sharp_b_c_i_1_1_dummy_adapter" ],
     [ "EEGDataType", "_device_adapters_8cs.html#a093a660576d1484ca08f82f943ba6651", [
       [ "ACCEL", "_device_adapters_8cs.html#a093a660576d1484ca08f82f943ba6651a91685fafbbbbe2c47c6a79c29180a27e", null ],
       [ "EEG", "_device_adapters_8cs.html#a093a660576d1484ca08f82f943ba6651a679310a95d28d9a928a0eb6960d3ea27", null ],

@@ -37,6 +37,8 @@ namespace SharpBCI {
 	}
 
 	public abstract class Pipeable : IPipeable {
+		public const int DEFAULT_BUFFER_SIZE = 1000;
+
 		Task runningTask;
 		CancellationTokenSource cts;
 		CancellationToken token;
@@ -64,11 +66,11 @@ namespace SharpBCI {
 		public void Connect(IPipeable other, bool mirror) {
 			BlockingCollection<object> output;
 			if (mirror) {
-				output = new BlockingCollection<object>();
+				output = new BlockingCollection<object>(DEFAULT_BUFFER_SIZE);
 				allOutputs.Add(output);
 			} else {
 				if (allOutputs.Count == 0) {
-					allOutputs.Add(new BlockingCollection<object>());
+					allOutputs.Add(new BlockingCollection<object>(DEFAULT_BUFFER_SIZE));
 				}
 				output = allOutputs[0];
 			}
@@ -86,6 +88,8 @@ namespace SharpBCI {
 			foreach (var o in allOutputs) {
 				o.Dispose();
 			}
+			allOutputs.Clear();
+			input = null;
 			runningTask.Wait();
 		}
 
@@ -94,14 +98,14 @@ namespace SharpBCI {
 			try {
 				// case: producer
 				if (input == null) {
-					Logger.Log("Pipeable " + this + " running as producer");
+					Logger.Log("Pipeable " + this + " running as producer: nOuputs = " + allOutputs.Count);
 					do {
 						if (token.IsCancellationRequested) break;
 					} while (Process(null));
 				}
 				// case: consumer (possibly a filter)
 				else {
-					Logger.Log("Pipeable " + this + " running as consumer/filter: nInputs = " + input.Length);
+					Logger.Log("Pipeable " + this + " running as consumer/filter: nInputs = " + input.Length + " nOuputs = " + allOutputs.Count);
 					while (!token.IsCancellationRequested) {
 						object item;
 						BlockingCollection<object>.TakeFromAny(input, out item, token);

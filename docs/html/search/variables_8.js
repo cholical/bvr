@@ -1,6 +1,23 @@
 var searchData=
 [
-  ['samplerate',['sampleRate',['../class_sharp_b_c_i_1_1_f_f_t_event.html#a56569d178f0d2f639b81b2c19772e90a',1,'SharpBCI::FFTEvent']]],
-  ['side',['side',['../class_e_e_g_color_changer.html#a57aa0403bc96bc6d291e5e31aeb63bf4',1,'EEGColorChanger']]],
-  ['startcolor',['startColor',['../class_e_e_g_color_changer.html#a65346f3fb9433b5fc28fe106a99ddede',1,'EEGColorChanger']]]
+  ['hairtriggerdelta',['hairTriggerDelta',['../class_steam_v_r___controller_1_1_device.html#a49b9c1551ba31a618c9a15b1ae700802',1,'SteamVR_Controller::Device']]],
+  ['hand',['hand',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_spawn_and_attach_to_hand.html#a7e8a6847b576348cff35507f8b41f293',1,'Valve::VR::InteractionSystem::SpawnAndAttachToHand']]],
+  ['handle',['handle',['../struct_valve_1_1_v_r_1_1_texture__t.html#a8b544ad2cfd49e3b272886c684e405cf',1,'Valve.VR.Texture_t.handle()'],['../struct_valve_1_1_v_r_1_1_v_r_event___screenshot__t.html#a3ebab877ca680d62892926ff21ef7a90',1,'Valve.VR.VREvent_Screenshot_t.handle()']]],
+  ['handletransform',['handleTransform',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_longbow.html#ad3a312a36990ee4d3b312cece61c8de3',1,'Valve::VR::InteractionSystem::Longbow']]],
+  ['hands',['hands',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_player.html#a0125279478cf643348b0b88d8d70139a',1,'Valve::VR::InteractionSystem::Player']]],
+  ['head',['head',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_body_collider.html#a0856dc4b7fc1ef4871db670e8e2c50c9',1,'Valve::VR::InteractionSystem::BodyCollider']]],
+  ['headaudiosource',['headAudioSource',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_teleport.html#a1d493fd67cd13ec2a60ce620264686cc',1,'Valve::VR::InteractionSystem::Teleport']]],
+  ['headcollider',['headCollider',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_player.html#a6988bfc619a4d79e509811f7eae16576',1,'Valve::VR::InteractionSystem::Player']]],
+  ['highlightmaterial',['highLightMaterial',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_controller_hover_highlight.html#a2bfe22496d798dc95d70f715a5425d9d',1,'Valve::VR::InteractionSystem::ControllerHoverHighlight']]],
+  ['highquality',['highquality',['../class_steam_v_r___overlay.html#a2672c7687af86e0812d60549bc8900be',1,'SteamVR_Overlay']]],
+  ['hitgroundsound',['hitGroundSound',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_arrow.html#aa696d5407b1ed7aad65494328b73c36e',1,'Valve::VR::InteractionSystem::Arrow']]],
+  ['hittargetsound',['hitTargetSound',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_arrow.html#a767632ea6897d5bef27d8c1043a54869',1,'Valve::VR::InteractionSystem::Arrow']]],
+  ['hmdoffset',['hmdOffset',['../struct_steam_v_r___external_camera_1_1_config.html#a14ffad994343221647c6439f8faf361f',1,'SteamVR_ExternalCamera::Config']]],
+  ['hmdtransforms',['hmdTransforms',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_player.html#ac298669d1664666a895c1821f11ed616',1,'Valve::VR::InteractionSystem::Player']]],
+  ['holder',['holder',['../class_steam_v_r___laser_pointer.html#a14659666a678a652abf301bcdb4f2442',1,'SteamVR_LaserPointer']]],
+  ['hoverlayermask',['hoverLayerMask',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_hand.html#aaf9a9febdfac710b0f6e3797ddeda6c2',1,'Valve::VR::InteractionSystem::Hand']]],
+  ['hoverlock',['hoverLock',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_circular_drive.html#a6e182eb36a646459a16013762119cb26',1,'Valve::VR::InteractionSystem::CircularDrive']]],
+  ['hoversphereradius',['hoverSphereRadius',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_hand.html#a96761a4bc7740a43c166c4f140e5d940',1,'Valve::VR::InteractionSystem::Hand']]],
+  ['hoverspheretransform',['hoverSphereTransform',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_hand.html#a5248cf59c17fc539634027c699b7126b',1,'Valve::VR::InteractionSystem::Hand']]],
+  ['hoverupdateinterval',['hoverUpdateInterval',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_hand.html#ac6fb0d8b74fe8377590ef9be83c9406c',1,'Valve::VR::InteractionSystem::Hand']]]
 ];
