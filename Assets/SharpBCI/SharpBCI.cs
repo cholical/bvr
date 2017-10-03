@@ -98,8 +98,6 @@ namespace SharpBCI {
 
 		double[] _connectionStatus;
 
-		int nextId = 0;
-
 		readonly Dictionary<EEGDataType, List<SharpBCIRawHandler>> rawHandlers = new Dictionary<EEGDataType, List<SharpBCIRawHandler>>();
 		readonly Dictionary<int, List<SharpBCITrainedHandler>> trainedHandlers = new Dictionary<int, List<SharpBCITrainedHandler>>();
 
@@ -192,13 +190,13 @@ namespace SharpBCI {
 		 * Stop training SharpBCI on the current trainingID
 		 */
 		public void StopTraining(int id) {
-			if (id < 0 || id >= nextId) throw new ArgumentException("Training id invalid");
+			if (id < 0) throw new ArgumentException("Training id invalid");
 
 			predictor.StopTraining(id);
 		}
 
 		public void AddTrainedHandler(int id, SharpBCITrainedHandler handler) { 
-			if (id < 0 || id >= nextId) throw new ArgumentException("Training id invalid");
+			if (id < 0) throw new ArgumentException("Training id invalid");
 			lock (trainedHandlers) {
 				if (!trainedHandlers.ContainsKey(id))
 					trainedHandlers.Add(id, new List<SharpBCITrainedHandler>());
@@ -207,7 +205,7 @@ namespace SharpBCI {
 		}
 
 		public void RemoveTrainedHandler(int id, SharpBCITrainedHandler handler) { 
-			if (id < 0 || id >= nextId) throw new ArgumentException("Training id invalid");
+			if (id < 0) throw new ArgumentException("Training id invalid");
 			lock (trainedHandlers) {
 				if (!trainedHandlers.ContainsKey(id))
 					throw new ArgumentException("No handlers registered for id: " + id);
