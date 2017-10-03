@@ -148,21 +148,18 @@ namespace SharpBCI {
 			var rawEvtEmmiter = new RawEventEmitter(this);
 			stages.Add(rawEvtEmmiter);
 
-			predictor = new KNearestNeighborPipeable(WINDOW_SIZE);
+			predictor = new KNearestNeighborPipeable(WINDOW_SIZE, channels);
 			stages.Add(predictor);
 
 			var trainedEvtEmitter = new TrainedEventEmitter(this);
 			stages.Add(trainedEvtEmitter);
 
-			//producer.Connect(fft, true);
-			//producer.Connect(rawEvtEmmiter, true);
+			producer.Connect(fft, true);
+			producer.Connect(rawEvtEmmiter, true);
 			//producer.Connect(predictor, true);
-			//fft.Connect(rawEvtEmmiter);
-			//predictor.Connect(trainedEvtEmitter);
-
-			producer.Connect (fft);
-			fft.Connect (predictor);
-			predictor.Connect (trainedEvtEmitter);
+			fft.Connect(rawEvtEmmiter, true);
+			fft.Connect (predictor, true);
+			predictor.Connect(trainedEvtEmitter);
 
 			// TODO other stages
 
@@ -171,10 +168,10 @@ namespace SharpBCI {
 			// begin start associated threads & EEGDeviceAdapter
 			cts = new CancellationTokenSource();
 			taskFactory = new TaskFactory(cts.Token, 
-			                              TaskCreationOptions.LongRunning, 
-			                              TaskContinuationOptions.None, 
-			                              TaskScheduler.Default
-			                             );
+				TaskCreationOptions.LongRunning, 
+				TaskContinuationOptions.None, 
+				TaskScheduler.Default
+			);
 
 			foreach (var stage in stages) {
 				stage.Start(taskFactory, cts);
@@ -196,7 +193,7 @@ namespace SharpBCI {
 		 */
 		public void StopTraining(int id) {
 			if (id < 0 || id >= nextId) throw new ArgumentException("Training id invalid");
-			
+
 			predictor.StopTraining(id);
 		}
 
