@@ -71,13 +71,15 @@ namespace SharpBCI
 				modeWindow.Add (prediction);
 
 				if( modeWindow.Count == MODE_WINDOW_SIZE) {
-					
+
+					//Find the mode of the past MODE_WINDOW_SIZE predictions.
 					var groups = modeWindow.GroupBy(v => v);
 					int maxCount = groups.Max(g => g.Count());
 					int outgoingPrediction = groups.First(g => g.Count() == maxCount).Key;
 
-					Logger.Log(string.Format("Predicted: {0}", outgoingPrediction));
 					modeWindow.Clear ();
+
+					Logger.Log(string.Format("Predicted: {0}", outgoingPrediction));
 					Add (new TrainedEvent (outgoingPrediction));
 				}
 			}
