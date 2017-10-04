@@ -9,7 +9,7 @@ public class ViveControllerInput : MonoBehaviour {
 
 	Transform laserTransform;
 
-	Vector3 hitPoint;
+	//Vector3 hitPoint;
 
 	SceneChanger hitObj;
 
@@ -24,6 +24,7 @@ public class ViveControllerInput : MonoBehaviour {
 	bool menuShown = false;
 
 	void Awake() {
+		UnityEngine.VR.InputTracking.disablePositionalTracking = true;
 		trackedObj = GetComponent<SteamVR_TrackedObject>();
 	}
 
@@ -35,10 +36,11 @@ public class ViveControllerInput : MonoBehaviour {
 	void Update () {
 		if (Controller.GetHairTrigger()) {
 			RaycastHit hit;
-			if (Physics.Raycast (trackedObj.transform.position, transform.forward, out hit, 100)) {
-				hitPoint = hit.point;
-				hitObj = hit.collider.GetComponent<SceneChanger> ();
-				ShowLaser(hit.distance);
+			if (Physics.Raycast(trackedObj.transform.position, transform.forward, out hit, 100)) {
+				hitObj = hit.collider.GetComponent<SceneChanger>();
+				ShowLaser(hit.point, hit.distance);
+			} else {
+				ShowLaser(trackedObj.transform.position + transform.forward * 100, 100);
 			}
 		} else {
 			laser.SetActive(false);
@@ -53,6 +55,11 @@ public class ViveControllerInput : MonoBehaviour {
 	}
 
 	void ToggleMenu() {
+		if (menuPrefab == null) {
+			Debug.LogWarning("Menu prefab not set, ignoring ToggleMenu()");
+			return;
+		}
+
 		if (menuShown) {
 			// hide
 			menuShown = false;
@@ -62,10 +69,12 @@ public class ViveControllerInput : MonoBehaviour {
 			menuShown = true;
 			menuPrefab.SetActive(true);
 			// TODO do we need to teleport menu?
+			//Vector3 headPos = UnityEngine.VR.InputTracking.GetLocalPosition(UnityEngine.VR.VRNode.CenterEye);
+			//menuPrefab.transform.position = headPos + 
 		}
 	}
 
-	void ShowLaser(float distance) {
+	void ShowLaser(Vector3 hitPoint, float distance) {
 		laser.SetActive(true);
 		laserTransform.position = Vector3.Lerp(trackedObj.transform.position, hitPoint, .5f);
 		laserTransform.LookAt(hitPoint);
