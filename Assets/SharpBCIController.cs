@@ -50,11 +50,12 @@ public class SharpBCIController : MonoBehaviour {
 		SharpBCI.Logger.AddLogOutput(new UnityLogger());
 		SharpBCI.Logger.AddLogOutput(new FileLogger(logName));
 
+		EEGDeviceAdapter adapter;
 		if (bciType == SharpBCIControllerType.MUSE) {
 			// start Muse-IO
 			try {
 				museIOProcess = new Process();
-				museIOProcess.StartInfo.FileName = System.IO.Path.Combine(Application.streamingAssetsPath, "muse-io.exe");
+				museIOProcess.StartInfo.FileName = System.IO.Path.Combine(Application.streamingAssetsPath, "MuseIO", "muse-io.exe");
 				// default is osc.tcp://localhost:5000, but we expect udp
 				museIOProcess.StartInfo.Arguments = "--osc osc.udp://localhost:5000";
 				museIOProcess.StartInfo.CreateNoWindow = true;
@@ -66,10 +67,9 @@ public class SharpBCIController : MonoBehaviour {
 				UnityEngine.Debug.LogException(e);
 			}
 
-			EEGDeviceAdapter adapter = new RemoteOSCAdapter(OSC_DATA_PORT);
-			BCI = new SharpBCIBuilder().EEGDeviceAdapter(adapter).Build();
-		} else if (bciType == SharpBCIControllerType.TONE_GENERATOR) { 
-			EEGDeviceAdapter adapter = new DummyAdapter(new double[] { 
+			adapter = new RemoteOSCAdapter(OSC_DATA_PORT);
+		} else if (bciType == SharpBCIControllerType.TONE_GENERATOR) {
+			adapter = new DummyAdapter(new double[] { 
 				// alpha
 				10, 
 				//// beta
@@ -79,16 +79,25 @@ public class SharpBCIController : MonoBehaviour {
 				//// delta
 				2, 
 				//// theta
-				6, 
-			}, new double[] { 
-				512, 
-				512, 
-				512, 
-				512, 
-				512 
+				6,
+			}, new double[] {
+				512,
+				512,
+				512,
+				512,
+				512
 			}, 220);
-			BCI = new SharpBCIBuilder().EEGDeviceAdapter(adapter).Build();
+		} else {
+			throw new System.Exception("Invalid bciType");
 		}
+
+		UnityEngine.Debug.Log(typeof(SharpBCI.RawEventEmitter).FullName);
+		UnityEngine.Debug.Log(typeof(SharpBCI.TrainedEventEmitter).FullName);
+
+		BCI = new SharpBCIBuilder()
+			.EEGDeviceAdapter(adapter)
+			.PipelineFile(System.IO.Path.Combine(Application.streamingAssetsPath, "default_pipeline.json"))
+			.Build();
 	}
 
 	void OnDestroy() {

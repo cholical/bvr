@@ -13,7 +13,7 @@ public class TrainingController : MonoBehaviour {
 	public Queue<TrainedEvent> lastEvents = new Queue<TrainedEvent>();
 	public int retainedEvents = 5;
 
-	int lastId = 0;
+	int lastId = 1;
 	bool eventsDirty = false;
 	bool isTraining = false;
 

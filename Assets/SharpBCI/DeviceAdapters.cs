@@ -184,7 +184,7 @@ namespace SharpBCI {
 		bool isCancelled;
 		Thread thread;
 
-		DateTime lastSampled = DateTime.UtcNow;
+		//DateTime lastSampled = DateTime.UtcNow;
 
 		public DummyAdapter(double[] freqs, double[] amplitudes, double sampleRate) : base(4, 220) {
 			if (freqs.Length != amplitudes.Length)

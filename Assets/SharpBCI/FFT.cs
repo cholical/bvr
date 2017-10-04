@@ -10,45 +10,29 @@ namespace SharpBCI {
 	 * @see FFTEvent
 	 */
 	public class FFTPipeable : Pipeable {
-
-		// ~10 Hz @ 220Hz sampling
-		public const int FFT_RATE = 22;
-
+		
 		public const double HAMMING_ALPHA = 25 / 46;
 		public const double HAMMING_BETA = 21 / 46;
 
-		readonly int windowSize;
-		readonly int channels;
-
-		// use a jagged array to make full-row access faster
-		//readonly double[][] samples;
-
-		readonly Queue<double>[] samples;
-
-		readonly Lomont.LomontFFT FFT = new Lomont.LomontFFT();
-
-		readonly int fftRate;
-
-		DateTime windowStart;
-		DateTime windowEnd;
-
-		int nSamples = 0;
-		int lastFFT = 0;
-		int totalSamples = 0;
-
-		double sampleRate;
-
-		IFilter<double>[] filters;
-
-		double[] windowConstants;
-
-		public static double HammingWindow(int i, int N) { 
-			return HAMMING_ALPHA - HAMMING_BETA* Math.Cos((2 * Math.PI* i) / (N - 1));
+		public static double HammingWindow(int i, int N) {
+			return HAMMING_ALPHA - HAMMING_BETA * Math.Cos((2 * Math.PI * i) / (N - 1));
 		}
 
 		public static double BoxcarWindow(int i, int N) {
 			return 1;
 		}
+		
+		readonly int windowSize;
+		readonly int channels;
+		readonly Queue<double>[] samples;
+		readonly Lomont.LomontFFT FFT = new Lomont.LomontFFT();
+		readonly int fftRate;
+		readonly double sampleRate;
+		readonly IFilter<double>[] filters;
+		readonly double[] windowConstants;
+
+		int nSamples = 0;
+		int lastFFT = 0;
 
 		/**
 		 * Create a new FFTPipeable which performs an FFT over windowSize.  Expects an input pipeable of EEGEvent's
@@ -84,17 +68,10 @@ namespace SharpBCI {
 		protected override bool Process(object item) {
 			EEGEvent evt = (EEGEvent) item;
 			if (evt.type != EEGDataType.EEG)
-				throw new Exception("FFTFilter recieved invalid EEGEvent: " + evt);
+				throw new Exception("FFTPipeable recieved invalid EEGEvent: " + evt);
 
 			if (evt.data.Length != channels)
-				throw new Exception("Malformed EEGEvent: " + evt);
-
-			//Logger.Log ("Recording samples, nSamples=" + nSamples + ", evt=" + evt);
-			totalSamples += 2;
-			if (totalSamples % windowSize == 0) {
-				windowStart = windowEnd;
-				windowEnd = evt.timestamp;
-			}
+				throw new Exception("FFTPipeable recieved malformed EEGEvent: " + evt);
 
 			// normal case: just append data to sample buffer
 			for (int i = 0; i < channels; i++) {
@@ -115,7 +92,7 @@ namespace SharpBCI {
 
 			lastFFT++;
 			// sample buffer is full, do FFT then reset for next round
-			if (nSamples >= windowSize && lastFFT % FFT_RATE == 0) {
+			if (nSamples >= windowSize && lastFFT % fftRate == 0) {
 				DoFFT(evt);
 			}
 

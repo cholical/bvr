@@ -11,6 +11,7 @@ namespace SharpBCI {
 	public interface IPipeable {
 		/**
 		 * Set the input on this IPipeable to param input
+		 * Should only be used internally by Connect
 		 */
 		void SetInput(BlockingCollection<object> input);
 

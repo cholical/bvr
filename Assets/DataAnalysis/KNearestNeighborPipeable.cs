@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace SharpBCI
 {
-	public class KNearestNeighborPipeable : Pipeable
+	public class KNearestNeighborPipeable : Pipeable, IPredictor
 	{
 		private KNearestNeighbor knn;
 		private int bufferSize;

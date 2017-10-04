@@ -9,33 +9,42 @@ namespace SharpBCI {
 
 	/**
 	 * An object which configures a SharpBCI object.
-	 * Generally built with SharpBCIBuilder
+	 * Generally used internally w/in SharpBCIBuilder
 	 * @see SharpBCIBuilder
 	 */
 	public class SharpBCIConfig {
 		public EEGDeviceAdapter adapter;
-
-		public SharpBCIConfig(EEGDeviceAdapter adapter) {
-			this.adapter = adapter;
-		}
+		public string pipelineFile;
+		public Dictionary<string, object> stageScope;
 	}
 
 	/**
-	 * A build class for SharpBCIConfig
+	 * A builder class for SharpBCIConfig
 	 * @see SharpBCIConfig
 	 * @see SharpBCI
 	 */
 	public class SharpBCIBuilder {
-		EEGDeviceAdapter adapter;
-		int channels;
+		readonly SharpBCIConfig config = new SharpBCIConfig();
 
 		public SharpBCIBuilder EEGDeviceAdapter(EEGDeviceAdapter adapter) {
-			this.adapter = adapter;
+			config.adapter = adapter;
+			return this;
+		}
+
+		public SharpBCIBuilder PipelineFile(string configFile) {
+			config.pipelineFile = configFile;
+			return this;
+		}
+
+		public SharpBCIBuilder AddToPipelineScope(string key, object obj) {
+			if (config.stageScope == null)
+				config.stageScope = new Dictionary<string, object>();
+			config.stageScope.Add(key, obj);
 			return this;
 		}
 
 		public SharpBCI Build() {
-			return new SharpBCI(new SharpBCIConfig(adapter));
+				return new SharpBCI(config);
 		}
 	}
 
@@ -51,10 +60,21 @@ namespace SharpBCI {
 	}
 
 	/**
-	 *  This is the "main" class which you should create.
+	 * This is the "main" class which you should create.
 	 */
 	public class SharpBCI {
-		public const int WINDOW_SIZE = 256;
+
+		public const string SCOPE_ADAPTER_KEY = "SharpBCI_Adapter";
+		public const string SCOPE_SHARP_BCI_KEY = "SharpBCI_Instance";
+		public const string SCOPE_CHANNELS_KEY = "SharpBCI_Channels";
+		public const string SCOPE_SAMPLE_RATE_KEY = "SharpBCI_SampleRate";
+
+		public static readonly string[] SCOPE_RESERVED_KEYWORDS = { 
+			SCOPE_ADAPTER_KEY,
+			SCOPE_SHARP_BCI_KEY,
+			SCOPE_CHANNELS_KEY,
+			SCOPE_SAMPLE_RATE_KEY,
+		};
 
 		// out-facing delegates
 		/**
@@ -92,11 +112,10 @@ namespace SharpBCI {
 
 		// end public variables
 
+		// readonlys
 		readonly EEGDeviceAdapter adapter;
 
-		readonly List<Pipeable> stages = new List<Pipeable>();
-
-		double[] _connectionStatus;
+		readonly IPipeable[] stages;
 
 		readonly Dictionary<EEGDataType, List<SharpBCIRawHandler>> rawHandlers = new Dictionary<EEGDataType, List<SharpBCIRawHandler>>();
 		readonly Dictionary<int, List<SharpBCITrainedHandler>> trainedHandlers = new Dictionary<int, List<SharpBCITrainedHandler>>();
@@ -104,8 +123,13 @@ namespace SharpBCI {
 		readonly TaskFactory taskFactory;
 		readonly CancellationTokenSource cts;
 
-		//Pipeable to train on.
-		private readonly KNearestNeighborPipeable predictor;
+		// IPipeables to train on.
+		readonly IPredictor[] predictors;
+		// end readonlys
+
+		// variables
+		double[] _connectionStatus;
+		// end variables
 
 		/**
          * @param config a valid config object, generally built with SharpBCIBuilder
@@ -121,6 +145,17 @@ namespace SharpBCI {
 
 			if (config.adapter.channels <= 0)
 				throw new ArgumentException("config.channels must be > 0");
+
+			if (config.pipelineFile == null)
+				throw new ArgumentException("config.pipelineFile must not be null and must be valid file name");
+
+			if (config.stageScope == null)
+				config.stageScope = new Dictionary<string, object>();
+
+			foreach (var key in SCOPE_RESERVED_KEYWORDS) {
+				if (config.stageScope.ContainsKey(key))
+					throw new ArgumentException(string.Format("{0} is a reserved stage scope keyword", key)); 
+			}
 			// end check args
 
 			// begin state config
@@ -137,30 +172,23 @@ namespace SharpBCI {
 			adapter.AddHandler(EEGDataType.CONTACT_QUALITY, UpdateConnectionStatus);
 
 			// begin internal pipeline construction
-			var producer = new EEGDeviceProducer(adapter);
-			stages.Add(producer);
+			var scope = config.stageScope;
+			scope.Add(SCOPE_SHARP_BCI_KEY, this);
+			scope.Add(SCOPE_ADAPTER_KEY, adapter);
+			scope.Add(SCOPE_CHANNELS_KEY, channels);
+			scope.Add(SCOPE_SAMPLE_RATE_KEY, sampleRate);
 
-			var fft = new FFTPipeable(WINDOW_SIZE, channels, adapter.sampleRate);
-			stages.Add(fft);
+			stages = PipelineSerializer.CreateFromFile(config.pipelineFile, scope);
+			var predictorsList = new List<IPredictor>();
+			foreach (var stage in stages) {
+				if (stage is IPredictor)
+					predictorsList.Add((IPredictor) stage);
+			}
 
-			var rawEvtEmmiter = new RawEventEmitter(this);
-			stages.Add(rawEvtEmmiter);
+			if (predictorsList.Count == 0)
+				throw new ArgumentException("Pipeline does not implement any IPredictors");
 
-			predictor = new KNearestNeighborPipeable(WINDOW_SIZE, channels);
-			stages.Add(predictor);
-
-			var trainedEvtEmitter = new TrainedEventEmitter(this);
-			stages.Add(trainedEvtEmitter);
-
-			producer.Connect(fft, true);
-			producer.Connect(rawEvtEmmiter, true);
-			//producer.Connect(predictor, true);
-			fft.Connect(rawEvtEmmiter, true);
-			fft.Connect (predictor, true);
-			predictor.Connect(trainedEvtEmitter);
-
-			// TODO other stages
-
+			predictors = predictorsList.ToArray();
 			// end internal pipeline construction
 
 			// begin start associated threads & EEGDeviceAdapter
@@ -180,23 +208,30 @@ namespace SharpBCI {
 		/**
 		 * Start training SharpBCI on the EEG data from now on
 		 * Should be paired w/ a StopTraining(id) call
-		 * @returns The id which identifies the current training session
+		 * @param id - a unique non-negative non-zero integer which identifies this trained event
 		 */
 		public void StartTraining(int id) {
-			predictor.StartTraining(id);
+			if (id <= 0) throw new ArgumentException("Training id invalid");
+
+			foreach (var predictor in predictors) {
+				predictor.StartTraining(id);
+			}
 		}
 
 		/**
 		 * Stop training SharpBCI on the current trainingID
+         * @param id - a unique non-negative non-zero integer which identifies this trained event
 		 */
 		public void StopTraining(int id) {
-			if (id < 0) throw new ArgumentException("Training id invalid");
+			if (id <= 0) throw new ArgumentException("Training id invalid");
 
-			predictor.StopTraining(id);
+			foreach (var predictor in predictors) {
+				predictor.StopTraining(id);
+			}
 		}
 
 		public void AddTrainedHandler(int id, SharpBCITrainedHandler handler) { 
-			if (id < 0) throw new ArgumentException("Training id invalid");
+			if (id <= 0) throw new ArgumentException("Training id invalid");
 			lock (trainedHandlers) {
 				if (!trainedHandlers.ContainsKey(id))
 					trainedHandlers.Add(id, new List<SharpBCITrainedHandler>());
@@ -205,12 +240,26 @@ namespace SharpBCI {
 		}
 
 		public void RemoveTrainedHandler(int id, SharpBCITrainedHandler handler) { 
-			if (id < 0) throw new ArgumentException("Training id invalid");
+			if (id <= 0) throw new ArgumentException("Training id invalid");
 			lock (trainedHandlers) {
 				if (!trainedHandlers.ContainsKey(id))
 					throw new ArgumentException("No handlers registered for id: " + id);
 				if (!trainedHandlers[id].Remove(handler))
 					throw new ArgumentException("Handler '" + handler + "' not registered for id: " + id);
+			}
+		}
+
+		internal void EmitTrainedEvent(TrainedEvent evt) { 
+			lock (trainedHandlers) {
+				if (!trainedHandlers.ContainsKey(evt.id))
+					return;
+				foreach (var handler in trainedHandlers[evt.id]) {
+					try {
+						handler(evt);
+					} catch (Exception e) {
+						Logger.Error("Handler " + handler + " encountered exception: " + e);
+					}
+				}
 			}
 		}
 
@@ -235,7 +284,7 @@ namespace SharpBCI {
 			}
 		}
 
-		protected void EmitRawEvent(EEGEvent evt) { 
+		internal void EmitRawEvent(EEGEvent evt) { 
 			lock (rawHandlers) {
 				if (!rawHandlers.ContainsKey(evt.type))
 					return;
@@ -267,40 +316,33 @@ namespace SharpBCI {
 		void UpdateConnectionStatus(EEGEvent evt) {
 			_connectionStatus = evt.data;
 		}
+	}
 
-		protected class TrainedEventEmitter : Pipeable { 
-			readonly SharpBCI self;
+	public class TrainedEventEmitter : Pipeable {
+		readonly SharpBCI self;
 
-			public TrainedEventEmitter(SharpBCI self) {
-				this.self = self;
-			}
-
-			protected override bool Process(object item) {
-				TrainedEvent evt = (TrainedEvent) item;
-				lock (self.trainedHandlers) { 
-					if (!self.trainedHandlers.ContainsKey(evt.id))
-						return true;
-
-					foreach (var handler in self.trainedHandlers[evt.id]) {
-						handler(evt);
-					}
-				}
-				return true;
-			}
+		public TrainedEventEmitter(SharpBCI self) {
+			this.self = self;
 		}
 
-		protected class RawEventEmitter : Pipeable {
-			readonly SharpBCI self;
+		protected override bool Process(object item) {
+			TrainedEvent evt = (TrainedEvent)item;
+			self.EmitTrainedEvent(evt);
+			return true;
+		}
+	}
 
-			public RawEventEmitter(SharpBCI self) {
-				this.self = self;
-			}
+	public class RawEventEmitter : Pipeable {
+		readonly SharpBCI self;
 
-			protected override bool Process(object item) {
-				EEGEvent evt = (EEGEvent) item;
-				self.EmitRawEvent(evt);
-				return true;
-			}
+		public RawEventEmitter(SharpBCI self) {
+			this.self = self;
+		}
+
+		protected override bool Process(object item) {
+			EEGEvent evt = (EEGEvent)item;
+			self.EmitRawEvent(evt);
+			return true;
 		}
 	}
 
