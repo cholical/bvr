@@ -9,7 +9,12 @@ using SharpBCI;
 namespace SharpBCI
 {
 
-	public abstract class NearestNeighborPredictor {
+	public interface IPredictor {
+		void AddTrainingData (int label, double[] data) ;
+		int Predict (double[] test);
+	}
+
+	public abstract class NearestNeighborPredictor : IPredictor{
 
 		public List<KeyValuePair<int, double[]>> train_data = new List<KeyValuePair<int, double[]>> ();
 		private double[] test_data;
@@ -49,7 +54,8 @@ namespace SharpBCI
 		}
 	}
 
-	public class CorrelationCoefficentNearestNeigborPredictor : NearestNeighborPredictor {
+	public class CorrelationCoefficentNearestNeigborPredictor : NearestNeighborPredictor 
+	{
 		protected override double Compute(double[] x, double[] y)
 		{
 
@@ -58,8 +64,8 @@ namespace SharpBCI
 
 			double numerator = x.Zip(y, (xi, yi) => (xi - xAvg) * (yi - yAvg)).Sum();
 
-			double xSumSq = x.Sum(i => Math.Pow((i - xAvg), 2.0));
-			double ySumSq = y.Sum(i => Math.Pow((i - yAvg), 2.0));
+			double xSumSq = x.Sum(i => Math.Pow((i - xAvg), 2));
+			double ySumSq = y.Sum(i => Math.Pow((i - yAvg), 2));
 
 			double denominator = Math.Sqrt (xSumSq * ySumSq);
 

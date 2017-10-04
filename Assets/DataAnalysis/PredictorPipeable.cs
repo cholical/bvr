@@ -6,23 +6,28 @@ using System.Collections.Generic;
 
 namespace SharpBCI
 {
-	public class KNearestNeighborPipeable : Pipeable
+	public class PredictorPipeable : Pipeable
 	{
 		public const int TEST_ID = 0;
 		public const int DEFAULT_VALUE = -1;
 
-		private NearestNeighborPredictor knn;
+		private const int MODE_WINDOW_SIZE = 20;
+
+		private NearestNeighborPredictor predictor;
 		private int bufferSize;
 		private EEGDataType type = EEGDataType.FFT_RAW;
+		private List<int> modeWindow = new List<int> ();
 		private int training;
 
-		public KNearestNeighborPipeable (int bufferSize, int channels)
+		public PredictorPipeable (int bufferSize, int channels)
 		{
-			this.knn = new KNearestNeighbor ();
+			this.predictor = new KNearestNeighbor ();
 
 			this.bufferSize = bufferSize;
 
 			training = TEST_ID;
+
+
 
 			AddTrainingData(DEFAULT_VALUE, new double[bufferSize]);
 
@@ -58,12 +63,23 @@ namespace SharpBCI
 				return true;
 
 
-			if (training != TEST_ID) {
+			if (training != TEST_ID) { //Training
 				trainingData.AddData (evt.data);
-			} else {
-				int prediction = knn.Predict (evt.data);
-				Logger.Log(string.Format("Predicted: {0}", prediction));
-				Add (new TrainedEvent (prediction));
+			} else { //Testing
+				int prediction = predictor.Predict (evt.data);
+
+				modeWindow.Add (prediction);
+
+				if( modeWindow.Count == MODE_WINDOW_SIZE) {
+					
+					var groups = modeWindow.GroupBy(v => v);
+					int maxCount = groups.Max(g => g.Count());
+					int outgoingPrediction = groups.First(g => g.Count() == maxCount).Key;
+
+					Logger.Log(string.Format("Predicted: {0}", outgoingPrediction));
+					modeWindow.Clear ();
+					Add (new TrainedEvent (outgoingPrediction));
+				}
 			}
 				
 			return true;
@@ -71,7 +87,7 @@ namespace SharpBCI
 			
 		private void AddTrainingData (int label, double[] data)
 		{
-			knn.AddTrainingData (label, data);
+			predictor.AddTrainingData (label, data);
 		}
 
 	}

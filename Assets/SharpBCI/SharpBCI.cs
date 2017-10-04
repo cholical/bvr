@@ -109,7 +109,7 @@ namespace SharpBCI {
 		readonly CancellationTokenSource cts;
 
 		//Pipeable to train on.
-		private readonly KNearestNeighborPipeable predictor;
+		private readonly PredictorPipeable predictor;
 
 		/**
          * @param config a valid config object, generally built with SharpBCIBuilder
@@ -150,7 +150,7 @@ namespace SharpBCI {
 			var rawEvtEmmiter = new RawEventEmitter(this);
 			stages.Add(rawEvtEmmiter);
 
-			predictor = new KNearestNeighborPipeable(WINDOW_SIZE, channels);
+			predictor = new PredictorPipeable(WINDOW_SIZE, channels);
 			stages.Add(predictor);
 
 			var trainedEvtEmitter = new TrainedEventEmitter(this);
