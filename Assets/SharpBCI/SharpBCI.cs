@@ -44,9 +44,11 @@ namespace SharpBCI {
 	 */
 	public class TrainedEvent {
 		public int id;
+		public DateTime time;
 
 		public TrainedEvent(int i) {
 			id = i;
+			time = DateTime.Now;
 		}
 	}
 
@@ -198,7 +200,7 @@ namespace SharpBCI {
 		}
 
 		public void AddTrainedHandler(int id, SharpBCITrainedHandler handler) { 
-			if (id < 0 || id >= nextId) throw new ArgumentException("Training id invalid");
+			if (id <= 0 || id >= nextId) throw new ArgumentException("Training id invalid");
 			lock (trainedHandlers) {
 				if (!trainedHandlers.ContainsKey(id))
 					trainedHandlers.Add(id, new List<SharpBCITrainedHandler>());
@@ -207,7 +209,7 @@ namespace SharpBCI {
 		}
 
 		public void RemoveTrainedHandler(int id, SharpBCITrainedHandler handler) { 
-			if (id < 0 || id >= nextId) throw new ArgumentException("Training id invalid");
+			if (id <= 0 || id >= nextId) throw new ArgumentException("Training id invalid");
 			lock (trainedHandlers) {
 				if (!trainedHandlers.ContainsKey(id))
 					throw new ArgumentException("No handlers registered for id: " + id);

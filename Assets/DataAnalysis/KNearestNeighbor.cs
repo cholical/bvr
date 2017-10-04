@@ -8,33 +8,19 @@ using SharpBCI;
 
 namespace SharpBCI
 {
-	public class KNearestNeighbor
-	{
 
-		public List<KeyValuePair<int, double[]>> train_data;
+	public abstract class NearestNeighborPredictor {
+
+		public List<KeyValuePair<int, double[]>> train_data = new List<KeyValuePair<int, double[]>> ();
 		private double[] test_data;
-		private int k_neighbors;
 
-		public KNearestNeighbor (int k)
+		public void AddTrainingData(int label, double[] data) 
 		{
-			train_data = new List<KeyValuePair<int, double[]>>();
-			if (k != 1) {
-				Debug.LogWarning ("KNearestNeighbor currently only supports k=1");
-			}
-			k_neighbors = 1;
-		}
-
-		public KNearestNeighbor()
-		{
-			train_data = new List<KeyValuePair<int, double[]>> ();
-			k_neighbors = 1;
-		}
-
-		public void AddTrainingData(int label, double[] data) {
 			AddTrainingData (new KeyValuePair<int, double[]> (label, data));
 		}
 
-		public void AddTrainingData(KeyValuePair<int, double[]> data) {
+		public void AddTrainingData(KeyValuePair<int, double[]> data) 
+		{
 			train_data.Add (data);
 		}
 
@@ -44,14 +30,43 @@ namespace SharpBCI
 			List<KeyValuePair<int, double>> costs = new List<KeyValuePair<int, double>> ();
 
 			foreach (KeyValuePair<int, double[]> d in this.train_data) {
-				costs.Add (new KeyValuePair<int, double> (d.Key, new DynamicTimeWarping (d.Value, test).GetCost ()));
+				costs.Add (new KeyValuePair<int, double> (d.Key, Compute(d.Value, test)));
 			}
-				
+
 			return costs.OrderBy (x => x.Value) //.Take (k_neighbors)  <-- k>1
 				.First ().Key; // <-- k==1. which we care about
 
 		}
+
+		protected abstract double Compute (double[] x, double[] y);
 	}
+
+	public class KNearestNeighbor : NearestNeighborPredictor
+	{
+		protected override double Compute(double[] x, double[] y) 
+		{
+			return new DynamicTimeWarping (x, y).GetCost ();
+		}
+	}
+
+	public class CorrelationCoefficentNearestNeigborPredictor : NearestNeighborPredictor {
+		protected override double Compute(double[] x, double[] y)
+		{
+
+			double xAvg = x.Average();
+			double yAvg = y.Average();
+
+			double numerator = x.Zip(y, (xi, yi) => (xi - xAvg) * (yi - yAvg)).Sum();
+
+			double xSumSq = x.Sum(i => Math.Pow((i - xAvg), 2.0));
+			double ySumSq = y.Sum(i => Math.Pow((i - yAvg), 2.0));
+
+			double denominator = Math.Sqrt (xSumSq * ySumSq);
+
+			return numerator / denominator;
+		}
+	}
+
 
 	public class DynamicTimeWarping
     {

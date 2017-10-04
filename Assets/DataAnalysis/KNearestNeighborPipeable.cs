@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,39 +8,42 @@ namespace SharpBCI
 {
 	public class KNearestNeighborPipeable : Pipeable
 	{
-		private KNearestNeighbor knn;
+		public const int TEST_ID = 0;
+		public const int DEFAULT_VALUE = -1;
+
+		private NearestNeighborPredictor knn;
 		private int bufferSize;
-		private int channels;
-		private Queue<double[]>[] channelList;
-		private List<double> buffer;
+		private EEGDataType type = EEGDataType.FFT_RAW;
 		private int training;
 
 		public KNearestNeighborPipeable (int bufferSize, int channels)
 		{
-			this.knn = new KNearestNeighbor (1);
+			this.knn = new KNearestNeighbor ();
+
 			this.bufferSize = bufferSize;
-			buffer = new List<double> ();
 
+			training = TEST_ID;
 
-			this.channels = channels;
-			channelList = new Queue<double[]>[channels];
-			for (int i = 0; i< channels; i++) {
-				channelList[i] = new Queue<double[]>();
-			}
-
-			training = 0;
-			AddTrainingData(-1, new double[bufferSize]);
+			AddTrainingData(DEFAULT_VALUE, new double[bufferSize]);
 
 		}
 
+		DynamicallyAveragedData trainingData = new DynamicallyAveragedData();
 		public void StartTraining (int id)
 		{
+			if(training != TEST_ID) 
+				throw new ArgumentException ("Called StartTraining again without a Complementary StopTraining");
 			training = id;
+
 		}
 
 		public void StopTraining (int id)
 		{
-			training = 0;
+			if(training == TEST_ID) 
+				throw new ArgumentException ("Called StopTraining without an open StartTraining");
+			AddTrainingData (training, trainingData.Data);
+			trainingData.Clear ();
+			training = TEST_ID;
 		}
 
 
@@ -50,39 +54,18 @@ namespace SharpBCI
 			//Ensure the object is the EEGDataType we want (FFT_RAW).
 			EEGEvent evt = (EEGEvent) item;
 
-			if (evt.type != EEGDataType.FFT_RAW)
+			if (evt.type != type)
 				return true;
 
 
-//			//Add the data to a queue associated with the channel.
-//			int evtChannel = (int) evt.extra;
-//			channelList [evtChannel].Enqueue (evt.data);
-//
-//			double[][] matrixToAverage = new double[channels][];
-//
-//			foreach (Queue<double[]> q in channelList)
-//				if (q.Peak () == null) {
-//					return true;
-//				} else {
-//					matrixToAverage[
-//						
-//				
-//			double[] toKNN = new double[channelList [0].Count];
-//			foreach (int
-
-
-//			buffer.Add ((double) item);
-
-//			if (buffer.Count == bufferSize) {
-				if (training != 0) {
-					AddTrainingData (training, evt.data);
-				} else {
-					int prediction = knn.Predict (evt.data);
+			if (training != TEST_ID) {
+				trainingData.AddData (evt.data);
+			} else {
+				int prediction = knn.Predict (evt.data);
 				Logger.Log(string.Format("Predicted: {0}", prediction));
 				Add (new TrainedEvent (prediction));
-				}
-//				buffer.Clear();
-//			}
+			}
+				
 			return true;
 		}
 			
@@ -90,7 +73,36 @@ namespace SharpBCI
 		{
 			knn.AddTrainingData (label, data);
 		}
-			
+
 	}
+
+	public class DynamicallyAveragedData {
+		private int count;
+		public double[] Data;
+
+		public DynamicallyAveragedData() {
+			this.count = 0;
+		}
+
+		public void AddData(double[] newData) {
+			if (Data == null)
+				Data = newData;
+			if (newData.Length != Data.Length)
+				throw new ArgumentException ("Bad Training Data");
+			count++;
+			for (int i = 0; i < Data.Length; i++) {
+				double oldPart = ((double)(count - 1) / (double) count) * Data [i];
+				double newPart = ((double)(1) / (double) count) * newData [i];
+				Data [i] = oldPart + newPart;
+			}
+		}
+
+		public void Clear() {
+			count = 0;
+			Data = null;
+		}
+
+	}
+
 }
 
