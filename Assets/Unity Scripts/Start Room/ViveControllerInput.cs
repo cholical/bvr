@@ -24,7 +24,7 @@ public class ViveControllerInput : MonoBehaviour {
 	bool menuShown = false;
 
 	void Awake() {
-		UnityEngine.VR.InputTracking.disablePositionalTracking = true;
+		//UnityEngine.VR.InputTracking.disablePositionalTracking = true;
 		trackedObj = GetComponent<SteamVR_TrackedObject>();
 	}
 
@@ -34,24 +34,23 @@ public class ViveControllerInput : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Controller.GetHairTrigger()) {
-			RaycastHit hit;
-			if (Physics.Raycast(trackedObj.transform.position, transform.forward, out hit, 100)) {
-				hitObj = hit.collider.GetComponent<SceneChanger>();
-				ShowLaser(hit.point, hit.distance);
-			} else {
-				ShowLaser(trackedObj.transform.position + transform.forward * 100, 100);
-			}
+		RaycastHit hit;
+		if (Physics.Raycast(trackedObj.transform.position, transform.forward, out hit, 100)) {
+			hitObj = hit.collider.GetComponent<SceneChanger>();
+			ShowLaser(hit.point, hit.distance);
 		} else {
-			laser.SetActive(false);
+			ShowLaser(trackedObj.transform.position + transform.forward* 100, 100);
+		}
+
+		if (Controller.GetHairTriggerDown()) { 
 			if (hitObj != null) {
 				hitObj.ChangeScene();
 			}
 		}
 
-		if (Controller.GetPressDown(SteamVR_Controller.ButtonMask.ApplicationMenu)) {
-			ToggleMenu();
-		}
+		//if (Controller.GetPressDown(SteamVR_Controller.ButtonMask.ApplicationMenu)) {
+		//	ToggleMenu();
+		//}
 	}
 
 	void ToggleMenu() {
