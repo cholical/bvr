@@ -91,9 +91,6 @@ public class SharpBCIController : MonoBehaviour {
 			throw new System.Exception("Invalid bciType");
 		}
 
-		UnityEngine.Debug.Log(typeof(SharpBCI.RawEventEmitter).FullName);
-		UnityEngine.Debug.Log(typeof(SharpBCI.TrainedEventEmitter).FullName);
-
 		BCI = new SharpBCIBuilder()
 			.EEGDeviceAdapter(adapter)
 			.PipelineFile(System.IO.Path.Combine(Application.streamingAssetsPath, "default_pipeline.json"))
