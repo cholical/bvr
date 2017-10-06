@@ -184,19 +184,20 @@ namespace SharpBCI {
 		bool isCancelled;
 		Thread thread;
 
-		//DateTime lastSampled = DateTime.UtcNow;
+		DateTime lastSampled = DateTime.UtcNow;
 
-		public DummyAdapter(double[] freqs, double[] amplitudes, double sampleRate) : base(4, 220) {
+		public DummyAdapter(double[] freqs, double[] amplitudes, double sampleRate) : base(4, sampleRate) {
 			if (freqs.Length != amplitudes.Length)
 				throw new ArgumentException("Freqs must be same length as amplitudes");
 			
 			this.freqs = freqs;
 			this.amplitudes = amplitudes;
 
-			period = (int) (1000/sampleRate);
+			period = (int) Math.Round(1000/sampleRate);
 		}
 
 		void Run() {
+			EmitData(new EEGEvent (DateTime.UtcNow, EEGDataType.CONTACT_QUALITY, new double[] { 1, 1, 1, 1 }));
 			double t = 0;
 			while (!isCancelled) {
 				double v = 0;
@@ -205,15 +206,14 @@ namespace SharpBCI {
 					var a = amplitudes[i];
 					v += (a * Math.Sin(2 * Math.PI * f * t) ) + a;
 				}
-				// Logger.Log("Emitting v " + v + " at time " + t);
+				Logger.Log(string.Format("Emitting v {0:1.0}", v));
 				t += ((double)(period)) / 1000;
 				EmitData(new EEGEvent(DateTime.UtcNow, EEGDataType.EEG, new double[] { v, v, v, v }));
 
-				//var now = DateTime.UtcNow;
-				//var delayTime = Math.Max(0, period - (int)(now.Subtract(lastSampled).TotalMilliseconds));
-				//Logger.Log("Delay Time: " + delayTime);
-				//lastSampled = now;
-				Thread.Sleep(period);
+				var now = DateTime.UtcNow;
+				var delayTime = Math.Max(0, period - (int) Math.Round(now.Subtract(lastSampled).TotalMilliseconds));
+				lastSampled = now;
+				Thread.Sleep(delayTime);
 			}
 		}
 

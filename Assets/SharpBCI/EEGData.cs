@@ -41,6 +41,10 @@ namespace SharpBCI {
 			this.data = data;
 			this.extra = extra;
 		}
+
+		public override string ToString () {
+			return string.Format ("EEGEvent({0:T}/{1}/{2}/{3})", timestamp, type, string.Join(" ", data), extra);
+		}
 	}
 
 }

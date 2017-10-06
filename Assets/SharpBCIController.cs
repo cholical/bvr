@@ -48,7 +48,7 @@ public class SharpBCIController : MonoBehaviour {
 		UnityEngine.Debug.Log("Writing sharpBCI log to: " + logName);
 		// configure logging
 		SharpBCI.Logger.AddLogOutput(new UnityLogger());
-		SharpBCI.Logger.AddLogOutput(new FileLogger(logName));
+		// SharpBCI.Logger.AddLogOutput(new FileLogger(logName));
 
 		EEGDeviceAdapter adapter;
 		if (bciType == SharpBCIControllerType.MUSE) {

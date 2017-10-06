@@ -75,7 +75,7 @@ namespace SharpBCI {
 
 			// normal case: just append data to sample buffer
 			for (int i = 0; i < channels; i++) {
-				samples[i].Enqueue(filters[i].Filter(evt.data[i]));
+				samples[i].Enqueue(evt.data[i]);
 				// this is the imaginary part of the signal, but we're FFT-ing a real number so 0 for us
 				// TODO is this ALWAYS true?
 				samples[i].Enqueue(0);
@@ -106,7 +106,7 @@ namespace SharpBCI {
 				// Logger.Log("FFT sample size:" + channelSamples.Count);
 				var samplesCopy = channelSamples.ToArray();
 				// apply hamming windowing function to samplesCopy
-				ApplyWindow(samplesCopy);
+				//ApplyWindow(samplesCopy);
 
 				FFT.FFT(samplesCopy, true);
 
