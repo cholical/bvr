@@ -31,6 +31,7 @@ public class TerrainSpawner : MonoBehaviour {
 		var backTerrain = terrainList.First.Value;
 		var distFromBack = Mathf.Abs(backTerrain.transform.position.z);
 		if (distFromBack > nSpawn * terrainSize.z) {
+			//Debug.Log("Removing old terrain and spawning new terrain");
 			terrainList.RemoveFirst();
 			Destroy(backTerrain);
 			var forwardTerrain = terrainList.Last.Value;
