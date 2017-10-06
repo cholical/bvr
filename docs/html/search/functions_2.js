@@ -1,27 +1,5 @@
 var searchData=
 [
-  ['cancelapplicationlaunch',['CancelApplicationLaunch',['../class_valve_1_1_v_r_1_1_c_v_r_applications.html#af537811353d75ea94719196f08fd6729',1,'Valve::VR::CVRApplications']]],
-  ['cancelteleporthint',['CancelTeleportHint',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_teleport.html#a6a0d34db9fd07f435ef0b0ff071010f9',1,'Valve::VR::InteractionSystem::Teleport']]],
-  ['canrenderscene',['CanRenderScene',['../class_valve_1_1_v_r_1_1_c_v_r_compositor.html#a6b732598f98df9faaef2687f95e72582',1,'Valve::VR::CVRCompositor']]],
-  ['captureinputfocus',['CaptureInputFocus',['../class_valve_1_1_v_r_1_1_c_v_r_system.html#a0cbffdba0d335c424906367d99332a70',1,'Valve::VR::CVRSystem']]],
-  ['changesceneaction',['ChangeSceneAction',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_teleport.html#a28823c5a8399c339e777276f21a263bf',1,'Valve::VR::InteractionSystem::Teleport']]],
-  ['clearlastsubmittedframe',['ClearLastSubmittedFrame',['../class_valve_1_1_v_r_1_1_c_v_r_compositor.html#ad8a809c0934f27e815138b1b5b1c3ac6',1,'Valve::VR::CVRCompositor']]],
-  ['clearoverlaytexture',['ClearOverlayTexture',['../class_valve_1_1_v_r_1_1_c_v_r_overlay.html#a5b5225eecf368458d61264b16342e399',1,'Valve::VR::CVROverlay']]],
-  ['clearoverride',['ClearOverride',['../class_steam_v_r___skybox.html#abc8390f554fabc720fe9ce997caceba7',1,'SteamVR_Skybox']]],
-  ['clearskyboxoverride',['ClearSkyboxOverride',['../class_valve_1_1_v_r_1_1_c_v_r_compositor.html#a307b9e6e784e7654e1f6a209ba283bdc',1,'Valve::VR::CVRCompositor']]],
-  ['clickedeventhandler',['ClickedEventHandler',['../_steam_v_r___tracked_controller_8cs.html#a1d74dd7d44cd71ea89e853a7d537fc15',1,'SteamVR_TrackedController.cs']]],
   ['close',['Close',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#a8192f9ae2f6601c32418f952b0dfaec6',1,'SharpBCI::SharpBCI']]],
-  ['collapse',['Collapse',['../class_steam_v_r___camera.html#a2ab69212b0c708dc4994cfa114d24636',1,'SteamVR_Camera']]],
-  ['commitworkingcopy',['CommitWorkingCopy',['../class_valve_1_1_v_r_1_1_c_v_r_chaperone_setup.html#abb6ee2add41e2ffd400ab355774c7386',1,'Valve::VR::CVRChaperoneSetup']]],
-  ['compositorbringtofront',['CompositorBringToFront',['../class_valve_1_1_v_r_1_1_c_v_r_compositor.html#ae669a3f67583f54b0800ad402abc9a4c',1,'Valve::VR::CVRCompositor']]],
-  ['compositordumpimages',['CompositorDumpImages',['../class_valve_1_1_v_r_1_1_c_v_r_compositor.html#ab099eb9b5f55c98faf732ba9130af86e',1,'Valve::VR::CVRCompositor']]],
-  ['compositorgotoback',['CompositorGoToBack',['../class_valve_1_1_v_r_1_1_c_v_r_compositor.html#a911ea002d43e94430f1c832fbf2809cd',1,'Valve::VR::CVRCompositor']]],
-  ['compositorquit',['CompositorQuit',['../class_valve_1_1_v_r_1_1_c_v_r_compositor.html#a29223e5d21d6b16ad657d830c3ee0aad',1,'Valve::VR::CVRCompositor']]],
-  ['computedistortion',['ComputeDistortion',['../class_valve_1_1_v_r_1_1_c_v_r_system.html#a9df1c714a1b2d358f98a4028122ccedb',1,'Valve::VR::CVRSystem']]],
-  ['computeintersection',['ComputeIntersection',['../class_steam_v_r___overlay.html#adb00098ec0030e2c8018abf70994256c',1,'SteamVR_Overlay']]],
-  ['computeoverlayintersection',['ComputeOverlayIntersection',['../class_valve_1_1_v_r_1_1_c_v_r_overlay.html#a1ce5f32391e533cd95c573152a2b0d1e',1,'Valve::VR::CVROverlay']]],
-  ['connect',['Connect',['../interface_sharp_b_c_i_1_1_i_pipeable.html#a8761061994efc0be275dafe8fc07d61e',1,'SharpBCI.IPipeable.Connect(IPipeable other, bool mirror)'],['../interface_sharp_b_c_i_1_1_i_pipeable.html#a2838b61a43a65fbf77f62db14a12fba6',1,'SharpBCI.IPipeable.Connect(IPipeable other)'],['../class_sharp_b_c_i_1_1_pipeable.html#a9ca41f69b9c57f4ef50208f42ceba9ec',1,'SharpBCI.Pipeable.Connect(IPipeable other)'],['../class_sharp_b_c_i_1_1_pipeable.html#a484ed00cf334e582bbca3f02b2de32b4',1,'SharpBCI.Pipeable.Connect(IPipeable other, bool mirror)']]],
-  ['createdashboardoverlay',['CreateDashboardOverlay',['../class_valve_1_1_v_r_1_1_c_v_r_overlay.html#a3010fee626abfe4227ccbf2c53186508',1,'Valve::VR::CVROverlay']]],
-  ['createnotification',['CreateNotification',['../class_valve_1_1_v_r_1_1_c_v_r_notifications.html#aead8ee21d8433b6c4191b423179e1be7',1,'Valve::VR::CVRNotifications']]],
-  ['createoverlay',['CreateOverlay',['../class_valve_1_1_v_r_1_1_c_v_r_overlay.html#a4b1c60e2e0e778f30b2a39a987f96de5',1,'Valve::VR::CVROverlay']]]
+  ['connect',['Connect',['../interface_sharp_b_c_i_1_1_i_pipeable.html#a8761061994efc0be275dafe8fc07d61e',1,'SharpBCI.IPipeable.Connect(IPipeable other, bool mirror)'],['../interface_sharp_b_c_i_1_1_i_pipeable.html#a2838b61a43a65fbf77f62db14a12fba6',1,'SharpBCI.IPipeable.Connect(IPipeable other)'],['../class_sharp_b_c_i_1_1_pipeable.html#a9ca41f69b9c57f4ef50208f42ceba9ec',1,'SharpBCI.Pipeable.Connect(IPipeable other)'],['../class_sharp_b_c_i_1_1_pipeable.html#a484ed00cf334e582bbca3f02b2de32b4',1,'SharpBCI.Pipeable.Connect(IPipeable other, bool mirror)']]]
 ];

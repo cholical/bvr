@@ -1,14 +1,8 @@
 var searchData=
 [
-  ['g',['g',['../struct_valve_1_1_v_r_1_1_hmd_color__t.html#adc5207bc59ae0991b566472dcdd5f8dd',1,'Valve.VR.HmdColor_t.g()'],['../struct_steam_v_r___external_camera_1_1_config.html#a462a618504dc7f0c919093eaf6aedfb6',1,'SteamVR_ExternalCamera.Config.g()']]],
-  ['gameposes',['gamePoses',['../class_steam_v_r___render.html#afd007b6a8bc622270108bba6a383b67d',1,'SteamVR_Render']]],
-  ['gazeincutoff',['gazeInCutoff',['../class_steam_v_r___gaze_tracker.html#a0493767bf126eee4d475bdc85c272f60',1,'SteamVR_GazeTracker']]],
-  ['gazeoutcutoff',['gazeOutCutoff',['../class_steam_v_r___gaze_tracker.html#acf4eb5e4cb5317eac6680d7d5ab549e2',1,'SteamVR_GazeTracker']]],
-  ['glintparticle',['glintParticle',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_arrow.html#a0ab62133f97ec701f82409db5976e17b',1,'Valve::VR::InteractionSystem::Arrow']]],
-  ['goodhighlightsound',['goodHighlightSound',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_teleport.html#a55a95b5f2f23c704d96f364ec893d2d4',1,'Valve::VR::InteractionSystem::Teleport']]],
-  ['griddivs',['gridDivs',['../struct_valve_1_1_v_r_1_1_compositor___overlay_settings.html#a4a4d6389d393ea29c92fac42ba61c30a',1,'Valve::VR::Compositor_OverlaySettings']]],
-  ['gridscale',['gridScale',['../struct_valve_1_1_v_r_1_1_compositor___overlay_settings.html#aae938e9970678f802e1b06ed144c3594',1,'Valve::VR::Compositor_OverlaySettings']]],
-  ['gridwidth',['gridWidth',['../struct_valve_1_1_v_r_1_1_compositor___overlay_settings.html#a03ce56f257a85b318cc293c30a4c1882',1,'Valve::VR::Compositor_OverlaySettings']]],
-  ['grip',['Grip',['../class_steam_v_r___controller_1_1_button_mask.html#a1409739863b76ad7d9f46f070625a308',1,'SteamVR_Controller::ButtonMask']]],
-  ['gripped',['gripped',['../class_steam_v_r___tracked_controller.html#abdbb71c47a455b3f13be03af78727a4c',1,'SteamVR_TrackedController']]]
+  ['lastevents',['lastEvents',['../class_training_controller.html#aac467938534ff61836c582157b342a3f',1,'TrainingController']]],
+  ['linecolor',['lineColor',['../class_f_f_t_graph.html#a45b353612493a1b1b74db6232e58947a',1,'FFTGraph']]],
+  ['linecolors',['lineColors',['../class_scrolling_graph.html#a0d94cb9af5c61bca3c4949aa73d186cd',1,'ScrollingGraph']]],
+  ['linethickness',['lineThickness',['../class_f_f_t_graph.html#a353066cb0dc173f0f03e7c1ce4628b16',1,'FFTGraph.lineThickness()'],['../class_scrolling_graph.html#a553ec91ab143029adde6b9a8c17a8005',1,'ScrollingGraph.lineThickness()']]],
+  ['log_5fname',['LOG_NAME',['../class_sharp_b_c_i_controller.html#a095418d1bd68d83df4a192e747713ffb',1,'SharpBCIController']]]
 ];

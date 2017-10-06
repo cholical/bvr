@@ -1,20 +1,4 @@
 var searchData=
 [
-  ['w',['w',['../struct_valve_1_1_v_r_1_1_hmd_quaternion__t.html#abde50c05fbbe966908d60af470ec4c6d',1,'Valve::VR::HmdQuaternion_t']]],
-  ['waitgetposes',['WaitGetPoses',['../class_valve_1_1_v_r_1_1_c_v_r_compositor.html#a4c8b57832b7579ed1485d6b1282bfc18',1,'Valve::VR::CVRCompositor']]],
-  ['warning',['WARNING',['../namespace_sharp_b_c_i.html#ac70bf7a2ec218652e49552a784078435a059e9861e0400dfbe05c98a841f3f96b',1,'SharpBCI.WARNING()'],['../namespace_valve_1_1_v_r.html#ab893e8e2bf198a8cb4d2a2cd9c545c32a0eaadb4fcb48a0a0ed7bc9868be9fbaa',1,'Valve.VR.Warning()']]],
-  ['warning_5fbasestationmayhavemoved',['Warning_BaseStationMayHaveMoved',['../namespace_valve_1_1_v_r.html#ab893e8e2bf198a8cb4d2a2cd9c545c32a786b3c2ea9efc08e612494eeca9a9186',1,'Valve::VR']]],
-  ['warning_5fbasestationremoved',['Warning_BaseStationRemoved',['../namespace_valve_1_1_v_r.html#ab893e8e2bf198a8cb4d2a2cd9c545c32a0add12990234c4952642abcb3fd86850',1,'Valve::VR']]],
-  ['warning_5fseatedboundsinvalid',['Warning_SeatedBoundsInvalid',['../namespace_valve_1_1_v_r.html#ab893e8e2bf198a8cb4d2a2cd9c545c32a3b6352566c20ae42546b2c7fa5e6877c',1,'Valve::VR']]],
-  ['wavefile',['waveFile',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_play_sound.html#ac8133bd7a943717ea4f870ef8551ea2b',1,'Valve::VR::InteractionSystem::PlaySound']]],
-  ['wavefiles',['waveFiles',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_sound_play_oneshot.html#a1aacc158d26e2382435f2627e3d863e2',1,'Valve::VR::InteractionSystem::SoundPlayOneshot']]],
-  ['weight',['Weight',['../class_sharp_b_c_i_1_1_series_variable.html#a4bf1ee95a0d7aa7f6e330556f39a7d2a',1,'SharpBCI::SeriesVariable']]],
-  ['window_5fsize',['WINDOW_SIZE',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#ab3f303aa0a26f550479d3d0eeee4d13b',1,'SharpBCI::SharpBCI']]],
-  ['windowsize',['windowSize',['../class_scrolling_graph.html#a29ada8d7b69e1dd1b440ebd2e6a6f3e9',1,'ScrollingGraph']]],
-  ['wireframe',['wireframe',['../class_steam_v_r___camera.html#aaf5a503576ecea4040421dcc141d979f',1,'SteamVR_Camera']]],
-  ['wireframeheight',['wireframeHeight',['../class_steam_v_r___play_area.html#a352ccc0737f8edb677337255c5fadb93',1,'SteamVR_PlayArea']]],
-  ['workingdirectory_5fstring',['WorkingDirectory_String',['../namespace_valve_1_1_v_r.html#a60802f09ad1b4764cd5bc78369d50bf3adfaac2edab9f2c7d1a18f304ac0a8cdd',1,'Valve::VR']]],
-  ['writefailed',['WriteFailed',['../namespace_valve_1_1_v_r.html#aeab7722b211afc3885ed77faa931291fa490d6710e12fd4a37fb7e42b4d46b1fa',1,'Valve::VR']]],
-  ['wrongtransformtype',['WrongTransformType',['../namespace_valve_1_1_v_r.html#aaee5c5144f42b7969d45b854f51b0c18a5be95cd2a7a6404cde0dc53b20046a8a',1,'Valve::VR']]],
-  ['wrongvisibilitytype',['WrongVisibilityType',['../namespace_valve_1_1_v_r.html#aaee5c5144f42b7969d45b854f51b0c18a8fbf28156a4274377558edb7be9ce3e5',1,'Valve::VR']]]
+  ['ylength',['YLength',['../class_sharp_b_c_i_1_1_dynamic_time_warping.html#a14cbe529ccd4cc30cc46237c21bfa180',1,'SharpBCI::DynamicTimeWarping']]]
 ];

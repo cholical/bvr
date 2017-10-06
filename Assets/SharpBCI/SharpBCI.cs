@@ -5,6 +5,16 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
+// note to devs: this will appear on the main page of documentation site
+/**
+ * \mainpage Welcome to the documentation site for SharpBCI, a robust real-time data processing library for C#.
+ * All methods should be assumed to be thread-safe (i.e., atomic) unless otherwise stated in the documentation.
+ * \section Getting Started
+ * Please read the Manual (//TODO insert link) for more detailed information about getting started.
+ * SharpBCI should ideally be created using SharpBCIBuilder, but for flexiblity the "raw" SharpBCIConfig class is also provided
+ */
+
+
 namespace SharpBCI {
 
 	/**
@@ -13,8 +23,26 @@ namespace SharpBCI {
 	 * @see SharpBCIBuilder
 	 */
 	public class SharpBCIConfig {
+		/**
+		 * The device adapter which will be used to get raw data
+		 * Must emit EEGDataType.EEG and EEGDataType.CONTACT_QUALITY EEGEvents
+		 * @see EEGDeviceAdapter
+		 * @see EEGDataType
+		 * @see EEGEvent
+		 */
 		public EEGDeviceAdapter adapter;
+
+		/**
+		 * The filename which contains a config file consistent with the format SharpBCI uses for pipeline construction
+		 * @see PipelineSerializer
+		 */
 		public string pipelineFile;
+
+		/**
+		 * objects which will be added to the "scope" used by PipelineSerializer during construction
+		 * SharpBCI_**** strings are reserved for library use only.
+		 * @see PipelineSerializer
+		 */
 		public Dictionary<string, object> stageScope;
 	}
 
@@ -26,16 +54,28 @@ namespace SharpBCI {
 	public class SharpBCIBuilder {
 		readonly SharpBCIConfig config = new SharpBCIConfig();
 
+		/**
+		 * Set the EEGDeviceAdapter that SharpBCI will use, overriding possible calls before
+         * @see EEGDeviceAdapter
+		 */
 		public SharpBCIBuilder EEGDeviceAdapter(EEGDeviceAdapter adapter) {
 			config.adapter = adapter;
 			return this;
 		}
 
+		/**
+		 * Set the filename that configures the SharpBCI's pipeline
+		 * @see PipelineSerializer
+		 */
 		public SharpBCIBuilder PipelineFile(string configFile) {
 			config.pipelineFile = configFile;
 			return this;
 		}
 
+		/**
+		 * Add the given object to the scope that PipelineSerializer will use when instantiating Pipeables
+		 * @see PipelineSerializer
+		 */
 		public SharpBCIBuilder AddToPipelineScope(string key, object obj) {
 			if (config.stageScope == null)
 				config.stageScope = new Dictionary<string, object>();
@@ -43,6 +83,11 @@ namespace SharpBCI {
 			return this;
 		}
 
+		/**
+		 * Create and return the library given previous configuration calls.  
+		 * Possibly raises ArgumentException exceptions if an invalid config was passed
+		 * @see SharpBCI
+		 */
 		public SharpBCI Build() {
 				return new SharpBCI(config);
 		}
@@ -52,7 +97,10 @@ namespace SharpBCI {
 	 * A generic event which indicates previously trained event occured
 	 */
 	public class TrainedEvent {
-		public int id;
+		/**
+		 * Which trained event was detected
+		 */
+		public readonly int id;
 
 		public TrainedEvent(int i) {
 			id = i;
@@ -64,17 +112,30 @@ namespace SharpBCI {
 	 */
 	public class SharpBCI {
 
-		public const string SCOPE_ADAPTER_KEY = "SharpBCI_Adapter";
-		public const string SCOPE_SHARP_BCI_KEY = "SharpBCI_Instance";
-		public const string SCOPE_CHANNELS_KEY = "SharpBCI_Channels";
-		public const string SCOPE_SAMPLE_RATE_KEY = "SharpBCI_SampleRate";
+		/**
+		 * None of your scope keys should start with this prefix
+		 */
+		public const string RESERVED_PREFIX = "SharpBCI";
 
-		public static readonly string[] SCOPE_RESERVED_KEYWORDS = { 
-			SCOPE_ADAPTER_KEY,
-			SCOPE_SHARP_BCI_KEY,
-			SCOPE_CHANNELS_KEY,
-			SCOPE_SAMPLE_RATE_KEY,
-		};
+		/**
+		 * Keyword for the EEGDeviceAdapter configured
+		 */
+		public const string SCOPE_ADAPTER_KEY = RESERVED_PREFIX + "Adapter";
+
+		/**
+		 * Keyword for the SharpBCI instance
+		 */
+		public const string SCOPE_SHARP_BCI_KEY = RESERVED_PREFIX + "Instance";
+
+		/**
+		 * Keyword for the number of EEG channels as reported by SharpBCIAdapter
+		 */
+		public const string SCOPE_CHANNELS_KEY = RESERVED_PREFIX + "Channels";
+
+		/**
+		 * Keyword for the sample rate of EEGDataType.EEG as reported by SharpBCIAdapter
+		 */
+		public const string SCOPE_SAMPLE_RATE_KEY = RESERVED_PREFIX + "SampleRate";
 
 		// out-facing delegates
 		/**
@@ -152,9 +213,9 @@ namespace SharpBCI {
 			if (config.stageScope == null)
 				config.stageScope = new Dictionary<string, object>();
 
-			foreach (var key in SCOPE_RESERVED_KEYWORDS) {
-				if (config.stageScope.ContainsKey(key))
-					throw new ArgumentException(string.Format("{0} is a reserved stage scope keyword", key)); 
+			foreach (var key in config.stageScope.Keys) {
+				if (key.StartsWith(RESERVED_PREFIX, StringComparison.InvariantCulture))
+					throw new ArgumentException(string.Format("{0} is a reserved stage scope keyword", key));
 			}
 			// end check args
 
@@ -230,6 +291,11 @@ namespace SharpBCI {
 			}
 		}
 
+		/**
+		 * Add a training handler which is notified when "id" is detected
+		 * Important: does not check if "id" has actually been trained upon
+		 * @throws ArgumentException when id less than or equal to zero
+		 */
 		public void AddTrainedHandler(int id, SharpBCITrainedHandler handler) { 
 			if (id <= 0) throw new ArgumentException("Training id invalid");
 			lock (trainedHandlers) {
@@ -239,6 +305,11 @@ namespace SharpBCI {
 			}
 		}
 
+		/**
+		 * Remove a previously added training handler
+		 * Important: does not check if "id" has actually been trained upon
+         * @throws ArgumentException when id less than or equal to zero or if training handler was not previously added
+		 */
 		public void RemoveTrainedHandler(int id, SharpBCITrainedHandler handler) { 
 			if (id <= 0) throw new ArgumentException("Training id invalid");
 			lock (trainedHandlers) {
@@ -263,6 +334,12 @@ namespace SharpBCI {
 			}
 		}
 
+		/**
+		 * Add a handler for raw (i.e, anything in EEGDataType) events
+		 * Adding a handler does not guarantee events will actually be recieved, 
+		 * this is dependent on the configuration of the pipeline
+		 * @throws ArgumentException if handler is null
+		 */
 		public void AddRawHandler(EEGDataType type, SharpBCIRawHandler handler) {
 			if (handler == null)
 				throw new ArgumentException("handler cannot be null");
@@ -273,6 +350,10 @@ namespace SharpBCI {
 			}
 		}
 
+		/**
+ 		 * Remove a handler for raw(i.e, anything in EEGDataType) events
+         * @throws ArgumentException if handler is null
+		 */
 		public void RemoveRawHandler(EEGDataType type, SharpBCIRawHandler handler) {
 			if (handler == null)
 				throw new ArgumentException("handler cannot be null");
@@ -302,8 +383,8 @@ namespace SharpBCI {
 
 		/**
 		 * Called when all the SharpBCI threads should shutdown.  
-		 * You may or may not continue to receive events after calling this.
-		 * You should unregister events before calling this: adjust your code accordingly.
+		 * You may or may not continue to receive events after calling this
+		 * You should unregister events before calling this to avoid memory leaks
 		 */
 		public void Close() {
 			Logger.Log("SharpBCI closed");
@@ -318,6 +399,10 @@ namespace SharpBCI {
 		}
 	}
 
+	/**
+	 * An end-point consumer which emits TrainedEvents it received
+	 * Must only be connected to Pipeables which output TrainedEvents
+	 */
 	public class TrainedEventEmitter : Pipeable {
 		readonly SharpBCI self;
 
@@ -332,6 +417,10 @@ namespace SharpBCI {
 		}
 	}
 
+	/**
+	 * An end-point consumer which emits TrainedEvents it received
+	 * Must only be connected to Pipeables which output EEGEvents
+	 */
 	public class RawEventEmitter : Pipeable {
 		readonly SharpBCI self;
 
@@ -346,6 +435,10 @@ namespace SharpBCI {
 		}
 	}
 
+	/**
+	 * Wraps an EEGDeviceAdapter with a Pipeable and emits EEGDataType.EEG events
+	 * Should only be used as a producer not consumer
+	 */
 	public class EEGDeviceProducer : Pipeable {
 
 		readonly static EEGDataType[] supportedTypes = new EEGDataType[] {

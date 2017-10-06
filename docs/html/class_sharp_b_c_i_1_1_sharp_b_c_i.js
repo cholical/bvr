@@ -1,7 +1,5 @@
 var class_sharp_b_c_i_1_1_sharp_b_c_i =
 [
-    [ "RawEventEmitter", "class_sharp_b_c_i_1_1_sharp_b_c_i_1_1_raw_event_emitter.html", "class_sharp_b_c_i_1_1_sharp_b_c_i_1_1_raw_event_emitter" ],
-    [ "TrainedEventEmitter", "class_sharp_b_c_i_1_1_sharp_b_c_i_1_1_trained_event_emitter.html", "class_sharp_b_c_i_1_1_sharp_b_c_i_1_1_trained_event_emitter" ],
     [ "SharpBCI", "class_sharp_b_c_i_1_1_sharp_b_c_i.html#a3a1fef163f303e6b7d0aacd72aacc7a5", null ],
     [ "AddRawHandler", "class_sharp_b_c_i_1_1_sharp_b_c_i.html#a524a4d4cfa604ec48655b820c33c1bf2", null ],
     [ "AddTrainedHandler", "class_sharp_b_c_i_1_1_sharp_b_c_i.html#a8fa9c8dad54c67668cbbfdd2734ca0ed", null ],
@@ -13,7 +11,11 @@ var class_sharp_b_c_i_1_1_sharp_b_c_i =
     [ "StartTraining", "class_sharp_b_c_i_1_1_sharp_b_c_i.html#ab5161e89a76022be2ed540e2c74ebd9a", null ],
     [ "StopTraining", "class_sharp_b_c_i_1_1_sharp_b_c_i.html#a95920f7e515a4d773ca3d1766b096046", null ],
     [ "channels", "class_sharp_b_c_i_1_1_sharp_b_c_i.html#a3de9635ac1944af5ff2ac8ac20fc3ded", null ],
+    [ "RESERVED_PREFIX", "class_sharp_b_c_i_1_1_sharp_b_c_i.html#af83bc3fdc6760bc0a54ed3baecdc1e5e", null ],
     [ "sampleRate", "class_sharp_b_c_i_1_1_sharp_b_c_i.html#a48ad5b9c3721618290494dc949239fa3", null ],
-    [ "WINDOW_SIZE", "class_sharp_b_c_i_1_1_sharp_b_c_i.html#ab3f303aa0a26f550479d3d0eeee4d13b", null ],
+    [ "SCOPE_ADAPTER_KEY", "class_sharp_b_c_i_1_1_sharp_b_c_i.html#a21580f8553223a87d5098f4911e45e70", null ],
+    [ "SCOPE_CHANNELS_KEY", "class_sharp_b_c_i_1_1_sharp_b_c_i.html#ab6195517a4071a90e36356642820bee4", null ],
+    [ "SCOPE_SAMPLE_RATE_KEY", "class_sharp_b_c_i_1_1_sharp_b_c_i.html#af119c2200d0bee83443a7caf0bc31830", null ],
+    [ "SCOPE_SHARP_BCI_KEY", "class_sharp_b_c_i_1_1_sharp_b_c_i.html#a6a32bce72d22775149d45001574a69de", null ],
     [ "connectionStatus", "class_sharp_b_c_i_1_1_sharp_b_c_i.html#a4ee5fa59eef86aad0254305e58d43a63", null ]
 ];

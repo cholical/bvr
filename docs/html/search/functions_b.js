@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['movegamepadfocustoneighbor',['MoveGamepadFocusToNeighbor',['../class_valve_1_1_v_r_1_1_c_v_r_overlay.html#a876caebbef8a3a19a53a06fe3debb9ae',1,'Valve::VR::CVROverlay']]],
-  ['multiply',['Multiply',['../struct_steam_v_r___utils_1_1_rigid_transform.html#a8c04750d49a8d0ef28e8c648a1b38eb8',1,'SteamVR_Utils::RigidTransform']]]
+  ['onpopulatemesh',['OnPopulateMesh',['../class_f_f_t_graph.html#a23c8c19276527d341402f3bed219c11e',1,'FFTGraph.OnPopulateMesh()'],['../class_scrolling_graph.html#a9d533191a9d2593aa6aabdf49856baea',1,'ScrollingGraph.OnPopulateMesh()']]]
 ];

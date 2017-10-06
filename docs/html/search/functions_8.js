@@ -1,28 +1,5 @@
 var searchData=
 [
-  ['identifyapplication',['IdentifyApplication',['../class_valve_1_1_v_r_1_1_c_v_r_applications.html#a095be14493fca1fabadbec251a216bb6',1,'Valve::VR::CVRApplications']]],
-  ['importfrombuffertoworking',['ImportFromBufferToWorking',['../class_valve_1_1_v_r_1_1_c_v_r_chaperone_setup.html#ad926c2713b34a03cc1f6c9ab8f0bcf79',1,'Valve::VR::CVRChaperoneSetup']]],
-  ['init',['Init',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_after_timer___component.html#a4edf98fcac31c68457596f928c12204c',1,'Valve.VR.InteractionSystem.AfterTimer_Component.Init()'],['../class_valve_1_1_v_r_1_1_open_v_r.html#aebdbc5c2f2c6a37fef5ac8e2199f2cce',1,'Valve.VR.OpenVR.Init()']]],
-  ['initializedaction',['InitializedAction',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_chaperone_info.html#a67077285a9b36c0dd9c3ea1e8357bd24',1,'Valve::VR::InteractionSystem::ChaperoneInfo']]],
-  ['initinternal',['InitInternal',['../class_valve_1_1_v_r_1_1_open_v_r.html#a416675ba428968a6da50f9490efce76b',1,'Valve::VR::OpenVR']]],
-  ['input',['Input',['../class_steam_v_r___controller.html#ac4ebd3cef7326104c0b6d5967a9fdbc0',1,'SteamVR_Controller']]],
-  ['interpolate',['Interpolate',['../struct_steam_v_r___utils_1_1_rigid_transform.html#a55949488d4577387b2a7600f1b3eebba',1,'SteamVR_Utils.RigidTransform.Interpolate(RigidTransform a, RigidTransform b, float t)'],['../struct_steam_v_r___utils_1_1_rigid_transform.html#ab19fdb29eb27380730e756aa3c8af3ac',1,'SteamVR_Utils.RigidTransform.Interpolate(RigidTransform to, float t)']]],
-  ['inverse',['Inverse',['../struct_steam_v_r___utils_1_1_rigid_transform.html#a7f90685fcc132312f475f43932d7ecbd',1,'SteamVR_Utils::RigidTransform']]],
-  ['inversetransformpoint',['InverseTransformPoint',['../struct_steam_v_r___utils_1_1_rigid_transform.html#a417ee7e12709984c5dc234695785dda5',1,'SteamVR_Utils::RigidTransform']]],
-  ['isactivedashboardoverlay',['IsActiveDashboardOverlay',['../class_valve_1_1_v_r_1_1_c_v_r_overlay.html#a68413569ad106e17b3503f392f11de76',1,'Valve::VR::CVROverlay']]],
-  ['isapplicationinstalled',['IsApplicationInstalled',['../class_valve_1_1_v_r_1_1_c_v_r_applications.html#a85a594e9e20b45a193d9145f0243eb00',1,'Valve::VR::CVRApplications']]],
-  ['isbuttonhintactive',['IsButtonHintActive',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_controller_button_hints.html#af0fff0c0aac140f3e642d11f0d796e6f',1,'Valve::VR::InteractionSystem::ControllerButtonHints']]],
-  ['isdashboardvisible',['IsDashboardVisible',['../class_valve_1_1_v_r_1_1_c_v_r_overlay.html#a2f8245632633538da1d5a48addc76559',1,'Valve::VR::CVROverlay']]],
-  ['isdisplayondesktop',['IsDisplayOnDesktop',['../class_valve_1_1_v_r_1_1_c_v_r_system.html#a9c4ab5e7989d6c1938159b7a1ec42b14',1,'Valve::VR::CVRSystem']]],
-  ['iseligibleforteleport',['IsEligibleForTeleport',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_teleport.html#aa05ea76b4adebd072549c72f5b1c0b04',1,'Valve::VR::InteractionSystem::Teleport']]],
-  ['isfullscreen',['IsFullscreen',['../class_valve_1_1_v_r_1_1_c_v_r_compositor.html#a8d9c2a37367803beea6f015e65d37cf8',1,'Valve::VR::CVRCompositor']]],
-  ['ishmdpresent',['IsHmdPresent',['../class_valve_1_1_v_r_1_1_open_v_r.html#a3586c9cb26b462671a12958e442ba58a',1,'Valve::VR::OpenVR']]],
-  ['ishovertargetoverlay',['IsHoverTargetOverlay',['../class_valve_1_1_v_r_1_1_c_v_r_overlay.html#ac91d70f1ab82315f0211bd3511e39965',1,'Valve::VR::CVROverlay']]],
-  ['isinputfocuscapturedbyanotherprocess',['IsInputFocusCapturedByAnotherProcess',['../class_valve_1_1_v_r_1_1_c_v_r_system.html#acf4ed03a55fd3d854ee6f8e7cf746c74',1,'Valve::VR::CVRSystem']]],
-  ['isinterfaceversionvalid',['IsInterfaceVersionValid',['../class_valve_1_1_v_r_1_1_open_v_r.html#ab0838779108201f20567fb3bf8d8050d',1,'Valve::VR::OpenVR']]],
-  ['ismirrorwindowvisible',['IsMirrorWindowVisible',['../class_valve_1_1_v_r_1_1_c_v_r_compositor.html#a70ed72ae8e8e200649b4bff2e54d0f5d',1,'Valve::VR::CVRCompositor']]],
-  ['isoverlayvisible',['IsOverlayVisible',['../class_valve_1_1_v_r_1_1_c_v_r_overlay.html#a3fff124048fa05c2312f899eb7c26b8e',1,'Valve::VR::CVROverlay']]],
-  ['isquituserpromptrequested',['IsQuitUserPromptRequested',['../class_valve_1_1_v_r_1_1_c_v_r_applications.html#af5244a52dc2ec469c188a3f20479b89e',1,'Valve::VR::CVRApplications']]],
-  ['isruntimeinstalled',['IsRuntimeInstalled',['../class_valve_1_1_v_r_1_1_open_v_r.html#afcddd1daf2a59e882134e25a4368abd1',1,'Valve::VR::OpenVR']]],
-  ['istrackeddeviceconnected',['IsTrackedDeviceConnected',['../class_valve_1_1_v_r_1_1_c_v_r_system.html#aeba3d5d5d782b1a343ae1555b30c4c3f',1,'Valve::VR::CVRSystem']]]
+  ['knearestneighbor',['KNearestNeighbor',['../class_sharp_b_c_i_1_1_k_nearest_neighbor.html#ab96a33ec4ca2fb3371d9d04fae42e3af',1,'SharpBCI.KNearestNeighbor.KNearestNeighbor(int k)'],['../class_sharp_b_c_i_1_1_k_nearest_neighbor.html#a090709139b0fb0529b3398d32b51d964',1,'SharpBCI.KNearestNeighbor.KNearestNeighbor()']]],
+  ['knearestneighborpipeable',['KNearestNeighborPipeable',['../class_sharp_b_c_i_1_1_k_nearest_neighbor_pipeable.html#a4b1f0c7bc8af31c1f9a42d9fa0ffdb04',1,'SharpBCI::KNearestNeighborPipeable']]]
 ];

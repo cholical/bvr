@@ -2,7 +2,7 @@ var dir_84bbf7b3c7f28a5a18725745e1505219 =
 [
     [ "DataAnalysis", "dir_c1843127eb989535b30a18248ce23f5c.html", "dir_c1843127eb989535b30a18248ce23f5c" ],
     [ "SharpBCI", "dir_792cb359bd7f1349fe0e3b05fe820b6d.html", "dir_792cb359bd7f1349fe0e3b05fe820b6d" ],
-    [ "SteamVR", "dir_bedfcd20671a9921cde036a71668c9db.html", "dir_bedfcd20671a9921cde036a71668c9db" ],
+    [ "Unity Scripts", "dir_956895d78ef68f8957464ed665173472.html", "dir_956895d78ef68f8957464ed665173472" ],
     [ "ConnectedDisplay.cs", "_connected_display_8cs.html", [
       [ "ConnectedDisplay", "class_connected_display.html", null ]
     ] ],
@@ -15,8 +15,11 @@ var dir_84bbf7b3c7f28a5a18725745e1505219 =
     [ "EEGDataOutput.cs", "_e_e_g_data_output_8cs.html", [
       [ "EEGDataOutput", "class_e_e_g_data_output.html", "class_e_e_g_data_output" ]
     ] ],
-    [ "FFTOutput.cs", "_f_f_t_output_8cs.html", [
-      [ "FFTOutput", "class_f_f_t_output.html", null ]
+    [ "FFTGraph.cs", "_f_f_t_graph_8cs.html", [
+      [ "FFTGraph", "class_f_f_t_graph.html", "class_f_f_t_graph" ]
+    ] ],
+    [ "FFTGraphController.cs", "_f_f_t_graph_controller_8cs.html", [
+      [ "FFTGraphController", "class_f_f_t_graph_controller.html", "class_f_f_t_graph_controller" ]
     ] ],
     [ "LomontFFT.cs", "_lomont_f_f_t_8cs.html", [
       [ "LomontFFT", "class_lomont_1_1_lomont_f_f_t.html", "class_lomont_1_1_lomont_f_f_t" ]

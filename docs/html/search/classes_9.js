@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['knearestneighbor',['KNearestNeighbor',['../class_sharp_b_c_i_1_1_k_nearest_neighbor.html',1,'SharpBCI']]],
-  ['knearestneighborpipeable',['KNearestNeighborPipeable',['../class_sharp_b_c_i_1_1_k_nearest_neighbor_pipeable.html',1,'SharpBCI']]]
+  ['raweventemitter',['RawEventEmitter',['../class_sharp_b_c_i_1_1_raw_event_emitter.html',1,'SharpBCI']]],
+  ['remoteoscadapter',['RemoteOSCAdapter',['../class_sharp_b_c_i_1_1_remote_o_s_c_adapter.html',1,'SharpBCI']]]
 ];

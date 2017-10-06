@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['hand_2ecs',['Hand.cs',['../_hand_8cs.html',1,'']]],
-  ['hapticrack_2ecs',['HapticRack.cs',['../_haptic_rack_8cs.html',1,'']]],
-  ['hideonhandfocuslost_2ecs',['HideOnHandFocusLost.cs',['../_hide_on_hand_focus_lost_8cs.html',1,'']]]
+  ['logger_2ecs',['Logger.cs',['../_logger_8cs.html',1,'']]],
+  ['lomontfft_2ecs',['LomontFFT.cs',['../_lomont_f_f_t_8cs.html',1,'']]]
 ];

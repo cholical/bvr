@@ -1,28 +1,7 @@
 var searchData=
 [
-  ['data',['data',['../class_sharp_b_c_i_1_1_e_e_g_event.html#afcebdb58730f5a3bbd3b0db23e2fc94c',1,'SharpBCI.EEGEvent.data()'],['../struct_valve_1_1_v_r_1_1_v_r_event__t.html#af45efaec7d202da67c2cce7b492bcdb1',1,'Valve.VR.VREvent_t.data()'],['../struct_valve_1_1_v_r_1_1_v_r_event__t___packed.html#ae5b6590789a65722738cbe93f9e64a73',1,'Valve.VR.VREvent_t_Packed.data()']]],
-  ['datatype',['dataType',['../class_e_e_g_data_output.html#ac4495c1c22c261cdc5920a18614c8dc2',1,'EEGDataOutput.dataType()'],['../class_particle_brain_wave_controller.html#a7ec03e458db1e83801adf918c4f93cdd',1,'ParticleBrainWaveController.dataType()']]],
-  ['dbgpathlimit',['dbgPathLimit',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_circular_drive.html#a4c793fa3de71c7d7063b70c8566516ec',1,'Valve::VR::InteractionSystem::CircularDrive']]],
-  ['deactivateobjecttime',['deactivateObjectTime',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_teleport.html#aa34d103d8da25a6bc95921dcc9c70c12',1,'Valve::VR::InteractionSystem::Teleport']]],
-  ['debugfloor',['debugFloor',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_teleport.html#a6a8f9eef1e86b11af356e2bbb04eae3b',1,'Valve::VR::InteractionSystem::Teleport']]],
-  ['debughints',['debugHints',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_controller_button_hints.html#ad0dc92cbb8908e12e4dbe21c9ae18c03',1,'Valve::VR::InteractionSystem::ControllerButtonHints']]],
-  ['debugpath',['debugPath',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_circular_drive.html#a155bba9d6c9819bce12a66f739c3e3a7',1,'Valve::VR::InteractionSystem::CircularDrive']]],
-  ['debugtext',['debugText',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_circular_drive.html#a918ce2445696801ab1e723fbf39522e3',1,'Valve::VR::InteractionSystem::CircularDrive']]],
-  ['default_5fbuffer_5fsize',['DEFAULT_BUFFER_SIZE',['../class_sharp_b_c_i_1_1_pipeable.html#a71fce27c4da6c0faf794ec240c974f71',1,'SharpBCI::Pipeable']]],
-  ['defaultattachmentflags',['defaultAttachmentFlags',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_hand.html#a836a6cb55d2514dbed680981dfcc5505',1,'Valve::VR::InteractionSystem::Hand']]],
-  ['delayoffsettime',['delayOffsetTime',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_play_sound.html#ad26bd2df1c10742c010f34bf2ea9e1a3',1,'Valve::VR::InteractionSystem::PlaySound']]],
-  ['destinationreticletransform',['destinationReticleTransform',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_teleport.html#a64f1404a754df096205f5d3b0ca6f276',1,'Valve::VR::InteractionSystem::Teleport']]],
-  ['destroyafterplayonce',['destroyAfterPlayOnce',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_sound_deparent.html#a0f2ff3bfe3a3660ea5ff2165f5ed67e6',1,'Valve::VR::InteractionSystem::SoundDeparent']]],
-  ['device',['Device',['../class_device_controller.html#a2b92db3cd78469f28db4a608bc1b9e05',1,'DeviceController']]],
-  ['diffusetextureid',['diffuseTextureId',['../struct_valve_1_1_v_r_1_1_render_model__t.html#a97ba56794c72d5cc36dc96a643ca001a',1,'Valve.VR.RenderModel_t.diffuseTextureId()'],['../struct_valve_1_1_v_r_1_1_render_model__t___packed.html#a64bb59932399b8ebe5ea81a050c98b90',1,'Valve.VR.RenderModel_t_Packed.diffuseTextureId()']]],
-  ['disableonend',['disableOnEnd',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_play_sound.html#a605dacc17d2f86ec35e501979fc1437e',1,'Valve::VR::InteractionSystem::PlaySound']]],
-  ['disablestandardassets',['disableStandardAssets',['../struct_steam_v_r___external_camera_1_1_config.html#a104e810c94e0c4d4e4455d2150292cdb',1,'SteamVR_ExternalCamera::Config']]],
-  ['displacement',['displacement',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_linear_displacement.html#a16d5c85c2d5af60e16f3b89466e2527a',1,'Valve::VR::InteractionSystem::LinearDisplacement']]],
-  ['distance',['distance',['../struct_gaze_event_args.html#ab4d814858f54b2910d353ff3eb443f1d',1,'GazeEventArgs.distance()'],['../struct_pointer_event_args.html#afd2aa34a4da89939805207e412c3d684',1,'PointerEventArgs.distance()'],['../struct_valve_1_1_v_r_1_1_compositor___overlay_settings.html#a30967b25f9a56ebb1ceb0b4fa74febd3',1,'Valve.VR.Compositor_OverlaySettings.distance()'],['../class_steam_v_r___overlay.html#a971e234c4577600fd8529d81bd85ac06',1,'SteamVR_Overlay.distance()'],['../struct_steam_v_r___overlay_1_1_intersection_results.html#adf56667747d9ec7e27b64dfc8ad786fe',1,'SteamVR_Overlay.IntersectionResults.distance()']]],
-  ['distanceintensitycurve',['distanceIntensityCurve',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_distance_haptics.html#aad2c3737bb10c1836e9b3ac571f564a4',1,'Valve::VR::InteractionSystem::DistanceHaptics']]],
-  ['drawingame',['drawInGame',['../class_steam_v_r___play_area.html#a83f22fc1ac68b9ccf7c798f396d34fbf',1,'SteamVR_PlayArea']]],
-  ['drawoffset',['drawOffset',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_longbow.html#a4387570c5440d83e71d8087fadac7177',1,'Valve::VR::InteractionSystem::Longbow']]],
-  ['drawsound',['drawSound',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_longbow.html#a86d5e6565e71ab26a6d58a9afd8ec685',1,'Valve::VR::InteractionSystem::Longbow']]],
-  ['drawwireframewhenselectedonly',['drawWireframeWhenSelectedOnly',['../class_steam_v_r___play_area.html#a0aa65e2be905b0d150a09b83f029588c',1,'SteamVR_PlayArea']]],
-  ['dropevent',['dropEvent',['../class_valve_1_1_v_r_1_1_interaction_system_1_1_item_package_spawner.html#adffe0a0db412218c6f2809234b4a2569',1,'Valve::VR::InteractionSystem::ItemPackageSpawner']]]
+  ['eegtype',['EEGType',['../class_e_e_g_color_changer.html#abe9894fdf18ab340fa8df044a8138e38',1,'EEGColorChanger']]],
+  ['endcolor',['endColor',['../class_e_e_g_color_changer.html#a36d0c0d8edcac23b45249c4db4f2d7e2',1,'EEGColorChanger']]],
+  ['eventtext',['eventText',['../class_training_controller.html#ab6804dbd0840e6048390dba092c67c0d',1,'TrainingController']]],
+  ['extra',['extra',['../class_sharp_b_c_i_1_1_e_e_g_event.html#aa43471159f421b1d97e074a34ab3dff9',1,'SharpBCI::EEGEvent']]]
 ];
