@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Collections.Generic;
 using SharpOSC;
+using DSPLib;
 
 namespace SharpBCI {
 	
@@ -180,40 +182,53 @@ namespace SharpBCI {
 		readonly double[] freqs;
 		readonly double[] amplitudes;
 		readonly int period;
+		readonly double signalToNoise;
 
 		bool isCancelled;
 		Thread thread;
 
-		DateTime lastSampled = DateTime.UtcNow;
+		public DummyAdapter(double[] freqs, double[] amplitudes, double sampleRate) : this(freqs, amplitudes, sampleRate, 2) { }
 
-		public DummyAdapter(double[] freqs, double[] amplitudes, double sampleRate) : base(4, sampleRate) {
+		public DummyAdapter(double[] freqs, double[] amplitudes, double sampleRate, double signalToNoise) : base(4, sampleRate) {
 			if (freqs.Length != amplitudes.Length)
 				throw new ArgumentException("Freqs must be same length as amplitudes");
 			
 			this.freqs = freqs;
 			this.amplitudes = amplitudes;
+            this.signalToNoise = signalToNoise;
 
+			// in MS
 			period = (int) Math.Round(1000/sampleRate);
 		}
 
 		void Run() {
-			EmitData(new EEGEvent (DateTime.UtcNow, EEGDataType.CONTACT_QUALITY, new double[] { 1, 1, 1, 1 }));
-			double t = 0;
-			while (!isCancelled) {
-				double v = 0;
-				for (int i = 0; i < freqs.Length; i++) {
-					var f = freqs[i];
-					var a = amplitudes[i];
-					v += (a * Math.Sin(2 * Math.PI * f * t) ) + a;
-				}
-				Logger.Log(string.Format("Emitting v {0:1.0}", v));
-				t += ((double)(period)) / 1000;
-				EmitData(new EEGEvent(DateTime.UtcNow, EEGDataType.EEG, new double[] { v, v, v, v }));
+			DateTime start = DateTime.UtcNow;
+			EmitData(new EEGEvent (start, EEGDataType.CONTACT_QUALITY, new double[] { 1, 1, 1, 1 }));
 
-				var now = DateTime.UtcNow;
-				var delayTime = Math.Max(0, period - (int) Math.Round(now.Subtract(lastSampled).TotalMilliseconds));
-				lastSampled = now;
-				Thread.Sleep(delayTime);
+			var N = 256;
+
+			// SNR = signal / noise
+			// noise = signal / SNR
+			var noiseAmplitude = amplitudes.Sum() / signalToNoise;
+			var noise = DSP.Generate.NoiseRms(noiseAmplitude, (uint)N, 0);
+			var inputSignal = new double[N];
+			for (int j = 0; j < freqs.Length; j++) {
+				inputSignal = DSP.Math.Add(inputSignal, DSP.Generate.ToneSampling(amplitudes[j], freqs[j], sampleRate, (uint)N));
+			}
+			var input = DSP.Math.Add(inputSignal, noise);
+
+			// in seconds
+			var t = 0;
+			int i = 0;
+			while (!isCancelled) {
+				var v = input[i++];
+				if (i == N) {
+					input = DSP.Math.Add(inputSignal, DSP.Generate.NoiseRms(noiseAmplitude, (uint)N, 0));
+					i = 0;
+				}
+				t++;
+				EmitData(new EEGEvent(start.AddSeconds(sampleRate * t), EEGDataType.EEG, new double[] { v, v, v, v }));
+				Thread.Sleep(period);
 			}
 		}
 

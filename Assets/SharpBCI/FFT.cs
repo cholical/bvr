@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using DSPLib;
 
 namespace SharpBCI {
 
@@ -11,45 +12,47 @@ namespace SharpBCI {
 	 */
 	public class FFTPipeable : Pipeable {
 		
-		public const double HAMMING_ALPHA = 25 / 46;
-		public const double HAMMING_BETA = 21 / 46;
+		readonly uint windowSize;
+		readonly uint channels;
+		readonly uint fftRate;
 
-		public static double HammingWindow(int i, int N) {
-			return HAMMING_ALPHA - HAMMING_BETA * Math.Cos((2 * Math.PI * i) / (N - 1));
-		}
-
-		public static double BoxcarWindow(int i, int N) {
-			return 1;
-		}
-		
-		readonly int windowSize;
-		readonly int channels;
 		readonly Queue<double>[] samples;
-		readonly Lomont.LomontFFT FFT = new Lomont.LomontFFT();
-		readonly int fftRate;
-		readonly double sampleRate;
-		readonly IFilter<double>[] filters;
-		readonly double[] windowConstants;
+		readonly FFT fft;
 
-		int nSamples = 0;
-		int lastFFT = 0;
+		readonly double sampleRate;
+		readonly double[] windowConstants;
+		readonly double scaleFactor;
+		readonly double noiseFactor;
+
+		readonly IFilter<double>[] filters;
+
+		uint nSamples = 0;
+		uint lastFFT = 0;
+
+		public FFTPipeable(int windowSize, int channels, double sampleRate) : this(windowSize, channels, sampleRate, 10) { }
 
 		/**
 		 * Create a new FFTPipeable which performs an FFT over windowSize.  Expects an input pipeable of EEGEvent's
 		 * @param windowSize The size of the FFT window, determines granularity (google FFT)
 		 * @param channels How many channels to operate on
+		 * @param sampleRate Sampling rate of data
+		 * @param targetFFTRate Optional: Frequency (in Hz) to perform an FFT (exact frequency may vary)
 		 * @see EEGEvent
 		 */
-		public FFTPipeable(int windowSize, int channels, double sampleRate) {
-			// 2 * windowSize to account for the imaginary parts of the FFT
-			windowSize = 2 * windowSize;
+		public FFTPipeable(int windowSize, int channels, double sampleRate, double targetFFTRate) {
+			//this.windowSize = windowSize;
 
-			this.windowSize = windowSize;
-			this.channels = channels;
+			this.windowSize = (uint) windowSize;
+			this.channels = (uint)channels;
 			this.sampleRate = sampleRate;
 
+			fft = new FFT();
+			fft.Initialize((uint) windowSize);
+			//FFT.A = 0;
+			//FFT.B = 1;
+
 			// target 10Hz
-			fftRate = (int)Math.Round(sampleRate / 10);
+			fftRate = (uint)Math.Round(sampleRate / targetFFTRate);
 
 			samples = new Queue<double>[channels];
 			filters = new IFilter<double>[channels];
@@ -59,10 +62,9 @@ namespace SharpBCI {
 				filters[i] = new PassThroughFilter();
 			}
 
-			windowConstants = new double[windowSize];
-			for (int i = 0; i < windowSize; i++) {
-				windowConstants[i] = BoxcarWindow(i, windowSize);
-			}
+			windowConstants = DSP.Window.Coefficients(DSP.Window.Type.Rectangular, this.windowSize);
+			scaleFactor = DSP.Window.ScaleFactor.Signal(windowConstants);
+			noiseFactor = DSP.Window.ScaleFactor.Noise(windowConstants, sampleRate);
 		}
 
 		protected override bool Process(object item) {
@@ -77,20 +79,20 @@ namespace SharpBCI {
 			for (int i = 0; i < channels; i++) {
 				samples[i].Enqueue(evt.data[i]);
 				// this is the imaginary part of the signal, but we're FFT-ing a real number so 0 for us
-				// TODO is this ALWAYS true?
-				samples[i].Enqueue(0);
+				//samples[i].Enqueue(0);
 			}
-			nSamples += 2;
+			nSamples++;
 
-			if (nSamples >= windowSize + 2) {
+			if (nSamples > windowSize) {
 				foreach (var channelSamples in samples) {
 					channelSamples.Dequeue();
-					channelSamples.Dequeue();
+					//channelSamples.Dequeue();
 				}
-				nSamples -= 2;
+				nSamples--;
 			}
 
 			lastFFT++;
+			//Logger.Log("nSamples={0}, lastFFT={1}", nSamples, lastFFT);
 			// sample buffer is full, do FFT then reset for next round
 			if (nSamples >= windowSize && lastFFT % fftRate == 0) {
 				DoFFT(evt);
@@ -103,28 +105,21 @@ namespace SharpBCI {
 			// Do an FFT on each channel
 			List<double[]> fftOutput = new List<double[]>();
 			foreach (var channelSamples in samples) {
-				// Logger.Log("FFT sample size:" + channelSamples.Count);
 				var samplesCopy = channelSamples.ToArray();
-				// apply hamming windowing function to samplesCopy
-				//ApplyWindow(samplesCopy);
 
-				FFT.FFT(samplesCopy, true);
+				// apply windowing function to samplesCopy
+				DSP.Math.Multiply(samplesCopy, windowConstants);
 
-				// now we want to slice off the complex conjugates and get magnitude of each complex number
-				int nMags = windowSize / 2;
-				var magnitudes = new double[nMags];
-				int i = 0;
-				int j = 0;
-				while (i < nMags) {
-					var abs = Math.Sqrt(samplesCopy[i] * samplesCopy[i] + samplesCopy[i + 1] * samplesCopy[i + 1]);
-					magnitudes[j++] = abs;
-					i += 2;
-				}
-				fftOutput.Add(magnitudes);
+				var cSpectrum = fft.Execute(samplesCopy);
+				double[] lmSpectrum = DSP.ConvertComplex.ToMagnitude(cSpectrum);
+				lmSpectrum = DSP.Math.Multiply(lmSpectrum, scaleFactor);
+
+				fftOutput.Add(lmSpectrum);
 			}
 
 			for (int i = 0; i<fftOutput.Count; i++) {
 				Add(new EEGEvent(evt.timestamp, EEGDataType.FFT_RAW, fftOutput[i], i));
+				//Add(new EEGEvent(evt.timestamp, EEGDataType.FFT_SMOOTHED, DSP.Math.Multiply(fftOutput[i], noiseFactor), i));
 			}
 
 			// find sampleRate given windowStart and windowEnd there are only windowSize / 2 actual samples
@@ -164,7 +159,7 @@ namespace SharpBCI {
 
 		void ApplyWindow(double[] arr) {
 			int N = arr.Length;
-			for (int i = 0; i < N; i += 2) {
+			for (int i = 0; i < N; i++) {
 				arr[i] = arr[i] * windowConstants[i];
 			}
 		}

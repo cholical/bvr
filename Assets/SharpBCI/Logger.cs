@@ -53,19 +53,20 @@ namespace SharpBCI {
 			}
 		}
 
-		public static void Log(object message) {
-			_Log(LogLevel.INFO, message);
+		public static void Log(object message, params object[] arguments) {
+			_Log(LogLevel.INFO, message, arguments);
 		}
 
-		public static void Warning(object message) {
-			_Log(LogLevel.WARNING, message);
+		public static void Warning(object message, params object[] arguments) {
+			_Log(LogLevel.WARNING, message, arguments);
 		}
 
-		public static void Error(object message) {
-			_Log(LogLevel.ERROR, message);
+		public static void Error(object message, params object[] arguments) {
+			_Log(LogLevel.ERROR, message, arguments);
 		}
 
-		static void _Log(LogLevel level, object message) {
+		static void _Log(LogLevel level, object message, object[] arguments) {
+			if (message is string) message = string.Format(((string) message), arguments);
 			foreach (var o in outputs) {
 				o.Log(level, message);
 			}

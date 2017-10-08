@@ -8,7 +8,7 @@
 		{
 			"stageKey": "fft",
 			"stageClass": "SharpBCI.FFTPipeable",
-			"arguments": [ 256, "SharpBCIChannels", "SharpBCISampleRate" ]
+			"arguments": [ 256, "SharpBCIChannels", "SharpBCISampleRate", 10 ]
 		},
 		{
 			"stageKey": "rawEventEmitter",
@@ -30,17 +30,17 @@
 	"stageConnections": [
 		{
 			"stageKey": "producer",
-			"mirrorOuputs": true,
+			"mirrorOutputs": true,
 			"outputs": [ "fft", "rawEventEmitter" ]
 		},
 		{
 			"stageKey": "fft",
-			"mirrorOuputs": true,
+			"mirrorOutputs": true,
 			"outputs": [ "rawEventEmitter", "predictor" ]
 		},
 		{
 			"stageKey": "predictor",
-			"mirrorOuputs": true,
+			"mirrorOutputs": true,
 			"outputs": [ "trainedEventEmitter" ]
 		}
 	]

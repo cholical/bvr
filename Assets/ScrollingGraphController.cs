@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using SharpBCI;
@@ -6,14 +6,25 @@ using SharpBCI;
 public class ScrollingGraphController : MonoBehaviour {
 
 	public EEGDataType type;
+	public int windowSize = 256;
 
-	ScrollingGraph graph;
+	Graph graph;
 
 	bool startCalled = false;
+	Queue<Vector2>[] data;
+	bool dataDirty = false;
+	DateTime started;
 
 	void Start() {
+		started = DateTime.UtcNow;
+		data = new Queue<Vector2>[SharpBCIController.BCI.channels];
+		for (int i = 0; i < data.Length; i++) {
+			data[i] = new Queue<Vector2>();
+		}
 		startCalled = true;
-		graph = GetComponent<ScrollingGraph>();
+		graph = GetComponent<Graph>();
+		graph.SetNumSeries(data.Length);
+		graph.yFormatter = (x) => string.Format("{0:F2}", x);
 		SharpBCIController.BCI.AddRawHandler(type, OnEEGData);
 	}
 
@@ -29,15 +40,20 @@ public class ScrollingGraphController : MonoBehaviour {
 		SharpBCIController.BCI.RemoveRawHandler(type, OnEEGData);
 	}
 
-	readonly Queue<EEGEvent> evts = new Queue<EEGEvent>();
-
 	void Update() {
-		while (evts.Count > 0) {
-			graph.AppendValue(evts.Dequeue());
+		if (dataDirty) {
+			for (int i = 0; i < data.Length; i++) {
+				graph.SetData(i, data[i].ToArray());
+			}
 		}
 	}
 
 	void OnEEGData(EEGEvent evt) {
-		evts.Enqueue(evt);
+		for (int i = 0; i < evt.data.Length; i++) {
+			data[i].Enqueue(new Vector2((float)DateTime.UtcNow.Subtract(started).TotalSeconds, (float)evt.data[i]));
+			if (data[i].Count == windowSize + 1)
+				data[i].Dequeue();
+		}
+		dataDirty = true;
 	}
 }

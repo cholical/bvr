@@ -65,11 +65,13 @@ namespace SharpBCI {
 		}
 
 		public void Connect(IPipeable other, bool mirror) {
+			//Logger.Log("Connecting {0} to {1} with mirror={2}", this, other, mirror);
 			BlockingCollection<object> output;
 			if (mirror) {
 				output = new BlockingCollection<object>(DEFAULT_BUFFER_SIZE);
 				allOutputs.Add(output);
 			} else {
+				Logger.Warning("Possible race condition: {0}.Connect({1}, {2}) was called.  This can result in one Pipeable leeching on another.", this, other, mirror);
 				if (allOutputs.Count == 0) {
 					allOutputs.Add(new BlockingCollection<object>(DEFAULT_BUFFER_SIZE));
 				}

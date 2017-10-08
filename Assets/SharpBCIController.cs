@@ -72,13 +72,13 @@ public class SharpBCIController : MonoBehaviour {
 			adapter = new DummyAdapter(new double[] { 
 				// alpha
 				10, 
-				//// beta
+				// beta
 				24, 
-				//// gamma
+				// gamma
 				40, 
-				//// delta
+				// delta
 				2, 
-				//// theta
+				// theta
 				6,
 			}, new double[] {
 				512,
@@ -86,7 +86,7 @@ public class SharpBCIController : MonoBehaviour {
 				512,
 				512,
 				512
-			}, 220);
+			}, 220, 100);
 		} else {
 			throw new System.Exception("Invalid bciType");
 		}

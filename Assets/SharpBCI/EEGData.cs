@@ -8,6 +8,8 @@ namespace SharpBCI {
 
 		// raw FFT data
 		FFT_RAW,
+		// smoothed FFT data
+		FFT_SMOOTHED,
 
 		// absolute freq bands
 		ALPHA_ABSOLUTE,
