@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
 namespace SharpBCI
 {
-	public class KNearestNeighborPipeable : Pipeable, IPredictor
+	public class KNearestNeighborPipeable : Pipeable, IPredictorPipeable
 	{
 		private KNearestNeighbor knn;
 		private int bufferSize;
