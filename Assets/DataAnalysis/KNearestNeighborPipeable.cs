@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -78,7 +77,7 @@ namespace SharpBCI
 					AddTrainingData (training, evt.data);
 				} else {
 					int prediction = knn.Predict (evt.data);
-				Logger.Log(string.Format("Predicted: {0}", prediction));
+				//Logger.Log(string.Format("Predicted: {0}", prediction));
 				Add (new TrainedEvent (prediction));
 				}
 //				buffer.Clear();

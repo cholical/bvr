@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using UnityEngine;
 using SharpBCI;
 
 
@@ -19,7 +18,7 @@ namespace SharpBCI
 		{
 			train_data = new List<KeyValuePair<int, double[]>>();
 			if (k != 1) {
-				Debug.LogWarning ("KNearestNeighbor currently only supports k=1");
+				Logger.Warning ("KNearestNeighbor currently only supports k=1");
 			}
 			k_neighbors = 1;
 		}
