@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['logger_2ecs',['Logger.cs',['../_logger_8cs.html',1,'']]],
-  ['lomontfft_2ecs',['LomontFFT.cs',['../_lomont_f_f_t_8cs.html',1,'']]]
+  ['knearestneighbor_2ecs',['KNearestNeighbor.cs',['../_k_nearest_neighbor_8cs.html',1,'']]],
+  ['knearestneighborpipeable_2ecs',['KNearestNeighborPipeable.cs',['../_k_nearest_neighbor_pipeable_8cs.html',1,'']]]
 ];

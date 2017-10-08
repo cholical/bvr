@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['lastevents',['lastEvents',['../class_training_controller.html#aac467938534ff61836c582157b342a3f',1,'TrainingController']]],
-  ['linecolor',['lineColor',['../class_f_f_t_graph.html#a45b353612493a1b1b74db6232e58947a',1,'FFTGraph']]],
-  ['linecolors',['lineColors',['../class_scrolling_graph.html#a0d94cb9af5c61bca3c4949aa73d186cd',1,'ScrollingGraph']]],
-  ['linethickness',['lineThickness',['../class_f_f_t_graph.html#a353066cb0dc173f0f03e7c1ce4628b16',1,'FFTGraph.lineThickness()'],['../class_scrolling_graph.html#a553ec91ab143029adde6b9a8c17a8005',1,'ScrollingGraph.lineThickness()']]],
-  ['log_5fname',['LOG_NAME',['../class_sharp_b_c_i_controller.html#a095418d1bd68d83df4a192e747713ffb',1,'SharpBCIController']]]
+  ['maxpoints',['maxPoints',['../class_scrolling_graph.html#a3d6c2161c6501bbd115a5537efeb5ca8',1,'ScrollingGraph']]],
+  ['mirroroutputs',['mirrorOutputs',['../class_sharp_b_c_i_1_1_serialized_connection_info.html#aa0f4ae45617d749f6d04cd632d0b87be',1,'SharpBCI::SerializedConnectionInfo']]],
+  ['movementrange',['movementRange',['../class_player_mover.html#a5435941c76bb3d73d87c6a412c4debf3',1,'PlayerMover']]],
+  ['movespeed',['moveSpeed',['../class_terrain_spawner.html#a6807406ed6e4e2bfb1b7cdbf6fce003a',1,'TerrainSpawner']]]
 ];

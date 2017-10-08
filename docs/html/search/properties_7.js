@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['xlength',['XLength',['../class_sharp_b_c_i_1_1_dynamic_time_warping.html#ad9f7644f6c0f9b064ed7448ae7a83d0c',1,'SharpBCI::DynamicTimeWarping']]]
+  ['variablename',['VariableName',['../class_sharp_b_c_i_1_1_series_variable.html#a33a1a037b7453fa658d84970fd98c8e2',1,'SharpBCI::SeriesVariable']]]
 ];

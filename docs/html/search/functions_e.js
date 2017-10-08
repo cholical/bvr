@@ -1,8 +1,9 @@
 var searchData=
 [
   ['seriesvariable',['SeriesVariable',['../class_sharp_b_c_i_1_1_series_variable.html#a6adcbf6271408bf943318f96943b009d',1,'SharpBCI::SeriesVariable']]],
-  ['setdata',['SetData',['../class_f_f_t_graph.html#ac09121076c9a437b799af79a2c42df6b',1,'FFTGraph']]],
+  ['setdata',['SetData',['../class_graph.html#ac07dd9849d9fd62cd677dc3eb8af3a69',1,'Graph']]],
   ['setinput',['SetInput',['../interface_sharp_b_c_i_1_1_i_pipeable.html#a1775fb57fee4ffe5716ff0fe99a17a2a',1,'SharpBCI.IPipeable.SetInput()'],['../class_sharp_b_c_i_1_1_pipeable.html#a3dd47de67c12f9bdb7a521c0ad5f9bb2',1,'SharpBCI.Pipeable.SetInput()']]],
+  ['setnumseries',['SetNumSeries',['../class_graph.html#a54ea947bcd7bf47b0be338a3007823e4',1,'Graph']]],
   ['sharpbci',['SharpBCI',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#a3a1fef163f303e6b7d0aacd72aacc7a5',1,'SharpBCI::SharpBCI']]],
   ['sharpbcirawhandler',['SharpBCIRawHandler',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#a70268de29756f5f85d063f28f4be0a5a',1,'SharpBCI::SharpBCI']]],
   ['sharpbcitrainedhandler',['SharpBCITrainedHandler',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#a660d3b06dc723a05b32c50aed9a18785',1,'SharpBCI::SharpBCI']]],

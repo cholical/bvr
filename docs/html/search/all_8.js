@@ -1,12 +1,7 @@
 var searchData=
 [
-  ['id',['id',['../class_sharp_b_c_i_1_1_trained_event.html#a74f1950ad5b72ae1e425aba5a9a595a4',1,'SharpBCI::TrainedEvent']]],
-  ['ifilter',['IFilter',['../interface_sharp_b_c_i_1_1_i_filter.html',1,'SharpBCI']]],
-  ['ifilter_3c_20double_20_3e',['IFilter&lt; double &gt;',['../interface_sharp_b_c_i_1_1_i_filter.html',1,'SharpBCI']]],
-  ['ilogoutput',['ILogOutput',['../interface_sharp_b_c_i_1_1_i_log_output.html',1,'SharpBCI']]],
-  ['info',['INFO',['../namespace_sharp_b_c_i.html#ac70bf7a2ec218652e49552a784078435a551b723eafd6a31d444fcb2f5920fbd3',1,'SharpBCI']]],
-  ['ipipeable',['IPipeable',['../interface_sharp_b_c_i_1_1_i_pipeable.html',1,'SharpBCI']]],
-  ['ipredictor',['IPredictor',['../interface_sharp_b_c_i_1_1_i_predictor.html',1,'SharpBCI']]],
-  ['ipredictor_2ecs',['IPredictor.cs',['../_i_predictor_8cs.html',1,'']]],
-  ['ipreprocessor',['IPreprocessor',['../interface_sharp_b_c_i_1_1_i_preprocessor.html',1,'SharpBCI']]]
+  ['knearestneighbor',['KNearestNeighbor',['../class_sharp_b_c_i_1_1_k_nearest_neighbor.html',1,'SharpBCI.KNearestNeighbor'],['../class_sharp_b_c_i_1_1_k_nearest_neighbor.html#ab96a33ec4ca2fb3371d9d04fae42e3af',1,'SharpBCI.KNearestNeighbor.KNearestNeighbor(int k)'],['../class_sharp_b_c_i_1_1_k_nearest_neighbor.html#a090709139b0fb0529b3398d32b51d964',1,'SharpBCI.KNearestNeighbor.KNearestNeighbor()']]],
+  ['knearestneighbor_2ecs',['KNearestNeighbor.cs',['../_k_nearest_neighbor_8cs.html',1,'']]],
+  ['knearestneighborpipeable',['KNearestNeighborPipeable',['../class_sharp_b_c_i_1_1_k_nearest_neighbor_pipeable.html',1,'SharpBCI.KNearestNeighborPipeable'],['../class_sharp_b_c_i_1_1_k_nearest_neighbor_pipeable.html#a4b1f0c7bc8af31c1f9a42d9fa0ffdb04',1,'SharpBCI.KNearestNeighborPipeable.KNearestNeighborPipeable()']]],
+  ['knearestneighborpipeable_2ecs',['KNearestNeighborPipeable.cs',['../_k_nearest_neighbor_pipeable_8cs.html',1,'']]]
 ];

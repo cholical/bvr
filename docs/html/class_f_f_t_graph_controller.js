@@ -1,10 +1,8 @@
 var class_f_f_t_graph_controller =
 [
-    [ "channel", "class_f_f_t_graph_controller.html#aabbb3c361a7d205f738e1886952dbe3c", null ],
-    [ "maxX", "class_f_f_t_graph_controller.html#ad2471f9d5de9e001cfcc458f84a9e412", null ],
-    [ "maxY", "class_f_f_t_graph_controller.html#a926c0c55fee9a2c0a447d4a98b4fd52b", null ],
-    [ "minX", "class_f_f_t_graph_controller.html#a83b8b6d4bf367ffb022a489fbf7214a5", null ],
-    [ "minY", "class_f_f_t_graph_controller.html#aa63f7388f3fb8e3e52bc8ef5d1957675", null ],
-    [ "realGraph", "class_f_f_t_graph_controller.html#a9c8f2f9c227ad3d8dd80c083cc86ac1a", null ],
+    [ "bandEnd", "class_f_f_t_graph_controller.html#aa782571f7e8540f6bbdc250e15647c6d", null ],
+    [ "bandStart", "class_f_f_t_graph_controller.html#a9ff123505556c58abe944df4c86af28b", null ],
+    [ "dataType", "class_f_f_t_graph_controller.html#a86317b85f92cc92d79dcf05471b8667c", null ],
+    [ "realGraph", "class_f_f_t_graph_controller.html#a0d1cb8cbfc6c8b6bce28f189f1198522", null ],
     [ "updateRate", "class_f_f_t_graph_controller.html#a904ff95d1cecf888f14aa4c8df3d3edf", null ]
 ];

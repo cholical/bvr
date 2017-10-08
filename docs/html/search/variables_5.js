@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['hamming_5falpha',['HAMMING_ALPHA',['../class_sharp_b_c_i_1_1_f_f_t_pipeable.html#aef6cb4665cb454b8c4a787771c64b9ab',1,'SharpBCI::FFTPipeable']]],
-  ['hamming_5fbeta',['HAMMING_BETA',['../class_sharp_b_c_i_1_1_f_f_t_pipeable.html#ac98033f5313034f56705c45fe43cca73',1,'SharpBCI::FFTPipeable']]]
+  ['id',['id',['../class_sharp_b_c_i_1_1_trained_event.html#a74f1950ad5b72ae1e425aba5a9a595a4',1,'SharpBCI::TrainedEvent']]],
+  ['im',['im',['../struct_complex.html#a775fa8c6b88941ce29839821bace136d',1,'Complex']]]
 ];

@@ -1,13 +1,16 @@
 var hierarchy =
 [
+    [ "Complex", "struct_complex.html", null ],
+    [ "DSPLib.DFT", "class_d_s_p_lib_1_1_d_f_t.html", null ],
+    [ "DSPLib.DSP", "class_d_s_p_lib_1_1_d_s_p.html", null ],
     [ "SharpBCI.DynamicTimeWarping", "class_sharp_b_c_i_1_1_dynamic_time_warping.html", null ],
     [ "SharpBCI.EEGDeviceAdapter", "class_sharp_b_c_i_1_1_e_e_g_device_adapter.html", [
       [ "SharpBCI.DummyAdapter", "class_sharp_b_c_i_1_1_dummy_adapter.html", null ],
       [ "SharpBCI.RemoteOSCAdapter", "class_sharp_b_c_i_1_1_remote_o_s_c_adapter.html", null ]
     ] ],
     [ "SharpBCI.EEGEvent", "class_sharp_b_c_i_1_1_e_e_g_event.html", null ],
+    [ "DSPLib.FFT", "class_d_s_p_lib_1_1_f_f_t.html", null ],
     [ "Graphic", null, [
-      [ "FFTGraph", "class_f_f_t_graph.html", null ],
       [ "ScrollingGraph", "class_scrolling_graph.html", null ]
     ] ],
     [ "IDisposable", null, [
@@ -41,18 +44,20 @@ var hierarchy =
       [ "SharpBCI.StandardizationPreprocessor", "class_sharp_b_c_i_1_1_standardization_preprocessor.html", null ]
     ] ],
     [ "SharpBCI.KNearestNeighbor", "class_sharp_b_c_i_1_1_k_nearest_neighbor.html", null ],
-    [ "Lomont.LomontFFT", "class_lomont_1_1_lomont_f_f_t.html", null ],
     [ "MonoBehaviour", null, [
       [ "ConnectedDisplay", "class_connected_display.html", null ],
       [ "DeviceController", "class_device_controller.html", null ],
       [ "EEGColorChanger", "class_e_e_g_color_changer.html", null ],
       [ "EEGDataOutput", "class_e_e_g_data_output.html", null ],
       [ "FFTGraphController", "class_f_f_t_graph_controller.html", null ],
+      [ "Graph", "class_graph.html", null ],
       [ "ParticleBrainWaveController", "class_particle_brain_wave_controller.html", null ],
+      [ "PlayerMover", "class_player_mover.html", null ],
       [ "ScrollingGraphController", "class_scrolling_graph_controller.html", null ],
       [ "SharpBCI.test1", "class_sharp_b_c_i_1_1test1.html", null ],
       [ "SharpBCI.tester", "class_sharp_b_c_i_1_1tester.html", null ],
       [ "SharpBCIController", "class_sharp_b_c_i_controller.html", null ],
+      [ "TerrainSpawner", "class_terrain_spawner.html", null ],
       [ "TogglePanel", "class_toggle_panel.html", null ],
       [ "TrainingController", "class_training_controller.html", null ]
     ] ],

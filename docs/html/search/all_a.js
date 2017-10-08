@@ -1,14 +1,11 @@
 var searchData=
 [
-  ['lastevents',['lastEvents',['../class_training_controller.html#aac467938534ff61836c582157b342a3f',1,'TrainingController']]],
-  ['linecolor',['lineColor',['../class_f_f_t_graph.html#a45b353612493a1b1b74db6232e58947a',1,'FFTGraph']]],
-  ['linecolors',['lineColors',['../class_scrolling_graph.html#a0d94cb9af5c61bca3c4949aa73d186cd',1,'ScrollingGraph']]],
-  ['linethickness',['lineThickness',['../class_f_f_t_graph.html#a353066cb0dc173f0f03e7c1ce4628b16',1,'FFTGraph.lineThickness()'],['../class_scrolling_graph.html#a553ec91ab143029adde6b9a8c17a8005',1,'ScrollingGraph.lineThickness()']]],
-  ['log',['Log',['../interface_sharp_b_c_i_1_1_i_log_output.html#a038ab153fdd501e3886702dcc554d8dc',1,'SharpBCI.ILogOutput.Log()'],['../class_sharp_b_c_i_1_1_file_logger.html#a08bddc2271bc9df4c303c72825ee8fb9',1,'SharpBCI.FileLogger.Log()'],['../class_unity_logger.html#aca4c73a7eadbb1afa6f730e045eb0747',1,'UnityLogger.Log()']]],
-  ['log_5fname',['LOG_NAME',['../class_sharp_b_c_i_controller.html#a095418d1bd68d83df4a192e747713ffb',1,'SharpBCIController']]],
-  ['logger_2ecs',['Logger.cs',['../_logger_8cs.html',1,'']]],
-  ['loglevel',['LogLevel',['../namespace_sharp_b_c_i.html#ac70bf7a2ec218652e49552a784078435',1,'SharpBCI']]],
-  ['lomont',['Lomont',['../namespace_lomont.html',1,'']]],
-  ['lomontfft',['LomontFFT',['../class_lomont_1_1_lomont_f_f_t.html',1,'Lomont.LomontFFT'],['../class_lomont_1_1_lomont_f_f_t.html#ab235c0b8874fbc78fa76c805cd2c1b5c',1,'Lomont.LomontFFT.LomontFFT()']]],
-  ['lomontfft_2ecs',['LomontFFT.cs',['../_lomont_f_f_t_8cs.html',1,'']]]
+  ['magnitude',['Magnitude',['../struct_complex.html#a277ab16d8e2083d44d62ab735cb93bf9',1,'Complex']]],
+  ['manhattan',['Manhattan',['../namespace_sharp_b_c_i.html#ac3ee47b1ee7f40a2fc3c86d88f117e80a1834cdf9bf35ea1d737c15eef72e18c7',1,'SharpBCI']]],
+  ['maximum',['Maximum',['../namespace_sharp_b_c_i.html#ac3ee47b1ee7f40a2fc3c86d88f117e80a8321e79c278ec510f63675c040594892',1,'SharpBCI']]],
+  ['maxpoints',['maxPoints',['../class_scrolling_graph.html#a3d6c2161c6501bbd115a5537efeb5ca8',1,'ScrollingGraph']]],
+  ['mirroroutputs',['mirrorOutputs',['../class_sharp_b_c_i_1_1_serialized_connection_info.html#aa0f4ae45617d749f6d04cd632d0b87be',1,'SharpBCI::SerializedConnectionInfo']]],
+  ['movementrange',['movementRange',['../class_player_mover.html#a5435941c76bb3d73d87c6a412c4debf3',1,'PlayerMover']]],
+  ['movespeed',['moveSpeed',['../class_terrain_spawner.html#a6807406ed6e4e2bfb1b7cdbf6fce003a',1,'TerrainSpawner']]],
+  ['muse',['MUSE',['../_sharp_b_c_i_controller_8cs.html#a6675ac506ac5d342a5c79fd97db31894a7c5e3a34087a07dedb810a6072ec8bb3',1,'SharpBCIController.cs']]]
 ];

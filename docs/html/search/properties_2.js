@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['connectionstatus',['connectionStatus',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#a4ee5fa59eef86aad0254305e58d43a63',1,'SharpBCI::SharpBCI']]]
+  ['magnitude',['Magnitude',['../struct_complex.html#a277ab16d8e2083d44d62ab735cb93bf9',1,'Complex']]]
 ];

@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['test1_2ecs',['test1.cs',['../test1_8cs.html',1,'']]],
-  ['tester_2ecs',['tester.cs',['../tester_8cs.html',1,'']]],
-  ['timeseriessmootherpipeable_2ecs',['TimeSeriesSmootherPipeable.cs',['../_time_series_smoother_pipeable_8cs.html',1,'']]],
-  ['togglepanel_2ecs',['TogglePanel.cs',['../_toggle_panel_8cs.html',1,'']]],
-  ['trainingcontroller_2ecs',['TrainingController.cs',['../_training_controller_8cs.html',1,'']]]
+  ['scrollinggraph_2ecs',['ScrollingGraph.cs',['../_scrolling_graph_8cs.html',1,'']]],
+  ['scrollinggraphcontroller_2ecs',['ScrollingGraphController.cs',['../_scrolling_graph_controller_8cs.html',1,'']]],
+  ['sharpbci_2ecs',['SharpBCI.cs',['../_sharp_b_c_i_8cs.html',1,'']]],
+  ['sharpbcicontroller_2ecs',['SharpBCIController.cs',['../_sharp_b_c_i_controller_8cs.html',1,'']]],
+  ['smoothers_2ecs',['Smoothers.cs',['../_smoothers_8cs.html',1,'']]]
 ];

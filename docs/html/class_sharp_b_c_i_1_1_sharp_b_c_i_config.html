@@ -86,18 +86,25 @@ $(document).ready(function(){initNavTree('class_sharp_b_c_i_1_1_sharp_b_c_i_conf
 <div class="title">SharpBCI.SharpBCIConfig Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>An object which configures a <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html" title="This is the &quot;main&quot; class which you should create. ">SharpBCI</a> object.  
+ <a href="class_sharp_b_c_i_1_1_sharp_b_c_i_config.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a7c14bd0a89fe5a084595889286fea058"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html">EEGDeviceAdapter</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_config.html#a7c14bd0a89fe5a084595889286fea058">adapter</a></td></tr>
+<tr class="memdesc:a7c14bd0a89fe5a084595889286fea058"><td class="mdescLeft">&#160;</td><td class="mdescRight">The device adapter which will be used to get raw data Must emit <a class="el" href="namespace_sharp_b_c_i.html#a093a660576d1484ca08f82f943ba6651a679310a95d28d9a928a0eb6960d3ea27">EEGDataType.EEG</a> and <a class="el" href="namespace_sharp_b_c_i.html#a093a660576d1484ca08f82f943ba6651a7643982a6ca8757bf8cddc3211688015">EEGDataType.CONTACT_QUALITY</a> EEGEvents.  <a href="#a7c14bd0a89fe5a084595889286fea058">More...</a><br /></td></tr>
 <tr class="separator:a7c14bd0a89fe5a084595889286fea058"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a8a49f2d026156e3b45d29c9c5354cc"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_config.html#a5a8a49f2d026156e3b45d29c9c5354cc">pipelineFile</a></td></tr>
+<tr class="memdesc:a5a8a49f2d026156e3b45d29c9c5354cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The filename which contains a config file consistent with the format <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html" title="This is the &quot;main&quot; class which you should create. ">SharpBCI</a> uses for pipeline construction.  <a href="#a5a8a49f2d026156e3b45d29c9c5354cc">More...</a><br /></td></tr>
 <tr class="separator:a5a8a49f2d026156e3b45d29c9c5354cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5280b097bbeb12372267348a5e0cd09b"><td class="memItemLeft" align="right" valign="top">Dictionary&lt; string, object &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_config.html#a5280b097bbeb12372267348a5e0cd09b">stageScope</a></td></tr>
+<tr class="memdesc:a5280b097bbeb12372267348a5e0cd09b"><td class="mdescLeft">&#160;</td><td class="mdescRight">objects which will be added to the "scope" used by PipelineSerializer during construction SharpBCI_**** strings are reserved for library use only.  <a href="#a5280b097bbeb12372267348a5e0cd09b">More...</a><br /></td></tr>
 <tr class="separator:a5280b097bbeb12372267348a5e0cd09b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>An object which configures a <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html">SharpBCI</a> object. Generally used internally w/in <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html">SharpBCIBuilder</a> </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html">SharpBCIBuilder</a> </dd></dl>
+<div class="textblock"><p>An object which configures a <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html" title="This is the &quot;main&quot; class which you should create. ">SharpBCI</a> object. </p>
+<p>Generally used internally w/in <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html" title="A builder class for SharpBCIConfig. ">SharpBCIBuilder</a> </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html" title="A builder class for SharpBCIConfig. ">SharpBCIBuilder</a> </dd></dl>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a7c14bd0a89fe5a084595889286fea058"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7c14bd0a89fe5a084595889286fea058">&#9670;&nbsp;</a></span>adapter</h2>
@@ -110,7 +117,9 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The device adapter which will be used to get raw data Must emit <a class="el" href="namespace_sharp_b_c_i.html#a093a660576d1484ca08f82f943ba6651a679310a95d28d9a928a0eb6960d3ea27">EEGDataType.EEG</a> and <a class="el" href="namespace_sharp_b_c_i.html#a093a660576d1484ca08f82f943ba6651a7643982a6ca8757bf8cddc3211688015">EEGDataType.CONTACT_QUALITY</a> EEGEvents </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html">EEGDeviceAdapter</a> </dd>
+
+<p>The device adapter which will be used to get raw data Must emit <a class="el" href="namespace_sharp_b_c_i.html#a093a660576d1484ca08f82f943ba6651a679310a95d28d9a928a0eb6960d3ea27">EEGDataType.EEG</a> and <a class="el" href="namespace_sharp_b_c_i.html#a093a660576d1484ca08f82f943ba6651a7643982a6ca8757bf8cddc3211688015">EEGDataType.CONTACT_QUALITY</a> EEGEvents. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html">EEGDeviceAdapter</a> </dd>
 <dd>
 <a class="el" href="namespace_sharp_b_c_i.html#a093a660576d1484ca08f82f943ba6651">EEGDataType</a> </dd>
 <dd>
@@ -129,7 +138,9 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>The filename which contains a config file consistent with the format <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html">SharpBCI</a> uses for pipeline construction </p><dl class="section see"><dt>See also</dt><dd>PipelineSerializer </dd></dl>
+
+<p>The filename which contains a config file consistent with the format <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html" title="This is the &quot;main&quot; class which you should create. ">SharpBCI</a> uses for pipeline construction. </p>
+<dl class="section see"><dt>See also</dt><dd>PipelineSerializer </dd></dl>
 
 </div>
 </div>
@@ -144,7 +155,9 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>objects which will be added to the "scope" used by PipelineSerializer during construction SharpBCI_**** strings are reserved for library use only. </p><dl class="section see"><dt>See also</dt><dd>PipelineSerializer </dd></dl>
+
+<p>objects which will be added to the "scope" used by PipelineSerializer during construction SharpBCI_**** strings are reserved for library use only. </p>
+<dl class="section see"><dt>See also</dt><dd>PipelineSerializer </dd></dl>
 
 </div>
 </div>

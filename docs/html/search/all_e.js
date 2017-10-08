@@ -1,16 +1,13 @@
 var searchData=
 [
-  ['particlebrainwavecontroller',['ParticleBrainWaveController',['../class_particle_brain_wave_controller.html',1,'']]],
-  ['particlebrainwavecontroller_2ecs',['ParticleBrainWaveController.cs',['../_particle_brain_wave_controller_8cs.html',1,'']]],
-  ['particlefactor',['particleFactor',['../class_particle_brain_wave_controller.html#adcaeddadac347f53ccbb86206a618390',1,'ParticleBrainWaveController']]],
-  ['passthroughfilter',['PassThroughFilter',['../class_sharp_b_c_i_1_1_pass_through_filter.html',1,'SharpBCI']]],
-  ['pipeable',['Pipeable',['../class_sharp_b_c_i_1_1_pipeable.html',1,'SharpBCI']]],
-  ['pipeline_2ecs',['Pipeline.cs',['../_pipeline_8cs.html',1,'']]],
-  ['pipelinefile',['pipelineFile',['../class_sharp_b_c_i_1_1_sharp_b_c_i_config.html#a5a8a49f2d026156e3b45d29c9c5354cc',1,'SharpBCI.SharpBCIConfig.pipelineFile()'],['../class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html#acfae5df93d7b67b7c38b03cf0a1d68cd',1,'SharpBCI.SharpBCIBuilder.PipelineFile()']]],
-  ['pipelineserializer_2ecs',['PipelineSerializer.cs',['../_pipeline_serializer_8cs.html',1,'']]],
-  ['predict',['Predict',['../class_sharp_b_c_i_1_1_k_nearest_neighbor.html#a2f5afa05d96027f87fbe12e57366ec44',1,'SharpBCI::KNearestNeighbor']]],
-  ['preprocess',['Preprocess',['../interface_sharp_b_c_i_1_1_i_preprocessor.html#a52cf4516cb7add4f2d47296125e228c8',1,'SharpBCI.IPreprocessor.Preprocess()'],['../class_sharp_b_c_i_1_1_preprocessors_1_1_none_preprocessor.html#ac25f2b83ceae238ccc1c19bef2ff1782',1,'SharpBCI.Preprocessors.NonePreprocessor.Preprocess()'],['../class_sharp_b_c_i_1_1_preprocessors_1_1_normalization_preprocessor.html#adf56c2145da26673862d80a63c152096',1,'SharpBCI.Preprocessors.NormalizationPreprocessor.Preprocess()'],['../class_sharp_b_c_i_1_1_standardization_preprocessor.html#aeb653797be21081d049b97603769c5e0',1,'SharpBCI.StandardizationPreprocessor.Preprocess()'],['../class_sharp_b_c_i_1_1_centralization_preprocessor.html#a976c264b5bd68de0ee7ca96e258ebdb4',1,'SharpBCI.CentralizationPreprocessor.Preprocess()']]],
-  ['preprocessors',['Preprocessors',['../class_sharp_b_c_i_1_1_preprocessors.html',1,'SharpBCI']]],
-  ['preprocessors_2ecs',['Preprocessors.cs',['../_preprocessors_8cs.html',1,'']]],
-  ['process',['Process',['../class_sharp_b_c_i_1_1_k_nearest_neighbor_pipeable.html#ab58b517625d115e25d328d980f6a400f',1,'SharpBCI.KNearestNeighborPipeable.Process()'],['../class_sharp_b_c_i_1_1_time_series_smoother_pipeable.html#a272a90f3fe9c6b099ce7a2276172bb35',1,'SharpBCI.TimeSeriesSmootherPipeable.Process()'],['../class_sharp_b_c_i_1_1_f_f_t_pipeable.html#a9c1a74d528d4069ea781561baf4c59c2',1,'SharpBCI.FFTPipeable.Process()'],['../class_sharp_b_c_i_1_1_pipeable.html#a2c0cf40eff6ea6ab5de4c4f779a4d652',1,'SharpBCI.Pipeable.Process()'],['../class_sharp_b_c_i_1_1_trained_event_emitter.html#ade787b21339cea8e5ed6574c25e2a098',1,'SharpBCI.TrainedEventEmitter.Process()'],['../class_sharp_b_c_i_1_1_raw_event_emitter.html#a015b11fce55a364abb807c2ecabc6c08',1,'SharpBCI.RawEventEmitter.Process()'],['../class_sharp_b_c_i_1_1_e_e_g_device_producer.html#a0e5956cc35176fea04ad5788b128f70b',1,'SharpBCI.EEGDeviceProducer.Process()']]]
+  ['raweventemitter',['RawEventEmitter',['../class_sharp_b_c_i_1_1_raw_event_emitter.html',1,'SharpBCI.RawEventEmitter'],['../class_sharp_b_c_i_1_1_raw_event_emitter.html#a89dc6d548c9fd7a017831dd43d41c24c',1,'SharpBCI.RawEventEmitter.RawEventEmitter()']]],
+  ['re',['re',['../struct_complex.html#a76898a3705a61e2575c1e2b4e8ffb7bb',1,'Complex']]],
+  ['real',['Real',['../struct_complex.html#a17c8af08e86d8ffb8ce6d5770fd5aa5c',1,'Complex']]],
+  ['realgraph',['realGraph',['../class_f_f_t_graph_controller.html#a0d1cb8cbfc6c8b6bce28f189f1198522',1,'FFTGraphController']]],
+  ['remoteoscadapter',['RemoteOSCAdapter',['../class_sharp_b_c_i_1_1_remote_o_s_c_adapter.html',1,'SharpBCI.RemoteOSCAdapter'],['../class_sharp_b_c_i_1_1_remote_o_s_c_adapter.html#a8c40105f89cc017c2903ef06f1bfb226',1,'SharpBCI.RemoteOSCAdapter.RemoteOSCAdapter()']]],
+  ['removehandler',['RemoveHandler',['../class_sharp_b_c_i_1_1_e_e_g_device_adapter.html#a69d74be6c873c0f35a5cbfa7c5dfedef',1,'SharpBCI::EEGDeviceAdapter']]],
+  ['removerawhandler',['RemoveRawHandler',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#ae7465d4262ea17036d3cc33cbc6bdaf4',1,'SharpBCI::SharpBCI']]],
+  ['removetrainedhandler',['RemoveTrainedHandler',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#afd15e4a9d121e29024d73cf1b46af5c0',1,'SharpBCI::SharpBCI']]],
+  ['reserved_5fprefix',['RESERVED_PREFIX',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#af83bc3fdc6760bc0a54ed3baecdc1e5e',1,'SharpBCI::SharpBCI']]],
+  ['retainedevents',['retainedEvents',['../class_training_controller.html#ab11bde6d17d0bd6fbf223e3cdb626140',1,'TrainingController']]]
 ];

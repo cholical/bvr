@@ -16,6 +16,7 @@ var searchData=
   ['error',['ERROR',['../namespace_sharp_b_c_i.html#ac70bf7a2ec218652e49552a784078435abb1ca97ec761fc37101737ba0aa2e7c5',1,'SharpBCI']]],
   ['euclidean',['Euclidean',['../namespace_sharp_b_c_i.html#ac3ee47b1ee7f40a2fc3c86d88f117e80a3e43207685247008d9e1ae53ecf8cab3',1,'SharpBCI']]],
   ['eventtext',['eventText',['../class_training_controller.html#ab6804dbd0840e6048390dba092c67c0d',1,'TrainingController']]],
+  ['execute',['Execute',['../class_d_s_p_lib_1_1_d_f_t.html#a91027345f776fcd012eba2870c810b10',1,'DSPLib.DFT.Execute()'],['../class_d_s_p_lib_1_1_f_f_t.html#aa4d99a292cfe7fdd6e21903e3bdb82fb',1,'DSPLib.FFT.Execute()']]],
   ['exponentialfilter',['ExponentialFilter',['../class_sharp_b_c_i_1_1_exponential_filter.html',1,'SharpBCI.ExponentialFilter'],['../class_sharp_b_c_i_1_1_exponential_filter.html#a3734c7336baf24696147acbe57f98a43',1,'SharpBCI.ExponentialFilter.ExponentialFilter()']]],
   ['extra',['extra',['../class_sharp_b_c_i_1_1_e_e_g_event.html#aa43471159f421b1d97e074a34ab3dff9',1,'SharpBCI::EEGEvent']]]
 ];

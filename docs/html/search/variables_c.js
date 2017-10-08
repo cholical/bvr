@@ -5,7 +5,6 @@ var searchData=
   ['scope_5fchannels_5fkey',['SCOPE_CHANNELS_KEY',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#ab6195517a4071a90e36356642820bee4',1,'SharpBCI::SharpBCI']]],
   ['scope_5fsample_5frate_5fkey',['SCOPE_SAMPLE_RATE_KEY',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#af119c2200d0bee83443a7caf0bc31830',1,'SharpBCI::SharpBCI']]],
   ['scope_5fsharp_5fbci_5fkey',['SCOPE_SHARP_BCI_KEY',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#a6a32bce72d22775149d45001574a69de',1,'SharpBCI::SharpBCI']]],
-  ['showcomplexdata',['showComplexData',['../class_f_f_t_graph.html#aa8d2f26a56f5dc14c703c4bd17603b27',1,'FFTGraph']]],
   ['side',['side',['../class_e_e_g_color_changer.html#a57aa0403bc96bc6d291e5e31aeb63bf4',1,'EEGColorChanger']]],
   ['stageclass',['stageClass',['../class_sharp_b_c_i_1_1_serialized_stage.html#ae40ea7a8707c8b988db5a219058de511',1,'SharpBCI::SerializedStage']]],
   ['stageconnections',['stageConnections',['../class_sharp_b_c_i_1_1_serialized_pipeline.html#a786e363d0694d24f0593b93f2a8f68fe',1,'SharpBCI::SerializedPipeline']]],

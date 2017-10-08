@@ -4,6 +4,7 @@ var _e_e_g_data_8cs =
     [ "EEGDataType", "_e_e_g_data_8cs.html#a093a660576d1484ca08f82f943ba6651", [
       [ "EEG", "_e_e_g_data_8cs.html#a093a660576d1484ca08f82f943ba6651a679310a95d28d9a928a0eb6960d3ea27", null ],
       [ "FFT_RAW", "_e_e_g_data_8cs.html#a093a660576d1484ca08f82f943ba6651a3f1ed08a8b6b8015c1ee8e6b66d01267", null ],
+      [ "FFT_SMOOTHED", "_e_e_g_data_8cs.html#a093a660576d1484ca08f82f943ba6651a199fe162ce38f1f55e2fbf7e33c3991c", null ],
       [ "ALPHA_ABSOLUTE", "_e_e_g_data_8cs.html#a093a660576d1484ca08f82f943ba6651aa55199eb05e4f86945ba9b6c28186b52", null ],
       [ "BETA_ABSOLUTE", "_e_e_g_data_8cs.html#a093a660576d1484ca08f82f943ba6651a861e7623acdc571c5db2180d64827d0a", null ],
       [ "GAMMA_ABSOLUTE", "_e_e_g_data_8cs.html#a093a660576d1484ca08f82f943ba6651a819c27cfcdc9b71dacd0df97a566c8a5", null ],
