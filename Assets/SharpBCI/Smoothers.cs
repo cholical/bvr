@@ -10,7 +10,7 @@ namespace SharpBCI
 	{
 		protected double current;
 
-		public abstract double next (double x);
+		public abstract double Next (double x);
 
 		public double getAverage ()
 		{
@@ -36,7 +36,7 @@ namespace SharpBCI
 			window = new Queue<double> ();
 		}
 
-		public override double next (double x)
+		public override double Next (double x)
 		{
 			window.Enqueue (x);
 
@@ -60,7 +60,7 @@ namespace SharpBCI
 			alpha = a;
 		}
 
-		public override double next (double x)
+		public override double Next (double x)
 		{
 			if (current.Equals (null)) {
 				current = x;

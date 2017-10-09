@@ -1,8 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using SharpBCI;
-using UnityEngine;
 
 namespace SharpBCI
 {
@@ -66,7 +66,7 @@ namespace SharpBCI
 		public double[] Preprocess (double[] data)
 		{
 			var mean = data.Average ();
-			var stdDev = Mathf.Sqrt ((float) data.Select (x => x - mean).Sum (x => x * x) / (data.Length - 1));
+			var stdDev = Math.Sqrt (data.Select (x => x - mean).Sum (x => x * x) / (data.Length - 1));
 
 			return data.Select (x => (x - mean) / stdDev).ToArray ();
 		}

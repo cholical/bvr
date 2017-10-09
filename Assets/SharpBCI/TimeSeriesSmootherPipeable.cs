@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 
 namespace SharpBCI
 {
@@ -20,7 +19,7 @@ namespace SharpBCI
 			if (!(item is double)) {
 				return false;
 			}
-			this.Add (smoother.next((double) item));
+			this.Add (smoother.Next((double) item));
 			return true;
 		}
 

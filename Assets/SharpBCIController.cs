@@ -86,7 +86,7 @@ public class SharpBCIController : MonoBehaviour {
 				512,
 				512,
 				512
-			}, 220, 100);
+			}, 220, 2);
 		} else {
 			throw new System.Exception("Invalid bciType");
 		}

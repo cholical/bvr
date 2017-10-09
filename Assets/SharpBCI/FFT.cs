@@ -5,6 +5,29 @@ using DSPLib;
 
 namespace SharpBCI {
 
+	public interface IVectorizedSmoother {
+		double[] Smooth(double[] values);
+	}
+
+	public class ExponentialVectoredSmoother : IVectorizedSmoother {
+		readonly double[] lastValues;
+		readonly double alpha;
+		public ExponentialVectoredSmoother(int n, double alpha) {
+			lastValues = new double[n];
+			this.alpha = alpha;
+		}
+
+		public double[] Smooth(double[] values) {
+			if (values.Length != lastValues.Length)
+				throw new ArgumentException("values.Length does not match lastValues.Length");
+			var n = values.Length;
+			for (int i = 0; i < values.Length; i++) {
+				lastValues[i] = (alpha * values[i]) + (1 - alpha) * lastValues[i];
+			}
+			return lastValues;
+		}
+	}
+
 	/**
 	 * A Pipeable which performs an FFT on each channel
 	 * It outputs an FFTEvent every windowSize samples
@@ -22,9 +45,9 @@ namespace SharpBCI {
 		readonly double sampleRate;
 		readonly double[] windowConstants;
 		readonly double scaleFactor;
-		readonly double noiseFactor;
+		//readonly double noiseFactor;
 
-		readonly IFilter<double>[] filters;
+		readonly IVectorizedSmoother[] smoothers;
 
 		uint nSamples = 0;
 		uint lastFFT = 0;
@@ -55,16 +78,16 @@ namespace SharpBCI {
 			fftRate = (uint)Math.Round(sampleRate / targetFFTRate);
 
 			samples = new Queue<double>[channels];
-			filters = new IFilter<double>[channels];
+			smoothers = new IVectorizedSmoother[channels];
 
 			for (int i = 0; i < channels; i++) {
 				samples[i] = new Queue<double>();
-				filters[i] = new PassThroughFilter();
+				smoothers[i] = new ExponentialVectoredSmoother(windowSize / 2 + 1, 0.1);
 			}
 
 			windowConstants = DSP.Window.Coefficients(DSP.Window.Type.Rectangular, this.windowSize);
 			scaleFactor = DSP.Window.ScaleFactor.Signal(windowConstants);
-			noiseFactor = DSP.Window.ScaleFactor.Noise(windowConstants, sampleRate);
+			//noiseFactor = DSP.Window.ScaleFactor.Noise(windowConstants, sampleRate);
 		}
 
 		protected override bool Process(object item) {
@@ -78,8 +101,6 @@ namespace SharpBCI {
 			// normal case: just append data to sample buffer
 			for (int i = 0; i < channels; i++) {
 				samples[i].Enqueue(evt.data[i]);
-				// this is the imaginary part of the signal, but we're FFT-ing a real number so 0 for us
-				//samples[i].Enqueue(0);
 			}
 			nSamples++;
 
@@ -117,14 +138,14 @@ namespace SharpBCI {
 				fftOutput.Add(lmSpectrum);
 			}
 
-			for (int i = 0; i<fftOutput.Count; i++) {
-				Add(new EEGEvent(evt.timestamp, EEGDataType.FFT_RAW, fftOutput[i], i));
-				//Add(new EEGEvent(evt.timestamp, EEGDataType.FFT_SMOOTHED, DSP.Math.Multiply(fftOutput[i], noiseFactor), i));
-			}
+			for (int i = 0; i < fftOutput.Count; i++) {
+				var rawFFT = fftOutput[i];
+				Add(new EEGEvent(evt.timestamp, EEGDataType.FFT_RAW, rawFFT, i));
 
-			// find sampleRate given windowStart and windowEnd there are only windowSize / 2 actual samples
-			//double sampleRate = (windowSize / 2) / windowEnd.Subtract(windowStart).TotalSeconds;
-			//Logger.Log(string.Format("Current sampleRate: {0:#} Hz", sampleRate));
+				// smoothing logic
+				var smoothedFFT = smoothers[i].Smooth(rawFFT);
+				Add(new EEGEvent(evt.timestamp, EEGDataType.FFT_SMOOTHED, smoothedFFT, i));
+			}
 
 			// find abs powers for each band
 			Dictionary<EEGDataType, List<double>> absolutePowers = new Dictionary<EEGDataType, List<double>>();
