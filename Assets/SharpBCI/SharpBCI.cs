@@ -99,7 +99,8 @@ namespace SharpBCI {
 	public class TrainedEvent {
 		
 		/**
-		 * Which trained event was detected		 */
+		 * Which trained event was detected
+		 */
 		public readonly int id;
 		/**
 		 * When the event was detected

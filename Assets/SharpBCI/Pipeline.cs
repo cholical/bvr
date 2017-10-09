@@ -131,6 +131,8 @@ namespace SharpBCI {
 		protected void Add(object item) {
 			// TODO this will delay adding if using bounded buffers: explore benefits of spin waiting here
 			foreach (var output in allOutputs) {
+				if (output.Count == output.BoundedCapacity)
+					Logger.Warning("Pipeable {0} is bottlenecked.", this);
 				output.Add(item, token);
 			}
 		}
