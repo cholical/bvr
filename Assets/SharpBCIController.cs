@@ -5,6 +5,7 @@ using System.Diagnostics;
 public enum SharpBCIControllerType {
 	MUSE,
 	TONE_GENERATOR,
+	TWO_TONE_GENERATOR,
 }
 
 public class UnityLogger : ILogOutput {
@@ -36,6 +37,7 @@ public class SharpBCIController : MonoBehaviour {
 	public const string LOG_NAME = "SharpBCI_log.txt";
 
 	public static SharpBCI.SharpBCI BCI;
+	public static EEGDeviceAdapter adapter;
 
 	public SharpBCIControllerType bciType;
 
@@ -50,7 +52,7 @@ public class SharpBCIController : MonoBehaviour {
 		SharpBCI.Logger.AddLogOutput(new UnityLogger());
 		// SharpBCI.Logger.AddLogOutput(new FileLogger(logName));
 
-		EEGDeviceAdapter adapter;
+		//EEGDeviceAdapter adapter;
 		if (bciType == SharpBCIControllerType.MUSE) {
 			// start Muse-IO
 			try {
@@ -69,7 +71,7 @@ public class SharpBCIController : MonoBehaviour {
 
 			adapter = new RemoteOSCAdapter(OSC_DATA_PORT);
 		} else if (bciType == SharpBCIControllerType.TONE_GENERATOR) {
-			adapter = new DummyAdapter(new double[] { 
+			adapter = new DummyAdapter(new DummyAdapterSignal(new double[] { 
 				// alpha
 				10, 
 				// beta
@@ -86,7 +88,47 @@ public class SharpBCIController : MonoBehaviour {
 				512,
 				512,
 				512
-			}, 220, 2);
+			}), 220, 2);
+		} else if (bciType == SharpBCIControllerType.TWO_TONE_GENERATOR) {
+			var signals = new DummyAdapterSignal[] { 
+				new DummyAdapterSignal(new double[] { 
+					// alpha
+					10, 
+					// beta
+					24, 
+					// gamma
+					40, 
+					// delta
+					2, 
+					// theta
+					6,
+				}, new double[] {
+					512,
+					0,
+					0,
+					0,
+					0
+				}),
+				new DummyAdapterSignal(new double[] { 
+					// alpha
+					10, 
+					// beta
+					24, 
+					// gamma
+					40, 
+					// delta
+					2, 
+					// theta
+					6,
+				}, new double[] {
+					0,
+					512,
+					0,
+					0,
+					0
+				})
+			};
+			adapter = new InstrumentedDummyAdapter(signals, 220, 2);
 		} else {
 			throw new System.Exception("Invalid bciType");
 		}
