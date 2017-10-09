@@ -97,13 +97,18 @@ namespace SharpBCI {
 	 * A generic event which indicates previously trained event occured
 	 */
 	public class TrainedEvent {
+		
 		/**
-		 * Which trained event was detected
-		 */
+		 * Which trained event was detected		 */
 		public readonly int id;
+		/**
+		 * When the event was detected
+		 */
+		public readonly DateTime time;
 
 		public TrainedEvent(int i) {
 			id = i;
+			time = DateTime.Now;
 		}
 	}
 
@@ -298,7 +303,7 @@ namespace SharpBCI {
 		 * Important: does not check if "id" has actually been trained upon
 		 * @throws ArgumentException when id less than or equal to zero
 		 */
-		public void AddTrainedHandler(int id, SharpBCITrainedHandler handler) { 
+		public void AddTrainedHandler(int id, SharpBCITrainedHandler handler) {
 			if (id <= 0) throw new ArgumentException("Training id invalid");
 			lock (trainedHandlers) {
 				if (!trainedHandlers.ContainsKey(id))

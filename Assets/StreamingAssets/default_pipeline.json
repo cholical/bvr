@@ -17,8 +17,8 @@
 		},
 		{
 			"stageKey": "predictor",
-			"stageClass": "SharpBCI.KNearestNeighborPipeable",
-			"arguments": [ 256, "SharpBCIChannels" ]
+			"stageClass": "SharpBCI.PredictorPipeable",
+			"arguments": [ 129, "SharpBCIChannels" ]
 		},
 		{
 			"stageKey": "trainedEventEmitter",
