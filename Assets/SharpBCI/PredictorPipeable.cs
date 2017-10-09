@@ -11,23 +11,16 @@ namespace SharpBCI
 		public const int TEST_ID = 0;
 		public const int DEFAULT_VALUE = -1;
 
-		private const int MODE_WINDOW_SIZE = 20;
-
 		private NearestNeighborPredictor predictor;
-		private int bufferSize;
 		private EEGDataType type = EEGDataType.FFT_RAW;
 		private List<int> modeWindow = new List<int> ();
 		private int training;
 
 		public PredictorPipeable (int bufferSize, int channels)
 		{
-			this.predictor = new KNearestNeighbor ();
-
-			this.bufferSize = bufferSize;
+			this.predictor = new CorrelationCoefficentNearestNeigborPredictor ();
 
 			training = TEST_ID;
-
-
 
 			AddTrainingData(DEFAULT_VALUE, new double[bufferSize]);
 
@@ -52,7 +45,7 @@ namespace SharpBCI
 		}
 
 
-
+		private const int MODE_WINDOW_SIZE = 20;
 
 		protected override bool Process (object item)
 		{
