@@ -93,7 +93,7 @@ namespace SharpBCI {
 
 		readonly IVectorizedSmoother<double>[] magSmoothers;
 
-		readonly IFilter<double> signalFilter;
+		readonly IFilter<double>[] signalFilters;
 
 		uint nSamples = 0;
 		uint lastFFT = 0;
@@ -123,18 +123,19 @@ namespace SharpBCI {
 			// target 10Hz
 			fftRate = (uint)Math.Round(sampleRate / targetFFTRate);
 
-			signalFilter = new MultiFilter<double>(new IFilter<double>[] {
-				// filter AC interference, based on 60hz AC power
-				new NotchFilter(59, 61, sampleRate),
-				// low-pass filter for movement artifacts
-			});
-
 			samples = new Queue<double>[channels];
+
+			signalFilters = new IFilter<double>[channels];
 			magSmoothers = new IVectorizedSmoother<double>[channels];
 
 			for (int i = 0; i < channels; i++) {
 				samples[i] = new Queue<double>();
 				magSmoothers[i] = new ExponentialVectorizedSmoother(windowSize / 2 + 1, 0.1);
+				signalFilters[i] = new MultiFilter<double>(new IFilter<double>[] {
+					// filter AC interference, based on 60hz AC power
+					new NotchFilter(58, 62, sampleRate),
+					// low-pass filter for movement artifacts
+				}); 
 			}
 
 			windowConstants = DSP.Window.Coefficients(DSP.Window.Type.Rectangular, this.windowSize);

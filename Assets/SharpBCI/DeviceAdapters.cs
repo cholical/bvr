@@ -239,7 +239,7 @@ namespace SharpBCI {
 				}
 				t++;
 				EmitData(new EEGEvent(start.AddSeconds(sampleRate* t), EEGDataType.EEG, new double[] { v, v, v, v }));
-				Thread.Sleep((int)(Math.Round(1 / sampleRate) * 1000));
+				Thread.Sleep((int)(Math.Round(1.0 / sampleRate * 1000)));
 			}
 		}
 

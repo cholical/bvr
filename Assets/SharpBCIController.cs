@@ -46,8 +46,8 @@ public class SharpBCIController : MonoBehaviour {
 	// Use this for initialization
 	void Awake() {
 		// FileLogger requires actual pathnames not Unity
-		string logName = System.IO.Path.Combine(Application.persistentDataPath.Replace('/', System.IO.Path.DirectorySeparatorChar), LOG_NAME);
-		UnityEngine.Debug.Log("Writing sharpBCI log to: " + logName);
+		//string logName = System.IO.Path.Combine(Application.persistentDataPath.Replace('/', System.IO.Path.DirectorySeparatorChar), LOG_NAME);
+		//UnityEngine.Debug.Log("Writing sharpBCI log to: " + logName);
 		// configure logging
 		SharpBCI.Logger.AddLogOutput(new UnityLogger());
 		// SharpBCI.Logger.AddLogOutput(new FileLogger(logName));
@@ -60,8 +60,8 @@ public class SharpBCIController : MonoBehaviour {
 				museIOProcess.StartInfo.FileName = System.IO.Path.Combine(Application.streamingAssetsPath, "MuseIO", "muse-io.exe");
 				// default is osc.tcp://localhost:5000, but we expect udp
 				museIOProcess.StartInfo.Arguments = "--osc osc.udp://localhost:5000";
-				museIOProcess.StartInfo.CreateNoWindow = true;
-				museIOProcess.StartInfo.UseShellExecute = false;
+				//museIOProcess.StartInfo.CreateNoWindow = true;
+				//museIOProcess.StartInfo.UseShellExecute = false;
 				museIOProcess.Start();
 				museIOProcess.PriorityClass = ProcessPriorityClass.RealTime;
 			} catch (System.Exception e) {
@@ -82,7 +82,10 @@ public class SharpBCIController : MonoBehaviour {
 				2, 
 				// theta
 				6,
+				// simulate AC interference
+				60,
 			}, new double[] {
+				512,
 				512,
 				512,
 				512,

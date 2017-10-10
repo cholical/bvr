@@ -48,20 +48,21 @@ namespace SharpBCI {
 
 		bool initialized;
 
-		public double Filter(double val) {
+		public double Filter(double x0) {
 			if (!initialized) { 
                 CalcParams(out a0, out a1, out a2, out b1, out b2);
 				initialized = true;
 			}
 
-			double newOut = a0 * val + a1 * x1 + a2 * x2 - b1 * y1 - b2 * y2;
+			double y0 = a0 * x0 + a1 * x1 + a2 * x2 + b1 * y1 + b2 * y2;
 			x2 = x1;
-			x1 = val;
+			x1 = x0;
 
 			y2 = y1;
-			y1 = newOut;
+			y1 = y0;
 
-			return newOut;
+			//Logger.Log("x0={0}, x1={1}, x2={2}, y0={3}, y1={4}, y2={5}", x0, x1, x2, y0, y1, y2);
+			return y0;
 		}
 
 		protected abstract void CalcParams(out double a0, out double a1, out double a2, out double b1, out double b2);
@@ -77,8 +78,9 @@ namespace SharpBCI {
 				throw new ArgumentException("fMax must be > fMin");
 
 			bandwidth = fMax - fMin;
-			center = bandwidth / 2;
+			center = (bandwidth / 2.0) + fMin;
 
+			//Logger.Log ("Created NotchFilter with bandwidth of {0} @ {1}", bandwidth, center);
 			// express both of these as a ratio of the sampling rate
 			bandwidth /= sampleRate;
 			center /= sampleRate; 
@@ -93,6 +95,8 @@ namespace SharpBCI {
 			a2 = K;
 			b1 = 2 * R * Math.Cos(2 * Math.PI* center);
 			b2 = -(R * R);
+
+			//Logger.Log("NotchFilter params: a0={0}, a1={1}, a2={2}, b1={3}, b2={4}", a0, a1, a2, b1, b2);
 		}
 	}
 }
