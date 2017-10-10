@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Linq;
+using System.Numerics;
 using System.Collections.Generic;
 using DSPLib;
 
 namespace SharpBCI {
 
-	public interface IVectorizedSmoother {
-		double[] Smooth(double[] values);
+	public interface IVectorizedSmoother<T> {
+		T[] Smooth(T[] values);
 	}
 
-	public class ExponentialVectoredSmoother : IVectorizedSmoother {
+	public class ExponentialVectorizedSmoother : IVectorizedSmoother<double> {
 		readonly double[] lastValues;
 		readonly double alpha;
-		public ExponentialVectoredSmoother(int n, double alpha) {
+		public ExponentialVectorizedSmoother(int n, double alpha) {
 			lastValues = new double[n];
 			this.alpha = alpha;
 		}
@@ -25,6 +26,49 @@ namespace SharpBCI {
 				lastValues[i] = (alpha * values[i]) + (1 - alpha) * lastValues[i];
 			}
 			return lastValues;
+		}
+	}
+
+	public class XCorrVectorizedSmoother : IVectorizedSmoother<Complex> {
+
+		readonly int iterations;
+
+		Queue<Complex[]> aChannel = new Queue<Complex[]>();
+		Queue<Complex[]> bChannel = new Queue<Complex[]>();
+
+		bool turn;
+
+		int n;
+
+		public XCorrVectorizedSmoother(int n, int k) {
+			if (iterations != 1)
+				throw new ArgumentException("Only k=1 is supported atm");
+			
+			this.iterations = k;
+			this.n = n;
+			//previousValues = new Complex[n];
+		}
+
+		public Complex[] Smooth(Complex[] values) {
+			if (turn) {
+				bChannel.Enqueue(values);
+				// assert aChannel.Count == bChannel.Count
+				var aSamples = aChannel.ToArray();
+				var bSamples = bChannel.ToArray();
+
+				var accumulator = new Complex[n];
+				for (int i = 0; i < aSamples.Length; i++) {
+					var a = aSamples[i];
+					var b = bSamples[i];
+					var conjugates = b.Select((x) => Complex.Conjugate(x));
+					var multiplied = a.Zip(b, (x, y) => x * y);
+					accumulator = accumulator.Zip(multiplied, (x, y) => x + y).ToArray();
+				}
+			} else {
+				aChannel.Enqueue(values);
+			}
+			turn = !turn;
+			return null;
 		}
 	}
 
@@ -47,7 +91,9 @@ namespace SharpBCI {
 		readonly double scaleFactor;
 		//readonly double noiseFactor;
 
-		readonly IVectorizedSmoother[] smoothers;
+		readonly IVectorizedSmoother<double>[] magSmoothers;
+
+		readonly IFilter<double> signalFilter;
 
 		uint nSamples = 0;
 		uint lastFFT = 0;
@@ -77,12 +123,18 @@ namespace SharpBCI {
 			// target 10Hz
 			fftRate = (uint)Math.Round(sampleRate / targetFFTRate);
 
+			signalFilter = new MultiFilter<double>(new IFilter<double>[] {
+				// filter AC interference, based on 60hz AC power
+				new NotchFilter(59, 61, sampleRate),
+				// low-pass filter for movement artifacts
+			});
+
 			samples = new Queue<double>[channels];
-			smoothers = new IVectorizedSmoother[channels];
+			magSmoothers = new IVectorizedSmoother<double>[channels];
 
 			for (int i = 0; i < channels; i++) {
 				samples[i] = new Queue<double>();
-				smoothers[i] = new ExponentialVectoredSmoother(windowSize / 2 + 1, 0.1);
+				magSmoothers[i] = new ExponentialVectorizedSmoother(windowSize / 2 + 1, 0.1);
 			}
 
 			windowConstants = DSP.Window.Coefficients(DSP.Window.Type.Rectangular, this.windowSize);
@@ -100,7 +152,9 @@ namespace SharpBCI {
 
 			// normal case: just append data to sample buffer
 			for (int i = 0; i < channels; i++) {
-				samples[i].Enqueue(evt.data[i]);
+				var v = evt.data[i];
+				v = signalFilters[i].Filter(v);
+				samples[i].Enqueue(v);
 			}
 			nSamples++;
 
@@ -132,6 +186,7 @@ namespace SharpBCI {
 				DSP.Math.Multiply(samplesCopy, windowConstants);
 
 				var cSpectrum = fft.Execute(samplesCopy);
+
 				double[] lmSpectrum = DSP.ConvertComplex.ToMagnitude(cSpectrum);
 				lmSpectrum = DSP.Math.Multiply(lmSpectrum, scaleFactor);
 
@@ -143,7 +198,7 @@ namespace SharpBCI {
 				Add(new EEGEvent(evt.timestamp, EEGDataType.FFT_RAW, rawFFT, i));
 
 				// smoothing logic
-				var smoothedFFT = smoothers[i].Smooth(rawFFT);
+				var smoothedFFT = magSmoothers[i].Smooth(rawFFT);
 				Add(new EEGEvent(evt.timestamp, EEGDataType.FFT_SMOOTHED, smoothedFFT, i));
 			}
 

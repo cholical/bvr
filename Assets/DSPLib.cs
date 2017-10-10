@@ -13,29 +13,6 @@ using System.Diagnostics;
 // 04Jul17 - 1.03 - Added zero or negative check to all Log10 operations.
 //
 
-public struct Complex {
-	public double Real { get { return re; } }
-	readonly double re;
-	readonly double im;
-
-	public Complex(double re, double im) {
-		this.re = re;
-		this.im = im;
-	}
-
-	public double Magnitude {
-		get {
-			return Math.Sqrt(re * re + im * im);
-		}
-	}
-
-	public double Phase { 
-		get {
-			throw new Exception("Not implemented");
-		}
-	}
-}
-
 namespace DSPLib
 {
 
