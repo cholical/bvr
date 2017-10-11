@@ -189,6 +189,8 @@ namespace SharpBCI {
 	}
 
 	public class InstrumentedDummyAdapter : EEGDeviceAdapter {
+		public const int SAMPLE_LENGTH = 256 * 10;
+
 		readonly DummyAdapterSignal[] signals;
 		readonly double signalToNoiseRatio;
 
@@ -224,7 +226,7 @@ namespace SharpBCI {
 			thread.Join();			
 		}
 
-		void Run() { 
+		void Run() {
 			DateTime start = DateTime.UtcNow;
 			EmitData(new EEGEvent(start, EEGDataType.CONTACT_QUALITY, new double[] { 1, 1, 1, 1 }));
 
@@ -234,22 +236,24 @@ namespace SharpBCI {
 			while (!isCancelled) {
 				var v = samples[i++];
 				if (i == samples.Length) {
+					//Logger.Log("Reached end of samples, getting more noise");
 					GenerateSamples();
 					i = 0;
 				}
 				t++;
 				EmitData(new EEGEvent(start.AddSeconds(sampleRate* t), EEGDataType.EEG, new double[] { v, v, v, v }));
-				Thread.Sleep((int)(Math.Round(1.0 / sampleRate * 1000)));
+				Thread.Sleep((int)(Math.Round((1.0 / sampleRate) * 1000)));
 			}
 		}
 
 		void GenerateSamples() {
+			//Logger.Log("Generating samples using currentSample=" + currentSignal);
 			var noiseAmplitude = (currentSignal == -1 ? signals.Select((x) => x.amplitudes.Sum()).Average() : signals[currentSignal].amplitudes.Sum()) / signalToNoiseRatio;
-			samples = DSP.Generate.NoiseRms(noiseAmplitude, 256, 0);
+			samples = DSP.Generate.NoiseRms(noiseAmplitude, SAMPLE_LENGTH, noiseAmplitude);
 			if (currentSignal != -1) {
 				var signal = signals[currentSignal];
 				for (int i = 0; i < signal.amplitudes.Length; i++) {
-					var s = DSP.Generate.ToneSampling(signal.amplitudes[i], signal.freqs[i], sampleRate, 256);
+					var s = DSP.Generate.ToneSampling(signal.amplitudes[i], signal.freqs[i], sampleRate, SAMPLE_LENGTH, signal.amplitudes[i]);
 					samples = DSP.Math.Add(samples, s);
 				}
 			}
@@ -262,6 +266,7 @@ namespace SharpBCI {
 
 		public DummyAdapter(DummyAdapterSignal signal, double sampleRate, double signalToNoise) : base(new DummyAdapterSignal[] { signal }, sampleRate, signalToNoise) {
 			StartSignal(0);
-		}	}
+		}
+	}
 }
 

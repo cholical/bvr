@@ -60,8 +60,8 @@ public class SharpBCIController : MonoBehaviour {
 				museIOProcess.StartInfo.FileName = System.IO.Path.Combine(Application.streamingAssetsPath, "MuseIO", "muse-io.exe");
 				// default is osc.tcp://localhost:5000, but we expect udp
 				museIOProcess.StartInfo.Arguments = "--osc osc.udp://localhost:5000";
-				//museIOProcess.StartInfo.CreateNoWindow = true;
-				//museIOProcess.StartInfo.UseShellExecute = false;
+				museIOProcess.StartInfo.CreateNoWindow = true;
+				museIOProcess.StartInfo.UseShellExecute = false;
 				museIOProcess.Start();
 				museIOProcess.PriorityClass = ProcessPriorityClass.RealTime;
 			} catch (System.Exception e) {

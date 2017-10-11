@@ -20,6 +20,14 @@ namespace SharpBCI {
 		void Log(LogLevel level, object message);
 	}
 
+	public class ConsoleLogger : ILogOutput {
+
+		public void Dispose() { }
+		public void Log(LogLevel level, object message) {
+			Console.WriteLine(string.Format("{0} - [{1}]: {2}", DateTime.Now, level, message));
+		}
+	}
+
 	public class FileLogger : ILogOutput {
 
 		readonly StreamWriter outputStream;

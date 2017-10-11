@@ -33,8 +33,8 @@ namespace SharpBCI {
 
 		readonly int iterations;
 
-		Queue<Complex[]> aChannel = new Queue<Complex[]>();
-		Queue<Complex[]> bChannel = new Queue<Complex[]>();
+		readonly Queue<Complex[]> aChannel = new Queue<Complex[]>();
+		readonly Queue<Complex[]> bChannel = new Queue<Complex[]>();
 
 		bool turn;
 
@@ -56,13 +56,13 @@ namespace SharpBCI {
 				var aSamples = aChannel.ToArray();
 				var bSamples = bChannel.ToArray();
 
-				var accumulator = new Complex[n];
+				var accumulator = new Complex[aSamples[0].Length].Select((x) => Complex.Zero);
 				for (int i = 0; i < aSamples.Length; i++) {
 					var a = aSamples[i];
 					var b = bSamples[i];
 					var conjugates = b.Select((x) => Complex.Conjugate(x));
 					var multiplied = a.Zip(b, (x, y) => x * y);
-					accumulator = accumulator.Zip(multiplied, (x, y) => x + y).ToArray();
+					accumulator = accumulator.Zip(multiplied, (x, y) => x + y);
 				}
 			} else {
 				aChannel.Enqueue(values);
@@ -132,11 +132,8 @@ namespace SharpBCI {
 				samples[i] = new Queue<double>();
 				magSmoothers[i] = new ExponentialVectorizedSmoother(windowSize / 2 + 1, 0.1);
 				signalFilters[i] = new MultiFilter<double>(new IFilter<double>[] {
-					// filter AC interference, based on 60hz AC power
-					//new NotchFilter(58, 62, sampleRate),
-					// low-pass filter for movement artifacts, ~100 point kernel
-					new WindowedSincFilter(50, 10, sampleRate),
-				}); 
+					new ConvolvingDoubleEndedFilter(1, 50, 2, sampleRate, true),
+				});
 			}
 
 			windowConstants = DSP.Window.Coefficients(DSP.Window.Type.Rectangular, this.windowSize);
@@ -191,9 +188,6 @@ namespace SharpBCI {
 
 				double[] lmSpectrum = DSP.ConvertComplex.ToMagnitude(cSpectrum);
 				lmSpectrum = DSP.Math.Multiply(lmSpectrum, scaleFactor);
-
-				// remove DC component
-				lmSpectrum[0] = 0;
 
 				fftOutput.Add(lmSpectrum);
 			}

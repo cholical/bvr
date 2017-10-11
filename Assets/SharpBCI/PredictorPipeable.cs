@@ -18,11 +18,11 @@ namespace SharpBCI
 
 		public PredictorPipeable (int bufferSize, int channels)
 		{
-			this.predictor = new CorrelationCoefficentNearestNeigborPredictor ();
+			this.predictor = new KNearestNeighbor ();
 
 			training = TEST_ID;
 
-			AddTrainingData(DEFAULT_VALUE, new double[bufferSize]);
+			//AddTrainingData(DEFAULT_VALUE, new double[bufferSize]);
 
 		}
 
@@ -45,7 +45,7 @@ namespace SharpBCI
 		}
 
 
-		private const int MODE_WINDOW_SIZE = 20;
+		private const int MODE_WINDOW_SIZE = 5;
 
 		protected override bool Process (object item)
 		{
@@ -72,7 +72,7 @@ namespace SharpBCI
 
 					modeWindow.Clear ();
 
-					//Logger.Log(string.Format("Predicted: {0}", outgoingPrediction));
+					Logger.Log(string.Format("Predicted: {0}", outgoingPrediction));
 					Add (new TrainedEvent (outgoingPrediction));
 				}
 			}
