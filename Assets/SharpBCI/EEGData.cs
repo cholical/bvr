@@ -2,30 +2,34 @@
 
 namespace SharpBCI {
 
+	/**
+	 * What type of EEG data this EEGEvent represents.
+	 * IMPORTANT note to devs: not assigning a value to each field in this enum can break scenes that rely on it.
+	 */
 	public enum EEGDataType {
 		// raw EEG data
-		EEG,
+		EEG = 0,
 
 		// raw FFT data
-		FFT_RAW,
+		FFT_RAW = 1,
 		// smoothed FFT data
-		FFT_SMOOTHED,
+		FFT_SMOOTHED = 2,
 
 		// absolute freq bands
-		ALPHA_ABSOLUTE,
-		BETA_ABSOLUTE,
-		GAMMA_ABSOLUTE,
-		DELTA_ABSOLUTE,
-		THETA_ABSOLUTE,
+		ALPHA_ABSOLUTE = 3,
+		BETA_ABSOLUTE = 4,
+		GAMMA_ABSOLUTE = 5,
+		DELTA_ABSOLUTE = 6,
+		THETA_ABSOLUTE = 7,
 
 		// relative freq bands
-		ALPHA_RELATIVE,
-		BETA_RELATIVE,
-		GAMMA_RELATIVE,
-		DELTA_RELATIVE,
-		THETA_RELATIVE,
+		ALPHA_RELATIVE = 8,
+		BETA_RELATIVE = 9,
+		GAMMA_RELATIVE = 10,
+		DELTA_RELATIVE = 11,
+		THETA_RELATIVE = 12,
 
-		CONTACT_QUALITY,
+		CONTACT_QUALITY = 13,
 	}
 
 	public class EEGEvent {
