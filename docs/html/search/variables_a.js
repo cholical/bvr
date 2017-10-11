@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['particlefactor',['particleFactor',['../class_particle_brain_wave_controller.html#adcaeddadac347f53ccbb86206a618390',1,'ParticleBrainWaveController']]],
-  ['pipelinefile',['pipelineFile',['../class_sharp_b_c_i_1_1_sharp_b_c_i_config.html#a5a8a49f2d026156e3b45d29c9c5354cc',1,'SharpBCI::SharpBCIConfig']]]
+  ['one',['One',['../struct_system_1_1_numerics_1_1_complex.html#a7b2234519d3dc80c5896beddbbeeb281',1,'System::Numerics::Complex']]],
+  ['osc_5fdata_5fport',['OSC_DATA_PORT',['../class_device_controller.html#a5b67854d14e544392d6f4f7f3d850fb9',1,'DeviceController.OSC_DATA_PORT()'],['../class_sharp_b_c_i_controller.html#a74354d51eee978aa1868de8c974cd241',1,'SharpBCIController.OSC_DATA_PORT()']]],
+  ['outputs',['outputs',['../class_sharp_b_c_i_1_1_serialized_connection_info.html#a142c8cf9bdd4deec7f22a98a72cd5b4b',1,'SharpBCI::SerializedConnectionInfo']]]
 ];

@@ -1,5 +1,5 @@
 var interface_sharp_b_c_i_1_1_i_predictor =
 [
-    [ "StartTraining", "interface_sharp_b_c_i_1_1_i_predictor.html#a52906c0db07595f27c1d863b3f362625", null ],
-    [ "StopTraining", "interface_sharp_b_c_i_1_1_i_predictor.html#a4e7bda8bc76f812a2b0c738d9f88bc90", null ]
+    [ "AddTrainingData", "interface_sharp_b_c_i_1_1_i_predictor.html#ae157aea7f6f035088766d1ff1c57e7b5", null ],
+    [ "Predict", "interface_sharp_b_c_i_1_1_i_predictor.html#ac4fc245fc21e5d2b12cb29a56ebf9850", null ]
 ];

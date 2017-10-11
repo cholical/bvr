@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['real',['Real',['../struct_complex.html#a17c8af08e86d8ffb8ce6d5770fd5aa5c',1,'Complex']]]
+  ['real',['Real',['../struct_system_1_1_numerics_1_1_complex.html#a1f693b4220f05bd9351b78aad35c6220',1,'System::Numerics::Complex']]]
 ];

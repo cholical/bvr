@@ -1,6 +1,7 @@
 var _logger_8cs =
 [
     [ "ILogOutput", "interface_sharp_b_c_i_1_1_i_log_output.html", "interface_sharp_b_c_i_1_1_i_log_output" ],
+    [ "ConsoleLogger", "class_sharp_b_c_i_1_1_console_logger.html", "class_sharp_b_c_i_1_1_console_logger" ],
     [ "FileLogger", "class_sharp_b_c_i_1_1_file_logger.html", "class_sharp_b_c_i_1_1_file_logger" ],
     [ "LogLevel", "_logger_8cs.html#ac70bf7a2ec218652e49552a784078435", [
       [ "INFO", "_logger_8cs.html#ac70bf7a2ec218652e49552a784078435a551b723eafd6a31d444fcb2f5920fbd3", null ],

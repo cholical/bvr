@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['magnitude',['Magnitude',['../struct_complex.html#a277ab16d8e2083d44d62ab735cb93bf9',1,'Complex']]]
+  ['magnitude',['Magnitude',['../struct_system_1_1_numerics_1_1_complex.html#a6629c755b0ddcab8c44cee1684ab005f',1,'System::Numerics::Complex']]]
 ];

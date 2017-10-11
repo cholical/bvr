@@ -18,5 +18,6 @@ var searchData=
   ['eventtext',['eventText',['../class_training_controller.html#ab6804dbd0840e6048390dba092c67c0d',1,'TrainingController']]],
   ['execute',['Execute',['../class_d_s_p_lib_1_1_d_f_t.html#a91027345f776fcd012eba2870c810b10',1,'DSPLib.DFT.Execute()'],['../class_d_s_p_lib_1_1_f_f_t.html#aa4d99a292cfe7fdd6e21903e3bdb82fb',1,'DSPLib.FFT.Execute()']]],
   ['exponentialfilter',['ExponentialFilter',['../class_sharp_b_c_i_1_1_exponential_filter.html',1,'SharpBCI.ExponentialFilter'],['../class_sharp_b_c_i_1_1_exponential_filter.html#a3734c7336baf24696147acbe57f98a43',1,'SharpBCI.ExponentialFilter.ExponentialFilter()']]],
+  ['exponentialvectorizedsmoother',['ExponentialVectorizedSmoother',['../class_sharp_b_c_i_1_1_exponential_vectorized_smoother.html',1,'SharpBCI.ExponentialVectorizedSmoother'],['../class_sharp_b_c_i_1_1_exponential_vectorized_smoother.html#a77761bb55f497e7c23e983a00c784205',1,'SharpBCI.ExponentialVectorizedSmoother.ExponentialVectorizedSmoother()']]],
   ['extra',['extra',['../class_sharp_b_c_i_1_1_e_e_g_event.html#aa43471159f421b1d97e074a34ab3dff9',1,'SharpBCI::EEGEvent']]]
 ];

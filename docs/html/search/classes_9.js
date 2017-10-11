@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['raweventemitter',['RawEventEmitter',['../class_sharp_b_c_i_1_1_raw_event_emitter.html',1,'SharpBCI']]],
-  ['remoteoscadapter',['RemoteOSCAdapter',['../class_sharp_b_c_i_1_1_remote_o_s_c_adapter.html',1,'SharpBCI']]]
+  ['particlebrainwavecontroller',['ParticleBrainWaveController',['../class_particle_brain_wave_controller.html',1,'']]],
+  ['pipeable',['Pipeable',['../class_sharp_b_c_i_1_1_pipeable.html',1,'SharpBCI']]],
+  ['playermover',['PlayerMover',['../class_player_mover.html',1,'']]],
+  ['predictorpipeable',['PredictorPipeable',['../class_sharp_b_c_i_1_1_predictor_pipeable.html',1,'SharpBCI']]],
+  ['preprocessors',['Preprocessors',['../class_sharp_b_c_i_1_1_preprocessors.html',1,'SharpBCI']]]
 ];

@@ -92,77 +92,72 @@ Inheritance diagram for SharpBCI.IPredictor:</div>
  <div class="center">
   <img src="interface_sharp_b_c_i_1_1_i_predictor.png" usemap="#SharpBCI.IPredictor_map" alt=""/>
   <map id="SharpBCI.IPredictor_map" name="SharpBCI.IPredictor_map">
-<area href="interface_sharp_b_c_i_1_1_i_pipeable.html" alt="SharpBCI.IPipeable" shape="rect" coords="0,0,223,24"/>
-<area href="class_sharp_b_c_i_1_1_k_nearest_neighbor_pipeable.html" alt="SharpBCI.KNearestNeighborPipeable" shape="rect" coords="0,112,223,136"/>
+<area href="class_sharp_b_c_i_1_1_nearest_neighbor_predictor.html" alt="SharpBCI.NearestNeighborPredictor" shape="rect" coords="171,56,503,80"/>
+<area href="class_sharp_b_c_i_1_1_correlation_coefficent_nearest_neigbor_predictor.html" alt="SharpBCI.CorrelationCoefficentNearestNeigborPredictor" shape="rect" coords="0,112,332,136"/>
+<area href="class_sharp_b_c_i_1_1_k_nearest_neighbor.html" alt="SharpBCI.KNearestNeighbor" shape="rect" coords="342,112,674,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a52906c0db07595f27c1d863b3f362625"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_sharp_b_c_i_1_1_i_predictor.html#a52906c0db07595f27c1d863b3f362625">StartTraining</a> (int id)</td></tr>
-<tr class="separator:a52906c0db07595f27c1d863b3f362625"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4e7bda8bc76f812a2b0c738d9f88bc90"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_sharp_b_c_i_1_1_i_predictor.html#a4e7bda8bc76f812a2b0c738d9f88bc90">StopTraining</a> (int id)</td></tr>
-<tr class="separator:a4e7bda8bc76f812a2b0c738d9f88bc90"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_interface_sharp_b_c_i_1_1_i_pipeable"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_interface_sharp_b_c_i_1_1_i_pipeable')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html">SharpBCI.IPipeable</a></td></tr>
-<tr class="memitem:a1775fb57fee4ffe5716ff0fe99a17a2a inherit pub_methods_interface_sharp_b_c_i_1_1_i_pipeable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html#a1775fb57fee4ffe5716ff0fe99a17a2a">SetInput</a> (BlockingCollection&lt; object &gt; input)</td></tr>
-<tr class="memdesc:a1775fb57fee4ffe5716ff0fe99a17a2a inherit pub_methods_interface_sharp_b_c_i_1_1_i_pipeable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the input on this <a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html">IPipeable</a> to param input Should only be used internally by Connect.  <a href="interface_sharp_b_c_i_1_1_i_pipeable.html#a1775fb57fee4ffe5716ff0fe99a17a2a">More...</a><br /></td></tr>
-<tr class="separator:a1775fb57fee4ffe5716ff0fe99a17a2a inherit pub_methods_interface_sharp_b_c_i_1_1_i_pipeable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8761061994efc0be275dafe8fc07d61e inherit pub_methods_interface_sharp_b_c_i_1_1_i_pipeable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html#a8761061994efc0be275dafe8fc07d61e">Connect</a> (<a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html">IPipeable</a> other, bool mirror)</td></tr>
-<tr class="memdesc:a8761061994efc0be275dafe8fc07d61e inherit pub_methods_interface_sharp_b_c_i_1_1_i_pipeable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect the input of other to our output and allow for control of mirror data.  <a href="interface_sharp_b_c_i_1_1_i_pipeable.html#a8761061994efc0be275dafe8fc07d61e">More...</a><br /></td></tr>
-<tr class="separator:a8761061994efc0be275dafe8fc07d61e inherit pub_methods_interface_sharp_b_c_i_1_1_i_pipeable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2838b61a43a65fbf77f62db14a12fba6 inherit pub_methods_interface_sharp_b_c_i_1_1_i_pipeable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html#a2838b61a43a65fbf77f62db14a12fba6">Connect</a> (<a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html">IPipeable</a> other)</td></tr>
-<tr class="memdesc:a2838b61a43a65fbf77f62db14a12fba6 inherit pub_methods_interface_sharp_b_c_i_1_1_i_pipeable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect the input of other to our output Note: mirror == false using this override.  <a href="interface_sharp_b_c_i_1_1_i_pipeable.html#a2838b61a43a65fbf77f62db14a12fba6">More...</a><br /></td></tr>
-<tr class="separator:a2838b61a43a65fbf77f62db14a12fba6 inherit pub_methods_interface_sharp_b_c_i_1_1_i_pipeable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9348aeb6dd14dd6ce8c332ba5d1b7552 inherit pub_methods_interface_sharp_b_c_i_1_1_i_pipeable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html#a9348aeb6dd14dd6ce8c332ba5d1b7552">Start</a> (TaskFactory taskFactory, CancellationTokenSource cts)</td></tr>
-<tr class="memdesc:a9348aeb6dd14dd6ce8c332ba5d1b7552 inherit pub_methods_interface_sharp_b_c_i_1_1_i_pipeable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actually start doing work (i.e., promise to eventually start pushing data to connected pipeables)  <a href="interface_sharp_b_c_i_1_1_i_pipeable.html#a9348aeb6dd14dd6ce8c332ba5d1b7552">More...</a><br /></td></tr>
-<tr class="separator:a9348aeb6dd14dd6ce8c332ba5d1b7552 inherit pub_methods_interface_sharp_b_c_i_1_1_i_pipeable"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae41775c72425fda3539ae086ef7666f9 inherit pub_methods_interface_sharp_b_c_i_1_1_i_pipeable"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html#ae41775c72425fda3539ae086ef7666f9">Stop</a> ()</td></tr>
-<tr class="memdesc:ae41775c72425fda3539ae086ef7666f9 inherit pub_methods_interface_sharp_b_c_i_1_1_i_pipeable"><td class="mdescLeft">&#160;</td><td class="mdescRight">Require this <a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html">IPipeable</a> to stop, blocking until actually stopped.  <a href="interface_sharp_b_c_i_1_1_i_pipeable.html#ae41775c72425fda3539ae086ef7666f9">More...</a><br /></td></tr>
-<tr class="separator:ae41775c72425fda3539ae086ef7666f9 inherit pub_methods_interface_sharp_b_c_i_1_1_i_pipeable"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae157aea7f6f035088766d1ff1c57e7b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_sharp_b_c_i_1_1_i_predictor.html#ae157aea7f6f035088766d1ff1c57e7b5">AddTrainingData</a> (int label, double[] data)</td></tr>
+<tr class="separator:ae157aea7f6f035088766d1ff1c57e7b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4fc245fc21e5d2b12cb29a56ebf9850"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_sharp_b_c_i_1_1_i_predictor.html#ac4fc245fc21e5d2b12cb29a56ebf9850">Predict</a> (double[] test)</td></tr>
+<tr class="separator:ac4fc245fc21e5d2b12cb29a56ebf9850"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a52906c0db07595f27c1d863b3f362625"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52906c0db07595f27c1d863b3f362625">&#9670;&nbsp;</a></span>StartTraining()</h2>
+<a id="ae157aea7f6f035088766d1ff1c57e7b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae157aea7f6f035088766d1ff1c57e7b5">&#9670;&nbsp;</a></span>AddTrainingData()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void SharpBCI.IPredictor.StartTraining </td>
+          <td class="memname">void SharpBCI.IPredictor.AddTrainingData </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>id</em></td><td>)</td>
+          <td class="paramname"><em>label</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">double []&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_sharp_b_c_i_1_1_k_nearest_neighbor_pipeable.html#a054ec0374a1352f4677989e1571d3e2f">SharpBCI.KNearestNeighborPipeable</a>.</p>
+<p>Implemented in <a class="el" href="class_sharp_b_c_i_1_1_nearest_neighbor_predictor.html#a771e90ab106dca5ae74b8a8777b03070">SharpBCI.NearestNeighborPredictor</a>.</p>
 
 </div>
 </div>
-<a id="a4e7bda8bc76f812a2b0c738d9f88bc90"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4e7bda8bc76f812a2b0c738d9f88bc90">&#9670;&nbsp;</a></span>StopTraining()</h2>
+<a id="ac4fc245fc21e5d2b12cb29a56ebf9850"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4fc245fc21e5d2b12cb29a56ebf9850">&#9670;&nbsp;</a></span>Predict()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void SharpBCI.IPredictor.StopTraining </td>
+          <td class="memname">int SharpBCI.IPredictor.Predict </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>id</em></td><td>)</td>
+          <td class="paramtype">double []&#160;</td>
+          <td class="paramname"><em>test</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_sharp_b_c_i_1_1_k_nearest_neighbor_pipeable.html#afe6577736a3b4496e77d00f75f97d7dc">SharpBCI.KNearestNeighborPipeable</a>.</p>
+<p>Implemented in <a class="el" href="class_sharp_b_c_i_1_1_nearest_neighbor_predictor.html#ae1f4eee9e1b1948528372f53bfe66c60">SharpBCI.NearestNeighborPredictor</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this interface was generated from the following file:<ul>
-<li>Assets/SharpBCI/<a class="el" href="_i_predictor_8cs.html">IPredictor.cs</a></li>
+<li>Assets/SharpBCI/<a class="el" href="_predictor_8cs.html">Predictor.cs</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['log',['Log',['../interface_sharp_b_c_i_1_1_i_log_output.html#a038ab153fdd501e3886702dcc554d8dc',1,'SharpBCI.ILogOutput.Log()'],['../class_sharp_b_c_i_1_1_file_logger.html#a08bddc2271bc9df4c303c72825ee8fb9',1,'SharpBCI.FileLogger.Log()'],['../class_unity_logger.html#aca4c73a7eadbb1afa6f730e045eb0747',1,'UnityLogger.Log()']]]
+  ['movingaveragefilter',['MovingAverageFilter',['../class_sharp_b_c_i_1_1_moving_average_filter.html#a29f1b8591aa8e55ee194acdc8e8d645b',1,'SharpBCI::MovingAverageFilter']]],
+  ['multifilter',['MultiFilter',['../class_sharp_b_c_i_1_1_multi_filter.html#a68fb8638e7a3b11ecaa793deea8dafb5',1,'SharpBCI::MultiFilter']]]
 ];

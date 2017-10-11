@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['yformatter',['yFormatter',['../class_graph.html#aee981e90a96ccd078a5aacd3c5a39cc2',1,'Graph']]]
+  ['xformatter',['xFormatter',['../class_graph.html#a2a92ddc4626fe5eae55aa952829cd9bb',1,'Graph']]]
 ];
