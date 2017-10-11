@@ -80,7 +80,6 @@ $(document).ready(function(){initNavTree('class_sharp_b_c_i_1_1_sharp_b_c_i.html
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#properties">Properties</a> &#124;
@@ -89,45 +88,70 @@ $(document).ready(function(){initNavTree('class_sharp_b_c_i_1_1_sharp_b_c_i.html
 <div class="title">SharpBCI.SharpBCI Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>This is the "main" class which you should create.  
+ <a href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_1_1_raw_event_emitter.html">RawEventEmitter</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_1_1_trained_event_emitter.html">TrainedEventEmitter</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a70268de29756f5f85d063f28f4be0a5a"><td class="memItemLeft" align="right" valign="top">delegate void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a70268de29756f5f85d063f28f4be0a5a">SharpBCIRawHandler</a> (<a class="el" href="class_sharp_b_c_i_1_1_e_e_g_event.html">EEGEvent</a> evt)</td></tr>
+<tr class="memdesc:a70268de29756f5f85d063f28f4be0a5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">A delegate which receives raw events based on what was registered.  <a href="#a70268de29756f5f85d063f28f4be0a5a">More...</a><br /></td></tr>
 <tr class="separator:a70268de29756f5f85d063f28f4be0a5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a660d3b06dc723a05b32c50aed9a18785"><td class="memItemLeft" align="right" valign="top">delegate void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a660d3b06dc723a05b32c50aed9a18785">SharpBCITrainedHandler</a> (<a class="el" href="class_sharp_b_c_i_1_1_trained_event.html">TrainedEvent</a> evt)</td></tr>
+<tr class="memdesc:a660d3b06dc723a05b32c50aed9a18785"><td class="mdescLeft">&#160;</td><td class="mdescRight">A delegate which recieved events based on a unique id returned by SharpBCI.StartTrain()  <a href="#a660d3b06dc723a05b32c50aed9a18785">More...</a><br /></td></tr>
 <tr class="separator:a660d3b06dc723a05b32c50aed9a18785"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a1fef163f303e6b7d0aacd72aacc7a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a3a1fef163f303e6b7d0aacd72aacc7a5">SharpBCI</a> (<a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_config.html">SharpBCIConfig</a> config)</td></tr>
 <tr class="separator:a3a1fef163f303e6b7d0aacd72aacc7a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafcddc93445255172f7cfaef3bbaa04b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#aafcddc93445255172f7cfaef3bbaa04b">StartTraining</a> ()</td></tr>
-<tr class="separator:aafcddc93445255172f7cfaef3bbaa04b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5161e89a76022be2ed540e2c74ebd9a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#ab5161e89a76022be2ed540e2c74ebd9a">StartTraining</a> (int id)</td></tr>
+<tr class="memdesc:ab5161e89a76022be2ed540e2c74ebd9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start training <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html" title="This is the &quot;main&quot; class which you should create. ">SharpBCI</a> on the EEG data from now on Should be paired w/ a StopTraining(id) call.  <a href="#ab5161e89a76022be2ed540e2c74ebd9a">More...</a><br /></td></tr>
+<tr class="separator:ab5161e89a76022be2ed540e2c74ebd9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95920f7e515a4d773ca3d1766b096046"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a95920f7e515a4d773ca3d1766b096046">StopTraining</a> (int id)</td></tr>
+<tr class="memdesc:a95920f7e515a4d773ca3d1766b096046"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop training <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html" title="This is the &quot;main&quot; class which you should create. ">SharpBCI</a> on the current trainingID.  <a href="#a95920f7e515a4d773ca3d1766b096046">More...</a><br /></td></tr>
 <tr class="separator:a95920f7e515a4d773ca3d1766b096046"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fa9c8dad54c67668cbbfdd2734ca0ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a8fa9c8dad54c67668cbbfdd2734ca0ed">AddTrainedHandler</a> (int id, <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a660d3b06dc723a05b32c50aed9a18785">SharpBCITrainedHandler</a> handler)</td></tr>
+<tr class="memdesc:a8fa9c8dad54c67668cbbfdd2734ca0ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a training handler which is notified when "id" is detected Important: does not check if "id" has actually been trained upon.  <a href="#a8fa9c8dad54c67668cbbfdd2734ca0ed">More...</a><br /></td></tr>
 <tr class="separator:a8fa9c8dad54c67668cbbfdd2734ca0ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd15e4a9d121e29024d73cf1b46af5c0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#afd15e4a9d121e29024d73cf1b46af5c0">RemoveTrainedHandler</a> (int id, <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a660d3b06dc723a05b32c50aed9a18785">SharpBCITrainedHandler</a> handler)</td></tr>
+<tr class="memdesc:afd15e4a9d121e29024d73cf1b46af5c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a previously added training handler Important: does not check if "id" has actually been trained upon.  <a href="#afd15e4a9d121e29024d73cf1b46af5c0">More...</a><br /></td></tr>
 <tr class="separator:afd15e4a9d121e29024d73cf1b46af5c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a524a4d4cfa604ec48655b820c33c1bf2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a524a4d4cfa604ec48655b820c33c1bf2">AddRawHandler</a> (<a class="el" href="namespace_sharp_b_c_i.html#a093a660576d1484ca08f82f943ba6651">EEGDataType</a> type, <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a70268de29756f5f85d063f28f4be0a5a">SharpBCIRawHandler</a> handler)</td></tr>
+<tr class="memdesc:a524a4d4cfa604ec48655b820c33c1bf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a handler for raw (i.e, anything in EEGDataType) events Adding a handler does not guarantee events will actually be recieved, this is dependent on the configuration of the pipeline.  <a href="#a524a4d4cfa604ec48655b820c33c1bf2">More...</a><br /></td></tr>
 <tr class="separator:a524a4d4cfa604ec48655b820c33c1bf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae7465d4262ea17036d3cc33cbc6bdaf4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#ae7465d4262ea17036d3cc33cbc6bdaf4">RemoveRawHandler</a> (<a class="el" href="namespace_sharp_b_c_i.html#a093a660576d1484ca08f82f943ba6651">EEGDataType</a> type, <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a70268de29756f5f85d063f28f4be0a5a">SharpBCIRawHandler</a> handler)</td></tr>
+<tr class="memdesc:ae7465d4262ea17036d3cc33cbc6bdaf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a handler for raw(i.e, anything in EEGDataType) events.  <a href="#ae7465d4262ea17036d3cc33cbc6bdaf4">More...</a><br /></td></tr>
 <tr class="separator:ae7465d4262ea17036d3cc33cbc6bdaf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8192f9ae2f6601c32418f952b0dfaec6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a8192f9ae2f6601c32418f952b0dfaec6">Close</a> ()</td></tr>
+<tr class="memdesc:a8192f9ae2f6601c32418f952b0dfaec6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when all the <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html" title="This is the &quot;main&quot; class which you should create. ">SharpBCI</a> threads should shutdown.  <a href="#a8192f9ae2f6601c32418f952b0dfaec6">More...</a><br /></td></tr>
 <tr class="separator:a8192f9ae2f6601c32418f952b0dfaec6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ab3f303aa0a26f550479d3d0eeee4d13b"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#ab3f303aa0a26f550479d3d0eeee4d13b">WINDOW_SIZE</a> = 1024</td></tr>
-<tr class="separator:ab3f303aa0a26f550479d3d0eeee4d13b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af83bc3fdc6760bc0a54ed3baecdc1e5e"><td class="memItemLeft" align="right" valign="top">const string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#af83bc3fdc6760bc0a54ed3baecdc1e5e">RESERVED_PREFIX</a> = &quot;SharpBCI&quot;</td></tr>
+<tr class="memdesc:af83bc3fdc6760bc0a54ed3baecdc1e5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">None of your scope keys should start with this prefix.  <a href="#af83bc3fdc6760bc0a54ed3baecdc1e5e">More...</a><br /></td></tr>
+<tr class="separator:af83bc3fdc6760bc0a54ed3baecdc1e5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21580f8553223a87d5098f4911e45e70"><td class="memItemLeft" align="right" valign="top">const string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a21580f8553223a87d5098f4911e45e70">SCOPE_ADAPTER_KEY</a> = <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#af83bc3fdc6760bc0a54ed3baecdc1e5e">RESERVED_PREFIX</a> + &quot;Adapter&quot;</td></tr>
+<tr class="memdesc:a21580f8553223a87d5098f4911e45e70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keyword for the <a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html">EEGDeviceAdapter</a> configured.  <a href="#a21580f8553223a87d5098f4911e45e70">More...</a><br /></td></tr>
+<tr class="separator:a21580f8553223a87d5098f4911e45e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a32bce72d22775149d45001574a69de"><td class="memItemLeft" align="right" valign="top">const string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a6a32bce72d22775149d45001574a69de">SCOPE_SHARP_BCI_KEY</a> = <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#af83bc3fdc6760bc0a54ed3baecdc1e5e">RESERVED_PREFIX</a> + &quot;Instance&quot;</td></tr>
+<tr class="memdesc:a6a32bce72d22775149d45001574a69de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keyword for the <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html" title="This is the &quot;main&quot; class which you should create. ">SharpBCI</a> instance.  <a href="#a6a32bce72d22775149d45001574a69de">More...</a><br /></td></tr>
+<tr class="separator:a6a32bce72d22775149d45001574a69de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6195517a4071a90e36356642820bee4"><td class="memItemLeft" align="right" valign="top">const string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#ab6195517a4071a90e36356642820bee4">SCOPE_CHANNELS_KEY</a> = <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#af83bc3fdc6760bc0a54ed3baecdc1e5e">RESERVED_PREFIX</a> + &quot;Channels&quot;</td></tr>
+<tr class="memdesc:ab6195517a4071a90e36356642820bee4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keyword for the number of EEG channels as reported by SharpBCIAdapter.  <a href="#ab6195517a4071a90e36356642820bee4">More...</a><br /></td></tr>
+<tr class="separator:ab6195517a4071a90e36356642820bee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af119c2200d0bee83443a7caf0bc31830"><td class="memItemLeft" align="right" valign="top">const string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#af119c2200d0bee83443a7caf0bc31830">SCOPE_SAMPLE_RATE_KEY</a> = <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#af83bc3fdc6760bc0a54ed3baecdc1e5e">RESERVED_PREFIX</a> + &quot;SampleRate&quot;</td></tr>
+<tr class="memdesc:af119c2200d0bee83443a7caf0bc31830"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keyword for the sample rate of <a class="el" href="namespace_sharp_b_c_i.html#a093a660576d1484ca08f82f943ba6651a679310a95d28d9a928a0eb6960d3ea27">EEGDataType.EEG</a> as reported by SharpBCIAdapter.  <a href="#af119c2200d0bee83443a7caf0bc31830">More...</a><br /></td></tr>
+<tr class="separator:af119c2200d0bee83443a7caf0bc31830"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3de9635ac1944af5ff2ac8ac20fc3ded"><td class="memItemLeft" align="right" valign="top">readonly int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a3de9635ac1944af5ff2ac8ac20fc3ded">channels</a></td></tr>
+<tr class="memdesc:a3de9635ac1944af5ff2ac8ac20fc3ded"><td class="mdescLeft">&#160;</td><td class="mdescRight">How many channels the <a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html">EEGDeviceAdapter</a> has.  <a href="#a3de9635ac1944af5ff2ac8ac20fc3ded">More...</a><br /></td></tr>
+<tr class="separator:a3de9635ac1944af5ff2ac8ac20fc3ded"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48ad5b9c3721618290494dc949239fa3"><td class="memItemLeft" align="right" valign="top">readonly double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a48ad5b9c3721618290494dc949239fa3">sampleRate</a></td></tr>
+<tr class="memdesc:a48ad5b9c3721618290494dc949239fa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nominal sample rate of <a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html">EEGDeviceAdapter</a>, used for FFT and to understand EEGEvents.  <a href="#a48ad5b9c3721618290494dc949239fa3">More...</a><br /></td></tr>
+<tr class="separator:a48ad5b9c3721618290494dc949239fa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:a4ee5fa59eef86aad0254305e58d43a63"><td class="memItemLeft" align="right" valign="top">double []&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a4ee5fa59eef86aad0254305e58d43a63">connectionStatus</a><code> [get]</code></td></tr>
+<tr class="memdesc:a4ee5fa59eef86aad0254305e58d43a63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the device connected to a human Based on the Muse EEG status updates:  <a href="#a4ee5fa59eef86aad0254305e58d43a63">More...</a><br /></td></tr>
 <tr class="separator:a4ee5fa59eef86aad0254305e58d43a63"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -150,13 +174,13 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">config</td><td>a valid config object, generally built with <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html">SharpBCIBuilder</a> </td></tr>
+    <tr><td class="paramname">config</td><td>a valid config object, generally built with <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html" title="A builder class for SharpBCIConfig. ">SharpBCIBuilder</a> </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_config.html">SharpBCIConfig</a> </dd>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_config.html" title="An object which configures a SharpBCI object. ">SharpBCIConfig</a> </dd>
 <dd>
-<a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html">SharpBCIBuilder</a> </dd></dl>
+<a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html" title="A builder class for SharpBCIConfig. ">SharpBCIBuilder</a> </dd></dl>
 
 </div>
 </div>
@@ -187,6 +211,14 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Add a handler for raw (i.e, anything in EEGDataType) events Adding a handler does not guarantee events will actually be recieved, this is dependent on the configuration of the pipeline. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">ArgumentException</td><td>if handler is null </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a8fa9c8dad54c67668cbbfdd2734ca0ed"></a>
@@ -215,6 +247,14 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Add a training handler which is notified when "id" is detected Important: does not check if "id" has actually been trained upon. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">ArgumentException</td><td>when id less than or equal to zero </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a8192f9ae2f6601c32418f952b0dfaec6"></a>
@@ -231,7 +271,9 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Called when all the <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html">SharpBCI</a> threads should shutdown. You may or may not continue to receive events after calling this. You should unregister events before calling this: adjust your code accordingly. </p>
+
+<p>Called when all the <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html" title="This is the &quot;main&quot; class which you should create. ">SharpBCI</a> threads should shutdown. </p>
+<p>You may or may not continue to receive events after calling this You should unregister events before calling this to avoid memory leaks </p>
 
 </div>
 </div>
@@ -261,6 +303,14 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Remove a handler for raw(i.e, anything in EEGDataType) events. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">ArgumentException</td><td>if handler is null </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="afd15e4a9d121e29024d73cf1b46af5c0"></a>
@@ -289,6 +339,14 @@ Properties</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Remove a previously added training handler Important: does not check if "id" has actually been trained upon. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">ArgumentException</td><td>when id less than or equal to zero or if training handler was not previously added </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a70268de29756f5f85d063f28f4be0a5a"></a>
@@ -306,7 +364,9 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>A delegate which receives raw events based on what was registered </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_sharp_b_c_i_1_1_e_e_g_event.html">EEGEvent</a> </dd></dl>
+
+<p>A delegate which receives raw events based on what was registered. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_sharp_b_c_i_1_1_e_e_g_event.html">EEGEvent</a> </dd></dl>
 
 </div>
 </div>
@@ -325,27 +385,37 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>A delegate which recieved events based on a unique id returned by SharpBCI.StartTrain() </p><dl class="section see"><dt>See also</dt><dd>SharpBCI.StartTrain() </dd>
+
+<p>A delegate which recieved events based on a unique id returned by SharpBCI.StartTrain() </p>
+<dl class="section see"><dt>See also</dt><dd>SharpBCI.StartTrain() </dd>
 <dd>
-<a class="el" href="class_sharp_b_c_i_1_1_trained_event.html">TrainedEvent</a> </dd></dl>
+<a class="el" href="class_sharp_b_c_i_1_1_trained_event.html" title="A generic event which indicates previously trained event occured. ">TrainedEvent</a> </dd></dl>
 
 </div>
 </div>
-<a id="aafcddc93445255172f7cfaef3bbaa04b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aafcddc93445255172f7cfaef3bbaa04b">&#9670;&nbsp;</a></span>StartTraining()</h2>
+<a id="ab5161e89a76022be2ed540e2c74ebd9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5161e89a76022be2ed540e2c74ebd9a">&#9670;&nbsp;</a></span>StartTraining()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int SharpBCI.SharpBCI.StartTraining </td>
+          <td class="memname">void SharpBCI.SharpBCI.StartTraining </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Start training <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html">SharpBCI</a> on the EEG data from now on Should be paired w/ a StopTraining(id) call </p><dl class="section return"><dt>Returns</dt><dd>The id which identifies the current training session </dd></dl>
+
+<p>Start training <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html" title="This is the &quot;main&quot; class which you should create. ">SharpBCI</a> on the EEG data from now on Should be paired w/ a StopTraining(id) call. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>- a unique non-negative non-zero integer which identifies this trained event </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -364,22 +434,127 @@ Properties</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Stop training <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html">SharpBCI</a> on the current trainingID </p>
+
+<p>Stop training <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html" title="This is the &quot;main&quot; class which you should create. ">SharpBCI</a> on the current trainingID. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>- a unique non-negative non-zero integer which identifies this trained event </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="ab3f303aa0a26f550479d3d0eeee4d13b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab3f303aa0a26f550479d3d0eeee4d13b">&#9670;&nbsp;</a></span>WINDOW_SIZE</h2>
+<a id="a3de9635ac1944af5ff2ac8ac20fc3ded"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3de9635ac1944af5ff2ac8ac20fc3ded">&#9670;&nbsp;</a></span>channels</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const int SharpBCI.SharpBCI.WINDOW_SIZE = 1024</td>
+          <td class="memname">readonly int SharpBCI.SharpBCI.channels</td>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>How many channels the <a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html">EEGDeviceAdapter</a> has. </p>
+
+</div>
+</div>
+<a id="af83bc3fdc6760bc0a54ed3baecdc1e5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af83bc3fdc6760bc0a54ed3baecdc1e5e">&#9670;&nbsp;</a></span>RESERVED_PREFIX</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const string SharpBCI.SharpBCI.RESERVED_PREFIX = &quot;SharpBCI&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>None of your scope keys should start with this prefix. </p>
+
+</div>
+</div>
+<a id="a48ad5b9c3721618290494dc949239fa3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48ad5b9c3721618290494dc949239fa3">&#9670;&nbsp;</a></span>sampleRate</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly double SharpBCI.SharpBCI.sampleRate</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Nominal sample rate of <a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html">EEGDeviceAdapter</a>, used for FFT and to understand EEGEvents. </p>
+
+</div>
+</div>
+<a id="a21580f8553223a87d5098f4911e45e70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21580f8553223a87d5098f4911e45e70">&#9670;&nbsp;</a></span>SCOPE_ADAPTER_KEY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const string SharpBCI.SharpBCI.SCOPE_ADAPTER_KEY = <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#af83bc3fdc6760bc0a54ed3baecdc1e5e">RESERVED_PREFIX</a> + &quot;Adapter&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Keyword for the <a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html">EEGDeviceAdapter</a> configured. </p>
+
+</div>
+</div>
+<a id="ab6195517a4071a90e36356642820bee4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6195517a4071a90e36356642820bee4">&#9670;&nbsp;</a></span>SCOPE_CHANNELS_KEY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const string SharpBCI.SharpBCI.SCOPE_CHANNELS_KEY = <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#af83bc3fdc6760bc0a54ed3baecdc1e5e">RESERVED_PREFIX</a> + &quot;Channels&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Keyword for the number of EEG channels as reported by SharpBCIAdapter. </p>
+
+</div>
+</div>
+<a id="af119c2200d0bee83443a7caf0bc31830"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af119c2200d0bee83443a7caf0bc31830">&#9670;&nbsp;</a></span>SCOPE_SAMPLE_RATE_KEY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const string SharpBCI.SharpBCI.SCOPE_SAMPLE_RATE_KEY = <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#af83bc3fdc6760bc0a54ed3baecdc1e5e">RESERVED_PREFIX</a> + &quot;SampleRate&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Keyword for the sample rate of <a class="el" href="namespace_sharp_b_c_i.html#a093a660576d1484ca08f82f943ba6651a679310a95d28d9a928a0eb6960d3ea27">EEGDataType.EEG</a> as reported by SharpBCIAdapter. </p>
+
+</div>
+</div>
+<a id="a6a32bce72d22775149d45001574a69de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a32bce72d22775149d45001574a69de">&#9670;&nbsp;</a></span>SCOPE_SHARP_BCI_KEY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const string SharpBCI.SharpBCI.SCOPE_SHARP_BCI_KEY = <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#af83bc3fdc6760bc0a54ed3baecdc1e5e">RESERVED_PREFIX</a> + &quot;Instance&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Keyword for the <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html" title="This is the &quot;main&quot; class which you should create. ">SharpBCI</a> instance. </p>
 
 </div>
 </div>
@@ -403,7 +578,9 @@ Properties</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Is the device connected to a human Based on the Muse EEG status updates: </p><dl class="section return"><dt>Returns</dt><dd>4 = no connection, 2 = ok connection, 1 = good connection, 3 = unused, complain to Muse about that </dd></dl>
+
+<p>Is the device connected to a human Based on the Muse EEG status updates: </p>
+<dl class="section return"><dt>Returns</dt><dd>4 = no connection, 2 = ok connection, 1 = good connection, 3 = unused, complain to Muse about that </dd></dl>
 
 </div>
 </div>

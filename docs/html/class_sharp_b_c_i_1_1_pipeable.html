@@ -81,6 +81,7 @@ $(document).ready(function(){initNavTree('class_sharp_b_c_i_1_1_pipeable.html','
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="class_sharp_b_c_i_1_1_pipeable-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -93,26 +94,38 @@ Inheritance diagram for SharpBCI.Pipeable:</div>
  <div class="center">
   <img src="class_sharp_b_c_i_1_1_pipeable.png" usemap="#SharpBCI.Pipeable_map" alt=""/>
   <map id="SharpBCI.Pipeable_map" name="SharpBCI.Pipeable_map">
-<area href="interface_sharp_b_c_i_1_1_i_pipeable.html" alt="SharpBCI.IPipeable" shape="rect" coords="376,0,617,24"/>
-<area href="class_sharp_b_c_i_1_1_e_e_g_device_producer.html" alt="SharpBCI.EEGDeviceProducer" shape="rect" coords="0,112,241,136"/>
-<area href="class_sharp_b_c_i_1_1_f_f_t_pipeable.html" alt="SharpBCI.FFTPipeable" shape="rect" coords="251,112,492,136"/>
-<area href="class_sharp_b_c_i_1_1_sharp_b_c_i_1_1_raw_event_emitter.html" alt="SharpBCI.SharpBCI.RawEventEmitter" shape="rect" coords="502,112,743,136"/>
-<area href="class_sharp_b_c_i_1_1_sharp_b_c_i_1_1_trained_event_emitter.html" alt="SharpBCI.SharpBCI.TrainedEventEmitter" shape="rect" coords="753,112,994,136"/>
+<area href="interface_sharp_b_c_i_1_1_i_pipeable.html" alt="SharpBCI.IPipeable" shape="rect" coords="610,0,844,24"/>
+<area href="class_sharp_b_c_i_1_1_e_e_g_device_producer.html" title="Wraps an EEGDeviceAdapter with a Pipeable and emits EEGDataType.EEG events Should only be used as a p..." alt="SharpBCI.EEGDeviceProducer" shape="rect" coords="0,112,234,136"/>
+<area href="class_sharp_b_c_i_1_1_f_f_t_pipeable.html" title="A Pipeable which performs an FFT on each channel It outputs an FFTEvent every windowSize samples..." alt="SharpBCI.FFTPipeable" shape="rect" coords="244,112,478,136"/>
+<area href="class_sharp_b_c_i_1_1_k_nearest_neighbor_pipeable.html" alt="SharpBCI.KNearestNeighborPipeable" shape="rect" coords="488,112,722,136"/>
+<area href="class_sharp_b_c_i_1_1_raw_event_emitter.html" title="An end-point consumer which emits TrainedEvents it received Must only be connected to Pipeables which..." alt="SharpBCI.RawEventEmitter" shape="rect" coords="732,112,966,136"/>
+<area href="class_sharp_b_c_i_1_1_time_series_smoother_pipeable.html" alt="SharpBCI.TimeSeriesSmootherPipeable" shape="rect" coords="976,112,1210,136"/>
+<area href="class_sharp_b_c_i_1_1_trained_event_emitter.html" title="An end-point consumer which emits TrainedEvents it received Must only be connected to Pipeables which..." alt="SharpBCI.TrainedEventEmitter" shape="rect" coords="1220,112,1454,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a3dd47de67c12f9bdb7a521c0ad5f9bb2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_pipeable.html#a3dd47de67c12f9bdb7a521c0ad5f9bb2">SetInput</a> (BlockingCollection&lt; object &gt; newInput)</td></tr>
+<tr class="memdesc:a3dd47de67c12f9bdb7a521c0ad5f9bb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the input on this <a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html">IPipeable</a> to param input Should only be used internally by Connect.  <a href="#a3dd47de67c12f9bdb7a521c0ad5f9bb2">More...</a><br /></td></tr>
 <tr class="separator:a3dd47de67c12f9bdb7a521c0ad5f9bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ca41f69b9c57f4ef50208f42ceba9ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_pipeable.html#a9ca41f69b9c57f4ef50208f42ceba9ec">Connect</a> (<a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html">IPipeable</a> other)</td></tr>
+<tr class="memdesc:a9ca41f69b9c57f4ef50208f42ceba9ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect the input of other to our output Note: mirror == false using this override.  <a href="#a9ca41f69b9c57f4ef50208f42ceba9ec">More...</a><br /></td></tr>
 <tr class="separator:a9ca41f69b9c57f4ef50208f42ceba9ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a484ed00cf334e582bbca3f02b2de32b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_pipeable.html#a484ed00cf334e582bbca3f02b2de32b4">Connect</a> (<a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html">IPipeable</a> other, bool mirror)</td></tr>
+<tr class="memdesc:a484ed00cf334e582bbca3f02b2de32b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connect the input of other to our output and allow for control of mirror data.  <a href="#a484ed00cf334e582bbca3f02b2de32b4">More...</a><br /></td></tr>
 <tr class="separator:a484ed00cf334e582bbca3f02b2de32b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d35c3692567886710f23263d0a40234"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_pipeable.html#a1d35c3692567886710f23263d0a40234">Start</a> (TaskFactory taskFactory, CancellationTokenSource cts)</td></tr>
+<tr class="memdesc:a1d35c3692567886710f23263d0a40234"><td class="mdescLeft">&#160;</td><td class="mdescRight">Actually start doing work (i.e., promise to eventually start pushing data to connected pipeables)  <a href="#a1d35c3692567886710f23263d0a40234">More...</a><br /></td></tr>
 <tr class="separator:a1d35c3692567886710f23263d0a40234"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a714316963ff8f7ac8fdd7e4479f3f9c6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_pipeable.html#a714316963ff8f7ac8fdd7e4479f3f9c6">Stop</a> ()</td></tr>
+<tr class="memdesc:a714316963ff8f7ac8fdd7e4479f3f9c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Require this <a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html">IPipeable</a> to stop, blocking until actually stopped.  <a href="#a714316963ff8f7ac8fdd7e4479f3f9c6">More...</a><br /></td></tr>
 <tr class="separator:a714316963ff8f7ac8fdd7e4479f3f9c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a71fce27c4da6c0faf794ec240c974f71"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_pipeable.html#a71fce27c4da6c0faf794ec240c974f71">DEFAULT_BUFFER_SIZE</a> = 1000</td></tr>
+<tr class="separator:a71fce27c4da6c0faf794ec240c974f71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
@@ -163,7 +176,8 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Connect the input of other to our output Note: mirror == false using this override </p>
+
+<p>Connect the input of other to our output Note: mirror == false using this override. </p>
 
 <p>Implements <a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html#a2838b61a43a65fbf77f62db14a12fba6">SharpBCI.IPipeable</a>.</p>
 
@@ -194,7 +208,8 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Connect the input of other to our output and allow for control of mirror data </p>
+
+<p>Connect the input of other to our output and allow for control of mirror data. </p>
 
 <p>Implements <a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html#a8761061994efc0be275dafe8fc07d61e">SharpBCI.IPipeable</a>.</p>
 
@@ -224,7 +239,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_producer.html#a0e5956cc35176fea04ad5788b128f70b">SharpBCI.EEGDeviceProducer</a>, <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_1_1_raw_event_emitter.html#a9536ac112dd8c9681b9ff80353d53e12">SharpBCI.SharpBCI.RawEventEmitter</a>, <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_1_1_trained_event_emitter.html#a95dc1384c528bfe01083fefc16e6780f">SharpBCI.SharpBCI.TrainedEventEmitter</a>, and <a class="el" href="class_sharp_b_c_i_1_1_f_f_t_pipeable.html#a9c1a74d528d4069ea781561baf4c59c2">SharpBCI.FFTPipeable</a>.</p>
+<p>Implemented in <a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_producer.html#a0e5956cc35176fea04ad5788b128f70b">SharpBCI.EEGDeviceProducer</a>, <a class="el" href="class_sharp_b_c_i_1_1_raw_event_emitter.html#a015b11fce55a364abb807c2ecabc6c08">SharpBCI.RawEventEmitter</a>, <a class="el" href="class_sharp_b_c_i_1_1_trained_event_emitter.html#ade787b21339cea8e5ed6574c25e2a098">SharpBCI.TrainedEventEmitter</a>, <a class="el" href="class_sharp_b_c_i_1_1_f_f_t_pipeable.html#a9c1a74d528d4069ea781561baf4c59c2">SharpBCI.FFTPipeable</a>, <a class="el" href="class_sharp_b_c_i_1_1_k_nearest_neighbor_pipeable.html#ab58b517625d115e25d328d980f6a400f">SharpBCI.KNearestNeighborPipeable</a>, and <a class="el" href="class_sharp_b_c_i_1_1_time_series_smoother_pipeable.html#a272a90f3fe9c6b099ce7a2276172bb35">SharpBCI.TimeSeriesSmootherPipeable</a>.</p>
 
 </div>
 </div>
@@ -243,7 +258,8 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Set the input on this <a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html">IPipeable</a> to param input </p>
+
+<p>Set the input on this <a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html">IPipeable</a> to param input Should only be used internally by Connect. </p>
 
 <p>Implements <a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html#a1775fb57fee4ffe5716ff0fe99a17a2a">SharpBCI.IPipeable</a>.</p>
 
@@ -282,6 +298,7 @@ Protected Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
 <p>Actually start doing work (i.e., promise to eventually start pushing data to connected pipeables) </p>
 
 <p>Implements <a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html#a9348aeb6dd14dd6ce8c332ba5d1b7552">SharpBCI.IPipeable</a>.</p>
@@ -312,11 +329,27 @@ Protected Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Require this <a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html">IPipeable</a> to stop, blocking until actually stopped </p>
+
+<p>Require this <a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html">IPipeable</a> to stop, blocking until actually stopped. </p>
 
 <p>Implements <a class="el" href="interface_sharp_b_c_i_1_1_i_pipeable.html#ae41775c72425fda3539ae086ef7666f9">SharpBCI.IPipeable</a>.</p>
 
 <p>Reimplemented in <a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_producer.html#abe7c2e83fd1ef40dd6f997d99987349d">SharpBCI.EEGDeviceProducer</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a71fce27c4da6c0faf794ec240c974f71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71fce27c4da6c0faf794ec240c974f71">&#9670;&nbsp;</a></span>DEFAULT_BUFFER_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int SharpBCI.Pipeable.DEFAULT_BUFFER_SIZE = 1000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

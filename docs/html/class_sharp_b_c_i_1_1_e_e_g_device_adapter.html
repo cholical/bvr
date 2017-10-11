@@ -81,6 +81,7 @@ $(document).ready(function(){initNavTree('class_sharp_b_c_i_1_1_e_e_g_device_ada
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="class_sharp_b_c_i_1_1_e_e_g_device_adapter-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -93,7 +94,8 @@ Inheritance diagram for SharpBCI.EEGDeviceAdapter:</div>
  <div class="center">
   <img src="class_sharp_b_c_i_1_1_e_e_g_device_adapter.png" usemap="#SharpBCI.EEGDeviceAdapter_map" alt=""/>
   <map id="SharpBCI.EEGDeviceAdapter_map" name="SharpBCI.EEGDeviceAdapter_map">
-<area href="class_sharp_b_c_i_1_1_remote_o_s_c_adapter.html" alt="SharpBCI.RemoteOSCAdapter" shape="rect" coords="0,56,183,80"/>
+<area href="class_sharp_b_c_i_1_1_dummy_adapter.html" alt="SharpBCI.DummyAdapter" shape="rect" coords="0,56,183,80"/>
+<area href="class_sharp_b_c_i_1_1_remote_o_s_c_adapter.html" alt="SharpBCI.RemoteOSCAdapter" shape="rect" coords="193,56,376,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -101,6 +103,8 @@ Inheritance diagram for SharpBCI.EEGDeviceAdapter:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a6bc5578dae837bf0b6d9c55c26d036bb"><td class="memItemLeft" align="right" valign="top">delegate void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html#a6bc5578dae837bf0b6d9c55c26d036bb">DataHandler</a> (<a class="el" href="class_sharp_b_c_i_1_1_e_e_g_event.html">EEGEvent</a> evt)</td></tr>
 <tr class="separator:a6bc5578dae837bf0b6d9c55c26d036bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2b60a785b9233272de552568175679d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html#aa2b60a785b9233272de552568175679d">EEGDeviceAdapter</a> (int <a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html#a5c4d167d19d09f6f930a482db852ac69">channels</a>, double <a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html#a80a3af93f2df50670ac6812075558baa">sampleRate</a>)</td></tr>
+<tr class="separator:aa2b60a785b9233272de552568175679d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41278c1e7ace24403c1b631cff5e96ed"><td class="memItemLeft" align="right" valign="top">abstract void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html#a41278c1e7ace24403c1b631cff5e96ed">Start</a> ()</td></tr>
 <tr class="separator:a41278c1e7ace24403c1b631cff5e96ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7f342bb842da7708b5da5d6ff8676b1"><td class="memItemLeft" align="right" valign="top">abstract void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html#ab7f342bb842da7708b5da5d6ff8676b1">Stop</a> ()</td></tr>
@@ -112,11 +116,47 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a09c359c3cbea6828e52086ed641e0b14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html#a09c359c3cbea6828e52086ed641e0b14">FlushEvents</a> ()</td></tr>
 <tr class="separator:a09c359c3cbea6828e52086ed641e0b14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a5c4d167d19d09f6f930a482db852ac69"><td class="memItemLeft" align="right" valign="top">readonly int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html#a5c4d167d19d09f6f930a482db852ac69">channels</a></td></tr>
+<tr class="separator:a5c4d167d19d09f6f930a482db852ac69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80a3af93f2df50670ac6812075558baa"><td class="memItemLeft" align="right" valign="top">readonly double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html#a80a3af93f2df50670ac6812075558baa">sampleRate</a></td></tr>
+<tr class="separator:a80a3af93f2df50670ac6812075558baa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a8d5b330b047159852ccfce5ea466eca4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html#a8d5b330b047159852ccfce5ea466eca4">EmitData</a> (<a class="el" href="namespace_sharp_b_c_i.html#a093a660576d1484ca08f82f943ba6651">EEGDataType</a> type, double[] data)</td></tr>
-<tr class="separator:a8d5b330b047159852ccfce5ea466eca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71be273a5afe707165b8b36ea1a164fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html#a71be273a5afe707165b8b36ea1a164fa">EmitData</a> (<a class="el" href="class_sharp_b_c_i_1_1_e_e_g_event.html">EEGEvent</a> evt)</td></tr>
+<tr class="separator:a71be273a5afe707165b8b36ea1a164fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aa2b60a785b9233272de552568175679d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2b60a785b9233272de552568175679d">&#9670;&nbsp;</a></span>EEGDeviceAdapter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">SharpBCI.EEGDeviceAdapter.EEGDeviceAdapter </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>channels</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>sampleRate</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a302f644df8a59f936363b5d6a469bd07"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a302f644df8a59f936363b5d6a469bd07">&#9670;&nbsp;</a></span>AddHandler()</h2>
@@ -164,8 +204,8 @@ Protected Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8d5b330b047159852ccfce5ea466eca4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d5b330b047159852ccfce5ea466eca4">&#9670;&nbsp;</a></span>EmitData()</h2>
+<a id="a71be273a5afe707165b8b36ea1a164fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71be273a5afe707165b8b36ea1a164fa">&#9670;&nbsp;</a></span>EmitData()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -176,19 +216,9 @@ Protected Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void SharpBCI.EEGDeviceAdapter.EmitData </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespace_sharp_b_c_i.html#a093a660576d1484ca08f82f943ba6651">EEGDataType</a>&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="class_sharp_b_c_i_1_1_e_e_g_event.html">EEGEvent</a>&#160;</td>
+          <td class="paramname"><em>evt</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">double []&#160;</td>
-          <td class="paramname"><em>data</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -268,7 +298,7 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_sharp_b_c_i_1_1_remote_o_s_c_adapter.html#ab292d2dc26166c9a2ee873982dded677">SharpBCI.RemoteOSCAdapter</a>.</p>
+<p>Implemented in <a class="el" href="class_sharp_b_c_i_1_1_dummy_adapter.html#a6c1c5e0bc934c3d2aafad913e9369f3e">SharpBCI.DummyAdapter</a>, and <a class="el" href="class_sharp_b_c_i_1_1_remote_o_s_c_adapter.html#ab292d2dc26166c9a2ee873982dded677">SharpBCI.RemoteOSCAdapter</a>.</p>
 
 </div>
 </div>
@@ -295,7 +325,36 @@ Protected Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="class_sharp_b_c_i_1_1_remote_o_s_c_adapter.html#aea4057959fc8197e3c8a13fe8c8ab63e">SharpBCI.RemoteOSCAdapter</a>.</p>
+<p>Implemented in <a class="el" href="class_sharp_b_c_i_1_1_dummy_adapter.html#a91e942b339169fcc3efdaee3c41faf84">SharpBCI.DummyAdapter</a>, and <a class="el" href="class_sharp_b_c_i_1_1_remote_o_s_c_adapter.html#aea4057959fc8197e3c8a13fe8c8ab63e">SharpBCI.RemoteOSCAdapter</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a5c4d167d19d09f6f930a482db852ac69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c4d167d19d09f6f930a482db852ac69">&#9670;&nbsp;</a></span>channels</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly int SharpBCI.EEGDeviceAdapter.channels</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a80a3af93f2df50670ac6812075558baa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80a3af93f2df50670ac6812075558baa">&#9670;&nbsp;</a></span>sampleRate</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">readonly double SharpBCI.EEGDeviceAdapter.sampleRate</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

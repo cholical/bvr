@@ -1,42 +1,75 @@
 ﻿using System;
+using System.Linq;
+using System.Numerics;
 using System.Collections.Generic;
+using DSPLib;
 
 namespace SharpBCI {
 
-	public class ChanneledQueue {
-		readonly int channels;
-		readonly int maxSize;
-		readonly Queue<double>[] samples;
-		readonly Queue<DateTime> timestamps;
+	public interface IVectorizedSmoother<T> {
+		T[] Smooth(T[] values);
+	}
 
-		DateTime windowStart;
-		DateTime windowEnd;
-
-		public ChanneledQueue(int channels, int maxSize) {
-			if (channels < 1)
-				throw new ArgumentException("channels must be >= 1");
-			this.channels = channels;
-			this.maxSize = maxSize;
-
-			samples = new Queue<double>[channels];
-			for (int i = 0; i < channels; i++) {
-				samples[i] = new Queue<double>();
-			}
-
-			timestamps = new Queue<DateTime>();
+	public class ExponentialVectorizedSmoother : IVectorizedSmoother<double> {
+		readonly double[] lastValues;
+		readonly double alpha;
+		public ExponentialVectorizedSmoother(int n, double alpha) {
+			lastValues = new double[n];
+			this.alpha = alpha;
 		}
 
-		public int Count { get { return timestamps.Count; } }
-
-		public void Add(EEGEvent evt) {
-			for (int i = 0; i < channels; i++) {
-				samples[i].Enqueue(evt.data[i]);
+		public double[] Smooth(double[] values) {
+			if (values.Length != lastValues.Length)
+				throw new ArgumentException("values.Length does not match lastValues.Length");
+			var n = values.Length;
+			for (int i = 0; i < values.Length; i++) {
+				lastValues[i] = (alpha * values[i]) + (1 - alpha) * lastValues[i];
 			}
-			timestamps.Enqueue(evt.timestamp);
+			return lastValues;
+		}
+	}
 
+	public class XCorrVectorizedSmoother : IVectorizedSmoother<Complex> {
 
+		readonly int iterations;
+
+		Queue<Complex[]> aChannel = new Queue<Complex[]>();
+		Queue<Complex[]> bChannel = new Queue<Complex[]>();
+
+		bool turn;
+
+		int n;
+
+		public XCorrVectorizedSmoother(int n, int k) {
+			if (iterations != 1)
+				throw new ArgumentException("Only k=1 is supported atm");
+			
+			this.iterations = k;
+			this.n = n;
+			//previousValues = new Complex[n];
 		}
 
+		public Complex[] Smooth(Complex[] values) {
+			if (turn) {
+				bChannel.Enqueue(values);
+				// assert aChannel.Count == bChannel.Count
+				var aSamples = aChannel.ToArray();
+				var bSamples = bChannel.ToArray();
+
+				var accumulator = new Complex[n];
+				for (int i = 0; i < aSamples.Length; i++) {
+					var a = aSamples[i];
+					var b = bSamples[i];
+					var conjugates = b.Select((x) => Complex.Conjugate(x));
+					var multiplied = a.Zip(b, (x, y) => x * y);
+					accumulator = accumulator.Zip(multiplied, (x, y) => x + y).ToArray();
+				}
+			} else {
+				aChannel.Enqueue(values);
+			}
+			turn = !turn;
+			return null;
+		}
 	}
 
 	/**
@@ -45,121 +78,171 @@ namespace SharpBCI {
 	 * @see FFTEvent
 	 */
 	public class FFTPipeable : Pipeable {
-
-		readonly int windowSize;
-		readonly int channels;
-
-		// use a jagged array to make full-row access faster
-		//readonly double[][] samples;
+		
+		readonly uint windowSize;
+		readonly uint channels;
+		readonly uint fftRate;
 
 		readonly Queue<double>[] samples;
+		readonly FFT fft;
 
-		readonly Lomont.LomontFFT FFT = new Lomont.LomontFFT();
+		readonly double sampleRate;
+		readonly double[] windowConstants;
+		readonly double scaleFactor;
+		//readonly double noiseFactor;
 
-		DateTime windowStart;
-		DateTime windowEnd;
+		readonly IVectorizedSmoother<double>[] magSmoothers;
 
-		int nSamples = 0;
-		int lastFFT = 0;
-		int totalSamples = 0;
+		readonly IFilter<double>[] signalFilters;
+
+		uint nSamples = 0;
+		uint lastFFT = 0;
+
+		public FFTPipeable(int windowSize, int channels, double sampleRate) : this(windowSize, channels, sampleRate, 10) { }
 
 		/**
 		 * Create a new FFTPipeable which performs an FFT over windowSize.  Expects an input pipeable of EEGEvent's
 		 * @param windowSize The size of the FFT window, determines granularity (google FFT)
 		 * @param channels How many channels to operate on
+		 * @param sampleRate Sampling rate of data
+		 * @param targetFFTRate Optional: Frequency (in Hz) to perform an FFT (exact frequency may vary)
 		 * @see EEGEvent
 		 */
-		public FFTPipeable(int windowSize, int channels) {
-			// 2 * windowSize to account for the imaginary parts of the FFT
-			this.windowSize = 2 * windowSize;
-			this.channels = channels;
+		public FFTPipeable(int windowSize, int channels, double sampleRate, double targetFFTRate) {
+			//this.windowSize = windowSize;
+
+			this.windowSize = (uint) windowSize;
+			this.channels = (uint)channels;
+			this.sampleRate = sampleRate;
+
+			fft = new FFT();
+			fft.Initialize((uint) windowSize);
+			//FFT.A = 0;
+			//FFT.B = 1;
+
+			// target 10Hz
+			fftRate = (uint)Math.Round(sampleRate / targetFFTRate);
 
 			samples = new Queue<double>[channels];
+
+			signalFilters = new IFilter<double>[channels];
+			magSmoothers = new IVectorizedSmoother<double>[channels];
+
 			for (int i = 0; i < channels; i++) {
 				samples[i] = new Queue<double>();
+				magSmoothers[i] = new ExponentialVectorizedSmoother(windowSize / 2 + 1, 0.1);
+				signalFilters[i] = new MultiFilter<double>(new IFilter<double>[] {
+					// filter AC interference, based on 60hz AC power
+					//new NotchFilter(58, 62, sampleRate),
+					// low-pass filter for movement artifacts, ~100 point kernel
+					new WindowedSincFilter(50, 10, sampleRate),
+				}); 
 			}
+
+			windowConstants = DSP.Window.Coefficients(DSP.Window.Type.Rectangular, this.windowSize);
+			scaleFactor = DSP.Window.ScaleFactor.Signal(windowConstants);
+			//noiseFactor = DSP.Window.ScaleFactor.Noise(windowConstants, sampleRate);
 		}
 
 		protected override bool Process(object item) {
 			EEGEvent evt = (EEGEvent) item;
 			if (evt.type != EEGDataType.EEG)
-				throw new Exception("FFTFilter recieved invalid EEGEvent: " + evt);
+				throw new Exception("FFTPipeable recieved invalid EEGEvent: " + evt);
 
 			if (evt.data.Length != channels)
-				throw new Exception("Malformed EEGEvent: " + evt);
-
-			//Logger.Log ("Recording samples, nSamples=" + nSamples + ", evt=" + evt);
-			totalSamples += 2;
-			if (totalSamples % windowSize == 0) {
-				windowStart = windowEnd;
-				windowEnd = evt.timestamp;
-			}
+				throw new Exception("FFTPipeable recieved malformed EEGEvent: " + evt);
 
 			// normal case: just append data to sample buffer
 			for (int i = 0; i < channels; i++) {
-				samples[i].Enqueue(evt.data[i]);
-				// this is the imaginary part of the signal, but we're FFT-ing a real number so 0 for us
-				// TODO is this ALWAYS true?
-				samples[i].Enqueue(0);
+				var v = evt.data[i];
+				v = signalFilters[i].Filter(v);
+				samples[i].Enqueue(v);
 			}
-			nSamples += 2;
+			nSamples++;
 
-			if (nSamples >= windowSize + 2) {
+			if (nSamples > windowSize) {
 				foreach (var channelSamples in samples) {
 					channelSamples.Dequeue();
-					channelSamples.Dequeue();
+					//channelSamples.Dequeue();
 				}
-				nSamples -= 2;
+				nSamples--;
 			}
 
 			lastFFT++;
+			//Logger.Log("nSamples={0}, lastFFT={1}", nSamples, lastFFT);
 			// sample buffer is full, do FFT then reset for next round
-			if (nSamples >= windowSize && lastFFT % (windowSize / 8) == 0) {
-				// Do an FFT on each channel
-				List<double[]> fftOutput = new List<double[]>();
-				foreach (var channelSamples in samples) {
-					// Logger.Log("FFT sample size:" + channelSamples.Count);
-					var samplesCopy = channelSamples.ToArray();
-					FFT.FFT(samplesCopy, true);
-					fftOutput.Add(samplesCopy);
-				}
-
-				// find sampleRate given windowStart and windowEnd there are only windowSize / 2 actual samples
-				double sampleRate = (windowSize / 2) / windowEnd.Subtract(windowStart).TotalSeconds;
-
-				// find abs powers for each band
-				Dictionary<EEGDataType, List<double>> absolutePowers = new Dictionary<EEGDataType, List<double>>();
-				foreach (var bins in fftOutput) {
-					double deltaAbs = AbsBandPower(bins, 0, 4, sampleRate);
-					double thetaAbs = AbsBandPower(bins, 4, 8, sampleRate);
-					double alphaAbs = AbsBandPower(bins, 8, 16, sampleRate);
-					double betaAbs = AbsBandPower(bins, 16, 32, sampleRate);
-					double gammaAbs = AbsBandPower(bins, 32, 0, sampleRate);
-
-					GetBandList(absolutePowers, EEGDataType.ALPHA_ABSOLUTE).Add(alphaAbs);
-					GetBandList(absolutePowers, EEGDataType.BETA_ABSOLUTE).Add(betaAbs);
-					GetBandList(absolutePowers, EEGDataType.GAMMA_ABSOLUTE).Add(gammaAbs);
-					GetBandList(absolutePowers, EEGDataType.DELTA_ABSOLUTE).Add(deltaAbs);
-					GetBandList(absolutePowers, EEGDataType.THETA_ABSOLUTE).Add(thetaAbs);
-
-				}
-
-				// we can emit abs powers immediately
-				Add(new EEGEvent(evt.timestamp, EEGDataType.ALPHA_ABSOLUTE, absolutePowers[EEGDataType.ALPHA_ABSOLUTE].ToArray()));
-				Add(new EEGEvent(evt.timestamp, EEGDataType.BETA_ABSOLUTE, absolutePowers[EEGDataType.BETA_ABSOLUTE].ToArray()));
-				Add(new EEGEvent(evt.timestamp, EEGDataType.GAMMA_ABSOLUTE, absolutePowers[EEGDataType.GAMMA_ABSOLUTE].ToArray()));
-				Add(new EEGEvent(evt.timestamp, EEGDataType.DELTA_ABSOLUTE, absolutePowers[EEGDataType.DELTA_ABSOLUTE].ToArray()));
-				Add(new EEGEvent(evt.timestamp, EEGDataType.THETA_ABSOLUTE, absolutePowers[EEGDataType.THETA_ABSOLUTE].ToArray()));
-
-				// now calc and emit relative powers
-				Add(new EEGEvent(evt.timestamp, EEGDataType.ALPHA_RELATIVE, RelBandPower(absolutePowers, EEGDataType.ALPHA_ABSOLUTE)));
-				Add(new EEGEvent(evt.timestamp, EEGDataType.BETA_RELATIVE, RelBandPower(absolutePowers, EEGDataType.BETA_ABSOLUTE)));
-				Add(new EEGEvent(evt.timestamp, EEGDataType.GAMMA_RELATIVE, RelBandPower(absolutePowers, EEGDataType.GAMMA_ABSOLUTE)));
-				Add(new EEGEvent(evt.timestamp, EEGDataType.DELTA_RELATIVE, RelBandPower(absolutePowers, EEGDataType.DELTA_ABSOLUTE)));
-				Add(new EEGEvent(evt.timestamp, EEGDataType.THETA_RELATIVE, RelBandPower(absolutePowers, EEGDataType.THETA_ABSOLUTE)));
+			if (nSamples >= windowSize && lastFFT % fftRate == 0) {
+				DoFFT(evt);
 			}
 
 			return true;
+		}
+
+		void DoFFT(EEGEvent evt) { 
+			// Do an FFT on each channel
+			List<double[]> fftOutput = new List<double[]>();
+			foreach (var channelSamples in samples) {
+				var samplesCopy = channelSamples.ToArray();
+
+				// apply windowing function to samplesCopy
+				DSP.Math.Multiply(samplesCopy, windowConstants);
+
+				var cSpectrum = fft.Execute(samplesCopy);
+
+				double[] lmSpectrum = DSP.ConvertComplex.ToMagnitude(cSpectrum);
+				lmSpectrum = DSP.Math.Multiply(lmSpectrum, scaleFactor);
+
+				// remove DC component
+				lmSpectrum[0] = 0;
+
+				fftOutput.Add(lmSpectrum);
+			}
+
+			for (int i = 0; i < fftOutput.Count; i++) {
+				var rawFFT = fftOutput[i];
+				Add(new EEGEvent(evt.timestamp, EEGDataType.FFT_RAW, rawFFT, i));
+
+				// smoothing logic
+				var smoothedFFT = magSmoothers[i].Smooth(rawFFT);
+				Add(new EEGEvent(evt.timestamp, EEGDataType.FFT_SMOOTHED, smoothedFFT, i));
+			}
+
+			// find abs powers for each band
+			Dictionary<EEGDataType, List<double>> absolutePowers = new Dictionary<EEGDataType, List<double>>();
+			foreach (var bins in fftOutput) {
+				double deltaAbs = AbsBandPower(bins, 1, 4);
+				double thetaAbs = AbsBandPower(bins, 4, 8);
+				double alphaAbs = AbsBandPower(bins, 7.5, 13);
+				double betaAbs = AbsBandPower(bins, 13, 30);
+				double gammaAbs = AbsBandPower(bins, 30, 44);
+
+				GetBandList(absolutePowers, EEGDataType.ALPHA_ABSOLUTE).Add(alphaAbs);
+				GetBandList(absolutePowers, EEGDataType.BETA_ABSOLUTE).Add(betaAbs);
+				GetBandList(absolutePowers, EEGDataType.GAMMA_ABSOLUTE).Add(gammaAbs);
+				GetBandList(absolutePowers, EEGDataType.DELTA_ABSOLUTE).Add(deltaAbs);
+				GetBandList(absolutePowers, EEGDataType.THETA_ABSOLUTE).Add(thetaAbs);
+			}
+
+			// we can emit abs powers immediately
+			Add(new EEGEvent(evt.timestamp, EEGDataType.ALPHA_ABSOLUTE, absolutePowers[EEGDataType.ALPHA_ABSOLUTE].ToArray()));
+			Add(new EEGEvent(evt.timestamp, EEGDataType.BETA_ABSOLUTE, absolutePowers[EEGDataType.BETA_ABSOLUTE].ToArray()));
+			Add(new EEGEvent(evt.timestamp, EEGDataType.GAMMA_ABSOLUTE, absolutePowers[EEGDataType.GAMMA_ABSOLUTE].ToArray()));
+			Add(new EEGEvent(evt.timestamp, EEGDataType.DELTA_ABSOLUTE, absolutePowers[EEGDataType.DELTA_ABSOLUTE].ToArray()));
+			Add(new EEGEvent(evt.timestamp, EEGDataType.THETA_ABSOLUTE, absolutePowers[EEGDataType.THETA_ABSOLUTE].ToArray()));
+
+			// now calc and emit relative powers
+			Add(new EEGEvent(evt.timestamp, EEGDataType.ALPHA_RELATIVE, RelBandPower(absolutePowers, EEGDataType.ALPHA_ABSOLUTE)));
+			Add(new EEGEvent(evt.timestamp, EEGDataType.BETA_RELATIVE, RelBandPower(absolutePowers, EEGDataType.BETA_ABSOLUTE)));
+			Add(new EEGEvent(evt.timestamp, EEGDataType.GAMMA_RELATIVE, RelBandPower(absolutePowers, EEGDataType.GAMMA_ABSOLUTE)));
+			Add(new EEGEvent(evt.timestamp, EEGDataType.DELTA_RELATIVE, RelBandPower(absolutePowers, EEGDataType.DELTA_ABSOLUTE)));
+			Add(new EEGEvent(evt.timestamp, EEGDataType.THETA_RELATIVE, RelBandPower(absolutePowers, EEGDataType.THETA_ABSOLUTE)));
+		}
+
+		void ApplyWindow(double[] arr) {
+			int N = arr.Length;
+			for (int i = 0; i < N; i++) {
+				arr[i] = arr[i] * windowConstants[i];
+			}
 		}
 
 		List<double> GetBandList(Dictionary<EEGDataType, List<double>> dict, EEGDataType type) {
@@ -188,14 +271,12 @@ namespace SharpBCI {
 			return relPowers;
 		}
 
-		double AbsBandPower(double[] bins, double minFreq, double maxFreq, double sampleRate) {
-			int N = bins.Length / 2;
-			// freq = (i/2) * sampleRate / N => i = 2 * freq / (sampleRate / N)
-			int minBin = Math.Max(1, 2 * (int)Math.Floor(minFreq / (sampleRate / N)));
-			int maxBin = Math.Min(N / 2, 2 * (int)Math.Ceiling(maxFreq / (sampleRate / N)));
+		double AbsBandPower(double[] bins, double minFreq, double maxFreq) {
+			int minBin = (int)Math.Floor(minFreq / sampleRate);
+			int maxBin = (int)Math.Ceiling(maxFreq / sampleRate);
 			double powerSum = 0;
-			for (int i = minBin; i < maxBin; i += 2) {
-				powerSum += Math.Abs(bins[i]);
+			for (int i = minBin; i < maxBin; i++) {
+				powerSum += bins[i];
 			}
 			return powerSum;
 		}

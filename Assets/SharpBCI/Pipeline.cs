@@ -11,6 +11,7 @@ namespace SharpBCI {
 	public interface IPipeable {
 		/**
 		 * Set the input on this IPipeable to param input
+		 * Should only be used internally by Connect
 		 */
 		void SetInput(BlockingCollection<object> input);
 
@@ -37,6 +38,8 @@ namespace SharpBCI {
 	}
 
 	public abstract class Pipeable : IPipeable {
+		public const int DEFAULT_BUFFER_SIZE = 1000;
+
 		Task runningTask;
 		CancellationTokenSource cts;
 		CancellationToken token;
@@ -62,13 +65,15 @@ namespace SharpBCI {
 		}
 
 		public void Connect(IPipeable other, bool mirror) {
+			//Logger.Log("Connecting {0} to {1} with mirror={2}", this, other, mirror);
 			BlockingCollection<object> output;
 			if (mirror) {
-				output = new BlockingCollection<object>();
+				output = new BlockingCollection<object>(DEFAULT_BUFFER_SIZE);
 				allOutputs.Add(output);
 			} else {
+				Logger.Warning("Possible race condition: {0}.Connect({1}, {2}) was called.  This can result in one Pipeable leeching on another.", this, other, mirror);
 				if (allOutputs.Count == 0) {
-					allOutputs.Add(new BlockingCollection<object>());
+					allOutputs.Add(new BlockingCollection<object>(DEFAULT_BUFFER_SIZE));
 				}
 				output = allOutputs[0];
 			}
@@ -86,6 +91,8 @@ namespace SharpBCI {
 			foreach (var o in allOutputs) {
 				o.Dispose();
 			}
+			allOutputs.Clear();
+			input = null;
 			runningTask.Wait();
 		}
 
@@ -94,14 +101,14 @@ namespace SharpBCI {
 			try {
 				// case: producer
 				if (input == null) {
-					Logger.Log("Pipeable " + this + " running as producer");
+					Logger.Log("Pipeable " + this + " running as producer: nOuputs = " + allOutputs.Count);
 					do {
 						if (token.IsCancellationRequested) break;
 					} while (Process(null));
 				}
 				// case: consumer (possibly a filter)
 				else {
-					Logger.Log("Pipeable " + this + " running as consumer/filter: nInputs = " + input.Length);
+					Logger.Log("Pipeable " + this + " running as consumer/filter: nInputs = " + input.Length + " nOuputs = " + allOutputs.Count);
 					while (!token.IsCancellationRequested) {
 						object item;
 						BlockingCollection<object>.TakeFromAny(input, out item, token);
@@ -124,6 +131,8 @@ namespace SharpBCI {
 		protected void Add(object item) {
 			// TODO this will delay adding if using bounded buffers: explore benefits of spin waiting here
 			foreach (var output in allOutputs) {
+				if (output.Count == output.BoundedCapacity)
+					Logger.Warning("Pipeable {0} is bottlenecked.", this);
 				output.Add(item, token);
 			}
 		}

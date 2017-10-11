@@ -86,21 +86,62 @@ $(document).ready(function(){initNavTree('class_sharp_b_c_i_1_1_sharp_b_c_i_buil
 <div class="title">SharpBCI.SharpBCIBuilder Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A builder class for <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_config.html" title="An object which configures a SharpBCI object. ">SharpBCIConfig</a>.  
+ <a href="class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa2f3e6f76a9daa9360bfac1a40079ef0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html">SharpBCIBuilder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html#aa2f3e6f76a9daa9360bfac1a40079ef0">EEGDeviceAdapter</a> (<a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html">EEGDeviceAdapter</a> adapter)</td></tr>
+<tr class="memdesc:aa2f3e6f76a9daa9360bfac1a40079ef0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the <a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html">EEGDeviceAdapter</a> that <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html" title="This is the &quot;main&quot; class which you should create. ">SharpBCI</a> will use, overriding possible calls before.  <a href="#aa2f3e6f76a9daa9360bfac1a40079ef0">More...</a><br /></td></tr>
 <tr class="separator:aa2f3e6f76a9daa9360bfac1a40079ef0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a241a3e2f69748fbb62cfc570253ec1dd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html">SharpBCIBuilder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html#a241a3e2f69748fbb62cfc570253ec1dd">Channels</a> (int channels)</td></tr>
-<tr class="separator:a241a3e2f69748fbb62cfc570253ec1dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfae5df93d7b67b7c38b03cf0a1d68cd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html">SharpBCIBuilder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html#acfae5df93d7b67b7c38b03cf0a1d68cd">PipelineFile</a> (string configFile)</td></tr>
+<tr class="memdesc:acfae5df93d7b67b7c38b03cf0a1d68cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the filename that configures the <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html" title="This is the &quot;main&quot; class which you should create. ">SharpBCI</a>'s pipeline.  <a href="#acfae5df93d7b67b7c38b03cf0a1d68cd">More...</a><br /></td></tr>
+<tr class="separator:acfae5df93d7b67b7c38b03cf0a1d68cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af458d444c31b0d15178f67e41fd52403"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html">SharpBCIBuilder</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html#af458d444c31b0d15178f67e41fd52403">AddToPipelineScope</a> (string key, object obj)</td></tr>
+<tr class="memdesc:af458d444c31b0d15178f67e41fd52403"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add the given object to the scope that PipelineSerializer will use when instantiating Pipeables.  <a href="#af458d444c31b0d15178f67e41fd52403">More...</a><br /></td></tr>
+<tr class="separator:af458d444c31b0d15178f67e41fd52403"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a5f635bf95edee1429945803ce97c80"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html">SharpBCI</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html#a9a5f635bf95edee1429945803ce97c80">Build</a> ()</td></tr>
+<tr class="memdesc:a9a5f635bf95edee1429945803ce97c80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create and return the library given previous configuration calls.  <a href="#a9a5f635bf95edee1429945803ce97c80">More...</a><br /></td></tr>
 <tr class="separator:a9a5f635bf95edee1429945803ce97c80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A build class for <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_config.html">SharpBCIConfig</a> </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_config.html">SharpBCIConfig</a> </dd>
+<div class="textblock"><p>A builder class for <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_config.html" title="An object which configures a SharpBCI object. ">SharpBCIConfig</a>. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_config.html" title="An object which configures a SharpBCI object. ">SharpBCIConfig</a> </dd>
 <dd>
-<a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html">SharpBCI</a> </dd></dl>
+<a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html" title="This is the &quot;main&quot; class which you should create. ">SharpBCI</a> </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="af458d444c31b0d15178f67e41fd52403"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af458d444c31b0d15178f67e41fd52403">&#9670;&nbsp;</a></span>AddToPipelineScope()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html">SharpBCIBuilder</a> SharpBCI.SharpBCIBuilder.AddToPipelineScope </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">object&#160;</td>
+          <td class="paramname"><em>obj</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add the given object to the scope that PipelineSerializer will use when instantiating Pipeables. </p>
+<dl class="section see"><dt>See also</dt><dd>PipelineSerializer </dd></dl>
+
+</div>
+</div>
 <a id="a9a5f635bf95edee1429945803ce97c80"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9a5f635bf95edee1429945803ce97c80">&#9670;&nbsp;</a></span>Build()</h2>
 
@@ -116,23 +157,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-</div>
-</div>
-<a id="a241a3e2f69748fbb62cfc570253ec1dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a241a3e2f69748fbb62cfc570253ec1dd">&#9670;&nbsp;</a></span>Channels()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html">SharpBCIBuilder</a> SharpBCI.SharpBCIBuilder.Channels </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>channels</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Create and return the library given previous configuration calls. </p>
+<p>Possibly raises ArgumentException exceptions if an invalid config was passed </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html" title="This is the &quot;main&quot; class which you should create. ">SharpBCI</a> </dd></dl>
 
 </div>
 </div>
@@ -151,6 +177,30 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Set the <a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html">EEGDeviceAdapter</a> that <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html" title="This is the &quot;main&quot; class which you should create. ">SharpBCI</a> will use, overriding possible calls before. </p>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="class_sharp_b_c_i_1_1_e_e_g_device_adapter.html">EEGDeviceAdapter</a> </dd></dl>
+
+</div>
+</div>
+<a id="acfae5df93d7b67b7c38b03cf0a1d68cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfae5df93d7b67b7c38b03cf0a1d68cd">&#9670;&nbsp;</a></span>PipelineFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html">SharpBCIBuilder</a> SharpBCI.SharpBCIBuilder.PipelineFile </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>configFile</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the filename that configures the <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html" title="This is the &quot;main&quot; class which you should create. ">SharpBCI</a>'s pipeline. </p>
+<dl class="section see"><dt>See also</dt><dd>PipelineSerializer </dd></dl>
 
 </div>
 </div>

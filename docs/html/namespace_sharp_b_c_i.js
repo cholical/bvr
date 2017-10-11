@@ -1,30 +1,43 @@
 var namespace_sharp_b_c_i =
 [
     [ "CentralizationPreprocessor", "class_sharp_b_c_i_1_1_centralization_preprocessor.html", "class_sharp_b_c_i_1_1_centralization_preprocessor" ],
+    [ "DummyAdapter", "class_sharp_b_c_i_1_1_dummy_adapter.html", "class_sharp_b_c_i_1_1_dummy_adapter" ],
     [ "DynamicTimeWarping", "class_sharp_b_c_i_1_1_dynamic_time_warping.html", "class_sharp_b_c_i_1_1_dynamic_time_warping" ],
     [ "EEGDeviceAdapter", "class_sharp_b_c_i_1_1_e_e_g_device_adapter.html", "class_sharp_b_c_i_1_1_e_e_g_device_adapter" ],
     [ "EEGDeviceProducer", "class_sharp_b_c_i_1_1_e_e_g_device_producer.html", "class_sharp_b_c_i_1_1_e_e_g_device_producer" ],
     [ "EEGEvent", "class_sharp_b_c_i_1_1_e_e_g_event.html", "class_sharp_b_c_i_1_1_e_e_g_event" ],
-    [ "FFTEvent", "class_sharp_b_c_i_1_1_f_f_t_event.html", "class_sharp_b_c_i_1_1_f_f_t_event" ],
+    [ "ExponentialFilter", "class_sharp_b_c_i_1_1_exponential_filter.html", "class_sharp_b_c_i_1_1_exponential_filter" ],
     [ "FFTPipeable", "class_sharp_b_c_i_1_1_f_f_t_pipeable.html", "class_sharp_b_c_i_1_1_f_f_t_pipeable" ],
+    [ "FileLogger", "class_sharp_b_c_i_1_1_file_logger.html", "class_sharp_b_c_i_1_1_file_logger" ],
+    [ "IFilter", "interface_sharp_b_c_i_1_1_i_filter.html", "interface_sharp_b_c_i_1_1_i_filter" ],
+    [ "ILogOutput", "interface_sharp_b_c_i_1_1_i_log_output.html", "interface_sharp_b_c_i_1_1_i_log_output" ],
     [ "IPipeable", "interface_sharp_b_c_i_1_1_i_pipeable.html", "interface_sharp_b_c_i_1_1_i_pipeable" ],
+    [ "IPredictor", "interface_sharp_b_c_i_1_1_i_predictor.html", "interface_sharp_b_c_i_1_1_i_predictor" ],
     [ "IPreprocessor", "interface_sharp_b_c_i_1_1_i_preprocessor.html", "interface_sharp_b_c_i_1_1_i_preprocessor" ],
     [ "KNearestNeighbor", "class_sharp_b_c_i_1_1_k_nearest_neighbor.html", "class_sharp_b_c_i_1_1_k_nearest_neighbor" ],
+    [ "KNearestNeighborPipeable", "class_sharp_b_c_i_1_1_k_nearest_neighbor_pipeable.html", "class_sharp_b_c_i_1_1_k_nearest_neighbor_pipeable" ],
+    [ "PassThroughFilter", "class_sharp_b_c_i_1_1_pass_through_filter.html", "class_sharp_b_c_i_1_1_pass_through_filter" ],
     [ "Pipeable", "class_sharp_b_c_i_1_1_pipeable.html", "class_sharp_b_c_i_1_1_pipeable" ],
     [ "Preprocessors", "class_sharp_b_c_i_1_1_preprocessors.html", [
       [ "NonePreprocessor", "class_sharp_b_c_i_1_1_preprocessors_1_1_none_preprocessor.html", "class_sharp_b_c_i_1_1_preprocessors_1_1_none_preprocessor" ],
       [ "NormalizationPreprocessor", "class_sharp_b_c_i_1_1_preprocessors_1_1_normalization_preprocessor.html", "class_sharp_b_c_i_1_1_preprocessors_1_1_normalization_preprocessor" ]
     ] ],
+    [ "RawEventEmitter", "class_sharp_b_c_i_1_1_raw_event_emitter.html", "class_sharp_b_c_i_1_1_raw_event_emitter" ],
     [ "RemoteOSCAdapter", "class_sharp_b_c_i_1_1_remote_o_s_c_adapter.html", "class_sharp_b_c_i_1_1_remote_o_s_c_adapter" ],
+    [ "SerializedConnectionInfo", "class_sharp_b_c_i_1_1_serialized_connection_info.html", "class_sharp_b_c_i_1_1_serialized_connection_info" ],
+    [ "SerializedPipeline", "class_sharp_b_c_i_1_1_serialized_pipeline.html", "class_sharp_b_c_i_1_1_serialized_pipeline" ],
+    [ "SerializedStage", "class_sharp_b_c_i_1_1_serialized_stage.html", "class_sharp_b_c_i_1_1_serialized_stage" ],
     [ "SeriesVariable", "class_sharp_b_c_i_1_1_series_variable.html", "class_sharp_b_c_i_1_1_series_variable" ],
     [ "SharpBCI", "class_sharp_b_c_i_1_1_sharp_b_c_i.html", "class_sharp_b_c_i_1_1_sharp_b_c_i" ],
     [ "SharpBCIBuilder", "class_sharp_b_c_i_1_1_sharp_b_c_i_builder.html", "class_sharp_b_c_i_1_1_sharp_b_c_i_builder" ],
     [ "SharpBCIConfig", "class_sharp_b_c_i_1_1_sharp_b_c_i_config.html", "class_sharp_b_c_i_1_1_sharp_b_c_i_config" ],
-    [ "Smoothers", "class_sharp_b_c_i_1_1_smoothers.html", [
-      [ "SimpleMovingAverageSmoother", "class_sharp_b_c_i_1_1_smoothers_1_1_simple_moving_average_smoother.html", "class_sharp_b_c_i_1_1_smoothers_1_1_simple_moving_average_smoother" ],
-      [ "SingleExponentialSmoother", "class_sharp_b_c_i_1_1_smoothers_1_1_single_exponential_smoother.html", "class_sharp_b_c_i_1_1_smoothers_1_1_single_exponential_smoother" ],
-      [ "TimeSeriesSmoother", "class_sharp_b_c_i_1_1_smoothers_1_1_time_series_smoother.html", "class_sharp_b_c_i_1_1_smoothers_1_1_time_series_smoother" ]
-    ] ],
+    [ "SimpleMovingAverageSmoother", "class_sharp_b_c_i_1_1_simple_moving_average_smoother.html", "class_sharp_b_c_i_1_1_simple_moving_average_smoother" ],
+    [ "SingleExponentialSmoother", "class_sharp_b_c_i_1_1_single_exponential_smoother.html", "class_sharp_b_c_i_1_1_single_exponential_smoother" ],
     [ "StandardizationPreprocessor", "class_sharp_b_c_i_1_1_standardization_preprocessor.html", "class_sharp_b_c_i_1_1_standardization_preprocessor" ],
-    [ "TrainedEvent", "class_sharp_b_c_i_1_1_trained_event.html", "class_sharp_b_c_i_1_1_trained_event" ]
+    [ "test1", "class_sharp_b_c_i_1_1test1.html", null ],
+    [ "tester", "class_sharp_b_c_i_1_1tester.html", null ],
+    [ "TimeSeriesSmoother", "class_sharp_b_c_i_1_1_time_series_smoother.html", "class_sharp_b_c_i_1_1_time_series_smoother" ],
+    [ "TimeSeriesSmootherPipeable", "class_sharp_b_c_i_1_1_time_series_smoother_pipeable.html", "class_sharp_b_c_i_1_1_time_series_smoother_pipeable" ],
+    [ "TrainedEvent", "class_sharp_b_c_i_1_1_trained_event.html", "class_sharp_b_c_i_1_1_trained_event" ],
+    [ "TrainedEventEmitter", "class_sharp_b_c_i_1_1_trained_event_emitter.html", "class_sharp_b_c_i_1_1_trained_event_emitter" ]
 ];

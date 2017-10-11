@@ -39,6 +39,7 @@ public class EEGDataOutput : MonoBehaviour {
 	}
 
 	void OnEEGData(EEGEvent evt) {
+		//Debug.Log ("Got evt " + evt);
 		buffer[0] = evt.data[0];
 		buffer[1] = evt.data[1];
 		buffer[2] = evt.data[2];

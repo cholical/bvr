@@ -1,57 +1,12 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
-using System.Collections;
 using System.Collections.Generic;
 using SharpOSC;
-using UnityEngine;
+using DSPLib;
 
 namespace SharpBCI {
-
-	public enum EEGDataType {
-		// raw Accelerometer data
-		ACCEL,
-
-		// raw EEG data
-		EEG,
-
-		// absolute freq bands
-		ALPHA_ABSOLUTE,
-		BETA_ABSOLUTE,
-		GAMMA_ABSOLUTE,
-		DELTA_ABSOLUTE,
-		THETA_ABSOLUTE,
-
-		// relative freq bands
-		ALPHA_RELATIVE,
-		BETA_RELATIVE,
-		GAMMA_RELATIVE,
-		DELTA_RELATIVE,
-		THETA_RELATIVE,
-
-		CONTACT_QUALITY,
-	}
-
-	public class EEGEvent {
-		public DateTime timestamp;
-		public EEGDataType type;
-		public double[] data;
-
-		public EEGEvent(DateTime timestamp, EEGDataType type, double[] data) {
-			this.timestamp = timestamp;
-			this.type = type;
-			this.data = data;
-		}
-
-//		public override string ToString () {
-//			var dataStr = "[ ";
-//			foreach (var d in data) {
-//				dataStr += d + ", ";
-//			}
-//			dataStr += " ]";
-//			return string.Format ("EEGEvent({0}, {1}, {2})", type, timestamp, dataStr);
-//		}
-	}
-
+	
 	public abstract class EEGDeviceAdapter {
 
 		public delegate void DataHandler(EEGEvent evt);
@@ -59,6 +14,14 @@ namespace SharpBCI {
 		readonly Dictionary<EEGDataType, List<DataHandler>> handlers = new Dictionary<EEGDataType, List<DataHandler>>();
 
 		readonly Queue<EEGEvent> eventQueue = new Queue<EEGEvent>();
+
+		public readonly int channels;
+		public readonly double sampleRate;
+
+		public EEGDeviceAdapter(int channels, double sampleRate) {
+			this.channels = channels;
+			this.sampleRate = sampleRate;
+		}
 
 		public abstract void Start();
 		public abstract void Stop();
@@ -90,11 +53,11 @@ namespace SharpBCI {
 			}
 		}
 
-		protected void EmitData(EEGDataType type, double[] data) {
+		protected void EmitData(EEGEvent evt) {
 			//Debug.Log("EmitData type=" + type);
 			lock (eventQueue) {
 				//Debug.Log("EmitData lock obtained");
-				eventQueue.Enqueue(new EEGEvent(DateTime.UtcNow, type, data));
+				eventQueue.Enqueue(evt);
 			}
 		}
 
@@ -123,12 +86,12 @@ namespace SharpBCI {
 		Thread listenerThread;
 		bool stopRequested;
 
-		public RemoteOSCAdapter(int port) {
+		public RemoteOSCAdapter(int port) : base(4, 220) {
 			this.port = port;
 		}
 
 		public override void Start() {
-			Debug.Log("Starting RemoteOSCAdapter");
+			Logger.Log("Starting RemoteOSCAdapter");
 			typeMap = InitTypeMap();
 			listener = new UDPListener(port);
 			listenerThread = new Thread(new ThreadStart(Run));
@@ -136,7 +99,7 @@ namespace SharpBCI {
 		}
 
 		public override void Stop() {
-			Debug.Log("Stopping RemoteOSCAdapter");
+			Logger.Log("Stopping RemoteOSCAdapter");
 			stopRequested = true;
 			listenerThread.Join();
 			listener.Dispose();
@@ -148,9 +111,6 @@ namespace SharpBCI {
 			// raw EEG data
 			typeMap.Add("/muse/eeg", EEGDataType.EEG);
 			//typeMap.Add("/muse/eeg/quantization", EEGDataType.QUANTIZATION);
-
-			// accel data
-			typeMap.Add("/muse/acc", EEGDataType.ACCEL);
 
 			// absolute power bands
 			typeMap.Add("/muse/elements/alpha_absolute", EEGDataType.ALPHA_ABSOLUTE);
@@ -211,52 +171,97 @@ namespace SharpBCI {
 //					Debug.Log(d.ToString());
 //				}
 
-				EmitData(type, data);
+				EmitData(new EEGEvent(DateTime.UtcNow, type, data));
 			} catch (Exception e) {
 				Logger.Error("Could not convert/emit data from EEGDeviceAdapter: " + e);
 			}
 		}
 	}
 
-	public class DummyAdapter : EEGDeviceAdapter {
-		readonly double[] freqs;
-		readonly double[] amplitudes;
-		readonly int period;
+	public struct DummyAdapterSignal {
+		public readonly double[] freqs;
+		public readonly double[] amplitudes;
 
-		bool isCancelled;
-		Thread thread;
-
-		public DummyAdapter(double[] freqs, double[] amplitudes, double sampleRate) {
+		public DummyAdapterSignal(double[] freqs, double[] amplitudes) {
 			this.freqs = freqs;
 			this.amplitudes = amplitudes;
-			period = (int) (1000 * (1/sampleRate));
+		}
+	}
+
+	public class InstrumentedDummyAdapter : EEGDeviceAdapter {
+		readonly DummyAdapterSignal[] signals;
+		readonly double signalToNoiseRatio;
+
+		Thread thread;
+
+		bool isCancelled;
+
+		int currentSignal = -1;
+
+		double[] samples;
+
+		public InstrumentedDummyAdapter(DummyAdapterSignal[] signals, double sampleRate, double signalToNoiseRatio) : base(4, sampleRate) {
+			this.signals = signals;
+			this.signalToNoiseRatio = signalToNoiseRatio;
+			GenerateSamples();
 		}
 
-		void Run() {
-			double t = 0;
-			while (!isCancelled) {
-				double v = 0;
-				for (int i = 0; i < freqs.Length; i++) {
-					var f = freqs[i];
-					var a = amplitudes[i];
-					v += a * Math.Sin(2 * Math.PI * f * t);
-				}
-				t += period / 1000;
-				EmitData(EEGDataType.EEG, new double[] { v, v, v, v });
-				Thread.Sleep(period);
-			}
+		public void StartSignal(int signal) {
+			if (signal < 0 || signal >= signals.Length) throw new ArgumentOutOfRangeException();
+			currentSignal = signal;
+			GenerateSamples();
 		}
 
-		public override void Start() {
+		public override void Start() { 
+			Logger.Log("Starting DummyAdapter");
 			thread = new Thread(Run);
 			thread.Start();
 		}
 
 		public override void Stop() {
+			Logger.Log("Stopping DummyAdapter");
 			isCancelled = true;
-			thread.Join();
+			thread.Join();			
+		}
+
+		void Run() { 
+			DateTime start = DateTime.UtcNow;
+			EmitData(new EEGEvent(start, EEGDataType.CONTACT_QUALITY, new double[] { 1, 1, 1, 1 }));
+
+			// in seconds
+			var t = 0;
+			int i = 0;
+			while (!isCancelled) {
+				var v = samples[i++];
+				if (i == samples.Length) {
+					GenerateSamples();
+					i = 0;
+				}
+				t++;
+				EmitData(new EEGEvent(start.AddSeconds(sampleRate* t), EEGDataType.EEG, new double[] { v, v, v, v }));
+				Thread.Sleep((int)(Math.Round(1.0 / sampleRate * 1000)));
+			}
+		}
+
+		void GenerateSamples() {
+			var noiseAmplitude = (currentSignal == -1 ? signals.Select((x) => x.amplitudes.Sum()).Average() : signals[currentSignal].amplitudes.Sum()) / signalToNoiseRatio;
+			samples = DSP.Generate.NoiseRms(noiseAmplitude, 256, 0);
+			if (currentSignal != -1) {
+				var signal = signals[currentSignal];
+				for (int i = 0; i < signal.amplitudes.Length; i++) {
+					var s = DSP.Generate.ToneSampling(signal.amplitudes[i], signal.freqs[i], sampleRate, 256);
+					samples = DSP.Math.Add(samples, s);
+				}
+			}
 		}
 	}
 
+
+	public class DummyAdapter : InstrumentedDummyAdapter {
+		public DummyAdapter(DummyAdapterSignal signal, double sampleRate) : this(signal, sampleRate, 2) { }
+
+		public DummyAdapter(DummyAdapterSignal signal, double sampleRate, double signalToNoise) : base(new DummyAdapterSignal[] { signal }, sampleRate, signalToNoise) {
+			StartSignal(0);
+		}	}
 }
 

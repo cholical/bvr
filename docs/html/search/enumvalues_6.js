@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['manhattan',['Manhattan',['../namespace_sharp_b_c_i.html#ac3ee47b1ee7f40a2fc3c86d88f117e80a1834cdf9bf35ea1d737c15eef72e18c7',1,'SharpBCI']]],
-  ['maximum',['Maximum',['../namespace_sharp_b_c_i.html#ac3ee47b1ee7f40a2fc3c86d88f117e80a8321e79c278ec510f63675c040594892',1,'SharpBCI']]]
+  ['gamma_5fabsolute',['GAMMA_ABSOLUTE',['../namespace_sharp_b_c_i.html#a093a660576d1484ca08f82f943ba6651a819c27cfcdc9b71dacd0df97a566c8a5',1,'SharpBCI']]],
+  ['gamma_5frelative',['GAMMA_RELATIVE',['../namespace_sharp_b_c_i.html#a093a660576d1484ca08f82f943ba6651af02a965ff63f83c3e6177f63198bc6c3',1,'SharpBCI']]]
 ];

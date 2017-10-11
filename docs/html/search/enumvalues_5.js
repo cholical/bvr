@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['gamma_5fabsolute',['GAMMA_ABSOLUTE',['../namespace_sharp_b_c_i.html#a093a660576d1484ca08f82f943ba6651a819c27cfcdc9b71dacd0df97a566c8a5',1,'SharpBCI']]],
-  ['gamma_5frelative',['GAMMA_RELATIVE',['../namespace_sharp_b_c_i.html#a093a660576d1484ca08f82f943ba6651af02a965ff63f83c3e6177f63198bc6c3',1,'SharpBCI']]]
+  ['fft_5fraw',['FFT_RAW',['../namespace_sharp_b_c_i.html#a093a660576d1484ca08f82f943ba6651a3f1ed08a8b6b8015c1ee8e6b66d01267',1,'SharpBCI']]],
+  ['fft_5fsmoothed',['FFT_SMOOTHED',['../namespace_sharp_b_c_i.html#a093a660576d1484ca08f82f943ba6651a199fe162ce38f1f55e2fbf7e33c3991c',1,'SharpBCI']]]
 ];

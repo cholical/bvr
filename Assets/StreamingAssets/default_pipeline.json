@@ -1,0 +1,47 @@
+{
+	"stages": [
+		{	
+			"stageKey": "producer",
+			"stageClass": "SharpBCI.EEGDeviceProducer",
+			"arguments": [ "SharpBCIAdapter" ]
+		},
+		{
+			"stageKey": "fft",
+			"stageClass": "SharpBCI.FFTPipeable",
+			"arguments": [ 256, "SharpBCIChannels", "SharpBCISampleRate", 10 ]
+		},
+		{
+			"stageKey": "rawEventEmitter",
+			"stageClass": "SharpBCI.RawEventEmitter",
+			"arguments": [ "SharpBCIInstance" ]
+		},
+		{
+			"stageKey": "predictor",
+			"stageClass": "SharpBCI.PredictorPipeable",
+			"arguments": [ 129, "SharpBCIChannels" ]
+		},
+		{
+			"stageKey": "trainedEventEmitter",
+			"stageClass": "SharpBCI.TrainedEventEmitter",
+			"arguments": [ "SharpBCIInstance" ]
+		}
+	],
+
+	"stageConnections": [
+		{
+			"stageKey": "producer",
+			"mirrorOutputs": true,
+			"outputs": [ "fft", "rawEventEmitter" ]
+		},
+		{
+			"stageKey": "fft",
+			"mirrorOutputs": true,
+			"outputs": [ "rawEventEmitter", "predictor" ]
+		},
+		{
+			"stageKey": "predictor",
+			"mirrorOutputs": true,
+			"outputs": [ "trainedEventEmitter" ]
+		}
+	]
+}

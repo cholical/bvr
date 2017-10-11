@@ -1,5 +1,5 @@
 var namespaces =
 [
-    [ "Lomont", "namespace_lomont.html", null ],
+    [ "DSPLib", "namespace_d_s_p_lib.html", null ],
     [ "SharpBCI", "namespace_sharp_b_c_i.html", null ]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['togglepanel_2ecs',['TogglePanel.cs',['../_toggle_panel_8cs.html',1,'']]]
+  ['logger_2ecs',['Logger.cs',['../_logger_8cs.html',1,'']]]
 ];

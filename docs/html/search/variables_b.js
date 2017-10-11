@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['window_5fsize',['WINDOW_SIZE',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#ab3f303aa0a26f550479d3d0eeee4d13b',1,'SharpBCI::SharpBCI']]],
-  ['windowsize',['windowSize',['../class_scrolling_graph.html#a29ada8d7b69e1dd1b440ebd2e6a6f3e9',1,'ScrollingGraph']]]
+  ['re',['re',['../struct_complex.html#a76898a3705a61e2575c1e2b4e8ffb7bb',1,'Complex']]],
+  ['realgraph',['realGraph',['../class_f_f_t_graph_controller.html#a0d1cb8cbfc6c8b6bce28f189f1198522',1,'FFTGraphController']]],
+  ['reserved_5fprefix',['RESERVED_PREFIX',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#af83bc3fdc6760bc0a54ed3baecdc1e5e',1,'SharpBCI::SharpBCI']]],
+  ['retainedevents',['retainedEvents',['../class_training_controller.html#ab11bde6d17d0bd6fbf223e3cdb626140',1,'TrainingController']]]
 ];

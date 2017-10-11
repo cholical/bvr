@@ -1,6 +1,9 @@
 var NAVTREE =
 [
   [ "Brain VR", "index.html", [
+    [ "Welcome to the documentation site for SharpBCI, a robust real-time data processing library for C#.", "index.html", [
+      [ "Started", "index.html#Getting", null ]
+    ] ],
     [ "Packages", null, [
       [ "Packages", "namespaces.html", "namespaces" ],
       [ "Package Functions", "namespacemembers.html", [
@@ -13,21 +16,26 @@ var NAVTREE =
       [ "Class Index", "classes.html", null ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
-        [ "All", "functions.html", null ],
+        [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", null ],
         [ "Variables", "functions_vars.html", null ],
         [ "Properties", "functions_prop.html", null ]
       ] ]
     ] ],
     [ "Files", null, [
-      [ "File List", "files.html", "files" ]
+      [ "File List", "files.html", "files" ],
+      [ "File Members", "globals.html", [
+        [ "All", "globals.html", null ],
+        [ "Enumerations", "globals_enum.html", null ]
+      ] ]
     ] ]
   ] ]
 ];
 
 var NAVTREEINDEX =
 [
-"_device_adapters_8cs.html"
+"_connected_display_8cs.html",
+"class_sharp_b_c_i_1_1_sharp_b_c_i_config.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
