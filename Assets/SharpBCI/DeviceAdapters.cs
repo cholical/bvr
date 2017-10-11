@@ -209,7 +209,7 @@ namespace SharpBCI {
 		}
 
 		public void StartSignal(int signal) {
-			if (signal < 0 || signal >= signals.Length) throw new ArgumentOutOfRangeException();
+			if (signal < -1 || signal >= signals.Length) throw new ArgumentOutOfRangeException();
 			currentSignal = signal;
 			GenerateSamples();
 		}
