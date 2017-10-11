@@ -16,11 +16,11 @@ public class ParticleBrainWaveController : MonoBehaviour {
 	public int channel;
 	public EEGDataType dataType;
 	public double particleFactor = 10;
-	public double changeThreshold = 0.1;
+	public double changeThreshold = 0.01;
 
 	ParticleSystem system;
 
-	double currentPower = 0.5;
+	double currentPower = 0;
 	bool powerChanged = true;
 
 	// Use this for initialization

@@ -30,6 +30,7 @@ namespace SharpBCI
 
 		public int Predict (double[] test)
 		{
+			if (this.train_data.Count == 0) return -1;
 
 			List<KeyValuePair<int, double>> costs = new List<KeyValuePair<int, double>> ();
 

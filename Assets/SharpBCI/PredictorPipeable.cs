@@ -61,6 +61,8 @@ namespace SharpBCI
 			} else { //Testing
 				int prediction = predictor.Predict (evt.data);
 
+				if (prediction == -1) return true;
+
 				modeWindow.Add (prediction);
 
 				if( modeWindow.Count == MODE_WINDOW_SIZE) {
