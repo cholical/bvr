@@ -41,4 +41,8 @@ public class TerrainSpawner : MonoBehaviour {
 			terrainList.AddLast(t);
 		}
 	}
+
+	void OnDestroy () {
+		UnityEngine.VR.InputTracking.disablePositionalTracking = false;
+	}
 }
