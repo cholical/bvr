@@ -5,18 +5,21 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/hemisphere-relax-demo.unity
-    guid: 27cf9ba932f9f634b85cb2ae039c25b4
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/start-room.unity
+    guid: 877b8f7d1b5ba7d4598be3d789afde16
+  - enabled: 1
     path: Assets/Scenes/brain.unity
     guid: aa57b0baba9dc6042981c15f91bd688b
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/hemisphere-relax-demo.unity
+    guid: 27cf9ba932f9f634b85cb2ae039c25b4
+  - enabled: 1
     path: Assets/Scenes/particle-tests.unity
     guid: 1ff610776c42d30449269fc3bd3389dd
-  - enabled: 0
-    path: Assets/Scenes/fft-testing.unity
-    guid: e5a1f1171698f314497bd47911169801
   - enabled: 1
-    path: Assets/Scenes/VR-training-demo.unity
+    path: Assets/Scenes/relax-demo.unity
+    guid: 3f06f6cb24117aa40b7f8f0b21e74b91
+  - enabled: 1
+    path: Assets/Scenes/flappy-bird-demo.unity
     guid: 5a7cdf7f4d8ce6b4786b266c43128484
