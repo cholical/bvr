@@ -37,21 +37,21 @@ public class FlappyBirdController : MonoBehaviour {
 		startPos = transform.position;
 	}
 
-	int lastSignal = -1;
+	//int lastSignal = -1;
 	// Update is called once per frame
 	void Update () {
 		if (isTraining) {
 			UpdateTraining();
 		} else {
-			if (transform.position.y < 2 && lastSignal != 0) {
-				Debug.Log("Starting up signal");
-				((InstrumentedDummyAdapter) SharpBCIController.adapter).StartSignal(0);
-				lastSignal = 0;
-			} else if (transform.position.y > 4 && lastSignal != 1) {
-				Debug.Log("Starting down signal");
-				((InstrumentedDummyAdapter) SharpBCIController.adapter).StartSignal(1);
- 			    lastSignal = 1;	
-			}
+			//if (transform.position.y < 2 && lastSignal != 0) {
+			//	Debug.Log("Starting up signal");
+			//	((InstrumentedDummyAdapter) SharpBCIController.adapter).StartSignal(0);
+			//	lastSignal = 0;
+			//} else if (transform.position.y > 4 && lastSignal != 1) {
+			//	Debug.Log("Starting down signal");
+			//	((InstrumentedDummyAdapter) SharpBCIController.adapter).StartSignal(1);
+ 		//	    lastSignal = 1;	
+			//}
 		}
 	}
 
@@ -84,7 +84,7 @@ public class FlappyBirdController : MonoBehaviour {
 			}
 			if (!trainingUp) {
 				upPrompt.SetActive(true);
-				((InstrumentedDummyAdapter)SharpBCIController.adapter).StartSignal(0);
+				//((InstrumentedDummyAdapter)SharpBCIController.adapter).StartSignal(0);
 				//Debug.Log("Starting up training");
 				SharpBCIController.BCI.StartTraining(UP_ID);
 				trainingUp = true;
@@ -98,7 +98,7 @@ public class FlappyBirdController : MonoBehaviour {
 			}
 			if (!trainingDown) {
 				downPrompt.SetActive(true);
-				((InstrumentedDummyAdapter)SharpBCIController.adapter).StartSignal(1);
+				//((InstrumentedDummyAdapter)SharpBCIController.adapter).StartSignal(1);
 				//Debug.Log("Starting down training");
 				SharpBCIController.BCI.StartTraining(DOWN_ID);
 				trainingDown = true;
