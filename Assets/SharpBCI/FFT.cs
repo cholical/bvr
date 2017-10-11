@@ -133,8 +133,9 @@ namespace SharpBCI {
 				magSmoothers[i] = new ExponentialVectorizedSmoother(windowSize / 2 + 1, 0.1);
 				signalFilters[i] = new MultiFilter<double>(new IFilter<double>[] {
 					// filter AC interference, based on 60hz AC power
-					new NotchFilter(58, 62, sampleRate),
-					// low-pass filter for movement artifacts
+					//new NotchFilter(58, 62, sampleRate),
+					// low-pass filter for movement artifacts, ~100 point kernel
+					new WindowedSincFilter(50, 10, sampleRate),
 				}); 
 			}
 
@@ -190,6 +191,9 @@ namespace SharpBCI {
 
 				double[] lmSpectrum = DSP.ConvertComplex.ToMagnitude(cSpectrum);
 				lmSpectrum = DSP.Math.Multiply(lmSpectrum, scaleFactor);
+
+				// remove DC component
+				lmSpectrum[0] = 0;
 
 				fftOutput.Add(lmSpectrum);
 			}

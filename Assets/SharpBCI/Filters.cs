@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SharpBCI {
 	public interface IFilter<T> {
@@ -21,8 +22,25 @@ namespace SharpBCI {
 		}
 	}
 
-	public class PassThroughFilter : IFilter<double> {
-		public double Filter(double val) { return val; }
+	public class MovingAverageFilter : IFilter<double> {
+		readonly Queue<double> samples = new Queue<double>();
+		readonly int windowSize;
+		double accumulator;
+
+		public MovingAverageFilter(int windowSize) {
+			this.windowSize = windowSize;
+		}
+
+		public double Filter(double val) {
+			samples.Enqueue(val);
+			accumulator += val;
+			if (samples.Count == windowSize + 1) {
+				accumulator -= samples.Dequeue();
+				return accumulator / windowSize;
+			} else {
+				return val;
+			}
+		}
 	}
 
 	public class ExponentialFilter : IFilter<double> {
@@ -41,7 +59,7 @@ namespace SharpBCI {
 		}
 	}
 
-	public abstract class ConvolutionalFilter : IFilter<double> { 
+	public abstract class RecursiveFilter : IFilter<double> { 
 		double a0, a1, a2, b1, b2;
 
 		double x1, x2, y1, y2;
@@ -68,7 +86,7 @@ namespace SharpBCI {
 		protected abstract void CalcParams(out double a0, out double a1, out double a2, out double b1, out double b2);
 	}
 
-	public class NotchFilter : ConvolutionalFilter {
+	public class NotchFilter : RecursiveFilter {
 
 		readonly double center;
 		readonly double bandwidth;
@@ -97,6 +115,54 @@ namespace SharpBCI {
 			b2 = -(R * R);
 
 			//Logger.Log("NotchFilter params: a0={0}, a1={1}, a2={2}, b1={3}, b2={4}", a0, a1, a2, b1, b2);
+		}
+	}
+
+	public class WindowedSincFilter : IFilter<double> {
+
+		readonly double[] H;
+		readonly Queue<double> lastValues = new Queue<double>();
+
+		public WindowedSincFilter(double fCutoff, double bandwidth, double sampleRate) {
+			fCutoff /= sampleRate;
+			bandwidth /= sampleRate;
+
+			int M = (int)Math.Round(4 / bandwidth);
+
+			H = new double[M];
+			for (int i = 0; i < M; i++) {
+				if (i - M / 2 == 0) {
+					H[i] = 2 * Math.PI * fCutoff;
+				} else {
+					H[i] = Math.Sin(2 * Math.PI * fCutoff * (i - M / 2)) / (i - M / 2);
+					H[i] = H[i] * (0.54 - 0.46 * Math.Cos(2 * Math.PI * i / M));
+				}
+			}
+
+			double sum = 0;
+			for (int i = 0; i < M; i++) {
+				sum += H[i];
+			}
+
+			for (int i = 0; i < M; i++) {
+				H[i] /= sum;
+			}
+		}
+
+		public double Filter(double val) {
+			lastValues.Enqueue(val);
+			if (lastValues.Count == H.Length + 1) {
+				lastValues.Dequeue();
+
+				// convolve X to Y
+				var arr = lastValues.ToArray();
+				double y = 0;
+				for (int i = 0; i < H.Length; i++) {
+					y += arr[H.Length - i - 1] * H[i];
+				}
+				return y;
+			}
+			return val;
 		}
 	}
 }
