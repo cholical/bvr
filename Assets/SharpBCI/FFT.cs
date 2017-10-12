@@ -266,10 +266,12 @@ namespace SharpBCI {
 		}
 
 		double AbsBandPower(double[] bins, double minFreq, double maxFreq) {
-			int minBin = (int)Math.Floor(minFreq / sampleRate);
-			int maxBin = (int)Math.Ceiling(maxFreq / sampleRate);
+			double halfSampleRate = sampleRate / 2;
+			double points = (double)(windowSize / 2);
+			int minBin = (int)Math.Floor(minFreq / (halfSampleRate / points));
+			int maxBin = (int)Math.Ceiling(maxFreq / (halfSampleRate / points));
 			double powerSum = 0;
-			for (int i = minBin; i < maxBin; i++) {
+			for (int i = minBin; i <= maxBin; i++) {
 				powerSum += bins[i];
 			}
 			return powerSum;

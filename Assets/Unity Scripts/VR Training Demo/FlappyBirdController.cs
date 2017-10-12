@@ -26,8 +26,11 @@ public class FlappyBirdController : MonoBehaviour {
 
 	Rigidbody rigidBody;
 
+	float started;
+
 	// Use this for initialization
 	void Start () {
+		started = Time.time;
 		trainingStatus.SetActive(true);
 		rigidBody = GetComponent<Rigidbody>();
 		//rigidBody.freezeRotation = true;
@@ -56,7 +59,7 @@ public class FlappyBirdController : MonoBehaviour {
 	}
 
 	void UpdateTraining() { 
-		if (Time.time > trainingTime) {
+		if ((Time.time - started) > trainingTime) {
 			
 			//Debug.Log(trainingUp + " " + trainingDown);
 			if (trainingUp) SharpBCIController.BCI.StopTraining(UP_ID);
