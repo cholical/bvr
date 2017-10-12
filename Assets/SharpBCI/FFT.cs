@@ -117,8 +117,6 @@ namespace SharpBCI {
 
 			fft = new FFT();
 			fft.Initialize((uint) windowSize);
-			//FFT.A = 0;
-			//FFT.B = 1;
 
 			// target 10Hz
 			fftRate = (uint)Math.Round(sampleRate / targetFFTRate);
@@ -136,7 +134,7 @@ namespace SharpBCI {
 				});
 			}
 
-			windowConstants = DSP.Window.Coefficients(DSP.Window.Type.Rectangular, this.windowSize);
+			windowConstants = DSP.Window.Coefficients(DSP.Window.Type.Hamming, this.windowSize);
 			scaleFactor = DSP.Window.ScaleFactor.Signal(windowConstants);
 			//noiseFactor = DSP.Window.ScaleFactor.Noise(windowConstants, sampleRate);
 		}
@@ -201,20 +199,24 @@ namespace SharpBCI {
 				Add(new EEGEvent(evt.timestamp, EEGDataType.FFT_SMOOTHED, smoothedFFT, i));
 			}
 
+			var freqSpan = fft.FrequencySpan(sampleRate);
+
 			// find abs powers for each band
-			Dictionary<EEGDataType, List<double>> absolutePowers = new Dictionary<EEGDataType, List<double>>();
-			foreach (var bins in fftOutput) {
+			Dictionary<EEGDataType, double[]> absolutePowers = new Dictionary<EEGDataType, double[]>();
+			for (int i = 0; i < channels; i++) {
+				var bins = fftOutput[i];
 				double deltaAbs = AbsBandPower(bins, 1, 4);
 				double thetaAbs = AbsBandPower(bins, 4, 8);
 				double alphaAbs = AbsBandPower(bins, 7.5, 13);
 				double betaAbs = AbsBandPower(bins, 13, 30);
 				double gammaAbs = AbsBandPower(bins, 30, 44);
+				//Logger.Log("D={0}, T={1}, A={2}, B={3}, G={4}", deltaAbs, thetaAbs, alphaAbs, betaAbs, gammaAbs);
 
-				GetBandList(absolutePowers, EEGDataType.ALPHA_ABSOLUTE).Add(alphaAbs);
-				GetBandList(absolutePowers, EEGDataType.BETA_ABSOLUTE).Add(betaAbs);
-				GetBandList(absolutePowers, EEGDataType.GAMMA_ABSOLUTE).Add(gammaAbs);
-				GetBandList(absolutePowers, EEGDataType.DELTA_ABSOLUTE).Add(deltaAbs);
-				GetBandList(absolutePowers, EEGDataType.THETA_ABSOLUTE).Add(thetaAbs);
+				GetBandList(absolutePowers, EEGDataType.ALPHA_ABSOLUTE)[i] = (alphaAbs);
+				GetBandList(absolutePowers, EEGDataType.BETA_ABSOLUTE)[i] = (betaAbs);
+				GetBandList(absolutePowers, EEGDataType.GAMMA_ABSOLUTE)[i] = (gammaAbs);
+				GetBandList(absolutePowers, EEGDataType.DELTA_ABSOLUTE)[i] = (deltaAbs);
+				GetBandList(absolutePowers, EEGDataType.THETA_ABSOLUTE)[i] = (thetaAbs);
 			}
 
 			// we can emit abs powers immediately
@@ -232,47 +234,44 @@ namespace SharpBCI {
 			Add(new EEGEvent(evt.timestamp, EEGDataType.THETA_RELATIVE, RelBandPower(absolutePowers, EEGDataType.THETA_ABSOLUTE)));
 		}
 
-		void ApplyWindow(double[] arr) {
-			int N = arr.Length;
-			for (int i = 0; i < N; i++) {
-				arr[i] = arr[i] * windowConstants[i];
-			}
-		}
-
-		List<double> GetBandList(Dictionary<EEGDataType, List<double>> dict, EEGDataType type) {
+		double[] GetBandList(Dictionary<EEGDataType, double[]> dict, EEGDataType type) {
 			if (dict.ContainsKey(type)) {
 				return dict[type];
 			} else {
-				List<double> val = new List<double>();
+				double[] val = new double[channels];
 				dict[type] = val;
 				return val;
 			}
 		}
 
-		double[] RelBandPower(Dictionary<EEGDataType, List<double>> powerDict, EEGDataType band) {
+		double[] RelBandPower(Dictionary<EEGDataType, double[]> powerDict, EEGDataType band) {
 			double[] absPowers = new double[channels];
-			foreach (var channelPowers in powerDict.Values) {
+			foreach (var channelPowers in powerDict) {
+				//Logger.Log("Looking at " + channelPowers.Key);
 				for (int i = 0; i < channels; i++) {
-					absPowers[i] += channelPowers[i];
+					absPowers[i] += Math.Pow(channelPowers.Value[i], 10);
 				}
 			}
 
 			double[] relPowers = new double[channels];
-			List<double> bandPowers = powerDict[band];
+			double[] bandPowers = powerDict[band];
 			for (int i = 0; i < channels; i++) {
-				relPowers[i] = bandPowers[i] / absPowers[i];
+				relPowers[i] =  Math.Pow(bandPowers[i], 10) / absPowers[i];
 			}
 			return relPowers;
 		}
 
 		double AbsBandPower(double[] bins, double minFreq, double maxFreq) {
-			int minBin = (int)Math.Floor(minFreq / sampleRate);
-			int maxBin = (int)Math.Ceiling(maxFreq / sampleRate);
+			double halfSampleRate = sampleRate / 2;
+			uint points = windowSize / 2 - 1;
+			int minBin = (int) Math.Floor(minFreq / (halfSampleRate / points));
+			int maxBin = (int)Math.Ceiling(maxFreq / (halfSampleRate / points));
+			//Logger.Log("minFreq={0}, minBin={1}, maxFreq={2}, maxBin={3}", minFreq, minBin, maxFreq, maxBin);
 			double powerSum = 0;
-			for (int i = minBin; i < maxBin; i++) {
+			for (int i = minBin; i <= maxBin; i++) {
 				powerSum += bins[i];
 			}
-			return powerSum;
+			return Math.Log10(powerSum);
 		}
 	}
 }
