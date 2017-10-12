@@ -18,7 +18,7 @@ namespace SharpBCI {
 		public readonly int channels;
 		public readonly double sampleRate;
 
-		public EEGDeviceAdapter(int channels, double sampleRate) {
+		protected EEGDeviceAdapter(int channels, double sampleRate) {
 			this.channels = channels;
 			this.sampleRate = sampleRate;
 		}
@@ -27,7 +27,7 @@ namespace SharpBCI {
 		public abstract void Stop();
 
 		public void AddHandler(EEGDataType type, DataHandler handler) {
-			// Debug.Log("AddHandler type="+type);
+			Logger.Log("AddHandler type="+type);
 			if (!handlers.ContainsKey(type)) {
 				handlers.Add(type, new List<DataHandler>());
 			}
@@ -44,20 +44,23 @@ namespace SharpBCI {
 		}
 
 		public void FlushEvents() {
+			//Logger.Log("FlushEvents()");
 			lock (eventQueue) {
-				// Debug.Log("FlushEvents()");
+				//Logger.Log("FlushEvents lock obtained");
 				while (eventQueue.Count > 0) {
 					EEGEvent evt = eventQueue.Dequeue();
 					FlushEvent(evt);
 				}
+				//Logger.Log("FlushEvents lock released");
 			}
 		}
 
 		protected void EmitData(EEGEvent evt) {
-			//Debug.Log("EmitData type=" + type);
+			//Logger.Log("EmitData type=" + evt.type);
 			lock (eventQueue) {
-				//Debug.Log("EmitData lock obtained");
+				//Logger.Log("EmitData lock obtained");
 				eventQueue.Enqueue(evt);
+				//Logger.Log("EmitData lock released");
 			}
 		}
 
@@ -66,7 +69,11 @@ namespace SharpBCI {
 				//Debug.Log("FlushEvent type=" + evt.type);
 				List<DataHandler> h = handlers[evt.type];
 				foreach (DataHandler dh in h) {
-					dh(evt);
+					//try {
+						dh(evt);
+					//} catch (Exception e) {
+					//	Logger.Error(e);
+					//}
 				}
 			}
 		}
