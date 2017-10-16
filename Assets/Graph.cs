@@ -81,7 +81,7 @@ public class Graph : MonoBehaviour {
 
 		Vector2 offset = new Vector2(rectTransform.pivot.x * sizeX, rectTransform.pivot.y * sizeY);
 
-		Debug.Log(string.Format("Graph extends: {0}, {1}, {2}, {3}", minX, maxX, minY, maxY));
+		//Debug.Log(string.Format("Graph extends: {0}, {1}, {2}, {3}", minX, maxX, minY, maxY));
 
 		// create bars based on dataMap
 		int colorIdx = 0;
@@ -149,7 +149,7 @@ public class Graph : MonoBehaviour {
 		var x = (int) Math.Round(minX);
 		int j = 0;
 
-		Debug.Log(string.Format("Max Labels {0}, Label Step {1}", maxLabels, labelStep));
+		//Debug.Log(string.Format("Max Labels {0}, Label Step {1}", maxLabels, labelStep));
 
 		if (!IsValidPoint(minX) || !IsValidPoint(maxX) || maxX < minX || labelStep <= 0) {
 			Debug.LogWarning("Graph ended up in invalid state");
