@@ -46,6 +46,14 @@ public class FlappyBirdController : MonoBehaviour {
 		if (isTraining) {
 			UpdateTraining();
 		} else {
+			//var newPos = transform.position;
+			if (Input.GetKey(KeyCode.UpArrow)) {
+				rigidBody.velocity = Vector3.up * upForce;
+			} else if (Input.GetKey(KeyCode.DownArrow)) {
+				rigidBody.velocity = Vector3.down * upForce;
+			} else {
+				rigidBody.velocity = Vector3.zero;
+			}
 			//if (transform.position.y < 2 && lastSignal != 0) {
 			//	Debug.Log("Starting up signal");
 			//	((InstrumentedDummyAdapter) SharpBCIController.adapter).StartSignal(0);
@@ -111,10 +119,12 @@ public class FlappyBirdController : MonoBehaviour {
 
 	void FixedUpdate() {
 		if (upQueued) {
-			rigidBody.velocity = Vector3.up * upForce;
+			Debug.Log("Performing up");
+			//rigidBody.velocity = Vector3.up * upForce;
 			upQueued = false;
 		} else if (downQueued) {
-			rigidBody.velocity = Vector3.down * upForce;
+			Debug.Log("Performing down");
+			//rigidBody.velocity = Vector3.down * upForce;
 			downQueued = false;
 		}
 	}
