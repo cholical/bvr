@@ -72,8 +72,9 @@ public class Graph : MonoBehaviour {
 	}
 
 	void UpdateData() {
-		CalcExtents();
 		valuesDirty = false;
+
+		CalcExtents();
 
 		float sizeX = rectTransform.rect.width;
 		float sizeY = rectTransform.rect.height;
@@ -104,6 +105,11 @@ public class Graph : MonoBehaviour {
 			for (int i = 0; i < arr.Length; i++) {
 				var v = arr[i];
 
+				var vX = v.x;
+				var vY = v.y;
+
+				if (!IsValidPoint(vX) || !IsValidPoint(vY)) continue;
+					
 				var scaledX = Rescale(v.x, minX, maxX, labelOffset, sizeX) - offset.x + barOffset;
 				var scaledY = Rescale(v.y, minY, maxY, 0f, sizeY - labelPrefab.rectTransform.rect.height) - offset.y;
 
@@ -139,11 +145,17 @@ public class Graph : MonoBehaviour {
 
 		// now make labels for xAxis
 		int maxLabels = (int)Math.Ceiling(sizeX / labelPrefab.rectTransform.rect.width);
-		int labelStep = (int)Math.Ceiling((maxX - minX) / maxLabels);
+		int labelStep = Math.Max(1, (int)Math.Ceiling((maxX - minX) / maxLabels));
 		var x = (int) Math.Round(minX);
 		int j = 0;
 
 		//Debug.Log(string.Format("Max Labels {0}, Label Step {1}", maxLabels, labelStep));
+
+		if (!IsValidPoint(minX) || !IsValidPoint(maxX) || maxX < minX || labelStep <= 0) {
+			Debug.LogWarning("Graph ended up in invalid state");
+			return;
+		}
+		
 		while (x < maxX) {
 			var scaledX = Rescale(x, minX, maxX, labelOffset, sizeX) - offset.x;
 			if (j == labelObjs.Count) {
@@ -153,9 +165,15 @@ public class Graph : MonoBehaviour {
 				labelObjs.Add(clone);
 			}
 			var label = labelObjs[j++];
+			label.gameObject.SetActive(true);
 			label.rectTransform.localPosition = new Vector3(scaledX, -rectTransform.rect.height, label.rectTransform.localPosition.z);
 			label.text = xFormatter(x);
 			x += labelStep;
+		}
+
+		// hide unused labels
+		while (j < labelObjs.Count) {
+			labelObjs[j++].gameObject.SetActive(false);
 		}
 	}
 
@@ -166,9 +184,26 @@ public class Graph : MonoBehaviour {
 	}
 
 	void CalcExtents() {
-		minX = dataMap.Min(arr => arr.Length == 0 ? 0 : arr.Min(v => v.x));
-		maxX = dataMap.Max(arr => arr.Length == 0 ? 0 : arr.Max(v => v.x));
-		minY = dataMap.Min(arr => arr.Length == 0 ? 0 : arr.Min(v => v.y));
-		maxY = dataMap.Max(arr => arr.Length == 0 ? 0 : arr.Max(v => v.y));
+		minX = float.PositiveInfinity;
+		maxX = float.NegativeInfinity;
+		minY = float.PositiveInfinity;
+		maxY = float.NegativeInfinity;
+		foreach (var key in dataMap) {
+			foreach (var v in key) {
+				if (!IsValidPoint(v.x) || !IsValidPoint(v.y)) continue;
+				if (v.x < minX)
+					minX = v.x;
+				if (v.x > maxX)
+					maxX = v.x;
+				if (v.y < minY)
+					minY = v.y;
+				if (v.y > maxY)
+					maxY = v.y;
+			}
+		}
+	}
+
+	bool IsValidPoint(float x) {
+		return !(float.IsNaN(x) || float.IsInfinity(x));
 	}
 }

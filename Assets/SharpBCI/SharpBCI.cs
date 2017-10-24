@@ -194,6 +194,8 @@ namespace SharpBCI {
 
 		// IPipeables to train on.
 		readonly IPredictorPipeable[] predictors;
+
+		readonly List<int> trainedEventIds = new List<int>();
 		// end readonlys
 
 		// variables
@@ -297,6 +299,10 @@ namespace SharpBCI {
 			foreach (var predictor in predictors) {
 				predictor.StopTraining(id);
 			}
+		}
+
+		public IEnumerable<int> GetTrainedIds() {
+			return trainedEventIds.AsReadOnly();
 		}
 
 		/**

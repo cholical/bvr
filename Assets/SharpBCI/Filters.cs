@@ -96,10 +96,10 @@ namespace SharpBCI {
 
 	public class MovingAverageFilter : IFilter<double> {
 		readonly Queue<double> samples = new Queue<double>();
-		readonly int windowSize;
+		readonly uint windowSize;
 		double accumulator;
 
-		public MovingAverageFilter(int windowSize) {
+		public MovingAverageFilter(uint windowSize) {
 			this.windowSize = windowSize;
 		}
 
