@@ -269,16 +269,9 @@ namespace SharpBCI {
 
 		double AbsBandPower(double[] bins, double minFreq, double maxFreq) {
 			double halfSampleRate = sampleRate / 2;
-<<<<<<< HEAD
 			double points = (double)(windowSize / 2);
 			int minBin = (int)Math.Floor(minFreq / (halfSampleRate / points));
 			int maxBin = (int)Math.Ceiling(maxFreq / (halfSampleRate / points));
-=======
-			uint points = windowSize / 2 - 1;
-			int minBin = (int) Math.Floor(minFreq / (halfSampleRate / points));
-			int maxBin = (int)Math.Ceiling(maxFreq / (halfSampleRate / points));
-			//Logger.Log("minFreq={0}, minBin={1}, maxFreq={2}, maxBin={3}", minFreq, minBin, maxFreq, maxBin);
->>>>>>> FFT-testing
 			double powerSum = 0;
 			for (int i = minBin; i <= maxBin; i++) {
 				powerSum += bins[i];
