@@ -15,6 +15,19 @@ public class FlappyBirdController : MonoBehaviour {
 	public GameObject upPrompt;
 	public GameObject downPrompt;
 
+	public SteamVR_TrackedObject leftController;
+	public SteamVR_TrackedObject rightController;
+
+	SteamVR_Controller.Device LeftDevice {
+		get {
+			return SteamVR_Controller.Input((int)leftController.index);
+		}	}
+
+	SteamVR_Controller.Device RightDevice {
+		get {
+			return SteamVR_Controller.Input((int)rightController.index);
+		}	}
+
 	bool isTraining = true;
 	bool trainingUp;
 	bool trainingDown;
@@ -46,14 +59,6 @@ public class FlappyBirdController : MonoBehaviour {
 		if (isTraining) {
 			UpdateTraining();
 		} else {
-			//var newPos = transform.position;
-			if (Input.GetKey(KeyCode.UpArrow)) {
-				rigidBody.velocity = Vector3.up * upForce;
-			} else if (Input.GetKey(KeyCode.DownArrow)) {
-				rigidBody.velocity = Vector3.down * upForce;
-			} else {
-				rigidBody.velocity = Vector3.zero;
-			}
 			//if (transform.position.y < 2 && lastSignal != 0) {
 			//	Debug.Log("Starting up signal");
 			//	((InstrumentedDummyAdapter) SharpBCIController.adapter).StartSignal(0);
@@ -68,7 +73,6 @@ public class FlappyBirdController : MonoBehaviour {
 
 	void UpdateTraining() { 
 		if ((Time.time - started) > trainingTime) {
-			
 			//Debug.Log(trainingUp + " " + trainingDown);
 			if (trainingUp) SharpBCIController.BCI.StopTraining(UP_ID);
 			if (trainingDown) SharpBCIController.BCI.StopTraining(DOWN_ID);
@@ -86,7 +90,21 @@ public class FlappyBirdController : MonoBehaviour {
 			downPrompt.SetActive(false);
 		}
 
-		if (transform.position.y < startPos.y) {
+		if (LeftDevice.GetHairTrigger()) {
+			if (trainingUp) {
+				upPrompt.SetActive(false);
+				//Debug.Log("Stopping up training");
+				SharpBCIController.BCI.StopTraining(UP_ID);
+				trainingUp = false;
+			}
+			if (!trainingDown) {
+				downPrompt.SetActive(true);
+				//((InstrumentedDummyAdapter)SharpBCIController.adapter).StartSignal(1);
+				//Debug.Log("Starting down training");
+				SharpBCIController.BCI.StartTraining(DOWN_ID);
+				trainingDown = true;
+			}
+		} else if (RightDevice.GetHairTrigger()) {
 			if (trainingDown) {
 				downPrompt.SetActive(false);
 				//Debug.Log("Stopping down training");
@@ -101,18 +119,14 @@ public class FlappyBirdController : MonoBehaviour {
 				trainingUp = true;
 			}
 		} else {
-			if (trainingUp) {
+			if (trainingDown) {
+				downPrompt.SetActive(false);
+				SharpBCIController.BCI.StopTraining(DOWN_ID);
+				trainingDown = false;
+			} else if (trainingUp) {
 				upPrompt.SetActive(false);
-				//Debug.Log("Stopping up training");
 				SharpBCIController.BCI.StopTraining(UP_ID);
 				trainingUp = false;
-			}
-			if (!trainingDown) {
-				downPrompt.SetActive(true);
-				//((InstrumentedDummyAdapter)SharpBCIController.adapter).StartSignal(1);
-				//Debug.Log("Starting down training");
-				SharpBCIController.BCI.StartTraining(DOWN_ID);
-				trainingDown = true;
 			}
 		}
 	}
