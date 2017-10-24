@@ -15,6 +15,9 @@
 		public static Complex operator *(Complex a, Complex b) {
 			return new Complex(a.re * b.re - a.im * b.im, a.im * b.re + a.re * b.im);
 		}
+		public static Complex operator /(Complex a, double b) {
+			return new Complex(a.re / b, a.re / b);
+		}
 
 		public static Complex Zero = new Complex(0, 0);
 		public static Complex One = new Complex(1, 0);

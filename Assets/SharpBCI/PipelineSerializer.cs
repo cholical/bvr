@@ -175,6 +175,10 @@ namespace SharpBCI {
 				var arg = stage.arguments[i];
 				if (arg is string && scope.ContainsKey(((string)arg))) {
 					stage.arguments[i] = scope[(string)arg];
+				} 
+				// kludge b/c it parses doubles as decimals
+				else if (arg is decimal) {
+					stage.arguments[i] = Convert.ToDouble(arg);
 				}
 			}
 

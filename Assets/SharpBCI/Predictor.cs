@@ -8,12 +8,12 @@ using SharpBCI;
 namespace SharpBCI
 {
 
-	public interface IPredictor {
-		void AddTrainingData (int label, double[] data) ;
-		int Predict (double[] test);
+	public interface IPredictor<T> {
+		void AddTrainingData (int label, T data) ;
+		int Predict (T test);
 	}
 
-	public abstract class NearestNeighborPredictor : IPredictor {
+	public abstract class NearestNeighborPredictor : IPredictor<double[]> {
 
 		public List<KeyValuePair<int, double[]>> train_data = new List<KeyValuePair<int, double[]>> ();
 		private double[] test_data;

@@ -31,44 +31,44 @@ namespace SharpBCI {
 
 	public class XCorrVectorizedSmoother : IVectorizedSmoother<Complex> {
 
-		readonly int iterations;
+		readonly uint iterations;
 
 		readonly Queue<Complex[]> aChannel = new Queue<Complex[]>();
 		readonly Queue<Complex[]> bChannel = new Queue<Complex[]>();
 
 		bool turn;
 
-		int n;
-
-		public XCorrVectorizedSmoother(int n, int k) {
-			if (iterations != 1)
-				throw new ArgumentException("Only k=1 is supported atm");
-			
-			this.iterations = k;
-			this.n = n;
-			//previousValues = new Complex[n];
+		public XCorrVectorizedSmoother(uint iterations) {
+			this.iterations = iterations;
 		}
 
 		public Complex[] Smooth(Complex[] values) {
 			if (turn) {
 				bChannel.Enqueue(values);
-				// assert aChannel.Count == bChannel.Count
-				var aSamples = aChannel.ToArray();
-				var bSamples = bChannel.ToArray();
-
-				var accumulator = new Complex[aSamples[0].Length].Select((x) => Complex.Zero);
-				for (int i = 0; i < aSamples.Length; i++) {
-					var a = aSamples[i];
-					var b = bSamples[i];
-					var conjugates = b.Select((x) => Complex.Conjugate(x));
-					var multiplied = a.Zip(b, (x, y) => x * y);
-					accumulator = accumulator.Zip(multiplied, (x, y) => x + y);
-				}
+				if (bChannel.Count == iterations + 1)
+					bChannel.Dequeue();
 			} else {
 				aChannel.Enqueue(values);
+				if (aChannel.Count  == iterations + 1)
+					aChannel.Dequeue();
 			}
 			turn = !turn;
-			return null;
+
+			var N = Math.Min(aChannel.Count, bChannel.Count);
+			if (N < 1) return values;
+
+			var aSamples = aChannel.ToArray();
+			var bSamples = bChannel.ToArray();
+
+			var accumulator = new Complex[aSamples[0].Length].Select((x) => Complex.Zero);
+			for (int i = 0; i < N; i++) {
+				var a = aSamples[i];
+				var b = bSamples[i];
+				var conjugates = b.Select((x) => Complex.Conjugate(x));
+				var multiplied = a.Zip(b, (x, y) => x * y);
+				accumulator = accumulator.Zip(multiplied, (x, y) => x + y);
+			}
+			return accumulator.Select((x) => (x / N)).ToArray();
 		}
 	}
 
@@ -92,6 +92,7 @@ namespace SharpBCI {
 		//readonly double noiseFactor;
 
 		readonly IVectorizedSmoother<double>[] magSmoothers;
+		readonly IVectorizedSmoother<Complex>[] complexFilters;
 
 		readonly IFilter<double>[] signalFilters;
 
@@ -117,8 +118,6 @@ namespace SharpBCI {
 
 			fft = new FFT();
 			fft.Initialize((uint) windowSize);
-			//FFT.A = 0;
-			//FFT.B = 1;
 
 			// target 10Hz
 			fftRate = (uint)Math.Round(sampleRate / targetFFTRate);
@@ -127,16 +126,18 @@ namespace SharpBCI {
 
 			signalFilters = new IFilter<double>[channels];
 			magSmoothers = new IVectorizedSmoother<double>[channels];
-
+			complexFilters = new IVectorizedSmoother<Complex>[channels];
 			for (int i = 0; i < channels; i++) {
 				samples[i] = new Queue<double>();
-				magSmoothers[i] = new ExponentialVectorizedSmoother(windowSize / 2 + 1, 0.1);
+				magSmoothers[i] = new ExponentialVectorizedSmoother(windowSize / 2 + 1, 1.0 / (fftRate / 4.0));
+				complexFilters[i] = new XCorrVectorizedSmoother(fftRate / 2);
 				signalFilters[i] = new MultiFilter<double>(new IFilter<double>[] {
 					new ConvolvingDoubleEndedFilter(1, 50, 2, sampleRate, true),
+					//new MovingAverageFilter(fftRate),
 				});
 			}
 
-			windowConstants = DSP.Window.Coefficients(DSP.Window.Type.Rectangular, this.windowSize);
+			windowConstants = DSP.Window.Coefficients(DSP.Window.Type.Hamming, this.windowSize);
 			scaleFactor = DSP.Window.ScaleFactor.Signal(windowConstants);
 			//noiseFactor = DSP.Window.ScaleFactor.Noise(windowConstants, sampleRate);
 		}
@@ -178,13 +179,16 @@ namespace SharpBCI {
 		void DoFFT(EEGEvent evt) { 
 			// Do an FFT on each channel
 			List<double[]> fftOutput = new List<double[]>();
-			foreach (var channelSamples in samples) {
+			for (int i = 0; i < samples.Length; i++) {
+				var channelSamples = samples[i];
 				var samplesCopy = channelSamples.ToArray();
 
 				// apply windowing function to samplesCopy
 				DSP.Math.Multiply(samplesCopy, windowConstants);
 
 				var cSpectrum = fft.Execute(samplesCopy);
+				// complex side smoothing
+				//cSpectrum = complexFilters[i].Smooth(cSpectrum);
 
 				double[] lmSpectrum = DSP.ConvertComplex.ToMagnitude(cSpectrum);
 				lmSpectrum = DSP.Math.Multiply(lmSpectrum, scaleFactor);
@@ -196,25 +200,29 @@ namespace SharpBCI {
 				var rawFFT = fftOutput[i];
 				Add(new EEGEvent(evt.timestamp, EEGDataType.FFT_RAW, rawFFT, i));
 
-				// smoothing logic
+				// magnitude side smoothing
 				var smoothedFFT = magSmoothers[i].Smooth(rawFFT);
 				Add(new EEGEvent(evt.timestamp, EEGDataType.FFT_SMOOTHED, smoothedFFT, i));
 			}
 
+			//var freqSpan = fft.FrequencySpan(sampleRate);
+
 			// find abs powers for each band
-			Dictionary<EEGDataType, List<double>> absolutePowers = new Dictionary<EEGDataType, List<double>>();
-			foreach (var bins in fftOutput) {
+			var absolutePowers = new Dictionary<EEGDataType, double[]>();
+			for (int i = 0; i < channels; i++) {
+				var bins = fftOutput[i];
 				double deltaAbs = AbsBandPower(bins, 1, 4);
 				double thetaAbs = AbsBandPower(bins, 4, 8);
 				double alphaAbs = AbsBandPower(bins, 7.5, 13);
 				double betaAbs = AbsBandPower(bins, 13, 30);
 				double gammaAbs = AbsBandPower(bins, 30, 44);
+				//Logger.Log("D={0}, T={1}, A={2}, B={3}, G={4}", deltaAbs, thetaAbs, alphaAbs, betaAbs, gammaAbs);
 
-				GetBandList(absolutePowers, EEGDataType.ALPHA_ABSOLUTE).Add(alphaAbs);
-				GetBandList(absolutePowers, EEGDataType.BETA_ABSOLUTE).Add(betaAbs);
-				GetBandList(absolutePowers, EEGDataType.GAMMA_ABSOLUTE).Add(gammaAbs);
-				GetBandList(absolutePowers, EEGDataType.DELTA_ABSOLUTE).Add(deltaAbs);
-				GetBandList(absolutePowers, EEGDataType.THETA_ABSOLUTE).Add(thetaAbs);
+				GetBandList(absolutePowers, EEGDataType.ALPHA_ABSOLUTE)[i] = (alphaAbs);
+				GetBandList(absolutePowers, EEGDataType.BETA_ABSOLUTE)[i] = (betaAbs);
+				GetBandList(absolutePowers, EEGDataType.GAMMA_ABSOLUTE)[i] = (gammaAbs);
+				GetBandList(absolutePowers, EEGDataType.DELTA_ABSOLUTE)[i] = (deltaAbs);
+				GetBandList(absolutePowers, EEGDataType.THETA_ABSOLUTE)[i] = (thetaAbs);
 			}
 
 			// we can emit abs powers immediately
@@ -232,35 +240,29 @@ namespace SharpBCI {
 			Add(new EEGEvent(evt.timestamp, EEGDataType.THETA_RELATIVE, RelBandPower(absolutePowers, EEGDataType.THETA_ABSOLUTE)));
 		}
 
-		void ApplyWindow(double[] arr) {
-			int N = arr.Length;
-			for (int i = 0; i < N; i++) {
-				arr[i] = arr[i] * windowConstants[i];
-			}
-		}
-
-		List<double> GetBandList(Dictionary<EEGDataType, List<double>> dict, EEGDataType type) {
+		double[] GetBandList(Dictionary<EEGDataType, double[]> dict, EEGDataType type) {
 			if (dict.ContainsKey(type)) {
 				return dict[type];
 			} else {
-				List<double> val = new List<double>();
+				double[] val = new double[channels];
 				dict[type] = val;
 				return val;
 			}
 		}
 
-		double[] RelBandPower(Dictionary<EEGDataType, List<double>> powerDict, EEGDataType band) {
+		double[] RelBandPower(Dictionary<EEGDataType, double[]> powerDict, EEGDataType band) {
 			double[] absPowers = new double[channels];
-			foreach (var channelPowers in powerDict.Values) {
+			foreach (var channelPowers in powerDict) {
+				//Logger.Log("Looking at " + channelPowers.Key);
 				for (int i = 0; i < channels; i++) {
-					absPowers[i] += channelPowers[i];
+					absPowers[i] += Math.Pow(channelPowers.Value[i], 10);
 				}
 			}
 
 			double[] relPowers = new double[channels];
-			List<double> bandPowers = powerDict[band];
+			double[] bandPowers = powerDict[band];
 			for (int i = 0; i < channels; i++) {
-				relPowers[i] = bandPowers[i] / absPowers[i];
+				relPowers[i] =  Math.Pow(bandPowers[i], 10) / absPowers[i];
 			}
 			return relPowers;
 		}
@@ -274,7 +276,7 @@ namespace SharpBCI {
 			for (int i = minBin; i <= maxBin; i++) {
 				powerSum += bins[i];
 			}
-			return powerSum;
+			return Math.Log10(powerSum);
 		}
 	}
 }
