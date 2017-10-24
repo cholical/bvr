@@ -57,6 +57,7 @@ namespace SharpBCI {
 			if (trainingId == ID_PREDICT) {
 				var prediction = predictor.Predict(buffer);
 				if (prediction != -1)
+					Logger.Log(string.Format("Predicted: {0}", prediction));
 					Add(new TrainedEvent(prediction));
 			} else {
 				predictor.AddTrainingData(trainingId, buffer);
@@ -117,7 +118,7 @@ namespace SharpBCI {
 			if (distances.Count == 0)
 				return -1;
 
-			var nearestNeighbors = distances.OrderBy((x) => x.Value).Take(k);
+			var nearestNeighbors = distances.OrderByDescending((x) => x.Value).Take(k);
 
 			// use a plurality voting system weighted by distance from us
 			double voteSum = 0;
@@ -155,14 +156,32 @@ namespace SharpBCI {
 		double Distance(double[,] a, double[,] b) {
 			double dist = 0;
 			for (int cIdx = 0; cIdx < channels; cIdx++) {
-				double bSum = 0;
+				double[] aRow = new double[a.GetLength(1)];
+				double[] bRow = new double[b.GetLength(1)];
 				for (int bIdx = 0; bIdx < bands.Length; bIdx++) {
-					bSum += Math.Abs(a[cIdx, bIdx] - b[cIdx, bIdx]);
+					aRow [bIdx] = a [cIdx, bIdx];
+					bRow [bIdx] = b [cIdx, bIdx];
 				}
-				dist += bSum / bands.Length;
+				dist += (Corr(aRow,bRow)+1) / bands.Length;
 			}
 			dist /= channels;
 			return dist;
+		}
+
+		double Corr(double[] x, double[] y)
+		{
+
+			double xAvg = x.Average ();
+			double yAvg = y.Average ();
+
+			double numerator = x.Zip (y, (xi, yi) => (xi - xAvg) * (yi - yAvg)).Sum ();
+
+			double xSumSq = x.Sum (i => Math.Pow ((i - xAvg), 2));
+			double ySumSq = y.Sum (i => Math.Pow ((i - yAvg), 2));
+
+			double denominator = Math.Sqrt (xSumSq * ySumSq);
+
+			return numerator / denominator;
 		}
 	}
 }
