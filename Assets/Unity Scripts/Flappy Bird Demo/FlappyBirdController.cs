@@ -21,12 +21,14 @@ public class FlappyBirdController : MonoBehaviour {
 	SteamVR_Controller.Device LeftDevice {
 		get {
 			return SteamVR_Controller.Input((int)leftController.index);
-		}	}
+		}
+	}
 
 	SteamVR_Controller.Device RightDevice {
 		get {
 			return SteamVR_Controller.Input((int)rightController.index);
-		}	}
+		}
+	}
 
 	bool isTraining = true;
 	bool trainingUp;
@@ -133,12 +135,12 @@ public class FlappyBirdController : MonoBehaviour {
 
 	void FixedUpdate() {
 		if (upQueued) {
-			Debug.Log("Performing up");
-			//rigidBody.velocity = Vector3.up * upForce;
+			Debug.Log ("Performing up");
+			rigidBody.velocity = Vector3.up * upForce;
 			upQueued = false;
 		} else if (downQueued) {
-			Debug.Log("Performing down");
-			//rigidBody.velocity = Vector3.down * upForce;
+			Debug.Log ("Performing down");
+			rigidBody.velocity = Vector3.down * upForce;
 			downQueued = false;
 		}
 	}

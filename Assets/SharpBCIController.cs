@@ -41,10 +41,19 @@ public class SharpBCIController : MonoBehaviour {
 
 	public SharpBCIControllerType bciType;
 
+	static SharpBCIController _inst;
+
 	Process museIOProcess;
 
 	// Use this for initialization
 	void Awake() {
+		if (_inst != null) {
+			Destroy(gameObject);
+			return;
+		}
+		_inst = this;
+		DontDestroyOnLoad(gameObject);
+
 		// FileLogger requires actual pathnames not Unity
 		//string logName = System.IO.Path.Combine(Application.persistentDataPath.Replace('/', System.IO.Path.DirectorySeparatorChar), LOG_NAME);
 		//UnityEngine.Debug.Log("Writing sharpBCI log to: " + logName);
