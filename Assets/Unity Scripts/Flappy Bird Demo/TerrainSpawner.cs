@@ -5,12 +5,14 @@ using UnityEngine;
 public class TerrainSpawner : MonoBehaviour {
 
 	public GameObject terrainPrefab;
+	public GameObject coinPrefab;
 	public int nSpawn = 5;
 	public float moveSpeed = 1;
 
 	Vector3 terrainSize;
 
 	readonly LinkedList<GameObject> terrainList = new LinkedList<GameObject>();
+	readonly LinkedList<GameObject> coinList = new LinkedList<GameObject>();
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +24,16 @@ public class TerrainSpawner : MonoBehaviour {
 			var t = Instantiate(terrainPrefab, pos, Quaternion.Euler(Vector3.zero));
 			terrainList.AddLast(t);
 		}
+
+		bool stopTest = true;
+		for(int i = 0; i < 200; i++) {
+			var random2 = Random.Range (0, 5);
+			float xCord = 13.25f;
+			float yCord = 2 + random2;
+			float zCord = -10 + (i*5);
+			var newCoin = Instantiate(coinPrefab, new Vector3(xCord, yCord, zCord), Quaternion.identity);
+			coinList.AddLast (newCoin);
+		}
 	}
 	
 	// Update is called once per frame
@@ -29,6 +41,11 @@ public class TerrainSpawner : MonoBehaviour {
 		foreach (var terrain in terrainList) {
 			terrain.transform.position += Vector3.back * moveSpeed * Time.deltaTime;
 		}
+
+		foreach (var coin in coinList) {
+			coin.transform.position += Vector3.back * moveSpeed * Time.deltaTime;
+		}
+
 		var backTerrain = terrainList.First.Value;
 		var distFromBack = Mathf.Abs(backTerrain.transform.position.z);
 		if (distFromBack > nSpawn * terrainSize.z) {
