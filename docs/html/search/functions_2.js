@@ -2,6 +2,7 @@ var searchData=
 [
   ['calcparams',['CalcParams',['../class_sharp_b_c_i_1_1_recursive_filter.html#a5347c37e9f54eff840c6320f7d5f2e1a',1,'SharpBCI.RecursiveFilter.CalcParams()'],['../class_sharp_b_c_i_1_1_narrow_pass_filter.html#ac7f488a688b06362838e932b5a1d6ca0',1,'SharpBCI.NarrowPassFilter.CalcParams()'],['../class_sharp_b_c_i_1_1_notch_filter.html#a7657925f0e8987e7d1a1395a9efb48fe',1,'SharpBCI.NotchFilter.CalcParams()']]],
   ['changescene',['ChangeScene',['../class_scene_changer.html#ae78e3b139ac02e1c9046489fbbfb27fe',1,'SceneChanger']]],
+  ['changesignal',['ChangeSignal',['../class_dummy_adapter_controller.html#ac60112318c45025312e6d389b6e88832',1,'DummyAdapterController']]],
   ['clear',['Clear',['../class_sharp_b_c_i_1_1_dynamically_averaged_data.html#ab7158f7844fa3332416d409575b845ad',1,'SharpBCI::DynamicallyAveragedData']]],
   ['close',['Close',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#a8192f9ae2f6601c32418f952b0dfaec6',1,'SharpBCI::SharpBCI']]],
   ['complex',['Complex',['../struct_system_1_1_numerics_1_1_complex.html#a3691858a124aa0ead3e7fa275ea5c493',1,'System::Numerics::Complex']]],

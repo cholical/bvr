@@ -1,5 +1,9 @@
 var dir_792cb359bd7f1349fe0e3b05fe820b6d =
 [
+    [ "AggregatePredictors.cs", "_aggregate_predictors_8cs.html", [
+      [ "AggregatePredictionPipeable", "class_sharp_b_c_i_1_1_aggregate_prediction_pipeable.html", "class_sharp_b_c_i_1_1_aggregate_prediction_pipeable" ],
+      [ "AggregateKNNPredictor", "class_sharp_b_c_i_1_1_aggregate_k_n_n_predictor.html", "class_sharp_b_c_i_1_1_aggregate_k_n_n_predictor" ]
+    ] ],
     [ "DeviceAdapters.cs", "_device_adapters_8cs.html", [
       [ "EEGDeviceAdapter", "class_sharp_b_c_i_1_1_e_e_g_device_adapter.html", "class_sharp_b_c_i_1_1_e_e_g_device_adapter" ],
       [ "RemoteOSCAdapter", "class_sharp_b_c_i_1_1_remote_o_s_c_adapter.html", "class_sharp_b_c_i_1_1_remote_o_s_c_adapter" ],

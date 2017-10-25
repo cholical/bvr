@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['eegcolorchanger_2ecs',['EEGColorChanger.cs',['../_e_e_g_color_changer_8cs.html',1,'']]],
-  ['eegdata_2ecs',['EEGData.cs',['../_e_e_g_data_8cs.html',1,'']]],
-  ['eegdataoutput_2ecs',['EEGDataOutput.cs',['../_e_e_g_data_output_8cs.html',1,'']]]
+  ['deviceadapters_2ecs',['DeviceAdapters.cs',['../_device_adapters_8cs.html',1,'']]],
+  ['devicecontroller_2ecs',['DeviceController.cs',['../_device_controller_8cs.html',1,'']]],
+  ['dsplib_2ecs',['DSPLib.cs',['../_d_s_p_lib_8cs.html',1,'']]],
+  ['dummyadaptercontroller_2ecs',['DummyAdapterController.cs',['../_dummy_adapter_controller_8cs.html',1,'']]]
 ];

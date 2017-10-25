@@ -1,10 +1,11 @@
 var searchData=
 [
-  ['eegcolorchanger',['EEGColorChanger',['../class_e_e_g_color_changer.html',1,'']]],
-  ['eegdataoutput',['EEGDataOutput',['../class_e_e_g_data_output.html',1,'']]],
-  ['eegdeviceadapter',['EEGDeviceAdapter',['../class_sharp_b_c_i_1_1_e_e_g_device_adapter.html',1,'SharpBCI']]],
-  ['eegdeviceproducer',['EEGDeviceProducer',['../class_sharp_b_c_i_1_1_e_e_g_device_producer.html',1,'SharpBCI']]],
-  ['eegevent',['EEGEvent',['../class_sharp_b_c_i_1_1_e_e_g_event.html',1,'SharpBCI']]],
-  ['exponentialfilter',['ExponentialFilter',['../class_sharp_b_c_i_1_1_exponential_filter.html',1,'SharpBCI']]],
-  ['exponentialvectorizedsmoother',['ExponentialVectorizedSmoother',['../class_sharp_b_c_i_1_1_exponential_vectorized_smoother.html',1,'SharpBCI']]]
+  ['devicecontroller',['DeviceController',['../class_device_controller.html',1,'']]],
+  ['dft',['DFT',['../class_d_s_p_lib_1_1_d_f_t.html',1,'DSPLib']]],
+  ['dsp',['DSP',['../class_d_s_p_lib_1_1_d_s_p.html',1,'DSPLib']]],
+  ['dummyadapter',['DummyAdapter',['../class_sharp_b_c_i_1_1_dummy_adapter.html',1,'SharpBCI']]],
+  ['dummyadaptercontroller',['DummyAdapterController',['../class_dummy_adapter_controller.html',1,'']]],
+  ['dummyadaptersignal',['DummyAdapterSignal',['../struct_sharp_b_c_i_1_1_dummy_adapter_signal.html',1,'SharpBCI']]],
+  ['dynamicallyaverageddata',['DynamicallyAveragedData',['../class_sharp_b_c_i_1_1_dynamically_averaged_data.html',1,'SharpBCI']]],
+  ['dynamictimewarping',['DynamicTimeWarping',['../class_sharp_b_c_i_1_1_dynamic_time_warping.html',1,'SharpBCI']]]
 ];

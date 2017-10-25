@@ -41,9 +41,11 @@ var hierarchy =
     ] ],
     [ "SharpBCI.IPipeable", "interface_sharp_b_c_i_1_1_i_pipeable.html", [
       [ "SharpBCI.IPredictorPipeable", "interface_sharp_b_c_i_1_1_i_predictor_pipeable.html", [
+        [ "SharpBCI.AggregatePredictionPipeable", "class_sharp_b_c_i_1_1_aggregate_prediction_pipeable.html", null ],
         [ "SharpBCI.PredictorPipeable", "class_sharp_b_c_i_1_1_predictor_pipeable.html", null ]
       ] ],
       [ "SharpBCI.Pipeable", "class_sharp_b_c_i_1_1_pipeable.html", [
+        [ "SharpBCI.AggregatePredictionPipeable", "class_sharp_b_c_i_1_1_aggregate_prediction_pipeable.html", null ],
         [ "SharpBCI.EEGDeviceProducer", "class_sharp_b_c_i_1_1_e_e_g_device_producer.html", null ],
         [ "SharpBCI.FFTPipeable", "class_sharp_b_c_i_1_1_f_f_t_pipeable.html", null ],
         [ "SharpBCI.PredictorPipeable", "class_sharp_b_c_i_1_1_predictor_pipeable.html", null ],
@@ -52,12 +54,17 @@ var hierarchy =
         [ "SharpBCI.TrainedEventEmitter", "class_sharp_b_c_i_1_1_trained_event_emitter.html", null ]
       ] ]
     ] ],
-    [ "SharpBCI.IPredictor", "interface_sharp_b_c_i_1_1_i_predictor.html", [
+    [ "SharpBCI.IPredictor< T >", "interface_sharp_b_c_i_1_1_i_predictor.html", null ],
+    [ "SharpBCI.IPredictor< double[]>", "interface_sharp_b_c_i_1_1_i_predictor.html", [
       [ "SharpBCI.NearestNeighborPredictor", "class_sharp_b_c_i_1_1_nearest_neighbor_predictor.html", [
         [ "SharpBCI.CorrelationCoefficentNearestNeigborPredictor", "class_sharp_b_c_i_1_1_correlation_coefficent_nearest_neigbor_predictor.html", null ],
         [ "SharpBCI.KNearestNeighbor", "class_sharp_b_c_i_1_1_k_nearest_neighbor.html", null ]
       ] ]
     ] ],
+    [ "SharpBCI.IPredictor< EEGEvent[]>", "interface_sharp_b_c_i_1_1_i_predictor.html", [
+      [ "SharpBCI.AggregateKNNPredictor", "class_sharp_b_c_i_1_1_aggregate_k_n_n_predictor.html", null ]
+    ] ],
+    [ "SharpBCI.IPredictor< SharpBCI.EEGEvent[]>", "interface_sharp_b_c_i_1_1_i_predictor.html", null ],
     [ "SharpBCI.IPreprocessor", "interface_sharp_b_c_i_1_1_i_preprocessor.html", [
       [ "SharpBCI.CentralizationPreprocessor", "class_sharp_b_c_i_1_1_centralization_preprocessor.html", null ],
       [ "SharpBCI.Preprocessors.NonePreprocessor", "class_sharp_b_c_i_1_1_preprocessors_1_1_none_preprocessor.html", null ],
@@ -74,11 +81,14 @@ var hierarchy =
     [ "MonoBehaviour", null, [
       [ "ConnectedDisplay", "class_connected_display.html", null ],
       [ "DeviceController", "class_device_controller.html", null ],
+      [ "DummyAdapterController", "class_dummy_adapter_controller.html", null ],
       [ "EEGColorChanger", "class_e_e_g_color_changer.html", null ],
       [ "EEGDataOutput", "class_e_e_g_data_output.html", null ],
       [ "FFTGraphController", "class_f_f_t_graph_controller.html", null ],
+      [ "FFTTrainingController", "class_f_f_t_training_controller.html", null ],
       [ "FlappyBirdController", "class_flappy_bird_controller.html", null ],
       [ "Graph", "class_graph.html", null ],
+      [ "MuseTestingController", "class_muse_testing_controller.html", null ],
       [ "ParticleBrainWaveController", "class_particle_brain_wave_controller.html", null ],
       [ "PlayerMover", "class_player_mover.html", null ],
       [ "SceneChanger", "class_scene_changer.html", null ],
@@ -87,6 +97,7 @@ var hierarchy =
       [ "TerrainSpawner", "class_terrain_spawner.html", null ],
       [ "TogglePanel", "class_toggle_panel.html", null ],
       [ "TrainingController", "class_training_controller.html", null ],
+      [ "TrainingGraphController", "class_training_graph_controller.html", null ],
       [ "ViveControllerBackToStart", "class_vive_controller_back_to_start.html", null ],
       [ "ViveControllerInput", "class_vive_controller_input.html", null ]
     ] ],

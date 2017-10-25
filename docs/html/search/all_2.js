@@ -3,6 +3,7 @@ var searchData=
   ['calcparams',['CalcParams',['../class_sharp_b_c_i_1_1_recursive_filter.html#a5347c37e9f54eff840c6320f7d5f2e1a',1,'SharpBCI.RecursiveFilter.CalcParams()'],['../class_sharp_b_c_i_1_1_narrow_pass_filter.html#ac7f488a688b06362838e932b5a1d6ca0',1,'SharpBCI.NarrowPassFilter.CalcParams()'],['../class_sharp_b_c_i_1_1_notch_filter.html#a7657925f0e8987e7d1a1395a9efb48fe',1,'SharpBCI.NotchFilter.CalcParams()']]],
   ['centralizationpreprocessor',['CentralizationPreprocessor',['../class_sharp_b_c_i_1_1_centralization_preprocessor.html',1,'SharpBCI']]],
   ['changescene',['ChangeScene',['../class_scene_changer.html#ae78e3b139ac02e1c9046489fbbfb27fe',1,'SceneChanger']]],
+  ['changesignal',['ChangeSignal',['../class_dummy_adapter_controller.html#ac60112318c45025312e6d389b6e88832',1,'DummyAdapterController']]],
   ['changethreshold',['changeThreshold',['../class_particle_brain_wave_controller.html#a8585b66d399a80e85730413c3592b887',1,'ParticleBrainWaveController']]],
   ['channel',['channel',['../class_particle_brain_wave_controller.html#af4c1192fa07ff77f818f9ad73a66d61b',1,'ParticleBrainWaveController']]],
   ['channels',['channels',['../class_sharp_b_c_i_1_1_e_e_g_device_adapter.html#a5c4d167d19d09f6f930a482db852ac69',1,'SharpBCI.EEGDeviceAdapter.channels()'],['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#a3de9635ac1944af5ff2ac8ac20fc3ded',1,'SharpBCI.SharpBCI.channels()']]],

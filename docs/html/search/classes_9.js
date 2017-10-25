@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['particlebrainwavecontroller',['ParticleBrainWaveController',['../class_particle_brain_wave_controller.html',1,'']]],
-  ['pipeable',['Pipeable',['../class_sharp_b_c_i_1_1_pipeable.html',1,'SharpBCI']]],
-  ['playermover',['PlayerMover',['../class_player_mover.html',1,'']]],
-  ['predictorpipeable',['PredictorPipeable',['../class_sharp_b_c_i_1_1_predictor_pipeable.html',1,'SharpBCI']]],
-  ['preprocessors',['Preprocessors',['../class_sharp_b_c_i_1_1_preprocessors.html',1,'SharpBCI']]]
+  ['narrowpassfilter',['NarrowPassFilter',['../class_sharp_b_c_i_1_1_narrow_pass_filter.html',1,'SharpBCI']]],
+  ['nearestneighborpredictor',['NearestNeighborPredictor',['../class_sharp_b_c_i_1_1_nearest_neighbor_predictor.html',1,'SharpBCI']]],
+  ['nonepreprocessor',['NonePreprocessor',['../class_sharp_b_c_i_1_1_preprocessors_1_1_none_preprocessor.html',1,'SharpBCI::Preprocessors']]],
+  ['normalizationpreprocessor',['NormalizationPreprocessor',['../class_sharp_b_c_i_1_1_preprocessors_1_1_normalization_preprocessor.html',1,'SharpBCI::Preprocessors']]],
+  ['notchfilter',['NotchFilter',['../class_sharp_b_c_i_1_1_notch_filter.html',1,'SharpBCI']]]
 ];

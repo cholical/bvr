@@ -1,8 +1,10 @@
 var searchData=
 [
-  ['fft',['FFT',['../class_d_s_p_lib_1_1_f_f_t.html',1,'DSPLib']]],
-  ['fftgraphcontroller',['FFTGraphController',['../class_f_f_t_graph_controller.html',1,'']]],
-  ['fftpipeable',['FFTPipeable',['../class_sharp_b_c_i_1_1_f_f_t_pipeable.html',1,'SharpBCI']]],
-  ['filelogger',['FileLogger',['../class_sharp_b_c_i_1_1_file_logger.html',1,'SharpBCI']]],
-  ['flappybirdcontroller',['FlappyBirdController',['../class_flappy_bird_controller.html',1,'']]]
+  ['eegcolorchanger',['EEGColorChanger',['../class_e_e_g_color_changer.html',1,'']]],
+  ['eegdataoutput',['EEGDataOutput',['../class_e_e_g_data_output.html',1,'']]],
+  ['eegdeviceadapter',['EEGDeviceAdapter',['../class_sharp_b_c_i_1_1_e_e_g_device_adapter.html',1,'SharpBCI']]],
+  ['eegdeviceproducer',['EEGDeviceProducer',['../class_sharp_b_c_i_1_1_e_e_g_device_producer.html',1,'SharpBCI']]],
+  ['eegevent',['EEGEvent',['../class_sharp_b_c_i_1_1_e_e_g_event.html',1,'SharpBCI']]],
+  ['exponentialfilter',['ExponentialFilter',['../class_sharp_b_c_i_1_1_exponential_filter.html',1,'SharpBCI']]],
+  ['exponentialvectorizedsmoother',['ExponentialVectorizedSmoother',['../class_sharp_b_c_i_1_1_exponential_vectorized_smoother.html',1,'SharpBCI']]]
 ];

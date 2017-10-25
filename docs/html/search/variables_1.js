@@ -6,5 +6,6 @@ var searchData=
   ['barprefab',['barPrefab',['../class_graph.html#a43a460bfd074e78f7d45a334d9bfbf77',1,'Graph']]],
   ['barthickness',['barThickness',['../class_graph.html#a1fd8b348fc0cd941e5546265a356c560',1,'Graph']]],
   ['bci',['BCI',['../class_sharp_b_c_i_controller.html#a24ea8792b523b2bf2f784f5e5ef3270c',1,'SharpBCIController']]],
+  ['bcigraph',['bciGraph',['../class_muse_testing_controller.html#afaba3f3ab31e697fca78b221b558bb35',1,'MuseTestingController']]],
   ['bcitype',['bciType',['../class_sharp_b_c_i_controller.html#a624bce0e33942a1c0a2b17db5f85f3be',1,'SharpBCIController']]]
 ];

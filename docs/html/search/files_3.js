@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['fft_2ecs',['FFT.cs',['../_f_f_t_8cs.html',1,'']]],
-  ['fftgraphcontroller_2ecs',['FFTGraphController.cs',['../_f_f_t_graph_controller_8cs.html',1,'']]],
-  ['filters_2ecs',['Filters.cs',['../_filters_8cs.html',1,'']]],
-  ['flappybirdcontroller_2ecs',['FlappyBirdController.cs',['../_flappy_bird_controller_8cs.html',1,'']]]
+  ['eegcolorchanger_2ecs',['EEGColorChanger.cs',['../_e_e_g_color_changer_8cs.html',1,'']]],
+  ['eegdata_2ecs',['EEGData.cs',['../_e_e_g_data_8cs.html',1,'']]],
+  ['eegdataoutput_2ecs',['EEGDataOutput.cs',['../_e_e_g_data_output_8cs.html',1,'']]]
 ];

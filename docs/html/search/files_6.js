@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['logger_2ecs',['Logger.cs',['../_logger_8cs.html',1,'']]]
+  ['ipredictorpipeable_2ecs',['IPredictorPipeable.cs',['../_i_predictor_pipeable_8cs.html',1,'']]]
 ];

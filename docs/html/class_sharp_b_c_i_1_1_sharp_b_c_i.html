@@ -108,6 +108,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a95920f7e515a4d773ca3d1766b096046"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a95920f7e515a4d773ca3d1766b096046">StopTraining</a> (int id)</td></tr>
 <tr class="memdesc:a95920f7e515a4d773ca3d1766b096046"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop training <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html" title="This is the &quot;main&quot; class which you should create. ">SharpBCI</a> on the current trainingID.  <a href="#a95920f7e515a4d773ca3d1766b096046">More...</a><br /></td></tr>
 <tr class="separator:a95920f7e515a4d773ca3d1766b096046"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad59186b699bc1116ae946e2e690bdb59"><td class="memItemLeft" align="right" valign="top">IEnumerable&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#ad59186b699bc1116ae946e2e690bdb59">GetTrainedIds</a> ()</td></tr>
+<tr class="separator:ad59186b699bc1116ae946e2e690bdb59"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8fa9c8dad54c67668cbbfdd2734ca0ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a8fa9c8dad54c67668cbbfdd2734ca0ed">AddTrainedHandler</a> (int id, <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html#a660d3b06dc723a05b32c50aed9a18785">SharpBCITrainedHandler</a> handler)</td></tr>
 <tr class="memdesc:a8fa9c8dad54c67668cbbfdd2734ca0ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a training handler which is notified when "id" is detected Important: does not check if "id" has actually been trained upon.  <a href="#a8fa9c8dad54c67668cbbfdd2734ca0ed">More...</a><br /></td></tr>
 <tr class="separator:a8fa9c8dad54c67668cbbfdd2734ca0ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -275,6 +277,23 @@ Properties</h2></td></tr>
 
 <p>Called when all the <a class="el" href="class_sharp_b_c_i_1_1_sharp_b_c_i.html" title="This is the &quot;main&quot; class which you should create. ">SharpBCI</a> threads should shutdown. </p>
 <p>You may or may not continue to receive events after calling this You should unregister events before calling this to avoid memory leaks </p>
+
+</div>
+</div>
+<a id="ad59186b699bc1116ae946e2e690bdb59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad59186b699bc1116ae946e2e690bdb59">&#9670;&nbsp;</a></span>GetTrainedIds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IEnumerable&lt;int&gt; SharpBCI.SharpBCI.GetTrainedIds </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

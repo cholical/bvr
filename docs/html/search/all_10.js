@@ -17,16 +17,21 @@ var searchData=
   ['toggleobject',['toggleObject',['../class_toggle_panel.html#aebce123cbd3c96a46cbbfa540080ef04',1,'TogglePanel']]],
   ['togglepanel',['TogglePanel',['../class_toggle_panel.html',1,'']]],
   ['togglepanel_2ecs',['TogglePanel.cs',['../_toggle_panel_8cs.html',1,'']]],
+  ['toggletraining',['ToggleTraining',['../class_f_f_t_training_controller.html#ad8fd1a31245a4aa18cf4b1d809e56ad1',1,'FFTTrainingController']]],
   ['tone_5fgenerator',['TONE_GENERATOR',['../_sharp_b_c_i_controller_8cs.html#a6675ac506ac5d342a5c79fd97db31894a9e6d4046a090fcf4ef3cf33625e92b09',1,'SharpBCIController.cs']]],
   ['tostring',['ToString',['../class_sharp_b_c_i_1_1_e_e_g_event.html#a70e3b4b68167444150b99401dd043f4b',1,'SharpBCI.EEGEvent.ToString()'],['../interface_sharp_b_c_i_1_1_i_preprocessor.html#ad184e05c5c64f69ac7777e22c199e0fc',1,'SharpBCI.IPreprocessor.ToString()'],['../class_sharp_b_c_i_1_1_preprocessors_1_1_none_preprocessor.html#a607311b52a1c52227d7e4ece1543644e',1,'SharpBCI.Preprocessors.NonePreprocessor.ToString()'],['../class_sharp_b_c_i_1_1_preprocessors_1_1_normalization_preprocessor.html#a64ffbc578eb9bdbd867a9c6e5c5ac056',1,'SharpBCI.Preprocessors.NormalizationPreprocessor.ToString()'],['../class_sharp_b_c_i_1_1_standardization_preprocessor.html#ac207ef482d6abb40f44b4751b1158504',1,'SharpBCI.StandardizationPreprocessor.ToString()'],['../class_sharp_b_c_i_1_1_centralization_preprocessor.html#a72e53cc91eb7c35fc4e459cbfc8fbae9',1,'SharpBCI.CentralizationPreprocessor.ToString()']]],
   ['train_5fdata',['train_data',['../class_sharp_b_c_i_1_1_nearest_neighbor_predictor.html#af29d0f36fbf53a3615bf57000428ab4a',1,'SharpBCI::NearestNeighborPredictor']]],
   ['trainedevent',['TrainedEvent',['../class_sharp_b_c_i_1_1_trained_event.html',1,'SharpBCI.TrainedEvent'],['../class_sharp_b_c_i_1_1_trained_event.html#a2b0c0f4275085e441f3a45c306446d7b',1,'SharpBCI.TrainedEvent.TrainedEvent()']]],
   ['trainedeventemitter',['TrainedEventEmitter',['../class_sharp_b_c_i_1_1_trained_event_emitter.html',1,'SharpBCI.TrainedEventEmitter'],['../class_sharp_b_c_i_1_1_trained_event_emitter.html#a0fa6add201fe27f23a736e716afab9e4',1,'SharpBCI.TrainedEventEmitter.TrainedEventEmitter()']]],
+  ['trainedeventids',['trainedEventIds',['../class_training_graph_controller.html#a51d4e13e095cdae03b320a389e20c3f9',1,'TrainingGraphController']]],
   ['trainingbtn',['trainingBtn',['../class_training_controller.html#a751a2d023193adbda58ebc687ebaf8dc',1,'TrainingController']]],
   ['trainingcontroller',['TrainingController',['../class_training_controller.html',1,'']]],
   ['trainingcontroller_2ecs',['TrainingController.cs',['../_training_controller_8cs.html',1,'']]],
-  ['trainingstatus',['trainingStatus',['../class_training_controller.html#a0f8963ff8a073439e75265b3f1407dba',1,'TrainingController.trainingStatus()'],['../class_flappy_bird_controller.html#aee70331c9cb8200bc809f15b949d38b7',1,'FlappyBirdController.trainingStatus()']]],
+  ['traininggraphcontroller',['TrainingGraphController',['../class_training_graph_controller.html',1,'']]],
+  ['traininggraphcontroller_2ecs',['TrainingGraphController.cs',['../_training_graph_controller_8cs.html',1,'']]],
+  ['trainingid',['trainingId',['../class_f_f_t_training_controller.html#a0a1fe2ac4397c3cba24fc97ab7e81e7b',1,'FFTTrainingController']]],
+  ['trainingstatus',['trainingStatus',['../class_flappy_bird_controller.html#aee70331c9cb8200bc809f15b949d38b7',1,'FlappyBirdController.trainingStatus()'],['../class_training_controller.html#a0f8963ff8a073439e75265b3f1407dba',1,'TrainingController.trainingStatus()']]],
   ['trainingtime',['trainingTime',['../class_flappy_bird_controller.html#aa2dfc96dadfc7f738c4cea3ed3891aca',1,'FlappyBirdController']]],
   ['two_5ftone_5fgenerator',['TWO_TONE_GENERATOR',['../_sharp_b_c_i_controller_8cs.html#a6675ac506ac5d342a5c79fd97db31894ab74ea3db93d7980a21601931c9248631',1,'SharpBCIController.cs']]],
-  ['type',['type',['../class_scrolling_graph_controller.html#abbbc644033b0aeb0b002be2916135653',1,'ScrollingGraphController.type()'],['../class_sharp_b_c_i_1_1_e_e_g_event.html#a2e24b3c122a38f781619441c679be0de',1,'SharpBCI.EEGEvent.type()']]]
+  ['type',['type',['../class_scrolling_graph_controller.html#abbbc644033b0aeb0b002be2916135653',1,'ScrollingGraphController.type()'],['../class_sharp_b_c_i_1_1_e_e_g_event.html#a2e24b3c122a38f781619441c679be0de',1,'SharpBCI.EEGEvent.type()'],['../class_muse_testing_controller.html#a816adb6b0adff2b8ed519f1b114ba417',1,'MuseTestingController.type()']]]
 ];

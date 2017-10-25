@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['deviceadapters_2ecs',['DeviceAdapters.cs',['../_device_adapters_8cs.html',1,'']]],
-  ['devicecontroller_2ecs',['DeviceController.cs',['../_device_controller_8cs.html',1,'']]],
-  ['dsplib_2ecs',['DSPLib.cs',['../_d_s_p_lib_8cs.html',1,'']]]
+  ['complexpatch_2ecs',['ComplexPatch.cs',['../_complex_patch_8cs.html',1,'']]],
+  ['connecteddisplay_2ecs',['ConnectedDisplay.cs',['../_connected_display_8cs.html',1,'']]]
 ];

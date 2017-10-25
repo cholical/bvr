@@ -1,5 +1,7 @@
 var namespace_sharp_b_c_i =
 [
+    [ "AggregateKNNPredictor", "class_sharp_b_c_i_1_1_aggregate_k_n_n_predictor.html", "class_sharp_b_c_i_1_1_aggregate_k_n_n_predictor" ],
+    [ "AggregatePredictionPipeable", "class_sharp_b_c_i_1_1_aggregate_prediction_pipeable.html", "class_sharp_b_c_i_1_1_aggregate_prediction_pipeable" ],
     [ "CentralizationPreprocessor", "class_sharp_b_c_i_1_1_centralization_preprocessor.html", "class_sharp_b_c_i_1_1_centralization_preprocessor" ],
     [ "ConsoleLogger", "class_sharp_b_c_i_1_1_console_logger.html", "class_sharp_b_c_i_1_1_console_logger" ],
     [ "ConvolvingDoubleEndedFilter", "class_sharp_b_c_i_1_1_convolving_double_ended_filter.html", "class_sharp_b_c_i_1_1_convolving_double_ended_filter" ],

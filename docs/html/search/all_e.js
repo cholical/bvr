@@ -10,5 +10,6 @@ var searchData=
   ['removerawhandler',['RemoveRawHandler',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#ae7465d4262ea17036d3cc33cbc6bdaf4',1,'SharpBCI::SharpBCI']]],
   ['removetrainedhandler',['RemoveTrainedHandler',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#afd15e4a9d121e29024d73cf1b46af5c0',1,'SharpBCI::SharpBCI']]],
   ['reserved_5fprefix',['RESERVED_PREFIX',['../class_sharp_b_c_i_1_1_sharp_b_c_i.html#af83bc3fdc6760bc0a54ed3baecdc1e5e',1,'SharpBCI::SharpBCI']]],
-  ['retainedevents',['retainedEvents',['../class_training_controller.html#ab11bde6d17d0bd6fbf223e3cdb626140',1,'TrainingController']]]
+  ['retainedevents',['retainedEvents',['../class_training_controller.html#ab11bde6d17d0bd6fbf223e3cdb626140',1,'TrainingController']]],
+  ['rightcontroller',['rightController',['../class_flappy_bird_controller.html#ae9b47c32ef1df7a4f657a392dd44bb09',1,'FlappyBirdController']]]
 ];

@@ -8,7 +8,10 @@ var searchData=
   ['mirroroutputs',['mirrorOutputs',['../class_sharp_b_c_i_1_1_serialized_connection_info.html#aa0f4ae45617d749f6d04cd632d0b87be',1,'SharpBCI::SerializedConnectionInfo']]],
   ['movementrange',['movementRange',['../class_player_mover.html#a5435941c76bb3d73d87c6a412c4debf3',1,'PlayerMover']]],
   ['movespeed',['moveSpeed',['../class_terrain_spawner.html#a6807406ed6e4e2bfb1b7cdbf6fce003a',1,'TerrainSpawner']]],
-  ['movingaveragefilter',['MovingAverageFilter',['../class_sharp_b_c_i_1_1_moving_average_filter.html',1,'SharpBCI.MovingAverageFilter'],['../class_sharp_b_c_i_1_1_moving_average_filter.html#a29f1b8591aa8e55ee194acdc8e8d645b',1,'SharpBCI.MovingAverageFilter.MovingAverageFilter()']]],
+  ['movingaveragefilter',['MovingAverageFilter',['../class_sharp_b_c_i_1_1_moving_average_filter.html',1,'SharpBCI.MovingAverageFilter'],['../class_sharp_b_c_i_1_1_moving_average_filter.html#a604fecfe0f61132882813ab6b6a41e1d',1,'SharpBCI.MovingAverageFilter.MovingAverageFilter()']]],
   ['multifilter',['MultiFilter',['../class_sharp_b_c_i_1_1_multi_filter.html',1,'SharpBCI.MultiFilter&lt; T &gt;'],['../class_sharp_b_c_i_1_1_multi_filter.html#a68fb8638e7a3b11ecaa793deea8dafb5',1,'SharpBCI.MultiFilter.MultiFilter()']]],
-  ['muse',['MUSE',['../_sharp_b_c_i_controller_8cs.html#a6675ac506ac5d342a5c79fd97db31894a7c5e3a34087a07dedb810a6072ec8bb3',1,'SharpBCIController.cs']]]
+  ['muse',['MUSE',['../_sharp_b_c_i_controller_8cs.html#a6675ac506ac5d342a5c79fd97db31894a7c5e3a34087a07dedb810a6072ec8bb3',1,'SharpBCIController.cs']]],
+  ['musegraph',['museGraph',['../class_muse_testing_controller.html#a67241eb7c21fedff03456129ed253592',1,'MuseTestingController']]],
+  ['musetestingcontroller',['MuseTestingController',['../class_muse_testing_controller.html',1,'']]],
+  ['musetestingcontroller_2ecs',['MuseTestingController.cs',['../_muse_testing_controller_8cs.html',1,'']]]
 ];
