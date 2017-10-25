@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerMover : MonoBehaviour {
 
-	public float movementRange = 2;
-	public float timeFactor = 10;
+	public float movementRange = 1.75f;
+	public float timeFactor = 7.5f;
 
 	Vector3 originalPos;
 
