@@ -17,8 +17,14 @@
 		},
 		{
 			"stageKey": "predictor",
-			"stageClass": "SharpBCI.PredictorPipeable",
-			"arguments": [ 129, "SharpBCIChannels" ]
+			"stageClass": "SharpBCI.AggregatePredictionPipeable",
+			"arguments": [ "SharpBCIChannels", 10, 0.25, [ 
+				"ALPHA_RELATIVE", 
+				"BETA_RELATIVE", 
+				"GAMMA_RELATIVE", 
+				"DELTA_RELATIVE", 
+				"THETA_RELATIVE" 
+			] ]
 		},
 		{
 			"stageKey": "trainedEventEmitter",
