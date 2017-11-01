@@ -16,7 +16,7 @@ public class TerrainSpawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		UnityEngine.VR.InputTracking.disablePositionalTracking = true;
+		UnityEngine.XR.InputTracking.disablePositionalTracking = true;
 		//offset = transform.position;
 		terrainSize = terrainPrefab.GetComponent<Terrain>().terrainData.size;
 		for (int i = -nSpawn; i < nSpawn; i++) {
@@ -60,6 +60,6 @@ public class TerrainSpawner : MonoBehaviour {
 	}
 
 	void OnDestroy () {
-		UnityEngine.VR.InputTracking.disablePositionalTracking = false;
+		UnityEngine.XR.InputTracking.disablePositionalTracking = false;
 	}
 }
