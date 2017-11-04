@@ -79,13 +79,15 @@ namespace SharpBCI {
 					if (errorDist.isValid) {
 						var errorS = Math.Sqrt(errorDist.var);
 						var errorMaxCI95 = errorDist.mean + 2 * errorS;
-						var errorMinCI95 = errorDist.mean + -2 * errorS;
+						var errorMinCI95 = errorDist.mean - 2 * errorS;
 						isArtifact = error > errorMaxCI95 || error < errorMinCI95;
 					}
 				}
 
-				if (isArtifact)
+				if (isArtifact) {
+					Logger.Log("Detected large amplitude artifact via AR model");
 					return true;
+				}
 			}
 
 			Add(new EEGEvent(evt.timestamp, evt.type, buffer, evt.extra));
