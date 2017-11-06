@@ -33,7 +33,7 @@ namespace SharpBCI {
 		}
 
 		public T Dequeue() {
-			var v = arr[start];
+			var v = arr[start % arr.Length];
 			start++;
 			len--;
 			return v;

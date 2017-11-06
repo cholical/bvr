@@ -61,8 +61,12 @@ namespace SharpBCI {
 				// sufficient samples to fit AR model
 				if (!stillLearning) {
 					for (int i = 0; i < n; i++) {
-						double[] arParams = StatsUtils.FitAR(10, artifactLearningSamples[i].ToArray());
-						arPredictors[i] = new ARModel(0, arParams);
+						double[] x = artifactLearningSamples[i].ToArray();
+						var p = StatsUtils.EstimateAROrder(x, 50);
+						double mean = StatsUtils.SampleMean(x);
+						double[] arParams = StatsUtils.FitAR(p, x);
+						Logger.Log("Estimated AR params: p={0}, c={1}, phi={2}", p, mean, string.Join(", ", arParams));
+						arPredictors[i] = new ARModel(mean, arParams);
 						lastPredictions[i] = arPredictors[i].Predict(evt.data[i]);
 					}
 				}
@@ -80,6 +84,7 @@ namespace SharpBCI {
 						var errorS = Math.Sqrt(errorDist.var);
 						var errorMaxCI95 = errorDist.mean + 2 * errorS;
 						var errorMinCI95 = errorDist.mean - 2 * errorS;
+						//Logger.Log("Error={0}, 95% CI = [{1}, {2}]", error, errorMinCI95, errorMaxCI95);
 						isArtifact = error > errorMaxCI95 || error < errorMinCI95;
 					}
 				}

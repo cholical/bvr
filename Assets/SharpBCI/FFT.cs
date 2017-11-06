@@ -94,7 +94,7 @@ namespace SharpBCI {
 		readonly IVectorizedSmoother<double>[] magSmoothers;
 		readonly IVectorizedSmoother<Complex>[] complexFilters;
 
-		readonly IFilter<double>[] signalFilters;
+		//readonly IFilter<double>[] signalFilters;
 
 		uint nSamples = 0;
 		uint lastFFT = 0;
@@ -124,17 +124,17 @@ namespace SharpBCI {
 
 			samples = new Queue<double>[channels];
 
-			signalFilters = new IFilter<double>[channels];
+			//signalFilters = new IFilter<double>[channels];
 			magSmoothers = new IVectorizedSmoother<double>[channels];
 			complexFilters = new IVectorizedSmoother<Complex>[channels];
 			for (int i = 0; i < channels; i++) {
 				samples[i] = new Queue<double>();
 				magSmoothers[i] = new ExponentialVectorizedSmoother(windowSize / 2 + 1, 1.0 / (fftRate / 4.0));
 				complexFilters[i] = new XCorrVectorizedSmoother(fftRate / 2);
-				signalFilters[i] = new MultiFilter<double>(new IFilter<double>[] {
-					new ConvolvingDoubleEndedFilter(1, 50, 2, sampleRate, true),
-					//new MovingAverageFilter(fftRate),
-				});
+				//signalFilters[i] = new MultiFilter<double>(new IFilter<double>[] {
+				//	new ConvolvingDoubleEndedFilter(1, 50, 2, sampleRate, true),
+				//	//new MovingAverageFilter(fftRate),
+				//});
 			}
 
 			windowConstants = DSP.Window.Coefficients(DSP.Window.Type.Hamming, this.windowSize);
@@ -153,7 +153,7 @@ namespace SharpBCI {
 			// normal case: just append data to sample buffer
 			for (int i = 0; i < channels; i++) {
 				var v = evt.data[i];
-				v = signalFilters[i].Filter(v);
+				//v = signalFilters[i].Filter(v);
 				samples[i].Enqueue(v);
 			}
 			nSamples++;
