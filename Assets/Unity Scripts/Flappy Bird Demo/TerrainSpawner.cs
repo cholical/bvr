@@ -30,7 +30,7 @@ public class TerrainSpawner : MonoBehaviour {
 			var random2 = Random.Range (0, 5);
 			float xCord = 13.25f;
 			float yCord = 2 + random2;
-			float zCord = -10 + (i*5);
+			float zCord = 200 + (i*5);
 			var newCoin = Instantiate(coinPrefab, new Vector3(xCord, yCord, zCord), Quaternion.identity);
 			coinList.AddLast (newCoin);
 		}

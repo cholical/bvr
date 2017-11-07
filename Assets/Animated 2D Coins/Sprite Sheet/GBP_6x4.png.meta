@@ -2,7 +2,31 @@ fileFormatVersion: 2
 guid: fd4d6fe9efaae5e4eaf33aa14b7adcc9
 timeCreated: 18446744011573954816
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: GBP_6x4_0
+    21300002: GBP_6x4_1
+    21300004: GBP_6x4_2
+    21300006: GBP_6x4_3
+    21300008: GBP_6x4_4
+    21300010: GBP_6x4_5
+    21300012: GBP_6x4_6
+    21300014: GBP_6x4_7
+    21300016: GBP_6x4_8
+    21300018: GBP_6x4_9
+    21300020: GBP_6x4_10
+    21300022: GBP_6x4_11
+    21300024: GBP_6x4_12
+    21300026: GBP_6x4_13
+    21300028: GBP_6x4_14
+    21300030: GBP_6x4_15
+    21300032: GBP_6x4_16
+    21300034: GBP_6x4_17
+    21300036: GBP_6x4_18
+    21300038: GBP_6x4_19
+    21300040: GBP_6x4_20
+    21300042: GBP_6x4_21
+    21300044: GBP_6x4_22
+    21300046: GBP_6x4_23
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
