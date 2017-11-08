@@ -10,6 +10,7 @@ public class FlappyBirdController : MonoBehaviour {
 
 	public float trainingTime = 30;
 	public float upForce = 1;
+	public float maxY = 5f;
 
 	public GameObject trainingStatus;
 	public GameObject upPrompt;
@@ -36,7 +37,7 @@ public class FlappyBirdController : MonoBehaviour {
 	bool trainingUp;
 	bool trainingDown;
 
-	Vector3 startPos;
+	//Vector3 startPos;
 
 	bool upQueued;
 	bool downQueued;
@@ -54,7 +55,7 @@ public class FlappyBirdController : MonoBehaviour {
 		//rigidBody.useGravity = false;
 		rigidBody.isKinematic = true;
 		gameObject.AddComponent<PlayerMover>();
-		startPos = transform.position;
+		//startPos = transform.position;
 	}
 
 	//int lastSignal = -1;
@@ -144,6 +145,13 @@ public class FlappyBirdController : MonoBehaviour {
 			Debug.Log ("Performing down");
 			rigidBody.velocity = Vector3.down * upForce;
 			downQueued = false;
+		}
+
+		if (rigidBody.position.y > maxY) {
+			var pos = rigidBody.position;
+			pos.y = maxY;
+			rigidBody.position = pos;
+			rigidBody.velocity = Vector3.zero;
 		}
 	}
 
