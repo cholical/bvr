@@ -6,6 +6,18 @@
 			"arguments": [ "SharpBCIAdapter" ]
 		},
 		{
+			"stageKey": "filter",
+			"stageClass": "SharpBCI.SimpleFilterPipeable",
+			"arguments": [
+				"SharpBCISampleRate",
+				"SharpBCIChannels",
+				1,
+				50,
+				2,
+				10,
+			]
+		},
+		{
 			"stageKey": "fft",
 			"stageClass": "SharpBCI.FFTPipeable",
 			"arguments": [ 256, "SharpBCIChannels", "SharpBCISampleRate", 10 ]
@@ -36,6 +48,11 @@
 	"stageConnections": [
 		{
 			"stageKey": "producer",
+			"mirrorOutputs": true,
+			"outputs": [ "filter" ]
+		},
+		{
+			"stageKey": "filter",
 			"mirrorOutputs": true,
 			"outputs": [ "fft", "rawEventEmitter" ]
 		},
