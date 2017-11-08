@@ -30,6 +30,8 @@ public class FlappyBirdController : MonoBehaviour {
 		}
 	}
 
+	public bool IsTraining { get { return isTraining; } }
+
 	bool isTraining = true;
 	bool trainingUp;
 	bool trainingDown;
