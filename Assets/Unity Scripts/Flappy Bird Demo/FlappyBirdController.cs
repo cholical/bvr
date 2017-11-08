@@ -48,6 +48,7 @@ public class FlappyBirdController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Camera.main.transform.localPosition = Vector3.zero;
 		started = Time.time;
 		trainingStatus.SetActive(true);
 		rigidBody = GetComponent<Rigidbody>();
