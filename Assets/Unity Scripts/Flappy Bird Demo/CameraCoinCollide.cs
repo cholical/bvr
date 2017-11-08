@@ -8,11 +8,16 @@ public class CameraCoinCollide : MonoBehaviour {
 	public CameraCoinCollide(){
 	}
 
-	void OnCollisionEnter(Collision collision)
-	{
-		print ("Collision");
+	void OnTriggerEnter(Collider other) {
+		//print("Trigger");
 		coinScore++;
-		Destroy(collision.gameObject);
+		Destroy(other.gameObject);
 	}
+
+	//void OnCollisionEnter(Collision collision) {
+	//	print ("Collision");
+	//	coinScore++;
+	//	Destroy(collision.gameObject);
+	//}
 		
 }
