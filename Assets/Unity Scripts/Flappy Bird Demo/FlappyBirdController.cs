@@ -36,25 +36,29 @@ public class FlappyBirdController : MonoBehaviour {
 	bool trainingUp;
 	bool trainingDown;
 
-	Vector3 startPos;
+	//Vector3 startPos;
 
 	bool upQueued;
 	bool downQueued;
 
-	Rigidbody rigidBody;
+	//Rigidbody rigidBody;
 
 	float started;
+
+	PlayerMover pm;
 
 	// Use this for initialization
 	void Start () {
 		started = Time.time;
 		trainingStatus.SetActive(true);
-		rigidBody = GetComponent<Rigidbody>();
+		//rigidBody = GetComponent<Rigidbody>();
 		//rigidBody.freezeRotation = true;
 		//rigidBody.useGravity = false;
-		rigidBody.isKinematic = true;
+		//rigidBody.isKinematic = true;
 		gameObject.AddComponent<PlayerMover>();
-		startPos = transform.position;
+		pm = GetComponent<PlayerMover>();
+		pm.movementMode = PlayerMover.MovementMode.OSCILLATING;
+		//startPos = transform.position;
 	}
 
 	//int lastSignal = -1;
@@ -82,12 +86,14 @@ public class FlappyBirdController : MonoBehaviour {
 			if (trainingDown) SharpBCIController.BCI.StopTraining(DOWN_ID);
 			isTraining = false;
 
-			Destroy(gameObject.GetComponent<PlayerMover>());
+			pm.movementMode = PlayerMover.MovementMode.NONE;
+
+			//Destroy(gameObject.GetComponent<PlayerMover>());
 			SharpBCIController.BCI.AddTrainedHandler(UP_ID, OnTrainedEvent);
 			SharpBCIController.BCI.AddTrainedHandler(DOWN_ID, OnTrainedEvent);
 
 			//rigidBody.useGravity = true;
-			rigidBody.isKinematic = false;
+			//rigidBody.isKinematic = false;
 
 			trainingStatus.SetActive(false);
 			upPrompt.SetActive(false);
@@ -138,11 +144,11 @@ public class FlappyBirdController : MonoBehaviour {
 	void FixedUpdate() {
 		if (upQueued) {
 			Debug.Log ("Performing up");
-			rigidBody.velocity = Vector3.up * upForce;
+			pm.movementMode = PlayerMover.MovementMode.UP;
 			upQueued = false;
 		} else if (downQueued) {
 			Debug.Log ("Performing down");
-			rigidBody.velocity = Vector3.down * upForce;
+			pm.movementMode = PlayerMover.MovementMode.DOWN;
 			downQueued = false;
 		}
 	}
