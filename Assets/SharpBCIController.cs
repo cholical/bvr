@@ -41,6 +41,8 @@ public class SharpBCIController : MonoBehaviour {
 
 	public SharpBCIControllerType bciType;
 
+	public EEGDataType dataType;
+
 	static SharpBCIController _inst;
 
 	Process museIOProcess;
@@ -149,6 +151,7 @@ public class SharpBCIController : MonoBehaviour {
 			.EEGDeviceAdapter(adapter)
 			.PipelineFile(System.IO.Path.Combine(Application.streamingAssetsPath, "default_pipeline.json"))
 			.Build();
+		BCI.logRawData(dataType);
 	}
 
 	void OnDestroy() {
