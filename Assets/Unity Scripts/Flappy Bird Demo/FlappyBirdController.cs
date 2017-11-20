@@ -33,9 +33,16 @@ public class FlappyBirdController : MonoBehaviour {
 
 	public bool IsTraining { get { return isTraining; } }
 
+	public float UpPercent { get { return _upTrainedTime / trainingTime; } }
+
+	public float DownPercent { get { return _downTrainedTime / trainingTime; } }
+
 	bool isTraining = true;
 	bool trainingUp;
 	bool trainingDown;
+
+	float _upTrainedTime;
+	float _downTrainedTime;
 
 	//Vector3 startPos;
 
@@ -77,8 +84,15 @@ public class FlappyBirdController : MonoBehaviour {
 		}
 	}
 
-	void UpdateTraining() { 
-		if ((Time.time - started) > trainingTime) {
+	void UpdateTraining() {
+		// first update training times
+		if (trainingUp) {
+			_upTrainedTime += Time.deltaTime;
+		} else if (trainingDown) {
+			_downTrainedTime += Time.deltaTime;
+		}
+
+		if (isTraining && _upTrainedTime >= trainingTime && _downTrainedTime >= trainingTime) {
 			//Debug.Log(trainingUp + " " + trainingDown);
 			if (trainingUp) SharpBCIController.BCI.StopTraining(UP_ID);
 			if (trainingDown) SharpBCIController.BCI.StopTraining(DOWN_ID);
