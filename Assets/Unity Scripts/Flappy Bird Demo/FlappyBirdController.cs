@@ -55,6 +55,10 @@ public class FlappyBirdController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		// kill old data (if any)
+		SharpBCIController.BCI.ClearTrainingData();
+
+		// rest  of setup
 		Camera.main.transform.localPosition = Vector3.zero;
 		started = Time.time;
 		trainingStatus.SetActive(true);
