@@ -78,7 +78,6 @@ public class FlappyBirdController : MonoBehaviour {
 		if (isTraining) {
 			UpdateTraining();
 		} else {
-			TimeController tc = gameObject.AddComponent (typeof(TimeController)) as TimeController;
 			//if (transform.position.y < 2 && lastSignal != 0) {
 			//	Debug.Log("Starting up signal");
 			//	((InstrumentedDummyAdapter) SharpBCIController.adapter).StartSignal(0);
@@ -115,6 +114,8 @@ public class FlappyBirdController : MonoBehaviour {
 			trainingStatus.SetActive(false);
 			upPrompt.SetActive(false);
 			downPrompt.SetActive(false);
+
+			TimeController tc = gameObject.AddComponent (typeof(TimeController)) as TimeController;
 		}
 
 		if (LeftDevice.GetHairTrigger()) {
