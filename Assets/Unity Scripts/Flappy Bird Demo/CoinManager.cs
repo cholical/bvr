@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class CoinManager : MonoBehaviour {
 	public Text scoreLabel;
+
 	void Start()
 	{
 		scoreLabel.text = "0";
@@ -14,5 +15,6 @@ public class CoinManager : MonoBehaviour {
 	{
 		scoreLabel.text = CameraCoinCollide.coinScore.ToString();
 	}
+		
 
 }

@@ -6,6 +6,7 @@ public enum SharpBCIControllerType {
 	MUSE,
 	TONE_GENERATOR,
 	TWO_TONE_GENERATOR,
+	CSV_READER
 }
 
 public class UnityLogger : ILogOutput {
@@ -43,6 +44,8 @@ public class SharpBCIController : MonoBehaviour {
 
 	public EEGDataType dataType;
 
+	public string CSVReadFilePath;
+
 	static SharpBCIController _inst;
 
 	Process museIOProcess;
@@ -50,39 +53,39 @@ public class SharpBCIController : MonoBehaviour {
 	// Use this for initialization
 	void Awake() {
 		if (_inst != null) {
-			Destroy(gameObject);
+			Destroy (gameObject);
 			return;
 		}
 		_inst = this;
-		DontDestroyOnLoad(gameObject);
+		DontDestroyOnLoad (gameObject);
 
 		// FileLogger requires actual pathnames not Unity
 		//string logName = System.IO.Path.Combine(Application.persistentDataPath.Replace('/', System.IO.Path.DirectorySeparatorChar), LOG_NAME);
 		//UnityEngine.Debug.Log("Writing sharpBCI log to: " + logName);
 		// configure logging
-		SharpBCI.Logger.AddLogOutput(new UnityLogger());
+		SharpBCI.Logger.AddLogOutput (new UnityLogger ());
 		// SharpBCI.Logger.AddLogOutput(new FileLogger(logName));
 
 		//EEGDeviceAdapter adapter;
 		if (bciType == SharpBCIControllerType.MUSE) {
 			// start Muse-IO
 			try {
-				museIOProcess = new Process();
-				museIOProcess.StartInfo.FileName = System.IO.Path.Combine(Application.streamingAssetsPath, "MuseIO", "muse-io.exe");
+				museIOProcess = new Process ();
+				museIOProcess.StartInfo.FileName = System.IO.Path.Combine (Application.streamingAssetsPath, "MuseIO", "muse-io.exe");
 				// default is osc.tcp://localhost:5000, but we expect udp
 				museIOProcess.StartInfo.Arguments = "--osc osc.udp://localhost:5000";
 				museIOProcess.StartInfo.CreateNoWindow = true;
 				museIOProcess.StartInfo.UseShellExecute = false;
-				museIOProcess.Start();
+				museIOProcess.Start ();
 				museIOProcess.PriorityClass = ProcessPriorityClass.RealTime;
 			} catch (System.Exception e) {
-				UnityEngine.Debug.LogError("Could not open muse-io:");
-				UnityEngine.Debug.LogException(e);
+				UnityEngine.Debug.LogError ("Could not open muse-io:");
+				UnityEngine.Debug.LogException (e);
 			}
 
-			adapter = new RemoteOSCAdapter(OSC_DATA_PORT);
+			adapter = new RemoteOSCAdapter (OSC_DATA_PORT);
 		} else if (bciType == SharpBCIControllerType.TONE_GENERATOR) {
-			adapter = new DummyAdapter(new DummyAdapterSignal(new double[] { 
+			adapter = new DummyAdapter (new DummyAdapterSignal (new double[] { 
 				// alpha
 				10, 
 				// beta
@@ -105,7 +108,7 @@ public class SharpBCIController : MonoBehaviour {
 			}), 220, 2);
 		} else if (bciType == SharpBCIControllerType.TWO_TONE_GENERATOR) {
 			var signals = new DummyAdapterSignal[] { 
-				new DummyAdapterSignal(new double[] { 
+				new DummyAdapterSignal (new double[] { 
 					// alpha
 					10, 
 					// beta
@@ -123,7 +126,7 @@ public class SharpBCIController : MonoBehaviour {
 					0,
 					0
 				}),
-				new DummyAdapterSignal(new double[] { 
+				new DummyAdapterSignal (new double[] { 
 					// alpha
 					10, 
 					// beta
@@ -142,7 +145,10 @@ public class SharpBCIController : MonoBehaviour {
 					0
 				})
 			};
-			adapter = new InstrumentedDummyAdapter(signals, 220, 2);
+			adapter = new InstrumentedDummyAdapter (signals, 220, 2);
+		} else if (bciType == SharpBCIControllerType.CSV_READER) {
+			double sampleRate = 220;
+			adapter = new CSVReadAdapter (CSVReadFilePath, sampleRate);
 		} else {
 			throw new System.Exception("Invalid bciType");
 		}
@@ -151,7 +157,10 @@ public class SharpBCIController : MonoBehaviour {
 			.EEGDeviceAdapter(adapter)
 			.PipelineFile(System.IO.Path.Combine(Application.streamingAssetsPath, "default_pipeline.json"))
 			.Build();
-		//BCI.LogRawData(dataType);
+
+		if (bciType != SharpBCIControllerType.CSV_READER) {
+			BCI.LogRawData(dataType);
+		}
 	}
 
 	void OnDestroy() {
