@@ -60,11 +60,11 @@ public class SharpBCIController : MonoBehaviour {
 		DontDestroyOnLoad (gameObject);
 
 		// FileLogger requires actual pathnames not Unity
-		//string logName = System.IO.Path.Combine(Application.persistentDataPath.Replace('/', System.IO.Path.DirectorySeparatorChar), LOG_NAME);
-		//UnityEngine.Debug.Log("Writing sharpBCI log to: " + logName);
+		string logName = System.IO.Path.Combine(Application.persistentDataPath.Replace('/', System.IO.Path.DirectorySeparatorChar), LOG_NAME);
+		UnityEngine.Debug.Log("Writing sharpBCI log to: " + logName);
 		// configure logging
 		SharpBCI.Logger.AddLogOutput (new UnityLogger ());
-		// SharpBCI.Logger.AddLogOutput(new FileLogger(logName));
+		SharpBCI.Logger.AddLogOutput(new FileLogger(logName));
 
 		//EEGDeviceAdapter adapter;
 		if (bciType == SharpBCIControllerType.MUSE) {
@@ -165,12 +165,12 @@ public class SharpBCIController : MonoBehaviour {
 
 	void OnDestroy() {
 		if (bciType == SharpBCIControllerType.MUSE) {
-			if (!museIOProcess.HasExited) {
+			if (museIOProcess != null && !museIOProcess.HasExited) {
 				museIOProcess.Kill();
 				museIOProcess.WaitForExit();
 			}
 		}
-		BCI.Close();
+		if (BCI != null) BCI.Close();
 		SharpBCI.Logger.Dispose();
 	}
 }
