@@ -151,7 +151,7 @@ public class SharpBCIController : MonoBehaviour {
 			.EEGDeviceAdapter(adapter)
 			.PipelineFile(System.IO.Path.Combine(Application.streamingAssetsPath, "default_pipeline.json"))
 			.Build();
-		BCI.logRawData(dataType);
+		BCI.LogRawData(dataType);
 	}
 
 	void OnDestroy() {
