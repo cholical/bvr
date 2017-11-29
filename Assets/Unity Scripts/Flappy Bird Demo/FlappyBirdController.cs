@@ -19,6 +19,8 @@ public class FlappyBirdController : MonoBehaviour {
 	public SteamVR_TrackedObject leftController;
 	public SteamVR_TrackedObject rightController;
 
+	public AudioClip ouchSound;
+
 	SteamVR_Controller.Device LeftDevice {
 		get {
 			return SteamVR_Controller.Input((int)leftController.index);
@@ -153,6 +155,8 @@ public class FlappyBirdController : MonoBehaviour {
 			pos.y = maxY;
 			rigidBody.position = pos;
 			rigidBody.velocity = Vector3.zero;
+			AudioSource.PlayClipAtPoint(ouchSound, transform.position);
+			CameraCoinCollide.coinScore--;
 		}
 	}
 
