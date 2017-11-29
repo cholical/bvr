@@ -19,6 +19,8 @@ public class FlappyBirdController : MonoBehaviour {
 	public SteamVR_TrackedObject leftController;
 	public SteamVR_TrackedObject rightController;
 
+	public AudioClip ouchSound;
+
 	SteamVR_Controller.Device LeftDevice {
 		get {
 			return SteamVR_Controller.Input((int)leftController.index);
@@ -65,6 +67,7 @@ public class FlappyBirdController : MonoBehaviour {
 		if (isTraining) {
 			UpdateTraining();
 		} else {
+			TimeController tc = gameObject.AddComponent (typeof(TimeController)) as TimeController;
 			//if (transform.position.y < 2 && lastSignal != 0) {
 			//	Debug.Log("Starting up signal");
 			//	((InstrumentedDummyAdapter) SharpBCIController.adapter).StartSignal(0);
@@ -153,6 +156,8 @@ public class FlappyBirdController : MonoBehaviour {
 			pos.y = maxY;
 			rigidBody.position = pos;
 			rigidBody.velocity = Vector3.zero;
+			AudioSource.PlayClipAtPoint(ouchSound, transform.position);
+			CameraCoinCollide.coinScore--;
 		}
 	}
 
