@@ -50,6 +50,8 @@ public class SharpBCIController : MonoBehaviour {
 
 	Process museIOProcess;
 
+	bool isTheHighlander = false;
+
 	// Use this for initialization
 	void Awake() {
 		if (_inst != null) {
@@ -58,6 +60,7 @@ public class SharpBCIController : MonoBehaviour {
 		}
 		_inst = this;
 		DontDestroyOnLoad (gameObject);
+		isTheHighlander = true;
 
 		// FileLogger requires actual pathnames not Unity
 		string logName = System.IO.Path.Combine(Application.persistentDataPath.Replace('/', System.IO.Path.DirectorySeparatorChar), LOG_NAME);
@@ -164,13 +167,17 @@ public class SharpBCIController : MonoBehaviour {
 	}
 
 	void OnDestroy() {
+		if (!isTheHighlander)
+			return;
+		
 		if (bciType == SharpBCIControllerType.MUSE) {
 			if (museIOProcess != null && !museIOProcess.HasExited) {
 				museIOProcess.Kill();
 				museIOProcess.WaitForExit();
 			}
 		}
-		if (BCI != null) BCI.Close();
+			
+		BCI.Close();
 		SharpBCI.Logger.Dispose();
 	}
 }
