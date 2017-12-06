@@ -27,7 +27,7 @@ public class ConnectionInfoController : MonoBehaviour {
 	}
 
 	bool _showStatus = false;
-	double _lastStatus = 0.0;
+	double _lastStatus = float.PositiveInfinity;
 
 	SharpBCI.MovingAverageFilter[] filters;
 

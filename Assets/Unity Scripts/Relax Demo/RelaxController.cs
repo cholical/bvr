@@ -14,6 +14,10 @@ public class RelaxController : MonoBehaviour {
 	//public Renderer targetRenderer;
 
 	public Transform fireHeight;
+	//public Light sunlight;
+
+	public Color sunMinColor = Color.white;
+	public Color sunMaxColor = Color.black;
 
 	float fireMin = 0f;
 	float fireMax = 5.5f;
@@ -37,6 +41,7 @@ public class RelaxController : MonoBehaviour {
 		Vector3 scale = fireHeight.localScale;
 		scale.y = Mathf.Lerp(fireMax, fireMin, t);
 		fireHeight.localScale = scale;
+		//sunlight.color = Color.Lerp (sunMinColor, sunMaxColor, t);
 		//float normed = Mathf.Lerp(0, 1, t);
 		//Color c = Color.Lerp(startColor, endColor, t);
 		//targetRenderer.material.color = c;
