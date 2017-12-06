@@ -36,7 +36,11 @@ public class CameraCoinCollide : MonoBehaviour {
 		Debug.Log("Exit collision");
 		colliding = false;
 	}
-		
+
+	void Start() {
+		coinScore = 0;
+	}
+
 	void Update() {
 		if (colliding) {
 			lastOuch += Time.deltaTime;
