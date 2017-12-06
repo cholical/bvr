@@ -18,10 +18,9 @@ public class ConnectionInfoController : MonoBehaviour {
 		set {
 			if (value != _showStatus) {
 				_showStatus = value;
-				leftTemple.gameObject.SetActive(value);
-				leftForehead.gameObject.SetActive(value);
-				rightForehead.gameObject.SetActive(value);
-				rightTemple.gameObject.SetActive(value);
+				foreach (Transform child in transform) {
+					child.gameObject.SetActive(value);
+				}
 			}
 			// noop otherwise
 		}
