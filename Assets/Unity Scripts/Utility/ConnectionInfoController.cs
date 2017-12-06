@@ -6,6 +6,7 @@ using UnityEngine;
 public class ConnectionInfoController : MonoBehaviour {
 
 	public uint averageSize = 30;
+	public float showThreshold = 1;
 
 	public ConnectionInfoDisplay leftTemple;
 	public ConnectionInfoDisplay leftForehead;
@@ -17,9 +18,10 @@ public class ConnectionInfoController : MonoBehaviour {
 		set {
 			if (value != _showStatus) {
 				_showStatus = value;
-				foreach (Transform child in transform) {
-					child.gameObject.SetActive(value);
-				}
+				leftTemple.gameObject.SetActive(value);
+				leftForehead.gameObject.SetActive(value);
+				rightForehead.gameObject.SetActive(value);
+				rightTemple.gameObject.SetActive(value);
 			}
 			// noop otherwise
 		}
@@ -50,7 +52,7 @@ public class ConnectionInfoController : MonoBehaviour {
 		rightTemple.AddContactQuality((int)status[3]);
 
 		var nextStatus = status.Sum();
-		if (!showStatus && Math.Abs(_lastStatus - nextStatus) > 0.1) {
+		if (!showStatus && nextStatus - _lastStatus > showThreshold) {
 			showStatus = true;
 			_lastStatus = nextStatus;
 		}
