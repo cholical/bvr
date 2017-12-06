@@ -159,25 +159,29 @@ public class FlappyBirdController : MonoBehaviour {
 		}
 	}
 
+	SharpBCI.MovingAverageFilter movementFilter = new SharpBCI.MovingAverageFilter(3);
+
 	void FixedUpdate() {
+
 		if (upQueued) {
-			Debug.Log ("Performing up");
-			rigidBody.velocity = Vector3.up * upForce;
+			var nextV = (float)movementFilter.Filter(upForce);
+			rigidBody.velocity = Vector3.up * nextV;
 			upQueued = false;
 		} else if (downQueued) {
-			Debug.Log ("Performing down");
-			rigidBody.velocity = Vector3.down * upForce;
+			var nextV = (float)movementFilter.Filter(-upForce);
+			rigidBody.velocity = Vector3.up * nextV;
 			downQueued = false;
 		}
 
-		if (rigidBody.position.y > maxY) {
-			var pos = rigidBody.position;
-			pos.y = maxY;
-			rigidBody.position = pos;
-			rigidBody.velocity = Vector3.zero;
-			AudioSource.PlayClipAtPoint(ouchSound, transform.position);
-			CameraCoinCollide.coinScore--;
-		}
+//		if (upQueued) {
+//			Debug.Log ("Performing up");
+//			rigidBody.velocity = Vector3.up * upForce;
+//			upQueued = false;
+//		} else if (downQueued) {
+//			Debug.Log ("Performing down");
+//			rigidBody.velocity = Vector3.down * upForce;
+//			downQueued = false;
+//		}
 	}
 
 	void OnTrainedEvent(TrainedEvent evt) {

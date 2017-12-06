@@ -11,10 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/brain.unity
     guid: aa57b0baba9dc6042981c15f91bd688b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/hemisphere-relax-demo.unity
     guid: 27cf9ba932f9f634b85cb2ae039c25b4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/relax-demo.unity
     guid: 3f06f6cb24117aa40b7f8f0b21e74b91
   - enabled: 0
@@ -26,3 +26,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/game-over.unity
     guid: d8c3d38e50ad60a4bb4cdf3de5921a19
+  - enabled: 1
+    path: Assets/Scenes/Relax Farm.unity
+    guid: 4b6f6f21dcc3cd04e887c8c36ceef3d8
