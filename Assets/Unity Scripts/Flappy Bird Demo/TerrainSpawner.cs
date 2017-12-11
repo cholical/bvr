@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/**
+ * Moves the terrain towards the player, handle coin addition, and coin decomposition.
+ */ 
 public class TerrainSpawner : MonoBehaviour {
 
 	public GameObject terrainPrefab;

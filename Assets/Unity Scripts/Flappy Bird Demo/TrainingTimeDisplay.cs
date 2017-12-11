@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/**
+ * Establishes the percent of time trained for up and down.
+ */
 [RequireComponent(typeof(Text))]
 public class TrainingTimeDisplay : MonoBehaviour {
 
 	public FlappyBirdController flappyBirdController;
+	//Controls up and down movements
 	public bool displayUp = true;
 
+	//Allows text to be controlled on screen
 	Text textObj;
 	string originalText;
 
