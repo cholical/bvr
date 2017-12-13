@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using SharpBCI;
 
+/**
+ * Controls movement of the camera motion throughout the game world
+ */
 public class FlappyBirdController : MonoBehaviour {
 
+	//Assigning numeric values to up and down
 	public static int UP_ID = 1;
 	public static int DOWN_ID = 2;
 
@@ -12,13 +16,16 @@ public class FlappyBirdController : MonoBehaviour {
 	public float upForce = 1;
 	public float maxY = 5f;
 
+	//Control display what is shown to the user within game
 	public GameObject trainingStatus;
 	public GameObject upPrompt;
 	public GameObject downPrompt;
 
+	//Install the controllers for use
 	public SteamVR_TrackedObject leftController;
 	public SteamVR_TrackedObject rightController;
 
+	//Audio sound for making "Ouch" sound when user hits the ceiling
 	public AudioClip ouchSound;
 
 	SteamVR_Controller.Device LeftDevice {
@@ -91,13 +98,14 @@ public class FlappyBirdController : MonoBehaviour {
 	}
 
 	void UpdateTraining() {
-		// first update training times
+		// first update training time percentages until both are successfully completed at 100%
 		if (trainingUp) {
 			_upTrainedTime += Time.deltaTime;
 		} else if (trainingDown) {
 			_downTrainedTime += Time.deltaTime;
 		}
 
+		//Checks to determine if training is completed. If so, moves on to playing the regular game
 		if (isTraining && _upTrainedTime >= trainingTime && _downTrainedTime >= trainingTime) {
 			//Debug.Log(trainingUp + " " + trainingDown);
 			if (trainingUp) SharpBCIController.BCI.StopTraining(UP_ID);
@@ -111,13 +119,16 @@ public class FlappyBirdController : MonoBehaviour {
 			//rigidBody.useGravity = true;
 			rigidBody.isKinematic = false;
 
+			//Hide training prompts from the screen
 			trainingStatus.SetActive(false);
 			upPrompt.SetActive(false);
 			downPrompt.SetActive(false);
 
+			//Start timining the game, located in Time Controller. Default is 120 seconds.
 			TimeController tc = gameObject.AddComponent (typeof(TimeController)) as TimeController;
 		}
 
+		//Get training through holding trigger then determine type of training
 		if (LeftDevice.GetHairTrigger()) {
 			if (trainingUp) {
 				upPrompt.SetActive(false);
