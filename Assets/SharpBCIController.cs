@@ -73,14 +73,14 @@ public class SharpBCIController : MonoBehaviour {
 		if (bciType == SharpBCIControllerType.MUSE) {
 			// start Muse-IO
 			try {
-				museIOProcess = new Process ();
-				museIOProcess.StartInfo.FileName = System.IO.Path.Combine (Application.streamingAssetsPath, "MuseIO", "muse-io.exe");
-				// default is osc.tcp://localhost:5000, but we expect udp
-				museIOProcess.StartInfo.Arguments = "--osc osc.udp://localhost:5000";
-				museIOProcess.StartInfo.CreateNoWindow = true;
-				museIOProcess.StartInfo.UseShellExecute = false;
-				museIOProcess.Start ();
-				museIOProcess.PriorityClass = ProcessPriorityClass.RealTime;
+//				museIOProcess = new Process ();
+//				museIOProcess.StartInfo.FileName = System.IO.Path.Combine (Application.streamingAssetsPath, "MuseIO", "muse-io.exe");
+//				// default is osc.tcp://localhost:5000, but we expect udp
+//				museIOProcess.StartInfo.Arguments = "--osc osc.udp://localhost:5000";
+//				museIOProcess.StartInfo.CreateNoWindow = true;
+//				museIOProcess.StartInfo.UseShellExecute = false;
+//				museIOProcess.Start ();
+//				museIOProcess.PriorityClass = ProcessPriorityClass.RealTime;
 			} catch (System.Exception e) {
 				UnityEngine.Debug.LogError ("Could not open muse-io:");
 				UnityEngine.Debug.LogException (e);
@@ -171,10 +171,10 @@ public class SharpBCIController : MonoBehaviour {
 			return;
 		
 		if (bciType == SharpBCIControllerType.MUSE) {
-			if (museIOProcess != null && !museIOProcess.HasExited) {
-				museIOProcess.Kill();
-				museIOProcess.WaitForExit();
-			}
+//			if (museIOProcess != null && !museIOProcess.HasExited) {
+//				museIOProcess.Kill();
+//				museIOProcess.WaitForExit();
+//			}
 		}
 			
 		BCI.Close();
